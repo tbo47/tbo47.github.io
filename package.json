@@ -1,0 +1,14 @@
+{
+  "name": "low-earth-orbit-visualization",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "serve": "ws"
+  },
+  "devDependencies": {
+    "local-web-server": "^5.1.1"
+  },
+  "author": "",
+  "license": "ISC"
+}
