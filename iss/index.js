@@ -25,7 +25,12 @@ class GlobeComponent {
             if (document.visibilityState === 'hidden') { return; }
             const { longitude, latitude, altitude, timestamp } = (await this._get('https://api.wheretheiss.at/v1/satellites/25544'));
             if (!iss) {
-                iss = new og.Entity({ name: 'iss', lonlat: [], label: { text: 'iss nasa' } });
+                iss = new og.Entity({
+                    name: 'iss', lonlat: [], label: { text: '' }, billboard: {
+                        src: './sat.png',
+                        size: [24, 24],
+                    },
+                });
                 issTrack = new og.Entity({ name: 'path', polyline: { pathLonLat: [], thickness: 4, color: '#9e9e9e' } });
                 const e = new og.EntityCollection({ entities: [iss, issTrack] });
                 e.addTo(globus.planet);
