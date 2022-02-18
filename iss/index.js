@@ -21,8 +21,13 @@ class GlobeComponent {
     _initIss(globus) {
         let iss;
         let issTrack;
+        let needToCenterTheMap = true
         setInterval(async () => {
-            if (document.visibilityState === 'hidden') { return; }
+            if (document.visibilityState === 'hidden') {
+                issTrack?.polyline?.clear()
+                needToCenterTheMap = true
+                return
+            }
             const { longitude, latitude, altitude, timestamp } = (await this._get('https://api.wheretheiss.at/v1/satellites/25544'));
             if (!iss) {
                 iss = new og.Entity({
@@ -31,15 +36,36 @@ class GlobeComponent {
                         size: [24, 24],
                     },
                 });
-                issTrack = new og.Entity({ name: 'path', polyline: { pathLonLat: [], thickness: 4, color: '#9e9e9e' } });
+                issTrack = new og.Entity({ name: 'path', polyline: { pathLonLat: [], thickness: 2, color: '#9e9e9e' } });
                 const e = new og.EntityCollection({ entities: [iss, issTrack] });
                 e.addTo(globus.planet);
-                this._goTo(globus, latitude, longitude, latitude - 16, longitude, altitude * 2000);
+            }
+            if (needToCenterTheMap) {
+                this._goTo(globus, latitude, longitude, latitude - 16, longitude, altitude * 2000)
+                needToCenterTheMap = false
             }
             const newPoint = new og.LonLat(longitude, latitude, altitude * 1000);
             iss.setLonLat(newPoint);
             issTrack.polyline.addPointLonLat(newPoint);
+            const circle = this.#createCircle(globus.planet.ellipsoid, newPoint)
+            const footprintEntity = new og.Entity({
+                polyline: {
+                    pathLonLat: [circle],
+                    // pathColors: pathColors,
+                    thickness: 3.3,
+                    isClosed: true,
+                    altitude: 2
+                }
+            });
         }, 1000);
+    }
+
+    #createCircle(ellipsoid, center, radius = 300) {
+        let circleCoords = [];
+        for (let i = 0; i < 360; i += 5) {
+            circleCoords.push(ellipsoid.getGreatCircleDestination(center, i, radius));
+        }
+        return circleCoords;
     }
 
     _goTo(globus, lat, lon, cameraLat, cameraLng, cameraAlt) {
