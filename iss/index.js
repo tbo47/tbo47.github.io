@@ -22,6 +22,7 @@ class GlobeComponent {
         let iss;
         let issTrack;
         let needToCenterTheMap = true
+        let footprintEntityCollection
         setInterval(async () => {
             if (document.visibilityState === 'hidden') {
                 issTrack?.polyline?.clear()
@@ -48,19 +49,22 @@ class GlobeComponent {
             iss.setLonLat(newPoint);
             issTrack.polyline.addPointLonLat(newPoint);
             const circle = this.#createCircle(globus.planet.ellipsoid, newPoint)
+            footprintEntityCollection?.remove()
             const footprintEntity = new og.Entity({
                 polyline: {
                     pathLonLat: [circle],
-                    // pathColors: pathColors,
+                    pathColors: [[158, 158, 158]],
                     thickness: 3.3,
                     isClosed: true,
                     altitude: 2
                 }
             });
+            footprintEntityCollection = new og.EntityCollection({ entities: [footprintEntity] });
+            footprintEntityCollection?.addTo(globus.planet)
         }, 1000);
     }
 
-    #createCircle(ellipsoid, center, radius = 300) {
+    #createCircle(ellipsoid, center, radius = 80000) {
         let circleCoords = [];
         for (let i = 0; i < 360; i += 5) {
             circleCoords.push(ellipsoid.getGreatCircleDestination(center, i, radius));
@@ -79,7 +83,7 @@ class GlobeComponent {
 
     _initMap() {
         const osm = new og.layer.XYZ('o', { url: this.#maps.arcgis });
-        const globe = new og.Globe({ target: 'globus', name: 'e', terrain: new og.terrain.GlobusTerrain(), layers: [osm] });
+        const globe = new og.Globe({ target: 'globus', name: 'e', terrain: new og.terrain.EmptyTerrain(), layers: [osm] });
         globe.renderer.backgroundColor.set(0.09, 0.09, 0.09);
         return globe
     }
