@@ -53,7 +53,7 @@ class GlobeComponent {
             const footprintEntity = new og.Entity({
                 polyline: {
                     pathLonLat: [circle],
-                pathColors: [[[0.99, 0.99, 0.99]]],
+                    pathColors: [[[0.99, 0.99, 0.99]]],
                     thickness: 3.3,
                     isClosed: true,
                     altitude: 2
