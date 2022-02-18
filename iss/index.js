@@ -6,6 +6,7 @@ class GlobeComponent {
     #maps = {
         openstreetmap: '//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
         arcgis: '//server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
+        mapquest: "//tileproxy.cloud.mapquest.com/tiles/1.0.0/sat/{z}/{x}/{y}.png",
     };
 
 
@@ -37,7 +38,7 @@ class GlobeComponent {
                         size: [24, 24],
                     },
                 });
-                issTrack = new og.Entity({ name: 'path', polyline: { pathLonLat: [], thickness: 2, color: '#9e9e9e' } });
+                issTrack = new og.Entity({ name: 'path', polyline: { pathLonLat: [], thickness: 2, color: '#fff' } });
                 const e = new og.EntityCollection({ entities: [iss, issTrack] });
                 e.addTo(globus.planet);
             }
