@@ -33,14 +33,21 @@ class GlobeComponent {
             const { longitude, latitude, altitude, timestamp } = (await this._get('https://api.wheretheiss.at/v1/satellites/25544'));
             if (!iss) {
                 iss = new og.Entity({
-                    name: 'iss', lonlat: [], label: { text: '' }, billboard: {
+                    name: 'iss', lonlat: [], label: { text: '  iss' }, billboard: {
                         src: './sat.png',
                         size: [24, 24],
                     },
                 });
+                const issCollection = new og.EntityCollection({ entities: [iss] });
+                issCollection.addTo(globus.planet);
+                issCollection.events.on('draw', c => {
+                    c.each(e => {
+                        e.billboard.setRotation(e.billboard.getRotation() + 0.006);
+                    });
+                });
                 issTrack = new og.Entity({ name: 'path', polyline: { pathLonLat: [], thickness: 2, color: '#fff' } });
-                const e = new og.EntityCollection({ entities: [iss, issTrack] });
-                e.addTo(globus.planet);
+                const issTrackCollection = new og.EntityCollection({ entities: [issTrack] });
+                issTrackCollection.addTo(globus.planet);
             }
             if (needToCenterTheMap) {
                 this._goTo(globus, latitude, longitude, latitude - 16, longitude, altitude * 2000)
