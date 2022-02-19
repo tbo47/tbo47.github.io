@@ -2,54 +2,29 @@
 <html>
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script src="https://cdn.tailwindcss.com"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      rel="stylesheet"
+      href="//cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css"
+    />
   </head>
   <body>
-    <div style="padding: 2rem">
-      <h1 class="text-3xl font-bold">Welcome!</h1>
-      <div style="margin-top: 1rem"></div>
-      <ul class="space-y-4">
-        <li class="flex items-center">
-          <svg
-            class="w-6 h-6 flex-none fill-sky-100 stroke-sky-500 stroke-2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          >
-            <circle cx="12" cy="12" r="11" />
-            <path d="m8 13 2.165 2.165a1 1 0 0 0 1.521-.126L16 9" fill="none" />
-          </svg>
-          <p class="ml-4">
-            <a class="underline" href="og/">satellites on openglobus</a>
-          </p>
-        </li>
-        <li class="flex items-center">
-          <svg
-            class="w-6 h-6 flex-none fill-sky-100 stroke-sky-500 stroke-2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          >
-            <circle cx="12" cy="12" r="11" />
-            <path d="m8 13 2.165 2.165a1 1 0 0 0 1.521-.126L16 9" fill="none" />
-          </svg>
-          <p class="ml-4">
-            <a class="underline" href="iss/">follow ISS on a globe</a>
-          </p>
-        </li>
-        <li class="flex items-center">
-          <svg
-            class="w-6 h-6 flex-none fill-sky-100 stroke-sky-500 stroke-2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          >
-            <circle cx="12" cy="12" r="11" />
-            <path d="m8 13 2.165 2.165a1 1 0 0 0 1.521-.126L16 9" fill="none" />
-          </svg>
-          <p class="ml-4">
-            <a class="underline" href="osm/">restaurants nearby</a>
-          </p>
-        </li>
-      </ul>
-    </div>
+    <section class="section">
+      <div class="container">
+        <h1 class="title">Hello there!</h1>
+        <p class="subtitle">Various demos using <strong>openglobus</strong>!</p>
+        <ul>
+          <li>
+            <a href="og/">constellation of satellites</a>
+          </li>
+          <li>
+            <a href="iss/">follow ISS on a globe (google earth like)</a>. Use the Alt key and mouse to navigate.
+          </li>
+          <li>
+            <a href="osm/">restaurants nearby</a>
+          </li>
+        </ul>
+      </div>
+    </section>
   </body>
 </html>

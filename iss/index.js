@@ -40,11 +40,6 @@ class GlobeComponent {
                 });
                 const issCollection = new og.EntityCollection({ entities: [iss] });
                 issCollection.addTo(globus.planet);
-                issCollection.events.on('draw', c => {
-                    c.each(e => {
-                        e.billboard.setRotation(e.billboard.getRotation() + 0.006);
-                    });
-                });
                 issTrack = new og.Entity({ name: 'path', polyline: { pathLonLat: [], thickness: 2, color: '#fff' } });
                 const issTrackCollection = new og.EntityCollection({ entities: [issTrack] });
                 issTrackCollection.addTo(globus.planet);
