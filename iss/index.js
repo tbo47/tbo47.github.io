@@ -1,25 +1,25 @@
 
 class IssComponent {
 
-    globus;
-    kmlLayer;
-    #needToCenterTheMap = true
     static MAPS_PROVIDER = {
         openstreetmap: '//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
         arcgis: '//server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
         mapquest: "//tileproxy.cloud.mapquest.com/tiles/1.0.0/sat/{z}/{x}/{y}.png",
     };
 
-    constructor() {
-        this.globus = this.#initMap();
-        this.#initIss(this.globus);
+    #needToCenterTheMap = true
+
+    /**
+     * 
+     * @param {string} [divId] the html div id where to render the globe
+     * @param {number} [refreshRate]  number of ms to refresh the position of iss
+     */
+    constructor(divId = 'globus', refreshRate = 1000) {
+        const globus = this.#initMap(divId);
+        this.#initIss(globus, refreshRate);
     }
 
-    viewExtent() {
-        this.globus.planet.flyExtent(this.kmlLayer.getExtent());
-    }
-
-    #initIss(globus) {
+    #initIss(globus, refreshRate = 1000) {
         let iss;
         let footprintEntityCollection
         setInterval(async () => {
@@ -33,14 +33,14 @@ class IssComponent {
                 iss = this.#initIssCollections(globus);
             }
             if (this.#needToCenterTheMap) {
-                this.#goTo(globus, latitude, longitude, latitude - 16, longitude, altitude * 2000)
+                await this.#goTo(globus, latitude, longitude, latitude - 16, longitude, altitude * 2000)
                 this.#needToCenterTheMap = false
             }
             const newPoint = new og.LonLat(longitude, latitude, altitude * 1000);
             iss.issEntity.setLonLat(newPoint);
             iss.issTrackEntity.polyline.addPointLonLat(newPoint);
             footprintEntityCollection = this.#changeFootprint(globus, newPoint, footprintEntityCollection);
-        }, 1000);
+        }, refreshRate);
     }
 
     #changeFootprint(globus, newPoint, footprintEntityCollection) {
@@ -83,7 +83,7 @@ class IssComponent {
         return circleCoords;
     }
 
-    #goTo(globus, lat, lon, cameraLat, cameraLng, cameraAlt) {
+    #goTo(globus, lat = 0, lon = 0, cameraLat = 0, cameraLng = 0, cameraAlt = 0) {
         const ell = globus.planet.ellipsoid;
         const destPos = new og.LonLat(cameraLng, cameraLat, cameraAlt);
         const viewPoi = new og.LonLat(lon, lat);
@@ -92,15 +92,15 @@ class IssComponent {
         return new Promise(res => globus.planet.camera.flyLonLat(destPos, lookCart, upVec, 0, res));
     }
 
-    #initMap() {
+    #initMap(target = '') {
         const url = IssComponent.MAPS_PROVIDER.arcgis
         const osm = new og.layer.XYZ('o', { url })
-        const globe = new og.Globe({ target: 'globus', name: 'e', terrain: new og.terrain.EmptyTerrain(), layers: [osm] })
+        const globe = new og.Globe({ target, name: 'e', terrain: new og.terrain.EmptyTerrain(), layers: [osm] })
         globe.renderer.backgroundColor.set(0.09, 0.09, 0.09)
         return globe
     }
 
-    #get(url) {
+    #get(url = '') {
         return new Promise((resolve) => {
             const http = new XMLHttpRequest();
             http.onreadystatechange = () => {
@@ -112,4 +112,4 @@ class IssComponent {
     }
 }
 
-new IssComponent()
+new IssComponent('globusDivId', 1000)
