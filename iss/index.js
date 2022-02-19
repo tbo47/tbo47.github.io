@@ -8,18 +8,22 @@ class IssComponent {
     };
 
     #needToCenterTheMap = true
+    #footprintRadius = 0
 
     /**
      * 
      * @param {string} [divId] the html div id where to render the globe
      * @param {number} [refreshRate]  number of ms to refresh the position of iss
+     * @param {string} [satelliteLabel]
+     * @param {number} [footprintRadius]
      */
-    constructor(divId = 'globus', refreshRate = 1000) {
+    constructor(divId = 'globus', refreshRate = 1000, satelliteLabel = '', footprintRadius = 80000) {
+        this.#footprintRadius = footprintRadius
         const globus = this.#initMap(divId);
-        this.#initIss(globus, refreshRate);
+        this.#initIss(globus, refreshRate, satelliteLabel);
     }
 
-    #initIss(globus, refreshRate = 1000) {
+    #initIss(globus, refreshRate = 1000, satelliteLabel = '') {
         let iss;
         let footprintEntityCollection
         setInterval(async () => {
@@ -30,7 +34,7 @@ class IssComponent {
             }
             const { longitude, latitude, altitude, timestamp } = (await this.#get('https://api.wheretheiss.at/v1/satellites/25544'));
             if (!iss) {
-                iss = this.#initIssCollections(globus);
+                iss = this.#initIssCollections(globus, satelliteLabel);
             }
             if (this.#needToCenterTheMap) {
                 await this.#goTo(globus, latitude, longitude, latitude - 16, longitude, altitude * 2000)
@@ -60,9 +64,9 @@ class IssComponent {
         return footprintEntityCollection;
     }
 
-    #initIssCollections(globus) {
+    #initIssCollections(globus, text = '') {
         const issEntity = new og.Entity({
-            name: 'iss', lonlat: [], label: { text: '  iss' }, billboard: {
+            name: 'iss', lonlat: [], label: { text }, billboard: {
                 src: './sat.png',
                 size: [24, 24],
             },
@@ -75,10 +79,10 @@ class IssComponent {
         return { issEntity, issTrackEntity }
     }
 
-    #createCircle(ellipsoid, center, radius = 80000) {
+    #createCircle(ellipsoid, center) {
         let circleCoords = [];
         for (let i = 0; i < 360; i += 5) {
-            circleCoords.push(ellipsoid.getGreatCircleDestination(center, i, radius));
+            circleCoords.push(ellipsoid.getGreatCircleDestination(center, i, this.#footprintRadius));
         }
         return circleCoords;
     }
@@ -112,4 +116,4 @@ class IssComponent {
     }
 }
 
-new IssComponent('globusDivId', 1000)
+new IssComponent('globusDivId', 1000, '  iss')
