@@ -7,7 +7,7 @@ class IssComponent {
         mapquest: "//tileproxy.cloud.mapquest.com/tiles/1.0.0/sat/{z}/{x}/{y}.png",
     };
 
-    #needToCenterTheMap = true
+    needToCenterTheMap = true
     #footprintRadius = 0
 
     /**
@@ -29,16 +29,16 @@ class IssComponent {
         setInterval(async () => {
             if (document.visibilityState === 'hidden') {
                 iss.issTrackEntity?.polyline?.clear()
-                this.#needToCenterTheMap = true
+                this.needToCenterTheMap = true
                 return
             }
             const { longitude, latitude, altitude, timestamp } = (await this.#get('https://api.wheretheiss.at/v1/satellites/25544'));
             if (!iss) {
                 iss = this.#initIssCollections(globus, satelliteLabel);
             }
-            if (this.#needToCenterTheMap) {
+            if (this.needToCenterTheMap) {
                 await this.#goTo(globus, latitude, longitude, latitude - 16, longitude, altitude * 2000)
-                this.#needToCenterTheMap = false
+                this.needToCenterTheMap = false
             }
             const newPoint = new og.LonLat(longitude, latitude, altitude * 1000);
             iss.issEntity.setLonLat(newPoint);
@@ -116,4 +116,8 @@ class IssComponent {
     }
 }
 
-new IssComponent('globusDivId', 1000, '  iss')
+const issComp = new IssComponent('globusDivId', 1000, '  iss')
+
+function centerButtonOnClick() {
+    issComp.needToCenterTheMap = !issComp.needToCenterTheMap
+}
