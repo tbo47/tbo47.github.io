@@ -1,15 +1,18 @@
 <html>
   <head>
     <title>ISS Nasa</title>
-    <meta property="og:title" content="ISS Nasa" />
+    <meta property="og:title" content="ISS on a 3d immersive globe." />
     <link rel="icon" href="sat.png" />
     <meta
       property="og:description"
-      content="Follow the ISS on a 3d immersive globe."
+      content="Follow ISS on a 3d immersive globe. Using openglobus opensource project."
     />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://tbo47.github.io/iss/" />
-    <meta property="og:image" content="https://tbo47.github.io/iss/iss_1200_630.png" />
+    <meta
+      property="og:image"
+      content="https://tbo47.github.io/iss/iss_1200_630.png"
+    />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link
       rel="stylesheet"
@@ -21,11 +24,27 @@
   <body style="margin: 0">
     <div id="globusDivId" style="width: 100%; height: 100%"></div>
     <div class="field is-grouped" style="position: fixed; padding: 1rem">
-      <div class="control">
-        <button class="button is-link is-light" onclick="centerButtonOnClick()">
-          Center
-        </button>
-      </div>
+      <button class="button is-link is-light" onclick="centerButtonOnClick()">
+        Center
+      </button>
+      <!-- 
+      <nav class="navbar" role="navigation" aria-label="dropdown navigation">
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link"> </a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" onclick="centerButtonOnClick()">
+              focus the map to the ISS satellite
+            </a>
+            <hr class="navbar-divider" />
+            <a class="navbar-item" onclick="changemap('osm')"> map provider: openstreetmap </a>
+            <a class="navbar-item" onclick="changemap('arcgis')"> map provider: arcgis </a>
+            <a class="navbar-item" onclick="changemap('mapquest')"> map provider: mapquest </a>
+            <hr class="navbar-divider" />
+            <a class="navbar-item" href="../"> back </a>
+          </div>
+        </div>
+      </nav>
+      -->
     </div>
   </body>
   <script src="index.js"></script>

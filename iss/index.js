@@ -2,7 +2,7 @@
 class IssComponent {
 
     static MAPS_PROVIDER = {
-        openstreetmap: '//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+        osm: '//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
         arcgis: '//server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
         mapquest: "//tileproxy.cloud.mapquest.com/tiles/1.0.0/sat/{z}/{x}/{y}.png",
     };
@@ -17,9 +17,9 @@ class IssComponent {
      * @param {string} [satelliteLabel]
      * @param {number} [footprintRadius]
      */
-    constructor(divId = 'globus', refreshRate = 1000, satelliteLabel = '', footprintRadius = 80000) {
+    constructor(divId = 'globus', refreshRate = 1000, satelliteLabel = '', footprintRadius = 80000, mapProvider = 'arcgis') {
         this.#footprintRadius = footprintRadius
-        const globus = this.#initMap(divId);
+        const globus = this.#initMap(divId, mapProvider);
         this.#initIss(globus, refreshRate, satelliteLabel);
     }
 
@@ -32,18 +32,22 @@ class IssComponent {
                 this.needToCenterTheMap = true
                 return
             }
-            const { longitude, latitude, altitude, timestamp } = (await this.#get('https://api.wheretheiss.at/v1/satellites/25544'));
-            if (!iss) {
-                iss = this.#initIssCollections(globus, satelliteLabel);
+            try {
+                const { longitude, latitude, altitude, timestamp } = (await this.#get('https://api.wheretheiss.at/v1/satellites/25544'));
+                if (!iss) {
+                    iss = this.#initIssCollections(globus, satelliteLabel);
+                }
+                if (this.needToCenterTheMap) {
+                    await this.#goTo(globus, latitude, longitude, latitude - 16, longitude, altitude * 2000)
+                    this.needToCenterTheMap = false
+                }
+                const newPoint = new og.LonLat(longitude, latitude, altitude * 1000);
+                iss.issEntity.setLonLat(newPoint);
+                iss.issTrackEntity.polyline.addPointLonLat(newPoint);
+                footprintEntityCollection = this.#changeFootprint(globus, newPoint, footprintEntityCollection);
+            } catch (error) {
+                console.error(error)
             }
-            if (this.needToCenterTheMap) {
-                await this.#goTo(globus, latitude, longitude, latitude - 16, longitude, altitude * 2000)
-                this.needToCenterTheMap = false
-            }
-            const newPoint = new og.LonLat(longitude, latitude, altitude * 1000);
-            iss.issEntity.setLonLat(newPoint);
-            iss.issTrackEntity.polyline.addPointLonLat(newPoint);
-            footprintEntityCollection = this.#changeFootprint(globus, newPoint, footprintEntityCollection);
         }, refreshRate);
     }
 
@@ -96,8 +100,8 @@ class IssComponent {
         return new Promise(res => globus.planet.camera.flyLonLat(destPos, lookCart, upVec, 0, res));
     }
 
-    #initMap(target = '') {
-        const url = IssComponent.MAPS_PROVIDER.arcgis
+    #initMap(target = '', mapProvider) {
+        const url = IssComponent.MAPS_PROVIDER[mapProvider]
         const osm = new og.layer.XYZ('o', { url })
         const globe = new og.Globe({ target, name: 'e', terrain: new og.terrain.EmptyTerrain(), layers: [osm] })
         globe.renderer.backgroundColor.set(0.09, 0.09, 0.09)
@@ -105,10 +109,14 @@ class IssComponent {
     }
 
     #get(url = '') {
-        return new Promise((resolve) => {
+        return new Promise((resolve, reject) => {
             const http = new XMLHttpRequest();
             http.onreadystatechange = () => {
-                if (http.status === 200 && http.readyState === 4) { resolve(JSON.parse(http.response)); }
+                if (http.status === 200 && http.response) {
+                    resolve(JSON.parse(http.response));
+                } else if (http.statusText && http.statusText !== 'OK') {
+                    reject(http)
+                }
             };
             http.open('GET', url, true);
             http.send(null);
