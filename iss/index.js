@@ -5,7 +5,7 @@ class IssComponent {
         osm: '//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
         arcgis: '//server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
         mapquest: "//tileproxy.cloud.mapquest.com/tiles/1.0.0/sat/{z}/{x}/{y}.png",
-    };
+    }
 
     #needToCenterTheMap = true
     #footprintRadius = 0
