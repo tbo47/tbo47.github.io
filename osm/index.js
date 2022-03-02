@@ -1,6 +1,13 @@
 
 class PoiComponent {
 
+    static MAPS_PROVIDER = {
+        osm: ' //tile-{s}.openstreetmap.fr/hot/{z}/{x}/{y}.png',
+        osm_old: '//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+        arcgis: '//server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
+        mapquest: "//tileproxy.cloud.mapquest.com/tiles/1.0.0/sat/{z}/{x}/{y}.png",
+    }
+
     constructor() {
     }
 
@@ -37,9 +44,9 @@ class PoiComponent {
         let quest = '';
         categories.forEach(c => {
             const p = `
-          node["amenity"="${c}"](${bbox});
-          way["amenity"="${c}"](${bbox});
-          relation["amenity"="${c}"](${bbox});`;
+          node['amenity'='${c}'](${bbox});
+          way['amenity'='${c}'](${bbox});
+          relation['amenity'='${c}'](${bbox});`;
             quest += p;
         });
 
@@ -53,7 +60,7 @@ class PoiComponent {
         out skel qt;`;
 
         const xhr = new XMLHttpRequest();
-        xhr.open("POST", url, true);
+        xhr.open('POST', url, true);
         xhr.setRequestHeader('Content-Type', 'application/json');
         xhr.send(q);
         return new Promise(resolve => {
@@ -89,6 +96,15 @@ class PoiComponent {
         const pois = await this.#getPois(bbox.join(','), ['cafe', 'restaurant'])
         return { pois, latitude, longitude }
     }
+
+    initMap(target = 'globus', mapProvider = 'osm') {
+        const url = PoiComponent.MAPS_PROVIDER[mapProvider]
+        const osm = new og.layer.XYZ('o', { url })
+        const globe = new og.Globe({ target, name: 'e', terrain: new og.terrain.EmptyTerrain(), layers: [osm] })
+        globe.renderer.backgroundColor.set(0.09, 0.09, 0.09)
+        return globe
+    }
+
 }
 
 (async () => {
@@ -98,6 +114,7 @@ class PoiComponent {
     console.log(`https://www.openstreetmap.org/#map=16/${latitude}/${longitude}`)
     console.log(pois)
     document.getElementById('progress').style.visibility = 'hidden'
+    // poiComponent.initMap()
     const list = document.querySelector('ul')
     pois.forEach(poi => {
         const element = document.createElement('li')
