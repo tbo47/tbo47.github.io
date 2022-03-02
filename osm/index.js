@@ -2,11 +2,12 @@
 class PoiComponent {
 
     static MAPS_PROVIDER = {
-        osm: ' //tile-{s}.openstreetmap.fr/hot/{z}/{x}/{y}.png',
-        osm_old: '//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+        osm_fr: ' //tile-{s}.openstreetmap.fr/hot/{z}/{x}/{y}.png',
+        osm: '//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
         arcgis: '//server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
-        mapquest: "//tileproxy.cloud.mapquest.com/tiles/1.0.0/sat/{z}/{x}/{y}.png",
+        mapquest: '//tileproxy.cloud.mapquest.com/tiles/1.0.0/sat/{z}/{x}/{y}.png',
     }
+    #globe
 
     constructor() {
     }
@@ -100,9 +101,62 @@ class PoiComponent {
     initMap(target = 'globus', mapProvider = 'osm') {
         const url = PoiComponent.MAPS_PROVIDER[mapProvider]
         const osm = new og.layer.XYZ('o', { url })
-        const globe = new og.Globe({ target, name: 'e', terrain: new og.terrain.EmptyTerrain(), layers: [osm] })
-        globe.renderer.backgroundColor.set(0.09, 0.09, 0.09)
-        return globe
+        this.#globe = new og.Globe({ target, name: 'e', terrain: new og.terrain.EmptyTerrain(), layers: [osm] })
+        this.#globe.renderer.backgroundColor.set(0.09, 0.09, 0.09)
+    }
+
+    addRestaurants(pois) {
+        const entities = []
+        pois.forEach(poi => {
+            entities.push(new og.Entity({
+                name: poi.name,
+                poi,
+                lonlat: [poi.lon, poi.lat, 0],
+                billboard: {
+                    src: './restaurant.png',
+                    size: [240, 240],
+                },
+            }));
+        })
+
+        const poisCollection = new og.EntityCollection({ entities });
+
+        /*
+        pois.events.on('draw', c => {
+            c.each(e => {
+                let c = e.getLonLat();
+                let ll = this.#globe.planet.ellipsoid.getBearingDestination(c, e.properties.bearing, 2000);
+                e.properties.bearing = og.Ellipsoid.getFinalBearing(c, ll);
+                e.setLonLat(new og.LonLat(ll.lon, ll.lat, c.height));
+                e.billboard.setRotation(e.billboard.getRotation() + 0.01);
+            });
+        });
+
+        pois.events.on('mouseleave', e => {
+            let b = e.pickingObject.billboard;
+            b.setColorHTML(e.pickingObject.properties.color);
+        });
+        */
+        poisCollection.events.on('ldown', e => {
+            let b = e.pickingObject.billboard;
+            b.setColor(1, 1, 1);
+            console.log(e)
+            console.log(e.pickingObject)
+            window.alert(e.pickingObject?.properties?.name)
+            // window.open("https://www.geeksforgeeks.org", "_blank");
+        });
+
+
+        poisCollection.addTo(this.#globe.planet);
+    }
+
+    goTo(lon = 0, lat = 0) {
+        const ell = this.#globe.planet.ellipsoid;
+        const destPos = new og.LonLat(lon, lat - 0.19, 30000);
+        const viewPoi = new og.LonLat(lon, lat);
+        const lookCart = ell.lonLatToCartesian(viewPoi);
+        const upVec = ell.lonLatToCartesian(destPos).normalize();
+        return new Promise(res => this.#globe.planet.camera.flyLonLat(destPos, lookCart, upVec, 0, res));
     }
 
 }
@@ -110,11 +164,14 @@ class PoiComponent {
 (async () => {
 
     const poiComponent = new PoiComponent()
+    poiComponent.initMap()
     const { pois, latitude, longitude } = await poiComponent.getRestaurantsAroundMe()
     console.log(`https://www.openstreetmap.org/#map=16/${latitude}/${longitude}`)
     console.log(pois)
+    poiComponent.goTo(longitude, latitude)
     document.getElementById('progress').style.visibility = 'hidden'
-    // poiComponent.initMap()
+    poiComponent.addRestaurants(pois)
+    /*
     const list = document.querySelector('ul')
     pois.forEach(poi => {
         const element = document.createElement('li')
@@ -125,5 +182,6 @@ class PoiComponent {
         element.appendChild(a)
         list.appendChild(element)
     })
+    */
 
 })()
