@@ -22,6 +22,7 @@ class ConstellationComponent {
                 },
                 properties: {
                     bearing: rnd(0, 360),
+                    color: 'darkblue'
                 }
             }));
         }
@@ -41,18 +42,18 @@ class ConstellationComponent {
             });
         });
 
-        carrots.events.on('mouseenter', function (e) {
+        carrots.events.on('mouseenter', e => {
             let b = e.pickingObject.billboard;
             b.setColor(1, 1, 1);
         });
 
-        carrots.events.on('mouseleave', function (e) {
+        carrots.events.on('mouseleave', e => {
             let b = e.pickingObject.billboard;
             b.setColorHTML(e.pickingObject.properties.color);
         });
 
 
-        let sat = new og.layer.XYZ('constellation', {
+        const sat = new og.layer.XYZ('constellation', {
             isBaseLayer: true,
             url: '//tileproxy.cloud.mapquest.com/tiles/1.0.0/sat/{z}/{x}/{y}.png',
             visibility: true,
