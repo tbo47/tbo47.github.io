@@ -1,9 +1,6 @@
 import { svgDiagramCreate } from '../diagram/svg-presenter/svg-diagram-factory.js';
 import { connectorEqual } from './index-helpers.js';
 import { serialize } from './serialize/serialize.js';
-import { SvgShapeTextEditorDecorator } from '../diagram-extensions/svg-shape-texteditor-decorator.js';
-import { pngSave } from '../diagram-extensions/png-save.js';
-import { pngDgrmChunkGet, pngOpen } from '../diagram-extensions/png-open.js';
 
 // elements
 import './elements/menu-shape/menu-shape.js';
@@ -27,16 +24,10 @@ const tip = document.getElementById('tip');
 /** @type{SVGSVGElement} */
 // @ts-ignore
 const svg = document.getElementById('diagram');
-const diagram = svgDiagramCreate(
-	svg,
-	function(shape, param) {
-		// the way to add custom logic inside shapes - decorators
-		return new SvgShapeTextEditorDecorator(shape, param.createParams.props)
-			.on('update', update)
-			.on('del', del);
-	})
+const diagram = svgDiagramCreate(svg, null)
 	.on('connect', connect)
-	.on('disconnect', disconnect);
+	.on('disconnect', disconnect)
+	.on('select', select);
 
 //
 // logic
@@ -143,6 +134,16 @@ function disconnect(evt) {
 	connectors.splice(connectors.findIndex(el => connectorEqual(el, evt.detail)), 1);
 }
 
+/** @param { CustomEvent<IDiagramEventSelectDetail> } evt */
+function select(evt) {
+	evt.detail.target.update({
+		props: {
+			text: { textContent: 'New title' }
+		}
+	});
+}
+
+
 //
 // file operations: new/save/open/serialize
 
@@ -153,36 +154,15 @@ function clear() {
 }
 
 function save() {
-	if (!shapeData.size) { alert('Nothing to save'); return; }
-
-	pngSave(svg, serialize(shapeData, connectors));
 }
 
 // open: from file dialog and drag'n'drop file to browser
 
 const cantOpenMsg = 'File cannot be read. Use the exact image file you got from the application.';
 function open() {
-	pngOpen(dgrmChunk => {
-		if (!dgrmChunk) { alert(cantOpenMsg); return; }
-		loadFromJson(dgrmChunk);
-	});
 }
 
 svg.addEventListener('dragover', evt => { evt.preventDefault(); });
-svg.addEventListener('drop', async evt => {
-	evt.preventDefault();
-
-	if (evt.dataTransfer?.items?.length !== 1 ||
-		evt.dataTransfer.items[0].kind !== 'file' ||
-		evt.dataTransfer.items[0].type !== 'image/png') {
-		alert(cantOpenMsg); return;
-	}
-
-	const dgrmChunk = await pngDgrmChunkGet(evt.dataTransfer.items[0].getAsFile());
-	if (!dgrmChunk) { alert(cantOpenMsg); return; }
-
-	loadFromJson(dgrmChunk);
-});
 
 async function generateLink() {
 	if (!shapeData.size) { alert('Nothing to save'); return; }
