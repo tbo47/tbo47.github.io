@@ -1,0 +1,41 @@
+{
+    "workbench.colorCustomizations": {
+        "tab.activeBorder": "#ff0000",
+        "tab.unfocusedActiveBorder": "#000000",
+        "banner.foreground": "#fff"
+    },
+    "search.exclude": {
+        "**/dist": true,
+        "**/.angular/cache": true
+    },
+    "editor.codeActionsOnSave": [
+        "source.formatDocument",
+        "source.fixAll.eslint"
+    ],
+    "eslint.probe": ["typescript"],
+    "editor.bracketPairColorization.enabled": true,
+    "editor.guides.bracketPairs": "active",
+    "typescript.tsdk": "node_modules/typescript/lib",
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnSave": true,
+    "python.formatting.provider": "black",
+    "sqltools.connections": [
+        {
+            "previewLimit": 50,
+            "server": "hub-staging.c4nihbnqaamp.us-gov-west-1.rds.amazonaws.com",
+            "port": 5432,
+            "askForPassword": true,
+            "driver": "PostgreSQL",
+            "name": "hub",
+            "database": "hub",
+            "username": "postgres"
+        }
+    ],
+    "[html]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[sass]": {
+        "editor.defaultFormatter": "syler.sass-indented"
+    },
+    "jest.jestCommandLine": "npm run test:hub --"
+}
