@@ -10,3 +10,13 @@ body {
 #pois {
     padding: 0.4rem;
 }
+
+.sidenav {
+    overflow-y: auto;
+}
+
+@media screen and (max-width: 600px) {
+    .sidenav {
+        display: none;
+    }
+}
