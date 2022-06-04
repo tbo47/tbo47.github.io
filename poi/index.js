@@ -132,5 +132,11 @@ function initMap({ pois, latitude, longitude }) {
     })
     const osm = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png')
     const map = L.map('map', { center: [latitude, longitude], zoom, layers: [osm, lg] })
+
+    map.on('locationfound', e => L.circle(e.latlng, e.accuracy / 2).addTo(map))
+    // map.on('locationerror', e => alert(e.message))
+    map.locate({ setView: true, maxZoom: 16 });
+
+
     return { map, markers }
 }
