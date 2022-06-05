@@ -1,8 +1,5 @@
 import { addPOIsToTheMap, extractDiets, getFoodShops, initLeafletMap } from './ez-osm.js';
 
-/**
- * @param {LatLngBounds} bounds
- */
 const renderMap = async (map) => {
 
     map.eachLayer(layer => {

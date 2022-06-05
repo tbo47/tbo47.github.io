@@ -149,7 +149,7 @@ export const addPOIsToTheMap = (map, pois) => {
         const extra = []
         extra.push(`<a href="${p.osm_url}" target="osm" title="Contribute on openstreetmap">osm</a>`)
         if (p.website) extra.push(`<a href="${p.website}" target="w" title="Visit the website">web</a>`)
-        const addr = p[`addr:street`] ? p[`addr:housenumber`] + ' ' + p[`addr:street`] : ``
+        const addr = p[`addr:street`] ? (p[`addr:housenumber`] || ``) + ' ' + p[`addr:street`] : ``
         const name = p.name?.replaceAll(`&`, ` `)
         if (addr) {
             extra.push(`<a href="https://www.google.com/search?q=${name} ${addr}" target="g" title="Search in google">g</a>`)
