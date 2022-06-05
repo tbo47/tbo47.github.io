@@ -8,6 +8,10 @@ const renderMap = async (map) => {
     map.eachLayer(layer => {
         if (!layer._url) map.removeLayer(layer)
     })
+    document.getElementById(`diets`).innerHTML = ``
+    document.getElementById(`pois`).innerHTML = ``
+    document.getElementById(`loading`).innerHTML = `Loading`;
+
     const bounds = map.getBounds()
     const pois = await getFoodShops(bounds);
     const markers = addPOIsToTheMap(map, pois)
@@ -32,11 +36,11 @@ const renderMap = async (map) => {
         });
         document.getElementById(`pois`).appendChild(div);
     });
+    document.getElementById(`loading`).innerHTML = ``;
 }
 
 (async () => {
     const { map } = await initLeafletMap()
     await renderMap(map)
-    document.getElementById("loading").innerHTML = "";
     map.on('moveend', () => renderMap(map))
 })();
