@@ -1,7 +1,10 @@
 <html>
   <head>
     <title>Restaurants</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
     <link
       rel="stylesheet"
       href="https://unpkg.com/leaflet@1.8.0/dist/leaflet.css"
@@ -25,36 +28,5 @@
     integrity="sha512-BB3hKbKWOc9Ez/TAwyWxNXeoV9c1v6FIeYiBieIWkpLjauysF18NzgR1MBNBXf8/KABdlkX68nAhlwcDFLGPCQ=="
     crossorigin=""
   ></script>
-  <script src="index.js"></script>
-  <script>
-    (async () => {
-      const { pois, latitude, longitude } = await this.getRestaurantsAroundMe();
-
-      document.getElementById("loading").innerHTML = "";
-
-      const { map, markers } = this.initMap({ pois, latitude, longitude });
-
-      const diets = this.extractDiets(pois);
-      const dietsHtml = diets
-        .map((d) => `<span class="">${d.at(0)} (${d.at(1)})</span>`)
-        .join(` | `);
-      document.getElementById(`diets`).innerHTML += dietsHtml;
-
-      pois.forEach((poi) => {
-        if (!poi.name) return;
-        const div = document.createElement("div");
-        const a = document.createElement("a");
-        a.innerHTML = poi.name;
-        div.appendChild(a);
-        a.addEventListener("click", () => {
-          const leafletMarker = markers.get(poi);
-          if (leafletMarker) {
-            leafletMarker.openPopup();
-            map.fitBounds(L.latLngBounds([leafletMarker.getLatLng()]));
-          }
-        });
-        document.getElementById(`pois`).appendChild(div);
-      });
-    })();
-  </script>
+  <script type="module" src="./index.js"></script>
 </html>
