@@ -17,7 +17,7 @@ class IssComponent {
      * @param {string} [satelliteLabel]
      * @param {number} [footprintRadius]
      */
-    constructor(divId = 'globus', refreshRate = 1000, satelliteLabel = '', footprintRadius = 80000, mapProvider = 'arcgis') {
+    constructor(divId = 'globus', refreshRate = 1000, satelliteLabel = '', footprintRadius = 80000, mapProvider = 'osm') {
         this.#footprintRadius = footprintRadius
         const globus = this.#initMap(divId, mapProvider);
         this.#initIss(globus, refreshRate, satelliteLabel);
@@ -108,7 +108,7 @@ class IssComponent {
         const url = IssComponent.MAPS_PROVIDER[mapProvider]
         const osm = new og.layer.XYZ('o', { url })
         const globe = new og.Globe({ target, name: 'e', terrain: new og.terrain.EmptyTerrain(), layers: [osm] })
-        globe.renderer.backgroundColor.set(0.09, 0.09, 0.09)
+        // globe.renderer.backgroundColor.set(0.09, 0.09, 0.09)
         return globe
     }
 

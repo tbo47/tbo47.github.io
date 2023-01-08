@@ -55,7 +55,7 @@ class ConstellationComponent {
 
         const sat = new og.layer.XYZ('constellation', {
             isBaseLayer: true,
-            url: '//tileproxy.cloud.mapquest.com/tiles/1.0.0/sat/{z}/{x}/{y}.png',
+            url: '//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
             visibility: true,
         });
 
