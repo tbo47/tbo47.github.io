@@ -22,7 +22,6 @@ class ConstellationComponent {
                 },
                 properties: {
                     bearing: rnd(0, 360),
-                    color: 'darkblue'
                 }
             }));
         }
@@ -64,13 +63,16 @@ class ConstellationComponent {
             target: 'globus',
             name: 'Earth',
             terrain: new og.terrain.GlobusTerrain(),
-            layers: [sat]
+            layers: [sat],
+            controls:[
+                new SimpleSkyBackground()
+            ]
         });
 
         carrots.addTo(globus.planet);
 
         globus.planet.flyLonLat(new og.LonLat(54.5, 43.5, 20108312));
-        globus.renderer.backgroundColor.set(0.09, 0.09, 0.09);
+        // globus.renderer.backgroundColor.set(0.09, 0.09, 0.09);
     }
 }
 

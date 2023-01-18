@@ -32,7 +32,7 @@ class IssComponent {
         let footprintEntityCollection
         setInterval(async () => {
             if (document.visibilityState === 'hidden') {
-                iss.issTrackEntity?.polyline?.clear()
+                iss?.issTrackEntity?.polyline?.clear()
                 this.#needToCenterTheMap = true
                 return
             }
@@ -81,7 +81,7 @@ class IssComponent {
         });
         const issCollection = new og.EntityCollection({ entities: [issEntity] });
         issCollection.addTo(globus.planet);
-        const issTrackEntity = new og.Entity({ name: 'path', polyline: { pathLonLat: [], thickness: 2, color: '#fff' } });
+        const issTrackEntity = new og.Entity({ name: 'path', polyline: { pathLonLat: [], thickness: 2, color: '#ff8282' } });
         const issTrackCollection = new og.EntityCollection({ entities: [issTrackEntity] });
         issTrackCollection.addTo(globus.planet);
         return { issEntity, issTrackEntity }
@@ -112,6 +112,7 @@ class IssComponent {
         return globe
     }
 
+    // TODO replace by fetch
     #get(url = '') {
         return new Promise((resolve, reject) => {
             const http = new XMLHttpRequest();
