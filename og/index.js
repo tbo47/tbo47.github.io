@@ -48,7 +48,7 @@ class ConstellationComponent {
 
         carrots.events.on('mouseleave', e => {
             let b = e.pickingObject.billboard;
-            b.setColorHTML(e.pickingObject.properties.color);
+            // b.setColorHTML(e.pickingObject.properties.color);
         });
 
 
@@ -63,10 +63,7 @@ class ConstellationComponent {
             target: 'globus',
             name: 'Earth',
             terrain: new og.terrain.GlobusTerrain(),
-            layers: [sat],
-            controls:[
-                new SimpleSkyBackground()
-            ]
+            layers: [sat]
         });
 
         carrots.addTo(globus.planet);
