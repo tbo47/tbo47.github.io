@@ -2,7 +2,15 @@
 ## after installing debian
 
 ```
-sudo apt install sway
+su -
+apt update; apt dist-upgrade -y; apt autoremove -y
+apt install sway swaylock swayidle nodejs chromium vim
+```
+
+`~/.vimrc`: 
+```
+:imap jk <Esc>
+:syntax on
 ```
 
 ## config sway
@@ -40,5 +48,7 @@ done
 
 `cp /etc/sway/config ~/.config/sway/`
 
-Change the `bar` section to have `status_command ~/.config/sway/scripts/statusbar.sh`
+In `~/.config/sway/config` change the `bar` section to have `status_command ~/.config/sway/scripts/statusbar.sh`
+
+`cp /etc/xdg/foot/foot.ini ~/.config/foot/` and tweak `~/.config/foot/foot.ini` if needed.
 
