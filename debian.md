@@ -3,7 +3,8 @@ This is my Debian 12 configuration.
 ```
 su -
 apt update; apt dist-upgrade -y; apt autoremove -y
-apt install sway swaylock swayidle grimshot nodejs npm vim thunderbird exa pavucontrol
+apt install sway swaylock swayidle grimshot nodejs npm vim thunderbird exa pavucontrol gimp
+npm i -g npm-check-updates
 ```
 
 Install [Docker](https://docs.docker.com/engine/install/debian/), [Discord](https://discord.com/download), [Chrome](https://www.google.com/chrome/dr/download/).
@@ -51,6 +52,7 @@ My `~/.config/sway/config` looks like:
 swaymsg 'output "*" background /tmp/wikimedia.jpg fill'
 bindsym $mod+m output eDP-1 disable
 bindsym $mod+n output eDP-1 enable
+bindsym Print exec grimshot save area
 ...
 
 bar {
