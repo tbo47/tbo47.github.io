@@ -7,7 +7,7 @@ apt install sway swaylock swayidle grimshot nodejs npm vim thunderbird exa pavuc
 npm i -g npm-check-updates
 ```
 
-Install [Docker](https://docs.docker.com/engine/install/debian/), [Discord](https://discord.com/download), [Chrome](https://www.google.com/chrome/dr/download/).
+Install [docker](https://docs.docker.com/engine/install/debian/), [discord](https://discord.com/download), [chrome](https://www.google.com/chrome/dr/download/), [syncthing](https://syncthing.net/).
 
 ## Sway
 
@@ -28,7 +28,7 @@ https.get(`https://query1.finance.yahoo.com/v8/finance/chart/${name}`, resp => {
 })
 ```
 
-Create a file named `~/.config/sway/script/statusbar.sh`:
+Create a file named `~/.config/sway/script/statusbar.sh` and make it executable `chmod +x ~/.config/sway/script/statusbar.sh`:
 
 ```bash
 #!/bin/sh
@@ -49,7 +49,7 @@ My `~/.config/sway/config` looks like:
 
 ```
 ...
-swaymsg 'output "*" background /tmp/wikimedia.jpg fill'
+output * bg /usr/share/backgrounds/sway/low-poly-bird.jpg fill
 bindsym $mod+m output eDP-1 disable
 bindsym $mod+n output eDP-1 enable
 bindsym Print exec grimshot save area
