@@ -1,11 +1,16 @@
-
-## after installing debian
+This is my Debian 12 configuration.
 
 ```
 su -
 apt update; apt dist-upgrade -y; apt autoremove -y
-apt install sway swaylock swayidle nodejs chromium vim
+apt install sway swaylock swayidle nodejs chromium vim thunderbird
 ```
+
+Install [Docker](https://docs.docker.com/engine/install/debian/).
+
+Install [Discord](https://discord.com/download).
+
+## Vim
 
 `~/.vimrc`: 
 ```
@@ -13,7 +18,9 @@ apt install sway swaylock swayidle nodejs chromium vim
 :syntax on
 ```
 
-## config sway
+## Sway
+
+[Sway](https://swaywm.org/) is a windows manager.
 
 Create a file named `getASTR.js`
 ```javascript
@@ -49,6 +56,10 @@ done
 `cp /etc/sway/config ~/.config/sway/`
 
 In `~/.config/sway/config` change the `bar` section to have `status_command ~/.config/sway/scripts/statusbar.sh`
+
+## Foot
+
+[Foot](https://codeberg.org/dnkl/foot) is the default terminal for Sway.
 
 `cp /etc/xdg/foot/foot.ini ~/.config/foot/` and tweak `~/.config/foot/foot.ini` if needed.
 
