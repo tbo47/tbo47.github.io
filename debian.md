@@ -3,12 +3,68 @@ This is my Debian 12 configuration.
 ```
 su -
 apt update; apt dist-upgrade -y; apt autoremove -y
-apt install sway swaylock swayidle nodejs chromium vim thunderbird
+apt install sway swaylock swayidle grimshot nodejs npm vim thunderbird exa pavucontrol
 ```
 
-Install [Docker](https://docs.docker.com/engine/install/debian/).
+Install [Docker](https://docs.docker.com/engine/install/debian/), [Discord](https://discord.com/download), [Chrome](https://www.google.com/chrome/dr/download/).
 
-Install [Discord](https://discord.com/download).
+## Sway
+
+[Sway](https://swaywm.org/) is a tiling windows manager.
+
+Create the conf dir and copy the default sway conf file:
+`mkdir -p ~/.config/sway/scripts/; cp /etc/sway/config ~/.config/sway/`
+
+Create a file named `~/.config/sway/scripts/finance.js`:
+
+```javascript
+const https = require('https');
+const name = process.argv.at(2) || 'ASTR' // RKLB
+https.get(`https://query1.finance.yahoo.com/v8/finance/chart/${name}`, resp => {
+  let data = ''
+  resp.on('data', c => data += c)
+  resp.on('end', () => console.log(JSON.parse(data).chart.result.at(0).meta.regularMarketPrice))
+})
+```
+
+Create a file named `~/.config/sway/script/statusbar.sh`:
+
+```bash
+#!/bin/sh
+rklb="RKLB \$$(node ~/.config/sway/scripts/finance.js RKLB)"
+astr="ASTR \$$(node ~/.config/sway/scripts/finance.js ASTR)"
+while true
+do
+    date_dakar="$(TZ="Africa/Dakar" date +'%Y-%m-%d')"
+    time_paris="Paris $(TZ="Europe/Paris" date +'%H:%M')"
+    time_dakar="Dakar $(TZ="Africa/Dakar" date +'%H:%M')"
+    time_sf="San Francisco $(TZ="America/Los_Angeles" date +'%H:%M')"
+    printf "%s | %s | %s %s, %s, %s\n" "$rklb" "$astr" "$date_dakar" "$time_paris" "$time_dakar" "$time_sf"
+    sleep 10
+done
+```
+
+My `~/.config/sway/config` looks like:
+
+```
+...
+swaymsg 'output "*" background /tmp/wikimedia.jpg fill'
+bindsym $mod+m output eDP-1 disable
+bindsym $mod+n output eDP-1 enable
+...
+
+bar {
+    ...
+    status_command ~/.config/sway/scripts/statusbar.sh
+    ...
+}
+```
+
+## Foot
+
+[Foot](https://codeberg.org/dnkl/foot) is the default terminal for Sway.
+
+`cp /etc/xdg/foot/foot.ini ~/.config/foot/` and tweak `~/.config/foot/foot.ini` if needed.
 
 ## Vim
 
@@ -17,49 +73,3 @@ Install [Discord](https://discord.com/download).
 :imap jk <Esc>
 :syntax on
 ```
-
-## Sway
-
-[Sway](https://swaywm.org/) is a windows manager.
-
-Create a file named `getASTR.js`
-```javascript
-const https = require('https');
-const name = process.argv.at(2) || 'ASTR'
-https.get(`https://query1.finance.yahoo.com/v8/finance/chart/${name}`, resp => {
-  let data = ''
-  resp.on('data', c => data += c)
-  resp.on('end', () => console.log(JSON.parse(data).chart.result.at(0).meta.regularMarketPrice))
-})
-// RKLB
-```
-
-Create `.config/sway/scripts/statusbar.sh` and make it executable `chmod +x statusbar.sh`
-
-```bash
-#!/bin/sh
-astr="ASTR \$$(/home/user/.nvm/versions/node/v18.15.0/bin/node ~/getASTR.js)"
-while true
-do
-    cpu_temp="CPU $(awk '{x += $1} END{ printf "%.2f", x / NR / 1000}' /sys/class/thermal/thermal_zone*/temp)°C"
-    # date_and_time="$(date +'%Y-%m-%d %I:%M:%S %p')"
-    date_dakar="$(TZ="Africa/Dakar" date +'%Y-%m-%d')"
-    date_and_time_paris="Paris $(TZ="Europe/Paris" date +'%H:%M')"
-    date_and_time_new_york="New York $(TZ="America/New_York" date +'%H:%M')"
-    date_and_time_dakar="Dakar $(TZ="Africa/Dakar" date +'%H:%M')"
-    date_and_time_sf="San Francisco $(TZ="America/Los_Angeles" date +'%H:%M')"
-    printf "%s | %s | %s %s, %s, %s\n" "$astr" "$cpu_temp" "$date_dakar" "$date_and_time_paris" "$date_and_time_dakar" "$date_and_time_sf"
-    sleep 30
-done
-```
-
-`cp /etc/sway/config ~/.config/sway/`
-
-In `~/.config/sway/config` change the `bar` section to have `status_command ~/.config/sway/scripts/statusbar.sh`
-
-## Foot
-
-[Foot](https://codeberg.org/dnkl/foot) is the default terminal for Sway.
-
-`cp /etc/xdg/foot/foot.ini ~/.config/foot/` and tweak `~/.config/foot/foot.ini` if needed.
-
