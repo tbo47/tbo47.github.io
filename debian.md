@@ -3,11 +3,11 @@ This is my Debian 12 configuration.
 ```
 su -
 apt update; apt dist-upgrade -y; apt autoremove -y
-apt install sway swaylock swayidle grimshot nodejs npm vim thunderbird exa pavucontrol gimp
+apt install sway swaylock swayidle grimshot nodejs npm vim thunderbird exa pavucontrol gimp silversearcher-ag rename
 npm i -g npm-check-updates
 ```
 
-Install [docker](https://docs.docker.com/engine/install/debian/), [discord](https://discord.com/download), [chrome](https://www.google.com/chrome/dr/download/), [syncthing](https://syncthing.net/).
+Install [docker](https://docs.docker.com/engine/install/debian/), [discord](https://discord.com/download), [chrome](https://www.google.com/chrome/dr/download/), [syncthing](https://syncthing.net/), [amule](https://github.com/ngosang/docker-amule#ngosangamule), [globalprotect](https://github.com/yuezk/GlobalProtect-openconnect).
 
 ## Sway
 
@@ -34,6 +34,9 @@ Create a file named `~/.config/sway/script/statusbar.sh` and make it executable 
 #!/bin/sh
 rklb="RKLB \$$(node ~/.config/sway/scripts/finance.js RKLB)"
 astr="ASTR \$$(node ~/.config/sway/scripts/finance.js ASTR)"
+# node ~/.config/sway/scripts/wikimedia.js
+# "stretch", "fill", "fit", "center", "tile"
+# swaymsg 'output "*" background /tmp/wikimedia.jpg center'
 while true
 do
     date_dakar="$(TZ="Africa/Dakar" date +'%Y-%m-%d')"
