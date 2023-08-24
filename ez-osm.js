@@ -15,9 +15,9 @@ export const getCurrentPosition = () => {
     })
 }
 
-const getCurrentPositionLink = async () => {
+const getCurrentPositionLink = async (zoom = 17) => {
     const position = await getCurrentPosition()
-    const url = `https://www.openstreetmap.org/#map=17/${position.latitude}/${position.longitude}`
+    const url = `https://www.openstreetmap.org/#map=${17}/${position.latitude}/${position.longitude}`
     return url
 }
 
@@ -159,6 +159,34 @@ export const addPOIsToTheMap = (map, pois) => {
         const html = `<div>${p.name}</div><div>${cuisine}</div><div>${extra.join(" | ")}`
         const marker = L.marker([p.lat, p.lon]).bindPopup(html).addTo(lg)
         markers.set(p, marker)
+    })
+    lg.addTo(map)
+    return markers
+}
+
+/**
+ * 
+ * @returns {Promise.<{title, lat, lon}[]>}
+ */
+export const wikipedia = async (lat = 37, lon = -122, language = 'en', radius = 10000, limit = 100) => {
+    const b = `https://${language}.wikipedia.org/w/api.php`
+    const u = `${b}?action=query&list=geosearch&gscoord=${lat}%7C${lon}&gsradius=${radius}&gslimit=${limit}&origin=*&format=json`
+    const r = await fetch(u)
+    const d = await r.json()
+    return d.query.geosearch
+}
+
+export const addWikipediaArticlesToTheMap = (map, articles) => {
+    const lg = L.layerGroup()
+    const markers = new Map()
+    articles.forEach(({title, lat, lon}) => {
+        const extra = []
+        extra.push(`<a href="${title}" target="osm" title="Wiki">wiki</a>`)
+        const website = title
+        if (website) extra.push(`<a href="${website}" target="w" title="Visit the website">web</a>`)
+        const html = `<div>${title}</div>`
+        const marker = L.marker([lat, lon]).bindPopup(html).addTo(lg)
+        markers.set(title, marker)
     })
     lg.addTo(map)
     return markers

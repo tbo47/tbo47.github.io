@@ -1,4 +1,4 @@
-import { addPOIsToTheMap, extractDiets, getFoodShops, initLeafletMap } from '../ez-osm.js';
+import { addWikipediaArticlesToTheMap, extractDiets, initLeafletMap, wikipedia } from '../ez-osm.js';
 
 const renderMap = async (map) => {
 
@@ -9,9 +9,12 @@ const renderMap = async (map) => {
     document.getElementById(`pois`).innerHTML = ``
     document.getElementById(`loading`).innerHTML = `Loading`;
 
-    const bounds = map.getBounds()
-    const pois = await getFoodShops(bounds);
-    const markers = addPOIsToTheMap(map, pois)
+    const { lat, lng } = map.getCenter()
+    const language = window.navigator.language?.split('-').at(0);
+    const articles = await wikipedia(lat, lng, language)
+    const markers = addWikipediaArticlesToTheMap(map, articles)
+    return
+
     const diets = extractDiets(pois);
     const dietsHtml = diets
         .map((d) => `<span class="">${d.at(0)} (${d.at(1)})</span>`)
