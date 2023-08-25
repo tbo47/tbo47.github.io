@@ -1,5 +1,4 @@
-
-const zoom = 16 // the default map zoom
+// Description: A library to query open data sources (wikipedia, openstreetmap, wikimedia...).
 
 /**
  * Get the current location of the user. Will only work on https or localhost.
@@ -15,10 +14,9 @@ export const getCurrentPosition = () => {
     })
 }
 
-const getCurrentPositionLink = async (zoom = 17) => {
-    const position = await getCurrentPosition()
-    const url = `https://www.openstreetmap.org/#map=${17}/${position.latitude}/${position.longitude}`
-    return url
+const getCurrentOsmPositionLink = async (z = 17) => {
+    const { latitude, longitude } = await getCurrentPosition()
+    return `https://www.openstreetmap.org/#map=${z}/${latitude}/${longitude}`
 }
 
 /**
@@ -28,7 +26,7 @@ const getCurrentPositionLink = async (zoom = 17) => {
  * @param {Array.<Array>} categories of pois. Like restaurant, cafe...
  * @returns Promise<Poi[]>
  */
-export const getPois = (bbox, categories) => {
+export const getOsmPois = (bbox, categories) => {
     const url = 'https://overpass-api.de/api/interpreter';
 
     let quest = '';
@@ -79,7 +77,7 @@ export const getPois = (bbox, categories) => {
  * @returns Promise<POI[]> restaurants and cafes
  */
 export const getRestaurants = () => {
-    return getPois('37.8,-122.3,37.8,-122.2', [{ key: 'amenity', value: 'cafe' }, { key: 'amenity', value: 'restaurant' }])
+    return getOsmPois('37.8,-122.3,37.8,-122.2', [{ key: 'amenity', value: 'cafe' }, { key: 'amenity', value: 'restaurant' }])
 }
 
 /**
@@ -95,7 +93,7 @@ export const getFoodShops = async ({ _northEast, _southWest }) => {
     bbox.push(_northEast.lng)
     let categories = [['amenity', 'cafe'], ['amenity', 'restaurant'], ['shop', 'deli'], ['amenity', 'ice_cream'], ['amenity', 'fast_food']]
     // categories = [['leisure', 'park'], ['leisure', 'swimming_pool']]
-    const pois = await getPois(bbox.join(','), categories)
+    const pois = await getOsmPois(bbox.join(','), categories)
     return pois
 }
 
@@ -165,26 +163,39 @@ export const addPOIsToTheMap = (map, pois) => {
 }
 
 /**
- * 
- * @returns {Promise.<{title, lat, lon}[]>}
+ * Return the wikipedia articles around a given location.
+ * @returns {Promise.<Array.<title, lat, lon, url, dist, pageid>>}
  */
-export const wikipedia = async (lat = 37, lon = -122, language = 'en', radius = 10000, limit = 100) => {
+export const wikipediaQuery = async (lat = 37, lon = -122, language = 'en', radius = 10000, limit = 100) => {
     const b = `https://${language}.wikipedia.org/w/api.php`
     const u = `${b}?action=query&list=geosearch&gscoord=${lat}%7C${lon}&gsradius=${radius}&gslimit=${limit}&origin=*&format=json`
     const r = await fetch(u)
     const d = await r.json()
-    return d.query.geosearch
+    return d.query.geosearch.map(a => {
+        a.url = `https://${language}.wikipedia.org/wiki/${a.title}`
+        return a
+    })
 }
 
+export const wikidataQuery = async (lat = 37, lon = -122, language = 'en', radius = 10000, limit = 100) => {
+    const b = 'https://query.wikidata.org/bigdata/namespace/wdq/sparql?format=json&query='
+    const q = 'SELECT ?q ?qLabel ?location ?image ?reason ?desc ?commonscat ?street WHERE { SERVICE wikibase:box { ?q wdt:P625 ?location . bd:serviceParam wikibase:cornerSouthWest "Point(-17.20767974853516 14.330588168640638)"^^geo:wktLiteral . bd:serviceParam wikibase:cornerNorthEast "Point(-16.78298950195313 14.626108798876851)"^^geo:wktLiteral }  OPTIONAL { ?q wdt:P18 ?image }  OPTIONAL { ?q wdt:P373 ?commonscat }  OPTIONAL { ?q wdt:P969 ?street }  SERVICE wikibase:label { bd:serviceParam wikibase:language "en,en,de,fr,es,it,nl" . ?q schema:description ?desc . ?q rdfs:label ?qLabel } } LIMIT 3000'
+    const r = await fetch(b + encodeURI(q))
+    const d = await r.json()
+    return d.results.bindings
+}
+
+/**
+ * Add wikipedia articles to the map.
+ * @param {*} map 
+ * @param {Array.<title, lat, lon>} articles 
+ * @returns {Map.<title, L.marker>}
+ */
 export const addWikipediaArticlesToTheMap = (map, articles) => {
     const lg = L.layerGroup()
     const markers = new Map()
-    articles.forEach(({title, lat, lon}) => {
-        const extra = []
-        extra.push(`<a href="${title}" target="osm" title="Wiki">wiki</a>`)
-        const website = title
-        if (website) extra.push(`<a href="${website}" target="w" title="Visit the website">web</a>`)
-        const html = `<div>${title}</div>`
+    articles.forEach(({ url, title, lat, lon }) => {
+        const html = `<div><a href="${url}" target="osm" title="Wiki">${title}</a></div>`
         const marker = L.marker([lat, lon]).bindPopup(html).addTo(lg)
         markers.set(title, marker)
     })
