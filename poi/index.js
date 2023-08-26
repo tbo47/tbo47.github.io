@@ -1,4 +1,4 @@
-import { addPOIsToTheMap, extractDiets, getFoodShops, initLeafletMap } from '../ez-osm.js';
+import { addPOIsToTheMap, extractDiets, getFoodShops, initLeafletMap } from '../ez-opendata.js';
 
 const renderMap = async (map) => {
 
