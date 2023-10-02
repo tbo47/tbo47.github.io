@@ -26,7 +26,7 @@ const getCurrentOsmPositionLink = async (z = 17) => {
  * @param {Array.<Array>} categories of pois. Like restaurant, cafe...
  * @returns Promise<Poi[]>
  */
-export const getOsmPois = (bbox, categories) => {
+export const getOsmPois = async (bbox, categories) => {
     const url = 'https://overpass-api.de/api/interpreter';
 
     let quest = '';
@@ -38,7 +38,7 @@ export const getOsmPois = (bbox, categories) => {
         quest += p;
     });
 
-    const q = `
+    const body = `
         [out:json][timeout:25];
         (
             ${quest}
@@ -47,28 +47,16 @@ export const getOsmPois = (bbox, categories) => {
         >;
         out skel qt;`;
 
-    const xhr = new XMLHttpRequest()
-    xhr.open('POST', url, true)
-    xhr.setRequestHeader('Content-Type', 'application/json')
-    xhr.send(q)
-    return new Promise((resolve, reject) => {
-        xhr.onload = function () {
-            try {
-                const data = JSON.parse(this.responseText)
-                const pois = data.elements.filter(p => p.tags).map(p => {
-                    p = { ...p, ...p.tags } // merge the tags object into the main one
-                    delete p.tags
-                    const type = p.members ? 'relation' : p.type
-                    if (!p.website && p[`contact:website`]) p.website = p[`contact:website`]
-                    p.osm_url = `https://www.openstreetmap.org/${type}/${p.id}`
-                    p.osm_url_edit = `https://www.openstreetmap.org/edit?${type}=${p.id}`
-                    return p
-                })
-                resolve(pois)
-            } catch (error) {
-                reject(error)
-            }
-        };
+    const response = await fetch(url, { method: 'POST', body })
+    const data = await response.json()
+    return data.elements.filter(p => p.tags).map(p => {
+        p = { ...p, ...p.tags } // merge the tags object into the main one
+        delete p.tags
+        const type = p.members ? 'relation' : p.type
+        if (!p.website && p[`contact:website`]) p.website = p[`contact:website`]
+        p.osm_url = `https://www.openstreetmap.org/${type}/${p.id}`
+        p.osm_url_edit = `https://www.openstreetmap.org/edit?${type}=${p.id}`
+        return p
     })
 }
 
@@ -136,7 +124,7 @@ export const initLeafletMap = () => {
             resolve({ map, ...e })
         })
         map.on('locationerror', e => reject(e))
-        map.locate({ setView: true, maxZoom: 16 });
+        map.locate({ setView: true, maxZoom: 16 })
     })
 }
 
