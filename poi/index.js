@@ -35,10 +35,14 @@ const renderMap = async (map) => {
         document.getElementById(`pois`).appendChild(div);
     });
     document.getElementById(`loading`).innerHTML = ``;
+    return markers
 }
 
 (async () => {
     const { map } = await leafletInitMap()
-    await renderMap(map)
-    map.on('moveend', () => renderMap(map))
+    let markers = await renderMap(map)
+    map.on('moveend', async () => {
+        markers.forEach(marker => map.removeLayer(marker))
+        markers = await renderMap(map)
+    })
 })();
