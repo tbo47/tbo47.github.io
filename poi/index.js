@@ -1,4 +1,5 @@
-import { addPOIsToTheMap, extractDiets, getFoodShops, initLeafletMap } from '../ez-opendata.js';
+import { extractDiets, getFoodShops } from '../ez-opendata.js';
+import { leafletAddPOIsToTheMap, leafletInitMap } from '../ez-leaflet.js';
 
 const renderMap = async (map) => {
 
@@ -11,7 +12,7 @@ const renderMap = async (map) => {
 
     const bounds = map.getBounds()
     const pois = await getFoodShops(bounds);
-    const markers = addPOIsToTheMap(map, pois)
+    const markers = leafletAddPOIsToTheMap(map, pois)
     const diets = extractDiets(pois);
     const dietsHtml = diets
         .map((d) => `<span class="">${d.at(0)} (${d.at(1)})</span>`)
@@ -37,7 +38,7 @@ const renderMap = async (map) => {
 }
 
 (async () => {
-    const { map } = await initLeafletMap()
+    const { map } = await leafletInitMap()
     await renderMap(map)
     map.on('moveend', () => renderMap(map))
 })();

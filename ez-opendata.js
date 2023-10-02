@@ -1,32 +1,13 @@
 // Description: A library to query open data sources (wikipedia, openstreetmap, wikimedia...).
 
 /**
- * Get the current location of the user. Will only work on https or localhost.
- * @returns { latitude, longitude }
- */
-export const getCurrentPosition = () => {
-    return new Promise((resolve, reject) => {
-        if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(position => resolve(position.coords))
-        } else {
-            reject('Geolocation is not supported by this browser.')
-        }
-    })
-}
-
-const getCurrentOsmPositionLink = async (z = 17) => {
-    const { latitude, longitude } = await getCurrentPosition()
-    return `https://www.openstreetmap.org/#map=${z}/${latitude}/${longitude}`
-}
-
-/**
  * Query an openstreetmap server to fetch POIs
  * 
  * @param {*} bbox the rectangle where to perform the query
  * @param {Array.<Array>} categories of pois. Like restaurant, cafe...
  * @returns Promise<Poi[]>
  */
-export const getOsmPois = async (bbox, categories) => {
+export const openstreetmapGetPOIs = async (bbox, categories) => {
     const url = 'https://overpass-api.de/api/interpreter';
 
     let quest = '';
@@ -64,8 +45,8 @@ export const getOsmPois = async (bbox, categories) => {
  * 
  * @returns Promise<POI[]> restaurants and cafes
  */
-export const getRestaurants = () => {
-    return getOsmPois('37.8,-122.3,37.8,-122.2', [{ key: 'amenity', value: 'cafe' }, { key: 'amenity', value: 'restaurant' }])
+export const openstreetmapGetRestaurants = () => {
+    return openstreetmapGetPOIs('37.8,-122.3,37.8,-122.2', [{ key: 'amenity', value: 'cafe' }, { key: 'amenity', value: 'restaurant' }])
 }
 
 /**
@@ -81,7 +62,7 @@ export const getFoodShops = async ({ _northEast, _southWest }) => {
     bbox.push(_northEast.lng)
     let categories = [['amenity', 'cafe'], ['amenity', 'restaurant'], ['shop', 'deli'], ['amenity', 'ice_cream'], ['amenity', 'fast_food']]
     // categories = [['leisure', 'park'], ['leisure', 'swimming_pool']]
-    const pois = await getOsmPois(bbox.join(','), categories)
+    const pois = await openstreetmapGetPOIs(bbox.join(','), categories)
     return pois
 }
 
@@ -107,50 +88,6 @@ export const extractDiets = (pois) => {
 }
 
 /**
- * 
- * @returns {Promise.<{map, bounds}>}
- */
-export const initLeafletMap = () => {
-    return new Promise((resolve, reject) => {
-        const map = L.map('map').fitWorld()
-
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            maxZoom: 19,
-            attribution: '© OpenStreetMap'
-        }).addTo(map)
-
-        map.on('locationfound', e => {
-            L.circle(e.latlng, e.accuracy / 2).addTo(map)
-            resolve({ map, ...e })
-        })
-        map.on('locationerror', e => reject(e))
-        map.locate({ setView: true, maxZoom: 16 })
-    })
-}
-
-export const addPOIsToTheMap = (map, pois) => {
-    const lg = L.layerGroup()
-    const markers = new Map()
-    pois.filter(p => p.lat && p.lon).forEach(p => {
-        const extra = []
-        extra.push(`<a href="${p.osm_url}" target="osm" title="Contribute on openstreetmap">osm</a>`)
-        if (p.website) extra.push(`<a href="${p.website}" target="w" title="Visit the website">web</a>`)
-        const addr = p[`addr:street`] ? (p[`addr:housenumber`] || ``) + ' ' + p[`addr:street`] : ``
-        const name = p.name?.replaceAll(`&`, ` `)
-        if (addr) {
-            extra.push(`<a href="https://www.google.com/search?q=${name} ${addr}" target="g" title="Search in google">g</a>`)
-            extra.push(`<a href="https://www.bing.com/search?q=${name} ${addr}" target="b" title="Search in bing">b</a>`)
-        }
-        const cuisine = p.cuisine ? `<div>${p.cuisine.split(';').join(', ')}</div>` : ``
-        const html = `<div>${p.name}</div><div>${cuisine}</div><div>${extra.join(" | ")}`
-        const marker = L.marker([p.lat, p.lon]).bindPopup(html).addTo(lg)
-        markers.set(p, marker)
-    })
-    lg.addTo(map)
-    return markers
-}
-
-/**
  * Return the wikipedia articles around a given location.
  * @returns {Promise.<Array.<title, lat, lon, url, dist, pageid>>}
  */
@@ -173,20 +110,3 @@ export const wikidataQuery = async (lat = 37, lon = -122, language = 'en', radiu
     return d.results.bindings
 }
 
-/**
- * Add wikipedia articles to the map.
- * @param {*} map 
- * @param {Array.<title, lat, lon>} articles 
- * @returns {Map.<title, L.marker>}
- */
-export const addWikipediaArticlesToTheMap = (map, articles) => {
-    const lg = L.layerGroup()
-    const markers = new Map()
-    articles.forEach(({ url, title, lat, lon }) => {
-        const html = `<div><a href="${url}" target="osm" title="Wiki">${title}</a></div>`
-        const marker = L.marker([lat, lon]).bindPopup(html).addTo(lg)
-        markers.set(title, marker)
-    })
-    lg.addTo(map)
-    return markers
-}
