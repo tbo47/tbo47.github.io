@@ -80,3 +80,26 @@ export const leafletAddWikipediaArticlesToTheMap = (map, articles) => {
     lg.addTo(map)
     return markers
 }
+
+/**
+ * Add wikidata items to the map.
+ */
+export const leafletAddWikidata = (map, items) => {
+    const lg = L.layerGroup()
+    const markers = new Map()
+    console.log(items)
+    items.forEach(({ commonscat, image, location, q, qLabel }) => {
+        const name = commonscat?.value || qLabel.value
+        const imgUrl = image?.value?.replace('http://', 'https://')
+        const imgHtml = imgUrl ? ` | <a href="${imgUrl}" target="wd" title="Wiki">pic</a>` : ''
+        const [lng, lat] = location?.value?.slice(6, -1).split(' ').map(s => parseFloat(s))
+        const html = `<div>
+                        <a href="${q.value}" target="wd" title="Wiki">${name}</a>
+                        ${imgHtml}
+                     </div>`
+        const marker = L.marker([lat, lng]).bindPopup(html).addTo(lg)
+        markers.set(name, marker)
+    })
+    lg.addTo(map)
+    return markers
+}

@@ -5,8 +5,7 @@ const renderMap = async (map) => {
     const { lat, lng } = map.getCenter()
     const language = window.navigator.language?.split('-').at(0);
     const articles = await wikipediaQuery(lat, lng, language)
-    const markers = leafletAddWikipediaArticlesToTheMap(map, articles)
-    return markers
+    return leafletAddWikipediaArticlesToTheMap(map, articles)
 }
 
 (async () => {

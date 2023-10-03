@@ -102,9 +102,24 @@ export const wikipediaQuery = async (lat = 37, lon = -122, language = 'en', radi
     })
 }
 
-export const wikidataQuery = async (lat = 37, lon = -122, language = 'en', radius = 10000, limit = 100) => {
+export const wikidataQuery = async (northEast, southWest, limit = 3000) => {
     const b = 'https://query.wikidata.org/bigdata/namespace/wdq/sparql?format=json&query='
-    const q = 'SELECT ?q ?qLabel ?location ?image ?reason ?desc ?commonscat ?street WHERE { SERVICE wikibase:box { ?q wdt:P625 ?location . bd:serviceParam wikibase:cornerSouthWest "Point(-17.20767974853516 14.330588168640638)"^^geo:wktLiteral . bd:serviceParam wikibase:cornerNorthEast "Point(-16.78298950195313 14.626108798876851)"^^geo:wktLiteral }  OPTIONAL { ?q wdt:P18 ?image }  OPTIONAL { ?q wdt:P373 ?commonscat }  OPTIONAL { ?q wdt:P969 ?street }  SERVICE wikibase:label { bd:serviceParam wikibase:language "en,en,de,fr,es,it,nl" . ?q schema:description ?desc . ?q rdfs:label ?qLabel } } LIMIT 3000'
+    const q = `SELECT ?q ?qLabel ?location ?image ?reason ?desc ?commonscat WHERE {
+                  SERVICE wikibase:box {
+                    ?q wdt:P625 ?location.
+                    bd:serviceParam wikibase:cornerSouthWest "Point(${southWest.lng} ${southWest.lat})"^^geo:wktLiteral;
+                      wikibase:cornerNorthEast "Point(${northEast.lng} ${northEast.lat})"^^geo:wktLiteral.
+                  }
+                  OPTIONAL { ?q wdt:P18 ?image. } 
+                  OPTIONAL { ?q wdt:P373 ?commonscat. }
+                  SERVICE wikibase:label {
+                    bd:serviceParam wikibase:language "[AUTO_LANGUAGE]".
+                    ?q schema:description ?desc;
+                      rdfs:label ?qLabel.
+                  }
+            }
+            LIMIT ${limit}`
+    console.log('https://query.wikidata.org/#' + encodeURI(q))
     const r = await fetch(b + encodeURI(q))
     const d = await r.json()
     return d.results.bindings
