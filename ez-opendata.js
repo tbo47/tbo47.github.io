@@ -138,11 +138,25 @@ export const wikimediaQuery = async (northEast, southWest, limit = 100) => {
 /*
  *
  */
-export const wikimediaInfo= async (pageids) => {
+export const wikimediaInfoMultiplePages = async (pageids, thumbWidth = 600) => {
     const pageidsStr = pageids.join('|')
     const r = 'https://commons.wikimedia.org/w/api.php'
-    const q = `${r}?action=query&pageids=${pageidsStr}&prop=imageinfo&iiprop=extmetadata|url&format=json&origin=*`
+    const q = `${r}?action=query&pageids=${pageidsStr}&prop=imageinfo&iiprop=extmetadata|url&format=json&origin=*&iiurlwidth=${thumbWidth}`
     const res = await fetch(q)
     const d = await res.json()
     return d.query.pages
+}
+
+/*
+ *
+ */
+export const wikimediaInfo = async (pageid, thumbWidth = 600) => {
+    const infos = await wikimediaInfoMultiplePages([pageid], thumbWidth)
+    const info = infos[pageid].imageinfo[0]
+    const name = info.extmetadata.ObjectName.value
+    const date = info.extmetadata.DateTime.value
+    const categories = info.extmetadata.Categories.value
+    const description = info.extmetadata.ImageDescription.value
+    const artistHtml = info.extmetadata.Artist.value
+    return { name, date, categories, description, artistHtml, ...info}
 }

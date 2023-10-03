@@ -107,6 +107,7 @@ export const leafletAddWikidata = (map, items) => {
 
 /**
  * Add wikimedia pictures to the map.
+ * https://www.mediawiki.org/wiki/API:Imageinfo
  */
 export const leafletAddWikimedia = (map, items) => {
     const lg = L.layerGroup()
@@ -114,17 +115,8 @@ export const leafletAddWikimedia = (map, items) => {
     items.forEach(({ dist, lat, lon, ns, pageid, primary, title }) => {
         const marker = L.marker([lat, lon]).addTo(lg)
         marker.on('click', async () => {
-            const infos = await wikimediaInfo([pageid])
-            const info = infos[pageid]
-            const urlShort = info.imageinfo[0].descriptionshorturl
-            const url = info.imageinfo[0].descriptionurl
-            const name = info.imageinfo[0].extmetadata.ObjectName.value
-            const date = info.imageinfo[0].extmetadata.DateTime.value
-            const categories = info.imageinfo[0].extmetadata.Categories.value
-            const description = info.imageinfo[0].extmetadata.ImageDescription.value
-            const dateTimeOriginal = info.imageinfo[0].extmetadata.DateTimeOriginal.value
-            const artistHtml = info.imageinfo[0].extmetadata.Artist.value
-            const html = `<div><a href="${url}" target="wm">${name}</a></div>`
+            const info = await wikimediaInfo(pageid, 600)
+            const html = `<div><a href="${info.descriptionurl}" target="wm">${info.name}<img src="${info.thumburl}"></a></div>`
             marker.bindPopup(html).openPopup()
         })
         markers.set(pageid, marker)
