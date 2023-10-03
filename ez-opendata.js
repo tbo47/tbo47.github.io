@@ -119,9 +119,30 @@ export const wikidataQuery = async (northEast, southWest, limit = 3000) => {
                   }
             }
             LIMIT ${limit}`
-    console.log('https://query.wikidata.org/#' + encodeURI(q))
+    // console.log('https://query.wikidata.org/#' + encodeURI(q))
     const r = await fetch(b + encodeURI(q))
     const d = await r.json()
     return d.results.bindings
 }
 
+
+export const wikimediaQuery = async (northEast, southWest, limit = 100) => {
+    const r = 'https://commons.wikimedia.org/w/api.php'
+    const q = `${r}?action=query&list=geosearch&gsbbox=${northEast.lat}%7C${southWest.lng}%7C${southWest.lat}%7C${northEast.lng}&gsnamespace=6&gslimit=${limit}&format=json&origin=*`
+    const res = await fetch(q)
+    const d = await res.json()
+    return d.query.geosearch
+}
+
+
+/*
+ *
+ */
+export const wikimediaInfo= async (pageids) => {
+    const pageidsStr = pageids.join('|')
+    const r = 'https://commons.wikimedia.org/w/api.php'
+    const q = `${r}?action=query&pageids=${pageidsStr}&prop=imageinfo&iiprop=extmetadata|url&format=json&origin=*`
+    const res = await fetch(q)
+    const d = await res.json()
+    return d.query.pages
+}

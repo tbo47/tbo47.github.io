@@ -29,7 +29,7 @@ const renderMap = async (map) => {
             const leafletMarker = markers.get(poi);
             if (leafletMarker) {
                 leafletMarker.openPopup();
-                map.fitBounds(L.latLngBounds([leafletMarker.getLatLng()]));
+                // map.fitBounds(L.latLngBounds([leafletMarker.getLatLng()]));
             }
         });
         document.getElementById(`pois`).appendChild(div);

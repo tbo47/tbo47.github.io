@@ -1,5 +1,7 @@
 // Description: A library to query open data sources (wikipedia, openstreetmap, wikimedia...).
 
+import { wikimediaInfo } from "./ez-opendata.js"
+
 /**
  * Get the current location of the user. Will only work on https or localhost.
  * @returns { latitude, longitude }
@@ -87,7 +89,6 @@ export const leafletAddWikipediaArticlesToTheMap = (map, articles) => {
 export const leafletAddWikidata = (map, items) => {
     const lg = L.layerGroup()
     const markers = new Map()
-    console.log(items)
     items.forEach(({ commonscat, image, location, q, qLabel }) => {
         const name = commonscat?.value || qLabel.value
         const imgUrl = image?.value?.replace('http://', 'https://')
@@ -99,6 +100,34 @@ export const leafletAddWikidata = (map, items) => {
                      </div>`
         const marker = L.marker([lat, lng]).bindPopup(html).addTo(lg)
         markers.set(name, marker)
+    })
+    lg.addTo(map)
+    return markers
+}
+
+/**
+ * Add wikimedia pictures to the map.
+ */
+export const leafletAddWikimedia = (map, items) => {
+    const lg = L.layerGroup()
+    const markers = new Map()
+    items.forEach(({ dist, lat, lon, ns, pageid, primary, title }) => {
+        const marker = L.marker([lat, lon]).addTo(lg)
+        marker.on('click', async () => {
+            const infos = await wikimediaInfo([pageid])
+            const info = infos[pageid]
+            const urlShort = info.imageinfo[0].descriptionshorturl
+            const url = info.imageinfo[0].descriptionurl
+            const name = info.imageinfo[0].extmetadata.ObjectName.value
+            const date = info.imageinfo[0].extmetadata.DateTime.value
+            const categories = info.imageinfo[0].extmetadata.Categories.value
+            const description = info.imageinfo[0].extmetadata.ImageDescription.value
+            const dateTimeOriginal = info.imageinfo[0].extmetadata.DateTimeOriginal.value
+            const artistHtml = info.imageinfo[0].extmetadata.Artist.value
+            const html = `<div><a href="${url}" target="wm">${name}</a></div>`
+            marker.bindPopup(html).openPopup()
+        })
+        markers.set(pageid, marker)
     })
     lg.addTo(map)
     return markers
