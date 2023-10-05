@@ -1,15 +1,10 @@
-import { leafletAddWikimedia, leafletInitMap } from '../ez-leaflet.js';
-import { wikidataQuery, wikimediaQuery } from '../ez-opendata.js';
+import { leafletAddWikidata, leafletInitMap } from '../ez-leaflet.js';
+import { wikidataQuery } from '../ez-opendata.js';
 
 const renderMap = async (map) => {
     const { _northEast, _southWest } = map.getBounds()
-    try {
-        const wmedia = await wikimediaQuery(_northEast, _southWest)
-        return leafletAddWikimedia(map, wmedia)
-    } catch (error) {
-        alert(error.info)
-        return []
-    }
+    const wdata = await wikidataQuery(_northEast, _southWest)
+    return leafletAddWikidata(map, wdata)
 }
 
 (async () => {
