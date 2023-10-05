@@ -16,19 +16,6 @@ const renderMap = async (map) => {
     }
 }
 
-const getLatLng = () => {
-    const url = new URL(window.location);
-    const lat = url.searchParams.get('lat')
-    const lng = url.searchParams.get('lng')
-    return { lat, lng }
-}
-
-const setLatLng = (lat, lng) => {
-    url.searchParams.set('lat', lat)
-    url.searchParams.set('lng', lng)
-    window.location.href = url.href
-}
-
 (async () => {
     const { map } = await leafletInitMap()
     let markers = await renderMap(map)

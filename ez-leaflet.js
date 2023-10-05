@@ -2,6 +2,7 @@
 
 import { wikimediaInfo } from "./ez-opendata.js"
 
+const OSM = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
 /**
  * Get the current location of the user. Will only work on https or localhost.
  * @returns { latitude, longitude }
@@ -26,20 +27,29 @@ export const getCurrentOsmPositionLink = async (z = 17) => {
  * @returns {Promise.<{map, bounds}>}
  */
 export const leafletInitMap = () => {
+    const { lat, lng, zoom } = getLatLngZoom()
+    const map = L.map('map')
+    L.tileLayer(OSM).addTo(map)
+    const moveAction = (e) => {
+        const pos = map.getCenter()
+        setLatLngZoomIfNeeded(pos.lat, pos.lng, map.getZoom())
+    }
+    map.on('zoomend', moveAction)
+    map.on('moveend', moveAction)
+
     return new Promise((resolve, reject) => {
-        const map = L.map('map').fitWorld()
-
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            maxZoom: 19,
-            attribution: '© OpenStreetMap'
-        }).addTo(map)
-
-        map.on('locationfound', e => {
-            L.circle(e.latlng, e.accuracy / 2).addTo(map)
-            resolve({ map, ...e })
-        })
-        map.on('locationerror', e => reject(e))
-        map.locate({ setView: true, maxZoom: 16 })
+        if (lat && lng && zoom) {
+            map.setView([lat, lng], zoom);
+            resolve({ map })
+        } else {
+            map.fitWorld()
+            map.on('locationfound', e => {
+                L.circle(e.latlng, e.accuracy / 2).addTo(map)
+                resolve({ map })
+            })
+            map.on('locationerror', e => reject(e))
+            map.locate({ setView: true, maxZoom: 16 })
+        }
     })
 }
 
@@ -123,4 +133,22 @@ export const leafletAddWikimedia = (map, items) => {
     })
     lg.addTo(map)
     return markers
+}
+
+export const getLatLngZoom = () => {
+    const url = new URL(window.location);
+    const lat = url.searchParams.get('lat')
+    const lng = url.searchParams.get('lng')
+    const zoom = url.searchParams.get('z')
+    return { lat, lng, zoom }
+}
+
+export const setLatLngZoomIfNeeded = (latNew, lngNew, zoomNew) => {
+    const { lat, lng, zoom } = getLatLngZoom()
+    if (latNew == lat && lngNew == lng && zoomNew == zoom) return
+    const url = new URL(window.location);
+    url.searchParams.set('lat', latNew)
+    url.searchParams.set('lng', lngNew)
+    url.searchParams.set('z', zoomNew)
+    window.location.href = url.href
 }
