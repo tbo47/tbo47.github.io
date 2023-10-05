@@ -27,7 +27,6 @@ export const getCurrentOsmPositionLink = async (z = 17) => {
  * @returns {Promise.<{map, bounds}>}
  */
 export const leafletInitMap = () => {
-    const { lat, lng, zoom } = getLatLngZoom()
     const map = L.map('map')
     L.tileLayer(OSM).addTo(map)
     const moveAction = (e) => {
@@ -37,6 +36,7 @@ export const leafletInitMap = () => {
     map.on('zoomend', moveAction)
     map.on('moveend', moveAction)
 
+    const { lat, lng, zoom } = getLatLngZoom()
     if (lat && lng && zoom) {
         map.setView([lat, lng], zoom);
     } else {
