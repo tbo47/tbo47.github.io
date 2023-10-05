@@ -1,14 +1,11 @@
 {
-  "name": "low-earth-orbit-visualization",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "name": "tbo47_stuff",
+  "private": true,
   "scripts": {
-    "serve": "ws"
+    "dev": "watch 'cp -u ../ez-opendata/index.js ez-opendata.js'"
   },
   "devDependencies": {
     "@types/leaflet": "^1.7.10"
   },
-  "author": "",
-  "license": "ISC"
+  "author": "tbo47"
 }
