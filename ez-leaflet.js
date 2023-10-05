@@ -37,20 +37,13 @@ export const leafletInitMap = () => {
     map.on('zoomend', moveAction)
     map.on('moveend', moveAction)
 
-    return new Promise((resolve, reject) => {
-        if (lat && lng && zoom) {
-            map.setView([lat, lng], zoom);
-            resolve({ map })
-        } else {
-            map.fitWorld()
-            map.on('locationfound', e => {
-                L.circle(e.latlng, e.accuracy / 2).addTo(map)
-                resolve({ map })
-            })
-            map.on('locationerror', e => reject(e))
-            map.locate({ setView: true, maxZoom: 16 })
-        }
-    })
+    if (lat && lng && zoom) {
+        map.setView([lat, lng], zoom);
+    } else {
+        map.setView([48.863, 2.368], 18); // Paris 11eme
+        map.on('locationfound', e => L.circle(e.latlng, e.accuracy / 2).addTo(map))
+    }
+    return { map }
 }
 
 export const leafletAddPOIsToTheMap = (map, pois) => {

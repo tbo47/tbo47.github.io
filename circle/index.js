@@ -3,7 +3,7 @@ import { leafletInitMap } from '../ez-leaflet.js';
 const D_STYLE = { color: "#ff7800", weight: 1 };
 
 (async () => {
-    const { map } = await leafletInitMap()
+    const { map } = leafletInitMap()
 
     // https://leafletjs.com/reference.html#control-scale-option
     L.control.scale({ maxWidth: 500, imperial: false, updateWhenIdle: true }).addTo(map)
