@@ -3,9 +3,14 @@ import { wikidataQuery, wikimediaQuery } from '../ez-opendata.js';
 
 const renderMap = async (map) => {
     const { _northEast, _southWest } = map.getBounds()
-    const wdata = await wikidataQuery(_northEast, _southWest)
-    const wmedia = await wikimediaQuery(_northEast, _southWest)
-    return leafletAddWikimedia(map, wmedia)
+    // const wdata = await wikidataQuery(_northEast, _southWest)
+    try {
+        const wmedia = await wikimediaQuery(_northEast, _southWest)
+        return leafletAddWikimedia(map, wmedia)
+    } catch (error) {
+        alert(error.info)
+        return []
+    }
 }
 
 (async () => {
