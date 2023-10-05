@@ -8,7 +8,7 @@ const renderMap = async (map) => {
 }
 
 (async () => {
-    const { map } = leafletInitMap()
+    const { map } = await leafletInitMap()
     let markers = await renderMap(map)
     map.on('moveend', async () => {
         markers.forEach(marker => map.removeLayer(marker))

@@ -1,18 +1,20 @@
 // Description: A library to query open data sources (wikipedia, openstreetmap, wikimedia...).
-
 import { wikimediaInfo } from "./ez-opendata.js"
 
+const DEFAULT_CENTER = { latitude: 48.863, longitude: 2.368 }
 const OSM = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
+
 /**
  * Get the current location of the user. Will only work on https or localhost.
  * @returns { latitude, longitude }
  */
 export const getCurrentPosition = () => {
-    return new Promise((resolve, reject) => {
+
+    return new Promise((resolve) => {
         if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(position => resolve(position.coords))
+            navigator.geolocation.getCurrentPosition(position => resolve(position.coords), () => resolve(DEFAULT_CENTER))
         } else {
-            reject('Geolocation is not supported by this browser.')
+            resolve(DEFAULT_CENTER)
         }
     })
 }
@@ -26,7 +28,7 @@ export const getCurrentOsmPositionLink = async (z = 17) => {
  * 
  * @returns {Promise.<{map, bounds}>}
  */
-export const leafletInitMap = () => {
+export const leafletInitMap = async () => {
     const map = L.map('map')
     L.tileLayer(OSM).addTo(map)
     const moveAction = (e) => {
@@ -36,11 +38,12 @@ export const leafletInitMap = () => {
     map.on('zoomend', moveAction)
     map.on('moveend', moveAction)
 
-    const { lat, lng, zoom } = getLatLngZoom()
+    const { lat, lng, zoom } = getLatLngZoomFromUrl()
     if (lat && lng && zoom) {
         map.setView([lat, lng], zoom);
     } else {
-        map.setView([48.863, 2.368], 18); // Paris 11eme
+        const { latitude, longitude } = await getCurrentPosition()
+        map.setView([latitude, longitude], 14)
         map.on('locationfound', e => L.circle(e.latlng, e.accuracy / 2).addTo(map))
     }
     return { map }
@@ -128,7 +131,7 @@ export const leafletAddWikimedia = (map, items) => {
     return markers
 }
 
-export const getLatLngZoom = () => {
+export const getLatLngZoomFromUrl = () => {
     const url = new URL(window.location);
     const lat = url.searchParams.get('lat')
     const lng = url.searchParams.get('lng')
@@ -137,7 +140,7 @@ export const getLatLngZoom = () => {
 }
 
 export const setLatLngZoomIfNeeded = (latNew, lngNew, zoomNew) => {
-    const { lat, lng, zoom } = getLatLngZoom()
+    const { lat, lng, zoom } = getLatLngZoomFromUrl()
     if (latNew == lat && lngNew == lng && zoomNew == zoom) return
     const url = new URL(window.location);
     url.searchParams.set('lat', latNew)
