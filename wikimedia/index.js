@@ -6,7 +6,7 @@ const showErrorMessage = (error) => {
         return;
     errorDiv.innerHTML = error.info;
     errorDiv.style.display = 'block';
-    setTimeout(() => errorDiv.style.display = 'none', 5000);
+    setTimeout(() => errorDiv.style.display = 'none', 2000);
 };
 const renderMap = async (map, markers) => {
     const bounds = map.getBounds();
@@ -14,9 +14,7 @@ const renderMap = async (map, markers) => {
         const pics = await wikimediaQuery(bounds.getNorthEast(), bounds.getSouthWest(), 5000);
         const picsToAdd = pics.filter(p => !markers.has(p.pageid));
         const newMarkers = leafletAddWikimedia(map, picsToAdd);
-        newMarkers.forEach((marker, id) => {
-            markers.set(id, marker);
-        });
+        newMarkers.forEach((marker, id) => markers.set(id, marker));
     }
     catch (error) {
         showErrorMessage(error);
