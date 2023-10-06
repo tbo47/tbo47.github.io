@@ -88,7 +88,7 @@ export const wikipediaQuery = async (lat = 37, lon = -122, language = 'en', radi
     const u = `${b}?action=query&list=geosearch&gscoord=${lat}%7C${lon}&gsradius=${radius}&gslimit=${limit}&origin=*&format=json`;
     const r = await fetch(u);
     const d = await r.json();
-    return d.query.geosearch.map((a) => {
+    return d.query.geosearch.map(a => {
         a.url = `https://${language}.wikipedia.org/wiki/${a.title}`;
         return a;
     });
@@ -113,7 +113,7 @@ export const wikidataQuery = async (northEast, southWest, limit = 3000) => {
     // console.log('https://query.wikidata.org/#' + encodeURI(q))
     const r = await fetch(b + encodeURI(q));
     const d = await r.json();
-    return d.results.bindings || [];
+    return (d.results.bindings || []);
 };
 export const wikimediaQuery = async (northEast, southWest, limit = 100) => {
     const r = 'https://commons.wikimedia.org/w/api.php';
@@ -124,7 +124,7 @@ export const wikimediaQuery = async (northEast, southWest, limit = 100) => {
         return Promise.reject(d.error);
     }
     else {
-        return d.query.geosearch || [];
+        return (d.query.geosearch || []);
     }
 };
 /*
@@ -185,12 +185,13 @@ export const wikimediaPicOfTheDay = async (lang = '') => {
     // const xml = new window.DOMParser().parseFromString(text, 'text/xml'); // doesn't work for nodejs
     const urls = text.split(/\n/).filter(l => l.includes(match1)).map(l => l.split(/"/)[5]);
     return urls;
-    // TODO to be continued
-    const lastUrl = urls.slice(-1)[0];
-    console.log(lastUrl);
-    const raw2 = await fetch(lastUrl, { mode: 'no-cors', redirect: 'follow', headers: { 'Content-Type': 'text/html' }, referrer: 'no-referrer' });
-    const text2 = await raw2.text();
-    const picUrl = text2.split(/\n/).filter(l => l.includes(match2)).map(l => l.split(/"/)[7]);
-    const picName = picUrl[0].slice(11);
+    /*
+    const lastUrl = urls.slice(-1)[0]
+    console.log(lastUrl)
+    const raw2 = await fetch(lastUrl, { mode: 'no-cors', redirect: 'follow', headers: { 'Content-Type': 'text/html' }, referrer: 'no-referrer' })
+    const text2 = await raw2.text()
+    const picUrl = text2.split(/\n/).filter(l => l.includes(match2)).map(l => l.split(/"/)[7])
+    const picName = picUrl[0].slice(11)
     return picName;
+    */
 };
