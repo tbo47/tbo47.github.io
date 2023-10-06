@@ -1,5 +1,5 @@
 // Description: A library to query open data sources (wikipedia, openstreetmap, wikimedia...).
-declare var L: any 
+declare var L: any
 
 import { OpenstreetmapPoi, WikidataArticle, WikimediaItem, WikipediaArticle, wikimediaGetAuthor, wikimediaGetAuthorLink, wikimediaInfo } from "./ez-opendata.js"
 
@@ -116,9 +116,9 @@ export const leafletAddWikidata = (map: L.Map, items: WikidataArticle[]) => {
  */
 export const leafletAddWikimedia = (map: L.Map, items: WikimediaItem[]) => {
     const lg = L.layerGroup()
-    const markers = new Map()
+    const markers = new Map<number, L.Marker>()
     items.forEach(({ dist, lat, lon, ns, pageid, primary, title }) => {
-        const marker = L.marker([lat, lon]).addTo(lg)
+        const marker = L.marker([lat, lon]).addTo(lg) as L.Marker
         marker.on('click', async () => {
             const info = await wikimediaInfo(pageid, 600)
             const user = await wikimediaGetAuthor(info.title, pageid)
@@ -136,19 +136,16 @@ export const leafletAddWikimedia = (map: L.Map, items: WikimediaItem[]) => {
 }
 
 export const getLatLngZoomFromUrl = () => {
-    const url = new URL(window.location as any);
-    const lat = url.searchParams.get('lat')
-    const lng = url.searchParams.get('lng')
-    const zoom = url.searchParams.get('z')
+    // #map=17/14.71241/-17.48513
+    const hash = window.location.hash.substring(1).split('/')
+    const zoom = hash[0]
+    const lat = hash[1]
+    const lng = hash[2]
     return { lat, lng, zoom }
 }
 
 export const setLatLngZoomIfNeeded = (latNew: string, lngNew: string, zoomNew: string) => {
     const { lat, lng, zoom } = getLatLngZoomFromUrl()
     if (latNew === lat && lngNew === lng && zoomNew === zoom) return
-    const url = new URL(window.location as any);
-    url.searchParams.set('lat', latNew)
-    url.searchParams.set('lng', lngNew)
-    url.searchParams.set('z', zoomNew)
-    window.location.href = url.href
+    window.location.hash = `${zoomNew}/${latNew}/${lngNew}`
 }

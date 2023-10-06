@@ -126,19 +126,16 @@ export const leafletAddWikimedia = (map, items) => {
     return markers;
 };
 export const getLatLngZoomFromUrl = () => {
-    const url = new URL(window.location);
-    const lat = url.searchParams.get('lat');
-    const lng = url.searchParams.get('lng');
-    const zoom = url.searchParams.get('z');
+    // #map=17/14.71241/-17.48513
+    const hash = window.location.hash.substring(1).split('/');
+    const zoom = hash[0];
+    const lat = hash[1];
+    const lng = hash[2];
     return { lat, lng, zoom };
 };
 export const setLatLngZoomIfNeeded = (latNew, lngNew, zoomNew) => {
     const { lat, lng, zoom } = getLatLngZoomFromUrl();
     if (latNew === lat && lngNew === lng && zoomNew === zoom)
         return;
-    const url = new URL(window.location);
-    url.searchParams.set('lat', latNew);
-    url.searchParams.set('lng', lngNew);
-    url.searchParams.set('z', zoomNew);
-    window.location.href = url.href;
+    window.location.hash = `${zoomNew}/${latNew}/${lngNew}`;
 };

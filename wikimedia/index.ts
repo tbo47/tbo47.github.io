@@ -9,22 +9,30 @@ const showErrorMessage = (error: any) => {
     setTimeout(() => errorDiv.style.display = 'none', 5000)
 }
 
-const renderMap = async (map: L.Map) => {
+const renderMap = async (map: L.Map, markers: Map<number, L.Marker>) => {
     const bounds = map.getBounds()
     try {
-        const wmedia = await wikimediaQuery(bounds.getNorthEast(), bounds.getSouthWest(), 5000)
-        return leafletAddWikimedia(map, wmedia)
+        const pics = await wikimediaQuery(bounds.getNorthEast(), bounds.getSouthWest(), 5000)
+        const picsToAdd = pics.filter(p => !markers.has(p.pageid))
+        const newMarkers = leafletAddWikimedia(map, picsToAdd)
+        newMarkers.forEach((marker, id) => {
+            markers.set(id, marker)
+        })
     } catch (error) {
         showErrorMessage(error)
-        return []
     }
 }
 
+/**
+ * Map<id of the wikimedia page -> leaflet marker>
+ */
+const markers = new Map<number, L.Marker>();
+
 (async () => {
     const { map } = await leafletInitMap()
-    let markers = await renderMap(map)
+    await renderMap(map, markers)
+    console.log(markers)
     map.on('moveend', async () => {
-        markers.forEach(marker => map.removeLayer(marker))
-        markers = await renderMap(map)
+        await renderMap(map, markers)
     })
 })();
