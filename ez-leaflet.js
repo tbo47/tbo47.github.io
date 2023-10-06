@@ -1,17 +1,20 @@
 // Description: A library to query open data sources (wikipedia, openstreetmap, wikimedia...).
+import { wikimediaInfo, wikimediaGetAuthor, wikimediaGetAuthorLink } from "./ez-opendata.js"
 
-import { wikimediaInfo } from "./ez-opendata.js"
+const DEFAULT_CENTER = { latitude: 48.863, longitude: 2.368 }
+const OSM = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
 
 /**
  * Get the current location of the user. Will only work on https or localhost.
  * @returns { latitude, longitude }
  */
 export const getCurrentPosition = () => {
-    return new Promise((resolve, reject) => {
+
+    return new Promise((resolve) => {
         if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(position => resolve(position.coords))
+            navigator.geolocation.getCurrentPosition(position => resolve(position.coords), () => resolve(DEFAULT_CENTER))
         } else {
-            reject('Geolocation is not supported by this browser.')
+            resolve(DEFAULT_CENTER)
         }
     })
 }
@@ -25,22 +28,25 @@ export const getCurrentOsmPositionLink = async (z = 17) => {
  * 
  * @returns {Promise.<{map, bounds}>}
  */
-export const leafletInitMap = () => {
-    return new Promise((resolve, reject) => {
-        const map = L.map('map').fitWorld()
+export const leafletInitMap = async () => {
+    const map = L.map('map')
+    L.tileLayer(OSM).addTo(map)
+    const moveAction = (e) => {
+        const pos = map.getCenter()
+        setLatLngZoomIfNeeded(pos.lat, pos.lng, map.getZoom())
+    }
+    map.on('zoomend', moveAction)
+    map.on('moveend', moveAction)
 
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            maxZoom: 19,
-            attribution: '© OpenStreetMap'
-        }).addTo(map)
-
-        map.on('locationfound', e => {
-            L.circle(e.latlng, e.accuracy / 2).addTo(map)
-            resolve({ map, ...e })
-        })
-        map.on('locationerror', e => reject(e))
-        map.locate({ setView: true, maxZoom: 16 })
-    })
+    const { lat, lng, zoom } = getLatLngZoomFromUrl()
+    if (lat && lng && zoom) {
+        map.setView([lat, lng], zoom);
+    } else {
+        const { latitude, longitude } = await getCurrentPosition()
+        map.setView([latitude, longitude], 14)
+        map.on('locationfound', e => L.circle(e.latlng, e.accuracy / 2).addTo(map))
+    }
+    return { map }
 }
 
 export const leafletAddPOIsToTheMap = (map, pois) => {
@@ -116,11 +122,34 @@ export const leafletAddWikimedia = (map, items) => {
         const marker = L.marker([lat, lon]).addTo(lg)
         marker.on('click', async () => {
             const info = await wikimediaInfo(pageid, 600)
-            const html = `<div><a href="${info.descriptionurl}" target="wm">${info.name}<img src="${info.thumburl}"></a></div>`
+            const user = await wikimediaGetAuthor(info.title, pageid)
+            const userLink = wikimediaGetAuthorLink(user)
+            const html = `<div>
+                            <a href="${info.descriptionurl}" target="wm">${info.name}<img src="${info.thumburl}"></a>
+                            <a href="${userLink}" target="mp">More photos from ${user}</a>
+                          </div>`
             marker.bindPopup(html).openPopup()
         })
         markers.set(pageid, marker)
     })
     lg.addTo(map)
     return markers
+}
+
+export const getLatLngZoomFromUrl = () => {
+    const url = new URL(window.location);
+    const lat = url.searchParams.get('lat')
+    const lng = url.searchParams.get('lng')
+    const zoom = url.searchParams.get('z')
+    return { lat, lng, zoom }
+}
+
+export const setLatLngZoomIfNeeded = (latNew, lngNew, zoomNew) => {
+    const { lat, lng, zoom } = getLatLngZoomFromUrl()
+    if (latNew == lat && lngNew == lng && zoomNew == zoom) return
+    const url = new URL(window.location);
+    url.searchParams.set('lat', latNew)
+    url.searchParams.set('lng', lngNew)
+    url.searchParams.set('z', zoomNew)
+    window.location.href = url.href
 }

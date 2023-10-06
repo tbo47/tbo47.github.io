@@ -1,14 +1,20 @@
 import { leafletAddWikimedia, leafletInitMap } from '../ez-leaflet.js';
-import { wikidataQuery, wikimediaQuery } from '../ez-opendata.js';
+import { wikimediaQuery } from '../ez-opendata.js';
+
+const showErrorMessage = (error) => {
+    const errorDiv = document.getElementById('error')
+    errorDiv.innerHTML = error.info
+    errorDiv.style.display = 'block'
+    setTimeout(() => errorDiv.style.display = 'none', 5000)
+}
 
 const renderMap = async (map) => {
     const { _northEast, _southWest } = map.getBounds()
-    // const wdata = await wikidataQuery(_northEast, _southWest)
     try {
-        const wmedia = await wikimediaQuery(_northEast, _southWest)
+        const wmedia = await wikimediaQuery(_northEast, _southWest, 5000)
         return leafletAddWikimedia(map, wmedia)
     } catch (error) {
-        alert(error.info)
+        showErrorMessage(error)
         return []
     }
 }
