@@ -1,3 +1,4 @@
+// Description: A library to query open data sources (wikipedia, openstreetmap, wikimedia...).
 import { wikimediaGetAuthor, wikimediaGetAuthorLink, wikimediaInfo } from "./ez-opendata.js";
 const DEFAULT_CENTER = { latitude: 48.863, longitude: 2.368 };
 const OSM = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
@@ -42,10 +43,17 @@ export const leafletInitMap = async () => {
     }
     return { map };
 };
-export const leafletAddPOIsToTheMap = (map, pois) => {
-    const lg = L.layerGroup();
-    const markers = new Map();
-    pois.filter(p => p.lat && p.lon).forEach(p => {
+/**
+ *
+ * @param map Leaflet map instance
+ * @param pois the POIs to add to the map
+ * @param markers the Map of all markers already on the map. We want to add the `pois` to the `markers`.
+ * @returns the array of added POIs
+ */
+export const leafletAddPOIsToTheMap = (layerGroup, pois, markers) => {
+    const poiIdsAlreadyOnTheMap = Array.from(markers.keys());
+    const poisToAdd = pois.filter(p => !poiIdsAlreadyOnTheMap.some(p2 => p.id === p2.id));
+    poisToAdd.filter(p => p.lat && p.lon).forEach(p => {
         const extra = [];
         extra.push(`<a href="${p.osm_url}" target="osm" title="Contribute on openstreetmap">osm</a>`);
         if (p.website)
@@ -58,48 +66,43 @@ export const leafletAddPOIsToTheMap = (map, pois) => {
         }
         const cuisine = p.cuisine ? `<div>${p.cuisine.split(';').join(', ')}</div>` : ``;
         const html = `<div>${p.name}</div><div>${cuisine}</div><div>${extra.join(" | ")}`;
-        const marker = L.marker([p.lat, p.lon]).bindPopup(html).addTo(lg);
+        const marker = L.marker([p.lat, p.lon]).bindPopup(html).addTo(layerGroup);
         markers.set(p, marker);
     });
+    return poisToAdd;
+};
+export const leafletCreateLayerOnMap = (map) => {
+    const lg = L.layerGroup();
     lg.addTo(map);
-    return markers;
+    return lg;
 };
 /**
  * Add wikipedia articles to the map.
- * @param {Array.<title, lat, lon>} articles
- * @returns {Map.<title, L.marker>}
  */
-export const leafletAddWikipediaArticlesToTheMap = (map, articles) => {
+export const leafletAddWikipediaArticlesToTheMap = (map, articles, markers) => {
     const lg = L.layerGroup();
-    const markers = new Map();
-    articles.forEach(({ url, title, lat, lon }) => {
+    const articlesToAdd = articles.filter(a => !markers.has(Number(a.pageid)));
+    articlesToAdd.forEach(({ url, title, lat, lon, pageid }) => {
         const html = `<div><a href="${url}" target="osm" title="Wiki">${title}</a></div>`;
         const marker = L.marker([lat, lon]).bindPopup(html).addTo(lg);
-        markers.set(title, marker);
+        markers.set(Number(pageid), marker);
     });
     lg.addTo(map);
-    return markers;
+    return lg; // TODO add all markers to the same layer group
 };
 /**
  * Add wikidata items to the map.
  */
-export const leafletAddWikidata = (map, items) => {
+export const leafletAddWikidata = (map, items, markers) => {
     const lg = L.layerGroup();
-    const markers = new Map();
-    items.forEach(({ commonscat, image, location, q, qLabel }) => {
-        const name = commonscat?.value || qLabel.value;
-        const imgUrl = image?.value?.replace('http://', 'https://');
-        const imgHtml = imgUrl ? ` | <a href="${imgUrl}" target="wd" title="Wiki">pic</a>` : '';
-        const [lng, lat] = location?.value?.slice(6, -1).split(' ').map((s) => parseFloat(s));
-        const html = `<div>
-                        <a href="${q.value}" target="wd" title="Wiki">${name}</a>
-                        ${imgHtml}
-                     </div>`;
-        const marker = L.marker([lat, lng]).bindPopup(html).addTo(lg);
-        markers.set(name, marker);
+    const articleIDsAlreadyOnTheMap = Array.from(markers.keys());
+    const itemsToAdd = items.filter(i => !articleIDsAlreadyOnTheMap.some(i2 => i.id === i2.id));
+    itemsToAdd.forEach((i) => {
+        const html = `<a href="${i.q.value}" target="wd" title="Wiki">${i.id}</a>`;
+        const marker = L.marker([i.lat, i.lng]).bindPopup(html).addTo(lg);
+        markers.set(i, marker);
     });
     lg.addTo(map);
-    return markers;
 };
 /**
  * Add wikimedia pictures to the map.

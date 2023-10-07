@@ -69,7 +69,11 @@ export const extractDiets = (pois) => {
         // extract poi.diet:thai == yes for example
         Object.keys(poi)
             .filter(key => key.startsWith(`diet`) && poi[key] === `yes`)
-            .forEach(key => diets.add(key.split(`:`).at(1)));
+            .forEach(key => {
+            const diet = key.split(`:`).at(1);
+            if (diet)
+                diets.add(diet);
+        });
         diets.forEach(diet => {
             if (dietsMap.has(diet))
                 dietsMap.set(diet, dietsMap.get(diet) + 1);
@@ -113,7 +117,14 @@ export const wikidataQuery = async (northEast, southWest, limit = 3000) => {
     // console.log('https://query.wikidata.org/#' + encodeURI(q))
     const r = await fetch(b + encodeURI(q));
     const d = await r.json();
-    return (d.results.bindings || []);
+    const items = d.results.bindings || [];
+    items.forEach((i) => {
+        i.id = i.qLabel.value;
+        const [lng, lat] = i.location?.value?.slice(6, -1).split(' ').map((s) => parseFloat(s));
+        i.lat = lat;
+        i.lng = lng;
+    });
+    return items;
 };
 export const wikimediaQuery = async (northEast, southWest, limit = 100) => {
     const r = 'https://commons.wikimedia.org/w/api.php';

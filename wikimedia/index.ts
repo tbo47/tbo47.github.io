@@ -29,8 +29,5 @@ const markers = new Map<number, L.Marker>();
 (async () => {
     const { map } = await leafletInitMap()
     await renderMap(map, markers)
-    console.log(markers)
-    map.on('moveend', async () => {
-        await renderMap(map, markers)
-    })
+    map.on('moveend', async () => await renderMap(map, markers))
 })()

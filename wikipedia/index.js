@@ -1,16 +1,15 @@
 import { wikipediaQuery } from '../ez-opendata.js';
 import { leafletAddWikipediaArticlesToTheMap, leafletInitMap } from '../ez-leaflet.js';
-const renderMap = async (map) => {
+const language = window.navigator.language?.split('-').at(0);
+const renderMap = async (map, markers) => {
     const { lat, lng } = map.getCenter();
-    const language = window.navigator.language?.split('-').at(0);
     const articles = await wikipediaQuery(lat, lng, language);
-    return leafletAddWikipediaArticlesToTheMap(map, articles);
+    return leafletAddWikipediaArticlesToTheMap(map, articles, markers);
 };
 (async () => {
+    // markers is a Map<pageid of the wikipedia article, leaflet marker instance>
+    const markers = new Map();
     const { map } = await leafletInitMap();
-    let markers = await renderMap(map);
-    map.on('moveend', async () => {
-        markers.forEach(marker => map.removeLayer(marker));
-        markers = await renderMap(map);
-    });
+    await renderMap(map, markers);
+    map.on('moveend', async () => await renderMap(map, markers));
 })();

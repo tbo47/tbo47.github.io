@@ -1,45 +1,37 @@
 import { extractDiets, getFoodShops } from '../ez-opendata.js';
-import { leafletAddPOIsToTheMap, leafletInitMap } from '../ez-leaflet.js';
-const renderMap = async (map) => {
-    map.eachLayer(layer => {
-        if (!layer._url)
-            map.removeLayer(layer);
-    });
+import { leafletAddPOIsToTheMap, leafletCreateLayerOnMap, leafletInitMap } from '../ez-leaflet.js';
+const renderMap = async (map, markers, layerGroup) => {
     document.getElementById(`diets`).innerHTML = ``;
     document.getElementById(`pois`).innerHTML = ``;
     document.getElementById(`loading`).innerHTML = `Loading`;
     const bounds = map.getBounds();
     const pois = await getFoodShops(bounds);
-    const markers = leafletAddPOIsToTheMap(map, pois);
+    leafletAddPOIsToTheMap(layerGroup, pois, markers);
     const diets = extractDiets(pois);
-    const dietsHtml = diets
-        .map((d) => `<span class="">${d.at(0)} (${d.at(1)})</span>`)
-        .join(` | `);
+    const getHtml = (d) => `<span class="">${d.at(0)} (${d.at(1)})</span>`;
+    const dietsHtml = diets.map(getHtml).join(` | `);
     document.getElementById(`diets`).innerHTML += dietsHtml;
     pois.forEach((poi) => {
-        if (!poi.name)
-            return;
-        const div = document.createElement("div");
-        const a = document.createElement("a");
+        // if (!poi.name) return;
+        const div = document.createElement('div');
+        const a = document.createElement('a');
         a.innerHTML = poi.name;
         div.appendChild(a);
-        a.addEventListener("click", () => {
+        a.addEventListener('click', () => {
             const leafletMarker = markers.get(poi);
             if (leafletMarker) {
                 leafletMarker.openPopup();
-                // map.fitBounds(L.latLngBounds([leafletMarker.getLatLng()]));
             }
         });
         document.getElementById(`pois`).appendChild(div);
     });
     document.getElementById(`loading`).innerHTML = ``;
-    return markers;
 };
 (async () => {
     const { map } = await leafletInitMap();
-    let markers = await renderMap(map);
-    map.on('moveend', async () => {
-        markers.forEach(marker => map.removeLayer(marker));
-        markers = await renderMap(map);
-    });
+    // markers is a Map<osm poi, leaflet marker instance>
+    const markers = new Map();
+    const layerGroup = leafletCreateLayerOnMap(map);
+    await renderMap(map, markers, layerGroup);
+    map.on('moveend', async () => await renderMap(map, markers, layerGroup));
 })();

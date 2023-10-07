@@ -27,8 +27,5 @@ const markers = new Map();
 (async () => {
     const { map } = await leafletInitMap();
     await renderMap(map, markers);
-    console.log(markers);
-    map.on('moveend', async () => {
-        await renderMap(map, markers);
-    });
+    map.on('moveend', async () => await renderMap(map, markers));
 })();
