@@ -6,10 +6,11 @@ import {
     wikimediaQueryBound,
     wikimediaSetHeightInfo,
 } from '../ez-opendata.js'
-import { saveLatLngZoomToUrl } from '../ez-web-utils.js'
+import { getLatLngZoomFromUrl, saveLatLngZoomToUrl } from '../ez-web-utils.js'
 
-const onPicClick = async (pic: WikimediaItem, marker: any, picExtraInfo: any) => {
-    const detailsEle = document.getElementById('details')!
+const detailsEle = document.getElementById('details')!
+
+const onPicClick = async (pic: WikimediaItem, marker: any, picExtraInfo: any, map: any) => {
     detailsEle.innerHTML = `Loading...`
     const user = await wikimediaGetAuthor(picExtraInfo.title, pic.pageid)
     const userLink = wikimediaGetAuthorLink(user)
@@ -23,16 +24,26 @@ const onPicClick = async (pic: WikimediaItem, marker: any, picExtraInfo: any) =>
     // <a href="${userLink}" target="mp">More</a>
     detailsEle.innerHTML = html
     detailsEle.style.height = `${h}px`
+    saveLatLngZoomToUrl(map.getCenter().lat, map.getCenter().lng, map.getZoom(), pic.pageid)
 }
 
 const renderMap = async (map: any, markers: Map<WikimediaItem, any>) => {
     try {
         const pics = await wikimediaQueryBound(map.getBounds())
         maplibreAddWikimedia(map, pics, markers, onPicClick)
+        const picIdInUrl = getLatLngZoomFromUrl().id
+        if (picIdInUrl) {
+            const picOnDisplay = pics.find((p) => p.pageid === picIdInUrl)
+            if (!picOnDisplay) {
+                console.log(`No pic on display`)
+                detailsEle.innerHTML = ``
+                detailsEle.style.flex = `0`
+            }
+        }
+        saveLatLngZoomToUrl(map.getCenter().lat, map.getCenter().lng, map.getZoom(), getLatLngZoomFromUrl().id)
     } catch (error) {
         console.error(error)
     }
-    saveLatLngZoomToUrl(map.getCenter().lat, map.getCenter().lng, map.getZoom())
 }
 
 ;(async () => {
@@ -55,4 +66,5 @@ const renderMap = async (map: any, markers: Map<WikimediaItem, any>) => {
     }
     map.on('mouseup', onChange)
     map.on('zoomend', onChange)
+    map.on('touchend', onChange)
 })()

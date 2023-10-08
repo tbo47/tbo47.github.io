@@ -24,16 +24,17 @@ export const getCurrentPosition = (defaultCenter = [2, 48], timeout = 3000): Pro
 }
 
 export const getLatLngZoomFromUrl = () => {
-    // #map=17/14.71241/-17.48513
+    // #map=17/14.71241/-17.48513/323
     const hash = window.location.hash.substring(1).split('/')
     const zoom = Number(hash[0])
     const lat = Number(hash[1])
     const lng = Number(hash[2])
-    return { lat, lng, zoom }
+    const id = Number(hash[3])
+    return { lat, lng, zoom, id }
 }
 
-export const saveLatLngZoomToUrl = (latNew: number, lngNew: number, zoomNew: number) => {
-    const { lat, lng, zoom } = getLatLngZoomFromUrl()
-    if (latNew === lat && lngNew === lng && zoomNew === zoom) return
-    window.location.hash = `${zoomNew}/${latNew}/${lngNew}`
+export const saveLatLngZoomToUrl = (latNew: number, lngNew: number, zoomNew: number, idNew = 0) => {
+    const { lat, lng, zoom, id } = getLatLngZoomFromUrl()
+    if (latNew === lat && lngNew === lng && zoomNew === zoom && idNew === id) return
+    window.location.hash = `${zoomNew}/${latNew}/${lngNew}` + (idNew ? `/${idNew}` : '')
 }
