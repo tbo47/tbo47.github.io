@@ -1,5 +1,5 @@
 import { WikimediaItem, wikimediaGetAuthor, wikimediaGetAuthorLink, wikimediaInfo } from './ez-opendata.js'
-import { getCurrentPosition, getLatLngZoomFromUrl, setLatLngZoomIfNeeded } from './ez-web-utils.js'
+import { getCurrentPosition, getLatLngZoomFromUrl } from './ez-web-utils.js'
 
 declare var maplibregl: any
 
@@ -15,23 +15,36 @@ export const maplibreInitMap = async () => {
         center = await getCurrentPosition()
         zoom = DEFAULT_ZOOM
     }
-    const map = new maplibregl.Map({
-        container: 'map',
-        style: 'https://api.maptiler.com/maps/streets/style.json?key=52Jm6r7frh3pSGiGGn3t',
-        center,
-        zoom,
-    })
-    setLatLngZoomIfNeeded(map.getCenter().lat, map.getCenter().lng, map.getZoom())
+
+    const style = {
+        version: 8,
+        sources: {
+            osm: {
+                type: 'raster',
+                tiles: ['https://a.tile.openstreetmap.org/{z}/{x}/{y}.png'],
+                tileSize: 256,
+                maxzoom: 19,
+            },
+        },
+        layers: [
+            {
+                id: 'osm',
+                type: 'raster',
+                source: 'osm', // This must match the source key above
+            },
+        ],
+    }
+    const map = new maplibregl.Map({ container: 'map', style, center, zoom })
     return map
 }
 
 export const maplibreAddWikimedia = async (map: any, pics: WikimediaItem[], markers: Map<WikimediaItem, any>) => {
     const picsAlreadyOnTheMap = Array.from(markers.keys())
     const picsToAdd = pics.filter((p) => !picsAlreadyOnTheMap.some((p2) => p.pageid === p2.pageid))
-    console.log(picsToAdd)
 
     picsToAdd.forEach(async (pic) => {
-        const info = await wikimediaInfo(pic.pageid, 600)
+        const width = Math.min(Math.floor(window.innerWidth * 0.8), 600)
+        const info = await wikimediaInfo(pic.pageid, width)
         const user = await wikimediaGetAuthor(info.title, pic.pageid)
         const userLink = wikimediaGetAuthorLink(user)
         const html = `<div>

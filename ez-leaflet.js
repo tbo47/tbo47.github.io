@@ -1,6 +1,6 @@
 // Description: A library to query open data sources (wikipedia, openstreetmap, wikimedia...).
 import { wikimediaGetAuthor, wikimediaGetAuthorLink, wikimediaInfo, } from './ez-opendata.js';
-import { getCurrentPosition, getLatLngZoomFromUrl, setLatLngZoomIfNeeded } from './ez-web-utils.js';
+import { getCurrentPosition, getLatLngZoomFromUrl, saveLatLngZoomToUrl } from './ez-web-utils.js';
 const OSM = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
 export const getCurrentOsmPositionLink = async (z = 17) => {
     const [longitude, latitude] = await getCurrentPosition();
@@ -13,8 +13,7 @@ export const leafletInitMap = async () => {
     const map = L.map('map');
     L.tileLayer(OSM).addTo(map);
     const moveAction = () => {
-        const pos = map.getCenter();
-        setLatLngZoomIfNeeded(pos.lat, pos.lng, map.getZoom());
+        saveLatLngZoomToUrl(map.getCenter().lat, map.getCenter().lng, map.getZoom());
     };
     map.on('zoomend', moveAction);
     map.on('moveend', moveAction);

@@ -11,7 +11,7 @@ import {
     wikimediaGetAuthorLink,
     wikimediaInfo,
 } from './ez-opendata.js'
-import { getCurrentPosition, getLatLngZoomFromUrl, setLatLngZoomIfNeeded } from './ez-web-utils.js'
+import { getCurrentPosition, getLatLngZoomFromUrl, saveLatLngZoomToUrl } from './ez-web-utils.js'
 
 const OSM = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
 
@@ -27,8 +27,7 @@ export const leafletInitMap = async (): Promise<{ map: L.Map }> => {
     const map = L.map('map')
     L.tileLayer(OSM).addTo(map)
     const moveAction = () => {
-        const pos = map.getCenter()
-        setLatLngZoomIfNeeded(pos.lat, pos.lng, map.getZoom())
+        saveLatLngZoomToUrl(map.getCenter().lat, map.getCenter().lng, map.getZoom())
     }
     map.on('zoomend', moveAction)
     map.on('moveend', moveAction)

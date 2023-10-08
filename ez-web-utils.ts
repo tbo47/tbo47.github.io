@@ -4,9 +4,9 @@
 
 /**
  * Get the current location of the user. Will only work on https or localhost.
- * 
+ *
  * @param defaultCenter default center if geolocation fails
- * 
+ *
  * ```const [longitude, latitude] = await getCurrentPosition()```
  */
 export const getCurrentPosition = (defaultCenter = [2, 48], timeout = 3000): Promise<number[]> => {
@@ -32,7 +32,7 @@ export const getLatLngZoomFromUrl = () => {
     return { lat, lng, zoom }
 }
 
-export const setLatLngZoomIfNeeded = (latNew: number, lngNew: number, zoomNew: number) => {
+export const saveLatLngZoomToUrl = (latNew: number, lngNew: number, zoomNew: number) => {
     const { lat, lng, zoom } = getLatLngZoomFromUrl()
     if (latNew === lat && lngNew === lng && zoomNew === zoom) return
     window.location.hash = `${zoomNew}/${latNew}/${lngNew}`

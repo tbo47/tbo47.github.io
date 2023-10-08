@@ -27,7 +27,7 @@ export const getLatLngZoomFromUrl = () => {
     const lng = Number(hash[2]);
     return { lat, lng, zoom };
 };
-export const setLatLngZoomIfNeeded = (latNew, lngNew, zoomNew) => {
+export const saveLatLngZoomToUrl = (latNew, lngNew, zoomNew) => {
     const { lat, lng, zoom } = getLatLngZoomFromUrl();
     if (latNew === lat && lngNew === lng && zoomNew === zoom)
         return;

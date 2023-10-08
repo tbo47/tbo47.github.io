@@ -1,15 +1,15 @@
-import { maplibreAddWikimedia, maplibreHasBoundsChanged, maplibreInitMap } from '../ez-maplibre.js'
-import { WikimediaItem, wikimediaQueryBound } from '../ez-opendata.js'
-import { setLatLngZoomIfNeeded } from '../ez-web-utils.js';
+import { maplibreAddWikimedia, maplibreHasBoundsChanged, maplibreInitMap } from '../ez-maplibre.js';
+import { WikimediaItem, wikimediaQueryBound } from '../ez-opendata.js';
+import { saveLatLngZoomToUrl } from '../ez-web-utils.js';
 
 const renderMap = async (map: any, markers: Map<WikimediaItem, any>) => {
     try {
         const pics = await wikimediaQueryBound(map.getBounds())
         maplibreAddWikimedia(map, pics, markers)
-        setLatLngZoomIfNeeded(map.getCenter().lat, map.getCenter().lng, map.getZoom())
     } catch (error) {
         console.error(error)
     }
+    saveLatLngZoomToUrl(map.getCenter().lat, map.getCenter().lng, map.getZoom())
 }
 
 ;(async () => {
