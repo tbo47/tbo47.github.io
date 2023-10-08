@@ -1,10 +1,12 @@
-import { maplibreAddWikimedia, maplibreHasBoundsChanged, maplibreInitMap } from '../ez-maplibre.js';
-import { WikimediaItem, wikimediaQueryBound } from '../ez-opendata.js';
+import { maplibreAddWikimedia, maplibreHasBoundsChanged, maplibreInitMap } from '../ez-maplibre.js'
+import { WikimediaItem, wikimediaQueryBound } from '../ez-opendata.js'
+import { setLatLngZoomIfNeeded } from '../ez-web-utils.js';
 
 const renderMap = async (map: any, markers: Map<WikimediaItem, any>) => {
     try {
         const pics = await wikimediaQueryBound(map.getBounds())
         maplibreAddWikimedia(map, pics, markers)
+        setLatLngZoomIfNeeded(map.getCenter().lat, map.getCenter().lng, map.getZoom())
     } catch (error) {
         console.error(error)
     }
@@ -21,12 +23,12 @@ const renderMap = async (map: any, markers: Map<WikimediaItem, any>) => {
     let isFetchingData = false
     let bounds = map.getBounds()
     const onChange = async () => {
-        if (isFetchingData) return
-        if (!maplibreHasBoundsChanged(map, bounds)) return
-        bounds = map.getBounds()
-        isFetchingData = true
-        await renderMap(map, markers)
-        isFetchingData = false
+        if (!isFetchingData && maplibreHasBoundsChanged(map, bounds)) {
+            bounds = map.getBounds()
+            isFetchingData = true
+            await renderMap(map, markers)
+            isFetchingData = false
+        }
     }
     map.on('mouseup', onChange)
     map.on('zoomend', onChange)

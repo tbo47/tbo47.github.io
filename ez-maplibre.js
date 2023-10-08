@@ -7,7 +7,6 @@ const MARKER_OPTIONS = {
 export const maplibreInitMap = async () => {
     let { lat, lng, zoom } = getLatLngZoomFromUrl();
     let center = [lng, lat];
-    debugger;
     if (!lat || !lng || !zoom) {
         center = await getCurrentPosition();
         zoom = DEFAULT_ZOOM;
@@ -18,8 +17,7 @@ export const maplibreInitMap = async () => {
         center,
         zoom,
     });
-    const pos = map.getCenter();
-    setLatLngZoomIfNeeded(pos.lat.toString(), pos.lng.toString(), map.getZoom().toString());
+    setLatLngZoomIfNeeded(map.getCenter().lat, map.getCenter().lng, map.getZoom());
     return map;
 };
 export const maplibreAddWikimedia = async (map, pics, markers) => {
