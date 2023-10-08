@@ -2,48 +2,42 @@
 
 declare var L: any
 
-import { OpenstreetmapPoi, WikidataArticle, WikimediaItem, WikipediaArticle, wikimediaGetAuthor, wikimediaGetAuthorLink, wikimediaInfo } from "./ez-opendata.js"
+import {
+    OpenstreetmapPoi,
+    WikidataArticle,
+    WikimediaItem,
+    WikipediaArticle,
+    wikimediaGetAuthor,
+    wikimediaGetAuthorLink,
+    wikimediaInfo,
+} from './ez-opendata.js'
+import { getCurrentPosition, getLatLngZoomFromUrl, setLatLngZoomIfNeeded } from './ez-web-utils.js'
 
-const DEFAULT_CENTER = { latitude: 48.863, longitude: 2.368 }
 const OSM = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
 
-/**
- * Get the current location of the user. Will only work on https or localhost.
- * @returns { latitude, longitude }
- */
-export const getCurrentPosition = (): Promise<{ latitude: number, longitude: number }> => {
-    return new Promise((resolve) => {
-        if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(position => resolve(position.coords), () => resolve(DEFAULT_CENTER))
-        } else {
-            resolve(DEFAULT_CENTER)
-        }
-    })
-}
-
 export const getCurrentOsmPositionLink = async (z = 17) => {
-    const { latitude, longitude } = await getCurrentPosition()
+    const [longitude, latitude] = await getCurrentPosition()
     return `https://www.openstreetmap.org/#map=${z}/${latitude}/${longitude}`
 }
 
 /**
- * 
+ *
  */
 export const leafletInitMap = async (): Promise<{ map: L.Map }> => {
     const map = L.map('map')
     L.tileLayer(OSM).addTo(map)
     const moveAction = () => {
         const pos = map.getCenter()
-        setLatLngZoomIfNeeded(pos.lat.toString(), pos.lng.toString(), map.getZoom().toString())
+        setLatLngZoomIfNeeded(pos.lat, pos.lng, map.getZoom())
     }
     map.on('zoomend', moveAction)
     map.on('moveend', moveAction)
 
     const { lat, lng, zoom } = getLatLngZoomFromUrl()
     if (lat && lng && zoom) {
-        map.setView([Number(lat), Number(lng)], Number(zoom));
+        map.setView([Number(lat), Number(lng)], Number(zoom))
     } else {
-        const { latitude, longitude } = await getCurrentPosition()
+        const [longitude, latitude] = await getCurrentPosition()
         map.setView([latitude, longitude], 14)
         map.on('locationfound', (e: any) => L.circle(e.latlng, e.accuracy / 2).addTo(map))
     }
@@ -51,30 +45,40 @@ export const leafletInitMap = async (): Promise<{ map: L.Map }> => {
 }
 
 /**
- * 
+ *
  * @param map Leaflet map instance
  * @param pois the POIs to add to the map
  * @param markers the Map of all markers already on the map. We want to add the `pois` to the `markers`.
  * @returns the array of added POIs
  */
-export const leafletAddPOIsToTheMap = (layerGroup: L.LayerGroup, pois: OpenstreetmapPoi[], markers: Map<OpenstreetmapPoi, L.Marker>) => {
+export const leafletAddPOIsToTheMap = (
+    layerGroup: L.LayerGroup,
+    pois: OpenstreetmapPoi[],
+    markers: Map<OpenstreetmapPoi, L.Marker>
+) => {
     const poiIdsAlreadyOnTheMap = Array.from(markers.keys())
-    const poisToAdd = pois.filter(p => !poiIdsAlreadyOnTheMap.some(p2 => p.id === p2.id))
-    poisToAdd.filter(p => p.lat && p.lon).forEach(p => {
-        const extra = []
-        extra.push(`<a href="${p.osm_url}" target="osm" title="Contribute on openstreetmap">osm</a>`)
-        if (p.website) extra.push(`<a href="${p.website}" target="w" title="Visit the website">web</a>`)
-        const addr = p[`addr:street`] ? (p[`addr:housenumber`] || ``) + ' ' + p[`addr:street`] : ``
-        const name = p.name?.replaceAll(`&`, ` `)
-        if (addr) {
-            extra.push(`<a href="https://www.google.com/search?q=${name} ${addr}" target="g" title="Search in google">g</a>`)
-            extra.push(`<a href="https://www.bing.com/search?q=${name} ${addr}" target="b" title="Search in bing">b</a>`)
-        }
-        const cuisine = p.cuisine ? `<div>${p.cuisine.split(';').join(', ')}</div>` : ``
-        const html = `<div>${p.name}</div><div>${cuisine}</div><div>${extra.join(" | ")}`
-        const marker = L.marker([p.lat, p.lon]).bindPopup(html).addTo(layerGroup)
-        markers.set(p, marker)
-    })
+    const poisToAdd = pois.filter((p) => !poiIdsAlreadyOnTheMap.some((p2) => p.id === p2.id))
+    poisToAdd
+        .filter((p) => p.lat && p.lon)
+        .forEach((p) => {
+            const extra = []
+            extra.push(`<a href="${p.osm_url}" target="osm" title="Contribute on openstreetmap">osm</a>`)
+            if (p.website) extra.push(`<a href="${p.website}" target="w" title="Visit the website">web</a>`)
+            const addr = p[`addr:street`] ? (p[`addr:housenumber`] || ``) + ' ' + p[`addr:street`] : ``
+            const name = p.name?.replaceAll(`&`, ` `)
+            if (addr) {
+                extra.push(
+                    `<a href="https://www.google.com/search?q=${name} ${addr}" target="g" title="Search in google">g</a>`
+                )
+                extra.push(
+                    `<a href="https://www.bing.com/search?q=${name} ${addr}" target="b" title="Search in bing">b</a>`
+                )
+            }
+            const cuisine = p.cuisine ? `<div>${p.cuisine.split(';').join(', ')}</div>` : ``
+            const html = `<div>${p.name}</div><div>${cuisine}</div><div>${extra.join(' | ')}`
+            const marker = L.marker([p.lat, p.lon]).bindPopup(html).addTo(layerGroup)
+            markers.set(p, marker)
+        })
     return poisToAdd
 }
 
@@ -87,9 +91,13 @@ export const leafletCreateLayerOnMap = (map: L.Map) => {
 /**
  * Add wikipedia articles to the map.
  */
-export const leafletAddWikipediaArticlesToTheMap = (map: L.Map, articles: Array<WikipediaArticle>, markers: Map<number, L.Marker>) => {
+export const leafletAddWikipediaArticlesToTheMap = (
+    map: L.Map,
+    articles: Array<WikipediaArticle>,
+    markers: Map<number, L.Marker>
+) => {
     const lg = L.layerGroup()
-    const articlesToAdd = articles.filter(a => !markers.has(Number(a.pageid)))
+    const articlesToAdd = articles.filter((a) => !markers.has(Number(a.pageid)))
     articlesToAdd.forEach(({ url, title, lat, lon, pageid }) => {
         const html = `<div><a href="${url}" target="osm" title="Wiki">${title}</a></div>`
         const marker = L.marker([lat, lon]).bindPopup(html).addTo(lg)
@@ -105,7 +113,7 @@ export const leafletAddWikipediaArticlesToTheMap = (map: L.Map, articles: Array<
 export const leafletAddWikidata = (map: L.Map, items: WikidataArticle[], markers: Map<WikidataArticle, L.Marker>) => {
     const lg = L.layerGroup()
     const articleIDsAlreadyOnTheMap = Array.from(markers.keys())
-    const itemsToAdd = items.filter(i => !articleIDsAlreadyOnTheMap.some(i2 => i.id === i2.id))
+    const itemsToAdd = items.filter((i) => !articleIDsAlreadyOnTheMap.some((i2) => i.id === i2.id))
     itemsToAdd.forEach((i: WikidataArticle) => {
         const html = `<a href="${i.q.value}" target="wd" title="Wiki">${i.id}</a>`
         const marker = L.marker([i.lat, i.lng]).bindPopup(html).addTo(lg)
@@ -137,19 +145,4 @@ export const leafletAddWikimedia = (map: L.Map, items: WikimediaItem[]) => {
     })
     lg.addTo(map)
     return markers
-}
-
-export const getLatLngZoomFromUrl = () => {
-    // #map=17/14.71241/-17.48513
-    const hash = window.location.hash.substring(1).split('/')
-    const zoom = hash[0]
-    const lat = hash[1]
-    const lng = hash[2]
-    return { lat, lng, zoom }
-}
-
-export const setLatLngZoomIfNeeded = (latNew: string, lngNew: string, zoomNew: string) => {
-    const { lat, lng, zoom } = getLatLngZoomFromUrl()
-    if (latNew === lat && lngNew === lng && zoomNew === zoom) return
-    window.location.hash = `${zoomNew}/${latNew}/${lngNew}`
 }
