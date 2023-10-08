@@ -174,10 +174,24 @@ export const wikimediaQuery = async (northEast: { lat: number; lng: number; }, s
 /*
  * https://www.mediawiki.org/wiki/API:Imageinfo
  */
-export const wikimediaInfoMultiplePages = async (pageids: number[], thumbWidth = 600) => {
+export const wikimediaGetInfoSetThumbWidth = async (pageids: number[], thumbWidth = 600) => {
     const pageidsStr = pageids.join('|')
     const r = 'https://commons.wikimedia.org/w/api.php'
     const q = `${r}?action=query&pageids=${pageidsStr}&prop=imageinfo&iiprop=extmetadata|url&iiurlwidth=${thumbWidth}&format=json&origin=*`
+    const res = await fetch(q)
+    const d = await res.json()
+    return d.query.pages
+}
+
+/**
+ * @deprecated use wikimediaGetInfoSetThumbWidth instead 
+ */
+export const wikimediaInfoMultiplePages = wikimediaGetInfoSetThumbWidth
+
+export const wikimediaSetHeightInfo = async (pageids: number[], thumbHeight = 600) => {
+    const pageidsStr = pageids.join('|')
+    const r = 'https://commons.wikimedia.org/w/api.php'
+    const q = `${r}?action=query&pageids=${pageidsStr}&prop=imageinfo&iiprop=extmetadata|url&iiurlheight=${thumbHeight}&format=json&origin=*`
     const res = await fetch(q)
     const d = await res.json()
     return d.query.pages
@@ -197,7 +211,7 @@ export const wikimediaGetAuthorLink = (name: string, limit = 40) => {
  *
  */
 export const wikimediaInfo = async (pageid: number, thumbWidth = 600) => {
-    const infos = await wikimediaInfoMultiplePages([pageid], thumbWidth)
+    const infos = await wikimediaGetInfoSetThumbWidth([pageid], thumbWidth)
     const info = infos[pageid].imageinfo[0]
     const name = info.extmetadata.ObjectName.value
     const date = info.extmetadata.DateTime.value

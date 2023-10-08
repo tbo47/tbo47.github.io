@@ -4,9 +4,6 @@ import { getCurrentPosition, getLatLngZoomFromUrl } from './ez-web-utils.js'
 declare var maplibregl: any
 
 const DEFAULT_ZOOM = 16
-const MARKER_OPTIONS = {
-    color: '#FFFFFF',
-}
 
 export const maplibreInitMap = async () => {
     let { lat, lng, zoom } = getLatLngZoomFromUrl()
@@ -38,25 +35,22 @@ export const maplibreInitMap = async () => {
     return map
 }
 
-export const maplibreAddWikimedia = async (map: any, pics: WikimediaItem[], markers: Map<WikimediaItem, any>) => {
+export const maplibreAddWikimedia = async (
+    map: any,
+    pics: WikimediaItem[],
+    markers: Map<WikimediaItem, any>,
+    onPicClick: Function
+) => {
     const picsAlreadyOnTheMap = Array.from(markers.keys())
     const picsToAdd = pics.filter((p) => !picsAlreadyOnTheMap.some((p2) => p.pageid === p2.pageid))
 
     picsToAdd.forEach(async (pic) => {
-        const width = Math.min(Math.floor(window.innerWidth * 0.8), 600)
+        const width = Math.min(Math.floor(window.innerWidth * 0.8), 100)
         const info = await wikimediaInfo(pic.pageid, width)
-        const user = await wikimediaGetAuthor(info.title, pic.pageid)
-        const userLink = wikimediaGetAuthorLink(user)
-        const html = `<div>
-                        <a href="${info.descriptionurl}" target="wm">${info.name}<img src="${info.thumburl}"></a>
-                        <a href="${userLink}" target="mp">More photos from ${user}</a>
-                      </div>`
-
-        const marker = new maplibregl.Marker(MARKER_OPTIONS)
-            .setLngLat([pic.lon, pic.lat])
-            .setPopup(new maplibregl.Popup().setHTML(html))
-            .addTo(map)
-
+        const element = document.createElement('img')
+        element.src = info.thumburl
+        const marker = new maplibregl.Marker({ element }).setLngLat([pic.lon, pic.lat]).addTo(map)
+        element.addEventListener('click', () => onPicClick(pic, marker, info))
         markers.set(pic, marker)
     })
 }
