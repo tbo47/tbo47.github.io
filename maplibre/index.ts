@@ -6,7 +6,7 @@ import {
     wikimediaQueryBound,
     wikimediaSetHeightInfo,
 } from '../ez-opendata.js'
-import { getLatLngZoomFromUrl, saveLatLngZoomToUrl } from '../ez-web-utils.js'
+import { getLatLngZoomFromUrl, saveLatLngZoomToUrl, swapListening } from '../ez-web-utils.js'
 
 const detailsEle = document.getElementById('details')!
 
@@ -67,4 +67,8 @@ const renderMap = async (map: any, markers: Map<WikimediaItem, any>) => {
     map.on('mouseup', onChange)
     map.on('zoomend', onChange)
     map.on('touchend', onChange)
+    swapListening(detailsEle, (e) => {
+        console.log(e)
+        alert(e.type)
+    })
 })()

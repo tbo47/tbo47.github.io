@@ -1,6 +1,6 @@
 import { maplibreAddWikimedia, maplibreHasBoundsChanged, maplibreInitMap } from '../ez-maplibre.js';
 import { wikimediaGetAuthor, wikimediaGetAuthorLink, wikimediaQueryBound, wikimediaSetHeightInfo, } from '../ez-opendata.js';
-import { getLatLngZoomFromUrl, saveLatLngZoomToUrl } from '../ez-web-utils.js';
+import { getLatLngZoomFromUrl, saveLatLngZoomToUrl, swapListening } from '../ez-web-utils.js';
 const detailsEle = document.getElementById('details');
 const onPicClick = async (pic, marker, picExtraInfo, map) => {
     detailsEle.innerHTML = `Loading...`;
@@ -57,4 +57,8 @@ const renderMap = async (map, markers) => {
     map.on('mouseup', onChange);
     map.on('zoomend', onChange);
     map.on('touchend', onChange);
+    swapListening(detailsEle, (e) => {
+        console.log(e);
+        alert(e.type);
+    });
 })();
