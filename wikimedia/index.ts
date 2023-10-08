@@ -1,7 +1,7 @@
 import { leafletAddWikimedia, leafletInitMap } from '../ez-leaflet.js';
 import { wikimediaQuery } from '../ez-opendata.js';
 
-const showErrorMessage = (error: { code: 'toobig' | string, info: string }) => {
+const showErrorMessage = (error: { info: string }) => {
     const errorDiv = document.getElementById('error')
     if (!errorDiv) return
     errorDiv.innerHTML = error.info
@@ -21,13 +21,19 @@ const renderMap = async (map: L.Map, markers: Map<number, L.Marker>) => {
     }
 }
 
-/**
- * Map<id of the wikimedia page -> leaflet marker>
- */
-const markers = new Map<number, L.Marker>();
 
 (async () => {
+    /**
+     * Map<id of the wikimedia page -> leaflet marker>
+     */
+    const markers = new Map<number, L.Marker>() // TODO replace id by instance
     const { map } = await leafletInitMap()
     await renderMap(map, markers)
-    map.on('moveend', async () => await renderMap(map, markers))
+    let isFetchingData = false
+    map.on('moveend', async () => {
+        if (isFetchingData) return
+        isFetchingData = true
+        await renderMap(map, markers)
+        isFetchingData = false
+    })
 })()

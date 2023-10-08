@@ -20,12 +20,19 @@ const renderMap = async (map, markers) => {
         showErrorMessage(error);
     }
 };
-/**
- * Map<id of the wikimedia page -> leaflet marker>
- */
-const markers = new Map();
 (async () => {
+    /**
+     * Map<id of the wikimedia page -> leaflet marker>
+     */
+    const markers = new Map(); // TODO replace id by instance
     const { map } = await leafletInitMap();
     await renderMap(map, markers);
-    map.on('moveend', async () => await renderMap(map, markers));
+    let isFetchingData = false;
+    map.on('moveend', async () => {
+        if (isFetchingData)
+            return;
+        isFetchingData = true;
+        await renderMap(map, markers);
+        isFetchingData = false;
+    });
 })();
