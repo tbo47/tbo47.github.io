@@ -50,7 +50,7 @@ export const maplibreAddWikimedia = async (
         const element = document.createElement('img')
         element.src = info.thumburl
         const marker = new maplibregl.Marker({ element }).setLngLat([pic.lon, pic.lat]).addTo(map)
-        element.addEventListener('click', () => onPicClick(pic, marker, info, map))
+        marker.getElement().addEventListener('click', () => onPicClick(pic, marker, info, map))
         if (getLatLngZoomFromUrl().id === pic.pageid) {
             element.click()
         }

@@ -49,20 +49,15 @@ export const swapListening = (ele, callback) => {
         handleGesture();
     }, false);
     const handleGesture = () => {
-        if (touchendX < touchstartX) {
-            callback(new Event('swipeleft'));
-        }
-        if (touchendX > touchstartX) {
-            callback(new Event('swiperight'));
-        }
-        if (touchendY < touchstartY) {
-            callback(new Event('swipeup'));
-        }
-        if (touchendY > touchstartY) {
-            callback(new Event('swipedown'));
-        }
-        if (touchendY === touchstartY) {
-            callback(new Event('tap'));
-        }
+        if (touchendX < touchstartX)
+            callback('swipeleft');
+        if (touchendX > touchstartX)
+            callback('swiperight');
+        if (touchendY < touchstartY)
+            callback('swipeup');
+        if (touchendY > touchstartY)
+            callback('swipedown');
+        if (touchendY === touchstartY)
+            callback('tap');
     };
 };

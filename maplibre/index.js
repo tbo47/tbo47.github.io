@@ -51,14 +51,18 @@ const renderMap = async (map, markers) => {
             bounds = map.getBounds();
             isFetchingData = true;
             await renderMap(map, markers);
-            isFetchingData = false;
+            setTimeout(() => (isFetchingData = false), 100);
         }
     };
     map.on('mouseup', onChange);
     map.on('zoomend', onChange);
     map.on('touchend', onChange);
-    swapListening(detailsEle, (e) => {
-        console.log(e);
-        alert(e.type);
+    swapListening(detailsEle, (type) => {
+        if (type === 'swipeleft') {
+            console.log('swipeleft');
+        }
+        if (type === 'swiperight') {
+            console.log('swiperight');
+        }
     });
 })();
