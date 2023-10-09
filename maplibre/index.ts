@@ -1,25 +1,22 @@
 import { maplibreAddWikimedia, maplibreHasBoundsChanged, maplibreInitMap } from '../ez-maplibre.js'
-import {
-    WikimediaItem,
-    wikimediaGetAuthor,
-    wikimediaGetAuthorLink,
-    wikimediaQueryBound,
-    wikimediaSetHeightInfo,
-} from '../ez-opendata.js'
+import { WikimediaItem, wikimediaQueryBound, wikimediaSetHeightInfo } from '../ez-opendata.js'
 import { getLatLngZoomFromUrl, saveLatLngZoomToUrl, swapListening } from '../ez-web-utils.js'
 
 const detailsEle = document.getElementById('details')!
 
-const onPicClick = async (pic: WikimediaItem, marker: any, picExtraInfo: any, map: any) => {
+/**
+ * This function is called every time a picture is clicked on the map.
+ */
+const onPicClick = async (pic: WikimediaItem, map: any) => {
     detailsEle.innerHTML = `Loading...`
-    const user = await wikimediaGetAuthor(picExtraInfo.title, pic.pageid)
-    const userLink = wikimediaGetAuthorLink(user)
     detailsEle.style.flex = `2`
     const h = Math.floor(detailsEle.getBoundingClientRect().height)
     const thumbInfo = await wikimediaSetHeightInfo([pic.pageid], h)
+    // const user = await wikimediaGetAuthor(thumbInfo.title, pic.pageid)
+    // const userLink = wikimediaGetAuthorLink(user)
     const thumbUrl = thumbInfo[pic.pageid].imageinfo[0].thumburl
     const html = `<div class="detail">
-            <a href="${picExtraInfo.descriptionurl}" target="wm" title="${picExtraInfo.name}"><img src="${thumbUrl}"></a>
+            <a href="${thumbInfo.descriptionurl}" target="wm" title="${thumbInfo.name}"><img src="${thumbUrl}"></a>
         </div>`
     // <a href="${userLink}" target="mp">More</a>
     detailsEle.innerHTML = html
@@ -27,33 +24,65 @@ const onPicClick = async (pic: WikimediaItem, marker: any, picExtraInfo: any, ma
     saveLatLngZoomToUrl(map.getCenter().lat, map.getCenter().lng, map.getZoom(), pic.pageid)
 }
 
+/**
+ * If the picture in the details section is not on the map anymore, hide the details.
+ */
+const hideDetailsIfNotOnPageAnymore = (pics: WikimediaItem[]) => {
+    if (!pics.find((p) => p.pageid === getLatLngZoomFromUrl().id)) {
+        detailsEle.innerHTML = ``
+        detailsEle.style.flex = `0`
+    }
+}
+
+/**
+ * This function is called every time the map is moved or zoomed.
+ * We call Wikimedia Common REST endpoint and place the pictures on the map if needed.
+ */
 const renderMap = async (map: any, markers: Map<WikimediaItem, any>) => {
     try {
         const pics = await wikimediaQueryBound(map.getBounds())
-        maplibreAddWikimedia(map, pics, markers, onPicClick)
-        const picIdInUrl = getLatLngZoomFromUrl().id
-        if (picIdInUrl) {
-            const picOnDisplay = pics.find((p) => p.pageid === picIdInUrl)
-            if (!picOnDisplay) {
-                console.log(`No pic on display`)
-                detailsEle.innerHTML = ``
-                detailsEle.style.flex = `0`
-            }
-        }
+        const newMarkers = await maplibreAddWikimedia(map, pics, markers)
+        newMarkers.forEach((marker, pic) => marker.getElement().addEventListener('click', () => onPicClick(pic, map)))
+        hideDetailsIfNotOnPageAnymore(pics)
         saveLatLngZoomToUrl(map.getCenter().lat, map.getCenter().lng, map.getZoom(), getLatLngZoomFromUrl().id)
     } catch (error) {
         console.error(error)
     }
 }
 
-;(async () => {
-    /**
-     * Map<wikimedia pic-> leaflet marker>
-     */
-    const markers = new Map<WikimediaItem, any>()
-    const map = await maplibreInitMap()
-    await renderMap(map, markers)
+/**
+ * Called only once when the page is loaded. It loads the details section for the picture in the URL.
+ */
+const initialShowPicInDetails = (map: any, markers: Map<WikimediaItem, any>) => {
+    const urlPicId = getLatLngZoomFromUrl().id
+    if (urlPicId) {
+        markers.forEach((marker, pic) => {
+            if (pic.pageid === urlPicId) {
+                onPicClick(pic, map)
+            }
+        })
+    }
+}
 
+const initSwipeLogic = (map: any, markers: Map<WikimediaItem, any>) => {
+    const urlPicId = getLatLngZoomFromUrl().id
+    swapListening(detailsEle, (type) => {
+        let add = 0
+        if (type === 'swipeleft') add = -1
+        if (type === 'swiperight') add = 1
+        Array.from(markers.keys()).every((pic, index, pics) => {
+            if (pic.pageid === urlPicId && index > 0 && index < pics.length - 1) {
+                const newPic = pics[index + add]
+                onPicClick(newPic, map)
+                map.flyTo({ center: [newPic.lon, newPic.lat] })
+                return false
+            }
+            return true
+        })
+    })
+}
+
+const initMapEventsListening = (map: any, markers: Map<WikimediaItem, any>) => {
     let isFetchingData = false
     let bounds = map.getBounds()
     const onChange = async () => {
@@ -67,12 +96,19 @@ const renderMap = async (map: any, markers: Map<WikimediaItem, any>) => {
     map.on('mouseup', onChange)
     map.on('zoomend', onChange)
     map.on('touchend', onChange)
-    swapListening(detailsEle, (type) => {
-        if (type === 'swipeleft') {
-            console.log('swipeleft')
-        }
-        if (type === 'swiperight') {
-            console.log('swiperight')
-        }
-    })
+}
+
+/**
+ * Main function
+ */
+;(async () => {
+    /**
+     * Map<wikimedia picture, maplibre marker>
+     */
+    const markers = new Map<WikimediaItem, any>()
+    const map = await maplibreInitMap()
+    await renderMap(map, markers)
+    initialShowPicInDetails(map, markers)
+    initMapEventsListening(map, markers)
+    initSwipeLogic(map, markers)
 })()

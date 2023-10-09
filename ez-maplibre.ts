@@ -35,27 +35,22 @@ export const maplibreInitMap = async () => {
     return map
 }
 
-export const maplibreAddWikimedia = async (
-    map: any,
-    pics: WikimediaItem[],
-    markers: Map<WikimediaItem, any>,
-    onPicClick: Function
-) => {
+export const maplibreAddWikimedia = async (map: any, pics: WikimediaItem[], markers: Map<WikimediaItem, any>) => {
     const picsAlreadyOnTheMap = Array.from(markers.keys())
     const picsToAdd = pics.filter((p) => !picsAlreadyOnTheMap.some((p2) => p.pageid === p2.pageid))
 
-    picsToAdd.forEach(async (pic) => {
-        const width = Math.min(Math.floor(window.innerWidth * 0.8), 100)
+    const newMarkers = new Map<WikimediaItem, any>()
+    const promises = picsToAdd.map(async (pic) => {
+        const width = Math.min(Math.floor(window.innerWidth * 0.8), 100) // TODO
         const info = await wikimediaInfo(pic.pageid, width)
         const element = document.createElement('img')
         element.src = info.thumburl
         const marker = new maplibregl.Marker({ element }).setLngLat([pic.lon, pic.lat]).addTo(map)
-        marker.getElement().addEventListener('click', () => onPicClick(pic, marker, info, map))
-        if (getLatLngZoomFromUrl().id === pic.pageid) {
-            element.click()
-        }
         markers.set(pic, marker)
+        newMarkers.set(pic, marker)
     })
+    await Promise.all(promises)
+    return newMarkers
 }
 
 export const maplibreHasBoundsChanged = (map: any, knownBounds: any) => {
