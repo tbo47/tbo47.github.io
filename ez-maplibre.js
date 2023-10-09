@@ -1,4 +1,4 @@
-import { wikimediaInfo } from './ez-opendata.js';
+import { wikimediaGetThumb } from './ez-opendata.js';
 import { getCurrentPosition, getLatLngZoomFromUrl } from './ez-web-utils.js';
 const DEFAULT_ZOOM = 16;
 export const maplibreInitMap = async () => {
@@ -34,8 +34,8 @@ export const maplibreAddWikimedia = async (map, pics, markers) => {
     const picsToAdd = pics.filter((p) => !picsAlreadyOnTheMap.some((p2) => p.pageid === p2.pageid));
     const newMarkers = new Map();
     const promises = picsToAdd.map(async (pic) => {
-        const width = Math.min(Math.floor(window.innerWidth * 0.8), 100); // TODO
-        const info = await wikimediaInfo(pic.pageid, width);
+        const maxSize = window.innerWidth > 400 ? window.innerWidth / 8 : window.innerWidth / 4;
+        const info = await wikimediaGetThumb(pic.pageid, maxSize, maxSize);
         const element = document.createElement('img');
         element.src = info.thumburl;
         const marker = new maplibregl.Marker({ element }).setLngLat([pic.lon, pic.lat]).addTo(map);

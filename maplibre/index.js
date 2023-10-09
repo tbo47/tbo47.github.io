@@ -1,5 +1,5 @@
 import { maplibreAddWikimedia, maplibreHasBoundsChanged, maplibreInitMap } from '../ez-maplibre.js';
-import { wikimediaQueryBound, wikimediaSetHeightInfo } from '../ez-opendata.js';
+import { wikimediaGetThumb, wikimediaQueryBound } from '../ez-opendata.js';
 import { getLatLngZoomFromUrl, saveLatLngZoomToUrl, swapListening } from '../ez-web-utils.js';
 const detailsEle = document.getElementById('details');
 /**
@@ -8,17 +8,20 @@ const detailsEle = document.getElementById('details');
 const onPicClick = async (pic, map) => {
     detailsEle.innerHTML = `Loading...`;
     detailsEle.style.flex = `2`;
-    const h = Math.floor(detailsEle.getBoundingClientRect().height);
-    const thumbInfo = await wikimediaSetHeightInfo([pic.pageid], h);
+    const { height, width } = detailsEle.getBoundingClientRect();
+    const thumb = await wikimediaGetThumb(pic.pageid, height, width);
     // const user = await wikimediaGetAuthor(thumbInfo.title, pic.pageid)
     // const userLink = wikimediaGetAuthorLink(user)
-    const thumbUrl = thumbInfo[pic.pageid].imageinfo[0].thumburl;
-    const html = `<div class="detail">
-            <a href="${thumbInfo.descriptionurl}" target="wm" title="${thumbInfo.name}"><img src="${thumbUrl}"></a>
-        </div>`;
+    const html = `<div class="detail"><img src="${thumb.thumburl}"></div>`;
     // <a href="${userLink}" target="mp">More</a>
     detailsEle.innerHTML = html;
-    detailsEle.style.height = `${h}px`;
+    detailsEle.addEventListener('dblclick', () => {
+        window.open(thumb.descriptionurl, '_blank');
+    });
+    detailsEle.addEventListener('click', () => {
+        map.flyTo({ center: [pic.lon, pic.lat], zoom: 16 });
+    });
+    // detailsEle.style.height = `${h}px`
     saveLatLngZoomToUrl(map.getCenter().lat, map.getCenter().lng, map.getZoom(), pic.pageid);
 };
 /**
@@ -38,8 +41,10 @@ const renderMap = async (map, markers) => {
     try {
         const pics = await wikimediaQueryBound(map.getBounds());
         const newMarkers = await maplibreAddWikimedia(map, pics, markers);
-        newMarkers.forEach((marker, pic) => marker.getElement().addEventListener('click', () => onPicClick(pic, map)));
-        hideDetailsIfNotOnPageAnymore(pics);
+        newMarkers.forEach((marker, pic) => {
+            marker.getElement().addEventListener('click', () => onPicClick(pic, map));
+        });
+        // TODO hideDetailsIfNotOnPageAnymore(pics)
         saveLatLngZoomToUrl(map.getCenter().lat, map.getCenter().lng, map.getZoom(), getLatLngZoomFromUrl().id);
     }
     catch (error) {
@@ -79,7 +84,7 @@ const initSwipeLogic = (map, markers) => {
             if (pic.pageid === urlPicId) {
                 const newPic = pics[index + add];
                 onPicClick(newPic, map);
-                map.flyTo({ center: [newPic.lon, newPic.lat] });
+                map.flyTo({ center: [newPic.lon, newPic.lat], zoom: 16 });
                 return false;
             }
             return true;

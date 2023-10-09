@@ -1,4 +1,7 @@
-import { WikimediaItem, wikimediaGetAuthor, wikimediaGetAuthorLink, wikimediaInfo } from './ez-opendata.js'
+import {
+    WikimediaItem,
+    wikimediaGetThumb
+} from './ez-opendata.js'
 import { getCurrentPosition, getLatLngZoomFromUrl } from './ez-web-utils.js'
 
 declare var maplibregl: any
@@ -41,8 +44,8 @@ export const maplibreAddWikimedia = async (map: any, pics: WikimediaItem[], mark
 
     const newMarkers = new Map<WikimediaItem, any>()
     const promises = picsToAdd.map(async (pic) => {
-        const width = Math.min(Math.floor(window.innerWidth * 0.8), 100) // TODO
-        const info = await wikimediaInfo(pic.pageid, width)
+        const maxSize = window.innerWidth > 400 ? window.innerWidth / 8 : window.innerWidth / 4
+        const info = await wikimediaGetThumb(pic.pageid, maxSize, maxSize)
         const element = document.createElement('img')
         element.src = info.thumburl
         const marker = new maplibregl.Marker({ element }).setLngLat([pic.lon, pic.lat]).addTo(map)
