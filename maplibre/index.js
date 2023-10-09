@@ -60,15 +60,23 @@ const initialShowPicInDetails = (map, markers) => {
     }
 };
 const initSwipeLogic = (map, markers) => {
-    const urlPicId = getLatLngZoomFromUrl().id;
     swapListening(detailsEle, (type) => {
+        const urlPicId = getLatLngZoomFromUrl().id;
         let add = 0;
         if (type === 'swipeleft')
             add = -1;
-        if (type === 'swiperight')
+        else if (type === 'swiperight')
             add = 1;
+        else
+            return;
         Array.from(markers.keys()).every((pic, index, pics) => {
-            if (pic.pageid === urlPicId && index > 0 && index < pics.length - 1) {
+            if (pic.pageid === urlPicId && index === 0) {
+                add = pics.length - 1;
+            }
+            else if (pic.pageid === urlPicId && index === pics.length - 1) {
+                add = 1 - pics.length;
+            }
+            if (pic.pageid === urlPicId) {
                 const newPic = pics[index + add];
                 onPicClick(newPic, map);
                 map.flyTo({ center: [newPic.lon, newPic.lat] });
