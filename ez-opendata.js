@@ -193,6 +193,9 @@ export const wikimediaGetThumb = async (pageid, height, width) => {
         Object.keys(info.extmetadata).forEach((key) => {
             result[key.toLowerCase()] = info.extmetadata[key].value;
         });
+        result.artistPage = result.artist;
+        result.artist = result.artist?.replace(/<a.*?>(.*?)<\/a>/, '$1'); // remove <a ... >Riamorei</a> -> Riamorei
+        result.artistUrl = wikimediaGetAuthorLink(result.artist);
         return result;
     };
     const thumbWidth = format(await wikimediaGetThumbs([pageid], 'width', width));

@@ -3,7 +3,13 @@
  * Start from the bottom of the file to understand the logic.
  */
 import { maplibreAddWikimedia, maplibreHasBoundsChanged, maplibreInitMap } from '../ez-maplibre.js'
-import { WikimediaItem, wikimediaGetThumb, wikimediaQueryBound } from '../ez-opendata.js'
+import {
+    WikimediaItem,
+    wikimediaGetAuthor,
+    wikimediaGetAuthorLink,
+    wikimediaGetThumb,
+    wikimediaQueryBound,
+} from '../ez-opendata.js'
 import { getLatLngZoomFromUrl, saveLatLngZoomToUrl, swapListening } from '../ez-web-utils.js'
 
 /**
@@ -14,18 +20,15 @@ const onPicClick = async (pic: WikimediaItem, map: any, detailsEle: HTMLElement)
     detailsEle.style.flex = `2`
     const { height, width } = detailsEle.getBoundingClientRect()
     const thumb = await wikimediaGetThumb(pic.pageid, height, width)
-    // const user = await wikimediaGetAuthor(thumbInfo.title, pic.pageid)
-    // const userLink = wikimediaGetAuthorLink(user)
-    const html = `<div class="detail"><img src="${thumb.thumburl}"></div>`
-    // <a href="${userLink}" target="mp">More</a>
+    const html = `<div class="detail"><img src="${thumb.thumburl}" title="Double click for more pictures from this author"></div>`
     detailsEle.innerHTML = html
     detailsEle.addEventListener('dblclick', () => {
-        window.open(thumb.descriptionurl, '_blank')
+        const a = document.getElementById('hiddenlink') as HTMLAnchorElement
+        a.href = thumb.artistUrl
+        a.target = thumb.artist
+        setTimeout(() => a.click(), 100)
     })
-    detailsEle.addEventListener('click', () => {
-        map.flyTo({ center: [pic.lon, pic.lat], zoom: 16 })
-    })
-    // detailsEle.style.height = `${h}px`
+    detailsEle.addEventListener('click', () => map.flyTo({ center: [pic.lon, pic.lat], zoom: 16 }))
     saveLatLngZoomToUrl(map.getCenter().lat, map.getCenter().lng, map.getZoom(), pic.pageid)
 }
 
@@ -85,8 +88,8 @@ const initSwipeLogic = (map: any, markers: Map<WikimediaItem, any>, detailsEle: 
         Array.from(markers.keys()).every((pic, index, pics) => {
             if (pic.pageid === urlPicId) {
                 let newPicIndex = index + add
-                if(newPicIndex < 0) newPicIndex = pics.length - 1
-                else if(newPicIndex >= pics.length) newPicIndex = 0
+                if (newPicIndex < 0) newPicIndex = pics.length - 1
+                else if (newPicIndex >= pics.length) newPicIndex = 0
                 const newPic = pics[newPicIndex]
                 onPicClick(newPic, map, detailsEle)
                 map.flyTo({ center: [newPic.lon, newPic.lat], zoom: 16 })

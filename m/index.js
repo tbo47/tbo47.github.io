@@ -3,7 +3,7 @@
  * Start from the bottom of the file to understand the logic.
  */
 import { maplibreAddWikimedia, maplibreHasBoundsChanged, maplibreInitMap } from '../ez-maplibre.js';
-import { wikimediaGetThumb, wikimediaQueryBound } from '../ez-opendata.js';
+import { wikimediaGetThumb, wikimediaQueryBound, } from '../ez-opendata.js';
 import { getLatLngZoomFromUrl, saveLatLngZoomToUrl, swapListening } from '../ez-web-utils.js';
 /**
  * This function is called every time a picture is clicked on the map.
@@ -13,18 +13,15 @@ const onPicClick = async (pic, map, detailsEle) => {
     detailsEle.style.flex = `2`;
     const { height, width } = detailsEle.getBoundingClientRect();
     const thumb = await wikimediaGetThumb(pic.pageid, height, width);
-    // const user = await wikimediaGetAuthor(thumbInfo.title, pic.pageid)
-    // const userLink = wikimediaGetAuthorLink(user)
-    const html = `<div class="detail"><img src="${thumb.thumburl}"></div>`;
-    // <a href="${userLink}" target="mp">More</a>
+    const html = `<div class="detail"><img src="${thumb.thumburl}" title="Double click for more pictures from this author"></div>`;
     detailsEle.innerHTML = html;
     detailsEle.addEventListener('dblclick', () => {
-        window.open(thumb.descriptionurl, '_blank');
+        const a = document.getElementById('hiddenlink');
+        a.href = thumb.artistUrl;
+        a.target = thumb.artist;
+        setTimeout(() => a.click(), 100);
     });
-    detailsEle.addEventListener('click', () => {
-        map.flyTo({ center: [pic.lon, pic.lat], zoom: 16 });
-    });
-    // detailsEle.style.height = `${h}px`
+    detailsEle.addEventListener('click', () => map.flyTo({ center: [pic.lon, pic.lat], zoom: 16 }));
     saveLatLngZoomToUrl(map.getCenter().lat, map.getCenter().lng, map.getZoom(), pic.pageid);
 };
 /**
