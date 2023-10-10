@@ -307,7 +307,7 @@ export const wikimediaGetAuthorLink = (name: string, limit = 40) => {
     return `https://commons.wikimedia.org/wiki/Special:ListFiles?limit=${limit}&user=${name}`
 }
 
-/*
+/**
  * @deprecated use wikimediaGetThumb instead
  */
 export const wikimediaInfo = async (pageid: number, thumbWidth = 600) => {

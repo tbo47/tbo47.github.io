@@ -110,7 +110,7 @@ const initMapEventsListening = (map, markers) => {
     /**
      * Map<wikimedia picture, maplibre marker>
      */
-    const markers = new Map();
+    const markers = new Map(); // TODO clean up markers if too big
     const map = await maplibreInitMap();
     await renderMap(map, markers);
     initialShowPicInDetails(map, markers);

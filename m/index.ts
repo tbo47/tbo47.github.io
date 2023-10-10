@@ -117,7 +117,7 @@ const initMapEventsListening = (map: any, markers: Map<WikimediaItem, any>) => {
     /**
      * Map<wikimedia picture, maplibre marker>
      */
-    const markers = new Map<WikimediaItem, any>()
+    const markers = new Map<WikimediaItem, any>() // TODO clean up markers if too big
     const map = await maplibreInitMap()
     await renderMap(map, markers)
     initialShowPicInDetails(map, markers)
