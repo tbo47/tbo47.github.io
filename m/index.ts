@@ -1,13 +1,15 @@
+/**
+ * This file is the entry point of the application. It will initialize the map and add the pictures on it.
+ * Start from the bottom of the file to understand the logic.
+ */
 import { maplibreAddWikimedia, maplibreHasBoundsChanged, maplibreInitMap } from '../ez-maplibre.js'
 import { WikimediaItem, wikimediaGetThumb, wikimediaQueryBound } from '../ez-opendata.js'
 import { getLatLngZoomFromUrl, saveLatLngZoomToUrl, swapListening } from '../ez-web-utils.js'
 
-const detailsEle = document.getElementById('details')!
-
 /**
  * This function is called every time a picture is clicked on the map.
  */
-const onPicClick = async (pic: WikimediaItem, map: any) => {
+const onPicClick = async (pic: WikimediaItem, map: any, detailsEle: HTMLElement) => {
     detailsEle.innerHTML = `Loading...`
     detailsEle.style.flex = `2`
     const { height, width } = detailsEle.getBoundingClientRect()
@@ -18,7 +20,7 @@ const onPicClick = async (pic: WikimediaItem, map: any) => {
     // <a href="${userLink}" target="mp">More</a>
     detailsEle.innerHTML = html
     detailsEle.addEventListener('dblclick', () => {
-        window.open(thumb.descriptionurl, '_blank');
+        window.open(thumb.descriptionurl, '_blank')
     })
     detailsEle.addEventListener('click', () => {
         map.flyTo({ center: [pic.lon, pic.lat], zoom: 16 })
@@ -30,7 +32,7 @@ const onPicClick = async (pic: WikimediaItem, map: any) => {
 /**
  * If the picture in the details section is not on the map anymore, hide the details.
  */
-const hideDetailsIfNotOnPageAnymore = (pics: WikimediaItem[]) => {
+const hideDetailsIfNotOnPageAnymore = (pics: WikimediaItem[], detailsEle: HTMLElement) => {
     if (!pics.find((p) => p.pageid === getLatLngZoomFromUrl().id)) {
         detailsEle.innerHTML = ``
         detailsEle.style.flex = `0`
@@ -38,15 +40,14 @@ const hideDetailsIfNotOnPageAnymore = (pics: WikimediaItem[]) => {
 }
 
 /**
- * This function is called every time the map is moved or zoomed.
- * We call Wikimedia Common REST endpoint and place the pictures on the map if needed.
+ * Calls Wikimedia Commons REST endpoint and place the pictures on the map.
  */
-const renderMap = async (map: any, markers: Map<WikimediaItem, any>) => {
+const renderMap = async (map: any, markers: Map<WikimediaItem, any>, detailsEle: HTMLElement) => {
     try {
         const pics = await wikimediaQueryBound(map.getBounds())
         const newMarkers = await maplibreAddWikimedia(map, pics, markers)
         newMarkers.forEach((marker, pic) => {
-            marker.getElement().addEventListener('click', () => onPicClick(pic, map))
+            marker.getElement().addEventListener('click', () => onPicClick(pic, map, detailsEle))
         })
         // TODO hideDetailsIfNotOnPageAnymore(pics)
         saveLatLngZoomToUrl(map.getCenter().lat, map.getCenter().lng, map.getZoom(), getLatLngZoomFromUrl().id)
@@ -56,21 +57,25 @@ const renderMap = async (map: any, markers: Map<WikimediaItem, any>) => {
 }
 
 /**
- * Called only once when the page is loaded. It loads the details section for the picture in the URL.
+ * It loads the details section for the picture in the URL.
  */
-const initialShowPicInDetails = (map: any, markers: Map<WikimediaItem, any>) => {
+const initialShowPicInDetails = (map: any, markers: Map<WikimediaItem, any>, detailsEle: HTMLElement) => {
     const urlPicId = getLatLngZoomFromUrl().id
     if (urlPicId) {
         markers.forEach((marker, pic) => {
             if (pic.pageid === urlPicId) {
-                onPicClick(pic, map)
+                onPicClick(pic, map, detailsEle)
             }
         })
     }
 }
 
-const initSwipeLogic = (map: any, markers: Map<WikimediaItem, any>) => {
+/**
+ * Initialize the swipe logic to change the picture in the details section. For smartphones.
+ */
+const initSwipeLogic = (map: any, markers: Map<WikimediaItem, any>, detailsEle: HTMLElement) => {
     swapListening(detailsEle, (type) => {
+        console.log(type)
         const urlPicId = getLatLngZoomFromUrl().id
         let add = 0
         if (type === 'swipeleft') add = -1
@@ -85,7 +90,7 @@ const initSwipeLogic = (map: any, markers: Map<WikimediaItem, any>) => {
             }
             if (pic.pageid === urlPicId) {
                 const newPic = pics[index + add]
-                onPicClick(newPic, map)
+                onPicClick(newPic, map, detailsEle)
                 map.flyTo({ center: [newPic.lon, newPic.lat], zoom: 16 })
                 return false
             }
@@ -94,14 +99,17 @@ const initSwipeLogic = (map: any, markers: Map<WikimediaItem, any>) => {
     })
 }
 
-const initMapEventsListening = (map: any, markers: Map<WikimediaItem, any>) => {
+/**
+ * Initialize all the events listeners on the map. It will call renderMap() when needed.
+ */
+const initMapEventsListening = (map: any, markers: Map<WikimediaItem, any>, detailsEle: HTMLElement) => {
     let isFetchingData = false
     let bounds = map.getBounds()
     const onChange = async () => {
         if (!isFetchingData && maplibreHasBoundsChanged(map, bounds)) {
             bounds = map.getBounds()
             isFetchingData = true
-            await renderMap(map, markers)
+            await renderMap(map, markers, detailsEle)
             setTimeout(() => (isFetchingData = false), 100)
         }
     }
@@ -111,16 +119,21 @@ const initMapEventsListening = (map: any, markers: Map<WikimediaItem, any>) => {
 }
 
 /**
- * Main function
+ * The `main` function is the entry point of the app.
  */
-;(async () => {
+const main = async () => {
+    debugger
     /**
-     * Map<wikimedia picture, maplibre marker>
+     * `markers` is a javascript Map.
+     * The keys of the map are the Wikimedia Commons picture instances, the values are the Maplibre marker instances.
      */
     const markers = new Map<WikimediaItem, any>() // TODO clean up markers if too big
+    const detailsEle = document.getElementById('details')!
     const map = await maplibreInitMap()
-    await renderMap(map, markers)
-    initialShowPicInDetails(map, markers)
-    initMapEventsListening(map, markers)
-    initSwipeLogic(map, markers)
-})()
+    await renderMap(map, markers, detailsEle)
+    initialShowPicInDetails(map, markers, detailsEle)
+    initMapEventsListening(map, markers, detailsEle)
+    initSwipeLogic(map, markers, detailsEle)
+}
+
+main()

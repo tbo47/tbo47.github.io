@@ -34,7 +34,7 @@ export const saveLatLngZoomToUrl = (latNew, lngNew, zoomNew, idNew = 0) => {
         return;
     window.location.hash = `${zoomNew}/${latNew}/${lngNew}` + (idNew ? `/${idNew}` : '');
 };
-export const swapListening = (ele, callback) => {
+export const swapListening = (ele, callback, sensitivity = 50) => {
     let touchstartX = 0;
     let touchstartY = 0;
     let touchendX = 0;
@@ -49,13 +49,13 @@ export const swapListening = (ele, callback) => {
         handleGesture();
     }, false);
     const handleGesture = () => {
-        if (touchendX < touchstartX)
+        if (touchendX - touchstartX < -sensitivity)
             callback('swipeleft');
-        if (touchendX > touchstartX)
+        if (touchendX - touchstartX > sensitivity)
             callback('swiperight');
-        if (touchendY < touchstartY)
+        if (touchendY - touchstartY < -sensitivity)
             callback('swipeup');
-        if (touchendY > touchstartY)
+        if (touchendY - touchstartY > sensitivity)
             callback('swipedown');
         if (touchendY === touchstartY)
             callback('tap');

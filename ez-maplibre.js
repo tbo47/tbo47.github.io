@@ -1,6 +1,9 @@
 import { wikimediaGetThumb } from './ez-opendata.js';
 import { getCurrentPosition, getLatLngZoomFromUrl } from './ez-web-utils.js';
 const DEFAULT_ZOOM = 16;
+/**
+ * Initialize the maplibre map with openstreetmap tiles.
+ */
 export const maplibreInitMap = async () => {
     let { lat, lng, zoom } = getLatLngZoomFromUrl();
     let center = [lng, lat];

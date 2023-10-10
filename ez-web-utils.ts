@@ -41,7 +41,8 @@ export const saveLatLngZoomToUrl = (latNew: number, lngNew: number, zoomNew: num
 
 export const swapListening = (
     ele: HTMLElement,
-    callback: (e: 'swipeleft' | 'swiperight' | 'swipeup' | 'swipedown' | 'tap') => void
+    callback: (e: 'swipeleft' | 'swiperight' | 'swipeup' | 'swipedown' | 'tap') => void,
+    sensitivity = 50
 ) => {
     let touchstartX = 0
     let touchstartY = 0
@@ -67,10 +68,10 @@ export const swapListening = (
     )
 
     const handleGesture = () => {
-        if (touchendX < touchstartX) callback('swipeleft')
-        if (touchendX > touchstartX) callback('swiperight')
-        if (touchendY < touchstartY) callback('swipeup')
-        if (touchendY > touchstartY) callback('swipedown')
+        if (touchendX - touchstartX < -sensitivity) callback('swipeleft')
+        if (touchendX - touchstartX > sensitivity) callback('swiperight')
+        if (touchendY - touchstartY < -sensitivity) callback('swipeup')
+        if (touchendY - touchstartY > sensitivity) callback('swipedown')
         if (touchendY === touchstartY) callback('tap')
     }
 }
