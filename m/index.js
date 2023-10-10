@@ -3,8 +3,20 @@
  * Start from the bottom of the file to understand the logic.
  */
 import { maplibreAddWikimedia, maplibreHasBoundsChanged, maplibreInitMap } from '../ez-maplibre.js';
-import { wikimediaGetThumb, wikimediaQueryBound, } from '../ez-opendata.js';
+import { wikimediaGetThumb, wikimediaQueryBound } from '../ez-opendata.js';
 import { getLatLngZoomFromUrl, saveLatLngZoomToUrl, swapListening } from '../ez-web-utils.js';
+const setMetaHeaders = (thumb) => {
+    document.title = thumb.objectname;
+    const metas = document.getElementsByTagName('meta');
+    const metaTitle = Array.from(metas).find((m) => m.attributes[0].nodeValue === 'og:title');
+    metaTitle.attributes[1].nodeValue = thumb.objectname;
+    const metaUrl = Array.from(metas).find((m) => m.attributes[0].nodeValue === 'og:url');
+    metaUrl.attributes[1].nodeValue = window.location.href;
+    const metaImage = Array.from(metas).find((m) => m.attributes[0].nodeValue === 'og:image');
+    metaImage.attributes[1].nodeValue = thumb.thumburl;
+    const metaDescription = Array.from(metas).find((m) => m.attributes[0].nodeValue === 'og:description');
+    metaDescription.attributes[1].nodeValue = thumb.objectname;
+};
 /**
  * This function is called every time a picture is clicked on the map.
  */
@@ -13,6 +25,7 @@ const onPicClick = async (pic, map, detailsEle) => {
     detailsEle.style.flex = `2`;
     const { height, width } = detailsEle.getBoundingClientRect();
     const thumb = await wikimediaGetThumb(pic.pageid, height, width);
+    setMetaHeaders(thumb);
     const html = `<div class="detail"><img src="${thumb.thumburl}" title="Double click for more pictures from this author"></div>`;
     detailsEle.innerHTML = html;
     detailsEle.addEventListener('dblclick', () => {
