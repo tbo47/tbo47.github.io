@@ -75,20 +75,19 @@ const initSwipeLogic = (map, markers, detailsEle) => {
         const urlPicId = getLatLngZoomFromUrl().id;
         let add = 0;
         if (type === 'swipeleft')
-            add = -1;
-        else if (type === 'swiperight')
             add = 1;
+        else if (type === 'swiperight')
+            add = -1;
         else
             return;
         Array.from(markers.keys()).every((pic, index, pics) => {
-            if (pic.pageid === urlPicId && index === 0) {
-                add = pics.length - 1;
-            }
-            else if (pic.pageid === urlPicId && index === pics.length - 1) {
-                add = 1 - pics.length;
-            }
             if (pic.pageid === urlPicId) {
-                const newPic = pics[index + add];
+                let newPicIndex = index + add;
+                if (newPicIndex < 0)
+                    newPicIndex = pics.length - 1;
+                else if (newPicIndex >= pics.length)
+                    newPicIndex = 0;
+                const newPic = pics[newPicIndex];
                 onPicClick(newPic, map, detailsEle);
                 map.flyTo({ center: [newPic.lon, newPic.lat], zoom: 16 });
                 return false;
