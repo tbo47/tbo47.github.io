@@ -99,11 +99,14 @@ export const extractDiets = (pois) => {
 /**
  * Return the wikipedia articles around a given location.
  */
-export const wikipediaQuery = async (lat = 37, lon = -122, language = 'en', radius = 10000, limit = 100) => {
+export const wikipediaQuery = async (lat = 37, lon = -122, language = 'en', radius = 10_000, limit = 100) => {
     const b = `https://${language}.wikipedia.org/w/api.php`;
     const u = `${b}?action=query&list=geosearch&gscoord=${lat}%7C${lon}&gsradius=${radius}&gslimit=${limit}&origin=*&format=json`;
     const r = await fetch(u);
     const d = await r.json();
+    if (d.error) {
+        throw d.error;
+    }
     return d.query.geosearch.map((a) => {
         a.url = `https://${language}.wikipedia.org/wiki/${a.title}`;
         return a;
@@ -229,9 +232,9 @@ export const wikimediaInfo = async (pageid, thumbWidth = 600) => {
 };
 /*
  * Return the browser language or 'en' if not found.
- * This will not work in nodejs, only for the browser.
+ * WARNING: This will not work in nodejs, only for the browser.
  */
-const getLang = () => {
+export const getLang = () => {
     return window?.navigator?.language?.split('-')?.at(0) || 'en';
 };
 /**
