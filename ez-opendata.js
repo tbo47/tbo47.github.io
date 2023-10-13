@@ -152,7 +152,7 @@ export const wikimediaQuery = async (northEast, southWest, limit = 100) => {
     const res = await fetch(q);
     const d = await res.json();
     if (d.error) {
-        return Promise.reject(d.error);
+        throw d.error;
     }
     else {
         return (d.query.geosearch || []);

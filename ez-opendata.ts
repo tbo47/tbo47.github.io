@@ -220,7 +220,7 @@ export const wikimediaQuery = async (
     const res = await fetch(q)
     const d = await res.json()
     if (d.error) {
-        return Promise.reject(d.error)
+        throw d.error
     } else {
         return (d.query.geosearch || []) as WikimediaItem[]
     }

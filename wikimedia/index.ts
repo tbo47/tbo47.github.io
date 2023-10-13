@@ -1,3 +1,7 @@
+/**
+ * This file is the entry point of the application. It will initialize the map and add the pictures on it.
+ * Start from the bottom of the file to understand the logic.
+ */
 import { leafletAddWikimedia, leafletInitMap } from '../ez-leaflet.js'
 import { wikimediaQueryBound } from '../ez-opendata.js'
 
@@ -20,7 +24,10 @@ const renderMap = async (map: L.Map, markers: Map<number, L.Marker>) => {
     }
 }
 
-;(async () => {
+/**
+ * The `main` function is the entry point of the app.
+ */
+const main = async () => {
     /**
      * Map<id of the wikimedia page -> leaflet marker>
      */
@@ -34,4 +41,6 @@ const renderMap = async (map: L.Map, markers: Map<number, L.Marker>) => {
         await renderMap(map, markers)
         isFetchingData = false
     })
-})()
+}
+
+main()

@@ -1,5 +1,9 @@
-import { extractDiets, getFoodShops } from '../ez-opendata.js';
+/**
+ * This file is the entry point of the application. It will initialize the map and add the POIs on it.
+ * Start from the bottom of the file to understand the logic.
+ */
 import { leafletAddPOIsToTheMap, leafletCreateLayerOnMap, leafletInitMap } from '../ez-leaflet.js';
+import { extractDiets, getFoodShops } from '../ez-opendata.js';
 const renderMap = async (map, markers, layerGroup) => {
     document.getElementById(`diets`).innerHTML = ``;
     document.getElementById(`pois`).innerHTML = ``;
@@ -27,11 +31,15 @@ const renderMap = async (map, markers, layerGroup) => {
     });
     document.getElementById(`loading`).innerHTML = ``;
 };
-(async () => {
+/**
+ * The `main` function is the entry point of the app.
+ */
+const main = async () => {
     const { map } = await leafletInitMap();
     // markers is a Map<osm poi, leaflet marker instance>
     const markers = new Map();
     const layerGroup = leafletCreateLayerOnMap(map);
     await renderMap(map, markers, layerGroup);
     map.on('moveend', async () => await renderMap(map, markers, layerGroup));
-})();
+};
+main();
