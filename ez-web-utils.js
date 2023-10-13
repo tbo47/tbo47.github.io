@@ -61,3 +61,30 @@ export const swapListening = (ele, callback, sensitivity = 50) => {
             callback('tap');
     };
 };
+/**
+ * This function update the HTML headers.
+ * ```html
+ *        <title></title>
+ *        <meta property="og:title" content="" />
+ *        <meta property="og:url" content="" />
+ *        <meta property="og:image" content="" />
+ *        <meta property="og:type" content="article" />
+ *        <meta property="og:description" content="" />
+ * ```
+ *
+ */
+export const setHtmlHeaders = ({ title, image, description } = { title: '', image: '', description: '' }) => {
+    document.title = title;
+    const metas = Array.from(document.getElementsByTagName('meta'));
+    const metaTitle = metas.find((m) => m.attributes[0].nodeValue === 'og:title');
+    if (metaTitle)
+        metaTitle.attributes[1].nodeValue = title;
+    const metaUrl = metas.find((m) => m.attributes[0].nodeValue === 'og:url');
+    if (metaUrl)
+        metaUrl.attributes[1].nodeValue = window.location.href;
+    const metaImage = metas.find((m) => m.attributes[0].nodeValue === 'og:image');
+    if (metaImage)
+        metaImage.attributes[1].nodeValue = image;
+    const metaDescription = metas.find((m) => m.attributes[0].nodeValue === 'og:description');
+    metaDescription.attributes[1].nodeValue = description;
+};
