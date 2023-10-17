@@ -24,6 +24,8 @@ Install [docker](https://docs.docker.com/engine/install/debian/), [discord](http
 
 TODO add sudo
 
+TODO find successor of exa and silversearcher-ag
+
 ## Vim
 
 `~/.vimrc`: 
