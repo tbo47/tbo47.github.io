@@ -99,8 +99,13 @@ export const maplibreAddWikimedia = async (map: any, pics: WikimediaItem[], mark
     const picsAlreadyOnTheMap = Array.from(markers.keys())
     const picsToAdd = pics.filter((p) => !picsAlreadyOnTheMap.some((p2) => p.pageid === p2.pageid))
 
+    // we only want to download a few images at a time, not the whole list. Bc it would take too long.
+    const modulos = Math.ceil(picsToAdd.length / 6)
+    
     const newMarkers = new Map<WikimediaItem, any>()
-    const promises = picsToAdd.map(async (pic) => {
+    const promises = picsToAdd.map(async (pic, index) => {
+        if (index % modulos !== 0) return
+        console.log(`Loading ${index} of ${picsToAdd.length}`)
         const maxSize = window.innerWidth > 400 ? window.innerWidth / 8 : window.innerWidth / 4
         const info = await wikimediaGetThumb(pic.pageid, maxSize, maxSize)
         const element = document.createElement('img')

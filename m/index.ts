@@ -55,7 +55,7 @@ const hideDetailsIfNotOnPageAnymore = (pics: WikimediaItem[], detailsEle: HTMLEl
  */
 const renderMap = async (map: any, markers: Map<WikimediaItem, any>, detailsEle: HTMLElement) => {
     try {
-        const pics = await wikimediaQueryBound(map.getBounds(), 100)
+        const pics = await wikimediaQueryBound(map.getBounds(), 400)
         const newMarkers = await maplibreAddWikimedia(map, pics, markers)
         newMarkers.forEach((marker, pic) => {
             marker.getElement().addEventListener('click', () => onPicClick(pic, map, detailsEle))

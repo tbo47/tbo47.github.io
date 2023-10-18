@@ -48,7 +48,7 @@ const hideDetailsIfNotOnPageAnymore = (pics, detailsEle) => {
  */
 const renderMap = async (map, markers, detailsEle) => {
     try {
-        const pics = await wikimediaQueryBound(map.getBounds(), 100);
+        const pics = await wikimediaQueryBound(map.getBounds(), 400);
         const newMarkers = await maplibreAddWikimedia(map, pics, markers);
         newMarkers.forEach((marker, pic) => {
             marker.getElement().addEventListener('click', () => onPicClick(pic, map, detailsEle));
