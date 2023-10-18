@@ -5,3 +5,4 @@ const main = async () => {
     document.getElementById('pics').innerHTML = h;
 };
 main();
+//# sourceMappingURL=index.js.map

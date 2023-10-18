@@ -13,3 +13,4 @@ const main = async () => {
     map.on('moveend', async () => await renderMap(map, markers));
 };
 main();
+//# sourceMappingURL=index.js.map

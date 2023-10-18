@@ -2,7 +2,12 @@
  * This file is the entry point of the application. It will initialize the map and add the pictures on it.
  * Start from the bottom of the file to understand the logic.
  */
-import { maplibreAddWikimedia, maplibreHasBoundsChanged, maplibreInitMap } from '../ez-maplibre.js'
+import {
+    getFromCacheOrDownload,
+    maplibreAddWikimedia,
+    maplibreHasBoundsChanged,
+    maplibreInitMap,
+} from '../ez-maplibre.js'
 import { WikimediaItem, wikimediaGetThumb, wikimediaQueryBound } from '../ez-opendata.js'
 import { getLatLngZoomFromUrl, saveLatLngZoomToUrl, setHtmlHeaders, swapListening } from '../ez-web-utils.js'
 
@@ -15,8 +20,16 @@ const onPicClick = async (pic: WikimediaItem, map: any, detailsEle: HTMLElement)
     const { height, width } = detailsEle.getBoundingClientRect()
     const thumb = await wikimediaGetThumb(pic.pageid, height, width)
     setHtmlHeaders({ title: thumb.objectname, image: thumb.thumburl, description: thumb.objectname })
-    const html = `<div class="detail"><img src="${thumb.thumburl}" title="Double click for more pictures from this author"></div>`
-    detailsEle.innerHTML = html
+    const fromCache = await getFromCacheOrDownload(thumb.thumburl)
+    const picHtml = document.createElement('img')
+    picHtml.className = 'detail-pic'
+    picHtml.title = 'Double click for more pictures from this author'
+    const detailHtml = document.createElement('div')
+    detailHtml.appendChild(picHtml)
+    detailHtml.className = 'detail'
+    if (fromCache !== 429) picHtml.src = fromCache
+    detailsEle.innerHTML = ``
+    detailsEle.appendChild(detailHtml)
     detailsEle.addEventListener('dblclick', () => {
         const a = document.getElementById('hiddenlink') as HTMLAnchorElement
         a.href = thumb.artistUrl
@@ -42,7 +55,7 @@ const hideDetailsIfNotOnPageAnymore = (pics: WikimediaItem[], detailsEle: HTMLEl
  */
 const renderMap = async (map: any, markers: Map<WikimediaItem, any>, detailsEle: HTMLElement) => {
     try {
-        const pics = await wikimediaQueryBound(map.getBounds())
+        const pics = await wikimediaQueryBound(map.getBounds(), 100)
         const newMarkers = await maplibreAddWikimedia(map, pics, markers)
         newMarkers.forEach((marker, pic) => {
             marker.getElement().addEventListener('click', () => onPicClick(pic, map, detailsEle))
@@ -99,14 +112,12 @@ const initSwipeLogic = (map: any, markers: Map<WikimediaItem, any>, detailsEle: 
  * Initialize all the events listeners on the map. It will call renderMap() when needed.
  */
 const initMapEventsListening = (map: any, markers: Map<WikimediaItem, any>, detailsEle: HTMLElement) => {
-    let isFetchingData = false
     let bounds = map.getBounds()
     const onChange = async () => {
-        if (!isFetchingData && maplibreHasBoundsChanged(map, bounds)) {
+        if (maplibreHasBoundsChanged(map, bounds)) {
             bounds = map.getBounds()
-            isFetchingData = true
             await renderMap(map, markers, detailsEle)
-            setTimeout(() => (isFetchingData = false), 100)
+            // TODO implement a debounce
         }
     }
     map.on('mouseup', onChange)

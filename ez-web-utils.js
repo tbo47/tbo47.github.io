@@ -88,3 +88,4 @@ export const setHtmlHeaders = ({ title, image, description } = { title: '', imag
     const metaDescription = metas.find((m) => m.attributes[0].nodeValue === 'og:description');
     metaDescription.attributes[1].nodeValue = description;
 };
+//# sourceMappingURL=ez-web-utils.js.map

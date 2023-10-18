@@ -43,3 +43,4 @@ const main = async () => {
     map.on('moveend', async () => await renderMap(map, markers, layerGroup));
 };
 main();
+//# sourceMappingURL=index.js.map

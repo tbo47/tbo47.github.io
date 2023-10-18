@@ -268,3 +268,4 @@ export const wikimediaPicOfTheDay = async (lang = '') => {
     return picName;
     */
 };
+//# sourceMappingURL=ez-opendata.js.map

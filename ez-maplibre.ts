@@ -1,7 +1,4 @@
-import {
-    WikimediaItem,
-    wikimediaGetThumb
-} from './ez-opendata.js'
+import { WikimediaItem, wikimediaGetThumb } from './ez-opendata.js'
 import { getCurrentPosition, getLatLngZoomFromUrl } from './ez-web-utils.js'
 
 declare var maplibregl: any
@@ -9,7 +6,7 @@ declare var maplibregl: any
 const DEFAULT_ZOOM = 16
 
 /**
- * Initialize the maplibre map with openstreetmap tiles. 
+ * Initialize the maplibre map with openstreetmap tiles.
  */
 export const maplibreInitMap = async () => {
     let { lat, lng, zoom } = getLatLngZoomFromUrl()
@@ -41,7 +38,64 @@ export const maplibreInitMap = async () => {
     return map
 }
 
+const OBJECT_STORE_NAME = 'image1'
+const openDb = (): Promise<IDBDatabase> => {
+    return new Promise((resolve, reject) => {
+        const DBOpenRequest = window.indexedDB.open(`ez-web-utils`, 7)
+        DBOpenRequest.onerror = () => reject('Error loading database.')
+        DBOpenRequest.onsuccess = () => resolve(DBOpenRequest.result)
+        DBOpenRequest.onupgradeneeded = (event) => {
+            const db = (event.target as IDBOpenDBRequest).result
+            db.onerror = (event) => console.error('Error loading database.' + event)
+            db.createObjectStore(OBJECT_STORE_NAME, { keyPath: 'id' })
+        }
+    })
+}
+const readDb = (url: string, db: IDBDatabase): Promise<Blob> => {
+    return new Promise((resolve, reject) => {
+        const transaction = db.transaction(OBJECT_STORE_NAME, 'readonly')
+        const image = transaction.objectStore(OBJECT_STORE_NAME)
+        transaction.onerror = () => reject(false)
+        image.get(url).onsuccess = (event: any) => resolve(event.target.result?.blob)
+    })
+}
+
+const setDb = (id: string, blob: Blob, db: IDBDatabase) => {
+    return new Promise((resolve, reject) => {
+        const transaction = db.transaction(OBJECT_STORE_NAME, 'readwrite')
+        const objectStore = transaction.objectStore(OBJECT_STORE_NAME)
+        // TODO would it be faster to combine all writes to db in one transaction?
+        // transaction.oncomplete = () => console.log('Transaction done')
+        const image = { id, blob }
+        const addition = objectStore.put(image)
+        addition.onsuccess = () => resolve(true)
+        addition.onerror = () => reject(false)
+    })
+}
+/**
+ * Get the image from the cache or download it and store it in the cache.
+ */
+export const getFromCacheOrDownload = async (url: string, db?: IDBDatabase) => {
+    const doWeOpenTheDb = !db
+    if (!db) db = await openDb()
+    let blob = await readDb(url, db)
+    if (!blob) {
+        const response = await fetch(url)
+        if (response.status === 429) {
+            return 429
+        }
+        blob = await response.blob()
+        await setDb(url, blob, db)
+    }
+    if (doWeOpenTheDb) db.close()
+    return URL.createObjectURL(blob)
+}
+
+/**
+ * Add the pics to the maplibre map and add the markers to the markers map.
+ */
 export const maplibreAddWikimedia = async (map: any, pics: WikimediaItem[], markers: Map<WikimediaItem, any>) => {
+    const db = await openDb()
     const picsAlreadyOnTheMap = Array.from(markers.keys())
     const picsToAdd = pics.filter((p) => !picsAlreadyOnTheMap.some((p2) => p.pageid === p2.pageid))
 
@@ -50,12 +104,18 @@ export const maplibreAddWikimedia = async (map: any, pics: WikimediaItem[], mark
         const maxSize = window.innerWidth > 400 ? window.innerWidth / 8 : window.innerWidth / 4
         const info = await wikimediaGetThumb(pic.pageid, maxSize, maxSize)
         const element = document.createElement('img')
-        element.src = info.thumburl
+        const fromCache = await getFromCacheOrDownload(info.thumburl, db)
+        if (fromCache === 429) {
+            // TODO how to handle this?
+        } else {
+            element.src = fromCache
+        }
         const marker = new maplibregl.Marker({ element }).setLngLat([pic.lon, pic.lat]).addTo(map)
         markers.set(pic, marker)
         newMarkers.set(pic, marker)
     })
     await Promise.all(promises)
+    db.close()
     return newMarkers
 }
 

@@ -115,3 +115,4 @@ export const leafletAddWikimedia = (map, items) => {
     lg.addTo(map);
     return markers;
 };
+//# sourceMappingURL=ez-leaflet.js.map

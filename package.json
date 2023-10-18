@@ -4,7 +4,7 @@
     "author": "tbo47",
     "scripts": {
         "transpile": "tsc --build tsconfig.json --watch",
-        "copy_lib": "watch 'cp -u ../ez-opendata/index.ts ez-opendata.ts'",
+        "copy_ez-opendata": "watch 'cp -u ../ez-opendata/index.ts ez-opendata.ts'",
         "copy_openglobus": "cp -ru ../openglobus/lib/js/* iss/og/ ; cp -u ../openglobus/css/* iss/"
     },
     "devDependencies": {
