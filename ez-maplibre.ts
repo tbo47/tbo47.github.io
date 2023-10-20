@@ -105,7 +105,6 @@ export const maplibreAddWikimedia = async (map: any, pics: WikimediaItem[], mark
     const newMarkers = new Map<WikimediaItem, any>()
     const promises = picsToAdd.map(async (pic, index) => {
         if (index % modulos !== 0) return
-        console.log(`Loading ${index} of ${picsToAdd.length}`)
         const maxSize = window.innerWidth > 400 ? window.innerWidth / 8 : window.innerWidth / 4
         const info = await wikimediaGetThumb(pic.pageid, maxSize, maxSize)
         const element = document.createElement('img')
