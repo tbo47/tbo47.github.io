@@ -259,6 +259,10 @@ export interface WikimediaThumb {
     responsiveUrls: { [key: number]: string }[]
     url: string
     /**
+     * unique url of the file.
+     */
+    atomicUrl: string
+    /**
      * Unique identifier of the artist.
      */
     artist: string
@@ -310,6 +314,7 @@ export const wikimediaGetThumb = async (pageid: number, height: number, width: n
         result.artistPage = result.artist
         result.artist = result.artist?.replace(/<a.*?>(.*?)<\/a>/, '$1') // remove <a ... >Riamorei</a> -> Riamorei
         result.artistUrl = wikimediaGetAuthorLink(result.artist)
+        result.atomicUrl = `https://commons.wikimedia.org/w/index.php?curid=${pageid}`
         return result as WikimediaThumb
     }
     const thumbWidth = format(await wikimediaGetThumbs([pageid], 'width', width))
