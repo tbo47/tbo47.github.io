@@ -3,14 +3,37 @@
  * https://github.com/tbo47/ez-opendata
  */
 export const WIKI_COMMONS = 'https://commons.wikimedia.org/w/api.php';
+export const OSM_CATEGORIES = {
+    sustenance: [
+        ['amenity', 'bar'],
+        ['amenity', 'biergarten'],
+        ['amenity', 'cafe'],
+        ['amenity', 'restaurant'],
+        ['amenity', 'fast_food'],
+        ['amenity', 'food_court'],
+        ['amenity', 'ice_cream'],
+    ],
+    food: [
+        ['amenity', 'cafe'],
+        ['amenity', 'restaurant'],
+        ['shop', 'deli'],
+        ['amenity', 'ice_cream'],
+        ['amenity', 'fast_food'],
+    ],
+    leisure: [
+        ['leisure', 'park'],
+        ['leisure', 'swimming_pool'],
+    ],
+};
 /**
  * Query an openstreetmap server to fetch POIs
  *
- * @param {*} bbox the rectangle where to perform the query
- * @param {Array.<Array>} categories of pois. Like restaurant, cafe...
- * @returns Promise<Poi[]>
+ * https://wiki.openstreetmap.org/wiki/Key:amenity#Values
+ *
+ * @param bbox the rectangle where to perform the query
+ * @param categories of pois. Like restaurant, cafe...
  */
-export const openstreetmapGetPOIs = async (bbox, categories) => {
+export const openstreetmapGetPOIs = async (bbox = '37.8,-122.3,37.8,-122.2', categories = OSM_CATEGORIES.sustenance, timeout = 25_000) => {
     const url = 'https://overpass-api.de/api/interpreter';
     let quest = '';
     categories.forEach(([key, value]) => {
@@ -28,7 +51,7 @@ export const openstreetmapGetPOIs = async (bbox, categories) => {
         out body;
         >;
         out skel qt;`;
-    const response = await fetch(url, { method: 'POST', body });
+    const response = await fetch(url, { method: 'POST', body, timeout });
     const data = await response.json();
     return data.elements
         .filter((p) => p.tags)
@@ -45,34 +68,37 @@ export const openstreetmapGetPOIs = async (bbox, categories) => {
     });
 };
 /**
- *
- * @returns Promise<POI[]> restaurants and cafes
+ * Useful to get POIs around a given location if you are using leaflet.
+ * ```
+ * const { _northEast, _southWest } = map.getBounds() // leaflet map
+ * openstreetmapGetPOIsBbox({ _northEast, _southWest }, OSM_CATEGORIES.food)
+ * ```
  */
-export const openstreetmapGetRestaurants = () => {
-    return openstreetmapGetPOIs('37.8,-122.3,37.8,-122.2', [
-        { key: 'amenity', value: 'cafe' },
-        { key: 'amenity', value: 'restaurant' },
-    ]);
-};
-export const getFoodShops = async ({ _northEast, _southWest, }) => {
+export const openstreetmapGetPOIsBbox = async ({ _northEast, _southWest, }, categories = OSM_CATEGORIES.food) => {
     const bbox = [];
     bbox.push(_southWest.lat);
     bbox.push(_southWest.lng);
     bbox.push(_northEast.lat);
     bbox.push(_northEast.lng);
-    let categories = [
-        ['amenity', 'cafe'],
-        ['amenity', 'restaurant'],
-        ['shop', 'deli'],
-        ['amenity', 'ice_cream'],
-        ['amenity', 'fast_food'],
-    ];
-    // categories = [['leisure', 'park'], ['leisure', 'swimming_pool']]
     const pois = await openstreetmapGetPOIs(bbox.join(','), categories);
     return pois;
 };
-// extract diets from POIs (only makes sense for restaurants)
+/**
+ * @deprecated use openstreetmapGetPOIbbox({ _northEast, _southWest }, CATEGORIES.food)
+ */
+export const getFoodShops = async ({ _northEast, _southWest, }) => {
+    return openstreetmapGetPOIsBbox({ _northEast, _southWest }, OSM_CATEGORIES.food);
+};
+/**
+ * @deprecated use openstreetmapGetRestaurants instead
+ */
 export const extractDiets = (pois) => {
+    return openstreetmapExtractDiets(pois);
+};
+/**
+ * extract diets from POIs (only makes sense for restaurants)
+ */
+export const openstreetmapExtractDiets = (pois) => {
     const dietsMap = new Map(); // stores ['thai': 3] if thai restaurants have been seen 3 times
     pois.forEach((poi) => {
         const diets = new Set();
@@ -199,6 +225,7 @@ export const wikimediaGetThumb = async (pageid, height, width) => {
         result.artistPage = result.artist;
         result.artist = result.artist?.replace(/<a.*?>(.*?)<\/a>/, '$1'); // remove <a ... >Riamorei</a> -> Riamorei
         result.artistUrl = wikimediaGetAuthorLink(result.artist);
+        result.atomicUrl = `https://commons.wikimedia.org/w/index.php?curid=${pageid}`;
         return result;
     };
     const thumbWidth = format(await wikimediaGetThumbs([pageid], 'width', width));

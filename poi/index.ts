@@ -3,16 +3,16 @@
  * Start from the bottom of the file to understand the logic.
  */
 import { leafletAddPOIsToTheMap, leafletCreateLayerOnMap, leafletInitMap } from '../ez-leaflet.js'
-import { OpenstreetmapPoi, extractDiets, getFoodShops } from '../ez-opendata.js'
+import { OSM_CATEGORIES, OpenstreetmapPoi, getFoodShops, openstreetmapExtractDiets, openstreetmapGetPOIsBbox } from '../ez-opendata.js'
 
 const renderMap = async (map: L.Map, markers: Map<OpenstreetmapPoi, L.Marker>, layerGroup: L.LayerGroup) => {
     document.getElementById(`diets`)!.innerHTML = ``
     document.getElementById(`pois`)!.innerHTML = ``
     document.getElementById(`loading`)!.innerHTML = `Loading`
     const bounds = map.getBounds()
-    const pois = await getFoodShops(bounds as any)
+    const pois = await openstreetmapGetPOIsBbox(bounds as any, OSM_CATEGORIES.food)
     leafletAddPOIsToTheMap(layerGroup, pois, markers)
-    const diets = extractDiets(pois)
+    const diets = openstreetmapExtractDiets(pois)
     const getHtml = (d: [string, number]) => `<span class="">${d.at(0)} (${d.at(1)})</span>`
     const dietsHtml = diets.map(getHtml).join(` | `)
     document.getElementById(`diets`)!.innerHTML += dietsHtml
