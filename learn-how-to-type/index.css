@@ -1,0 +1,45 @@
+body {
+    border: 0;
+    margin: 0;
+}
+
+.container {
+    margin-top: 1rem;
+    max-width: 1200px !important;
+}
+
+.main-title {
+    font-size: 3rem;
+    text-align: right;
+    padding-bottom: 2rem;
+}
+
+#user-model {
+    width: 100%;
+    border: 0;
+    font-size: 2rem;
+    outline: none;
+    resize: none;
+}
+
+#user-input {
+    width: 100%;
+    border: 0;
+    font-size: 2rem;
+    outline: none;
+    resize: none;
+    color: #4a4a4a;
+    padding-bottom: 2rem;
+}
+
+.hands {
+    text-align: center;
+}
+
+.correct {
+    color: green !important;
+}
+
+.incorrect {
+    color: red !important;
+}
