@@ -13,61 +13,32 @@ const CONTENT = [
         'all fall falls alf alfa alfas fad fads salsa ska skald skalds flak flask flasks',
     ],
 ];
+const FINGER_MAPPING = [
+    [9, [' ']],
+    [1, ['a', 'q', 'z', '1']],
+    [2, ['s', 'w', 'x', '2']],
+    [3, ['d', 'e', 'c', '3']],
+    [4, ['f', 'r', 'v', '4']],
+    [4, ['g', 't', 'b', '5']],
+    [5, ['h', 'y', 'n', '6']],
+    [5, ['j', 'u', 'm', '7']],
+    [6, ['k', 'i', ',', '8']],
+    [7, ['l', 'o', '.', '9']],
+    [8, [';', 'p', '/', '0']],
+    [8, ["'", '[', ']', '-']],
+    [8, ['\\', ']', '=', '+']],
+];
 const model = document.getElementById('user-model');
 const input = document.getElementById('user-input');
 const levelElement = document.getElementById('level');
 const handsPic = document.getElementById('hands');
-document.addEventListener('click', () => {
-    document.getElementById('user-input').focus();
-});
-const setHtmlLevel = (level) => {
-    levelElement.innerHTML = `${level + 1}`;
+document.addEventListener('click', () => document.getElementById('user-input').focus());
+const setHtmlLevel = (level) => (levelElement.innerHTML = `${level + 1}`);
+const findFinger = (l) => {
+    const f = FINGER_MAPPING.find(([finger, letters]) => letters.includes(l)) || [0, []];
+    return f[0];
 };
-const findFinger = (nextLetter) => {
-    if (nextLetter === ' ') {
-        return 9;
-    }
-    else if (['a', 'q', 'z', '1'].includes(nextLetter)) {
-        return 1;
-    }
-    else if (['s', 'w', 'x', '2'].includes(nextLetter)) {
-        return 2;
-    }
-    else if (['d', 'e', 'c', '3'].includes(nextLetter)) {
-        return 3;
-    }
-    else if (['f', 'r', 'v', '4'].includes(nextLetter)) {
-        return 4;
-    }
-    else if (['g', 't', 'b', '5'].includes(nextLetter)) {
-        return 4;
-    }
-    else if (['h', 'y', 'n', '6'].includes(nextLetter)) {
-        return 5;
-    }
-    else if (['j', 'u', 'm', '7'].includes(nextLetter)) {
-        return 5;
-    }
-    else if (['k', 'i', ',', '8'].includes(nextLetter)) {
-        return 6;
-    }
-    else if (['l', 'o', '.', '9'].includes(nextLetter)) {
-        return 7;
-    }
-    else if ([';', 'p', '/', '0'].includes(nextLetter)) {
-        return 8;
-    }
-    else if (["'", '[', ']', '-'].includes(nextLetter)) {
-        return 8;
-    }
-    else if (['\\', ']', '=', '+'].includes(nextLetter)) {
-        return 8;
-    }
-    else {
-        return 0;
-    }
-};
-const main = async () => {
+const main = () => {
     let levelProgress = 0;
     let progress = 0;
     model.innerHTML = CONTENT[levelProgress][progress];
