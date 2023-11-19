@@ -1,15 +1,31 @@
 const CONTENT = [
     [
-        'aaaa ssss dddd ffff aaaa ssss dddd ffff aaaa ssss dddd ffff',
-        'aa ss dd ff aa ss dd ff aa ss dd ff',
-        'asdf asdf asdf asdf asdf asdf asdf asdf',
-        'fads dafs safd dsaf fasd adfs sdaf afds fdsa',
+        'aaaa ssss dddd ffff gggg aaaa ssss dddd ffff gggg aaaa ssss dddd ffff gggg',
+        'aa ss dd ff gg aa ss dd ff gg aa ss dd ff gg',
+        'asdfg asdfg asdfg asdfg asdfg asdfg asdfg asdfg',
+        'fgads dagfs gsafd dsagf fasdg gadfs sgdaf afgds fdsag',
     ],
-    ['jjj kkk lll ;;; jj kk ll ;; j k l ;', 'jj kk ll ;; jjj kkk lll ;;; j k l ;', ';lkj ;lkj jkl; jkl; jkl;'],
     [
-        'fad fads lad lads lass alas salad salads dad dads lad lads salads alas',
-        'ad add ads adds as ask asks la lad lads lass da dad dada dada sa sad salad',
+        'hhhh jjjj kkkk llll ;;;; hhhh jjjj kkkk llll ;;;; h j k l ;',
+        'hh jj kk lll ;; hhhh jjj kkk lll ;;; h j k l ;',
+        ';lkjh ;lkjh ;lkjh ;lkjh',
+        'klhj; ;hkjh ;hljk h;jkj',
+    ],
+    [
+        'fad fads lad lads lass halas salad salads dad gads ladh lads salads gala alas',
+        'ad add gads hadds has gask asks la lad lads lass da dad dada dada sa sad salad',
         'all fall falls alf alfa alfas fad fads salsa ska skald skalds flak flask flasks',
+    ],
+    [
+        'qqqq wwww eeee rrrr tttt qqqq wwww eeee rrrr tttt',
+        'qq ww ee rr tt qq ww ee rr tt',
+        'qwert qwert qwert qwert',
+        'rqewt eqrwt wqrtw ewqrt tqerw weqtr rtewq',
+    ],
+    [
+        'yyyy uuuu iiii oooo pppp yyyy uuuu iiii oooo pppp',
+        'yy uu ii oo pp yy uu ii oo pp',
+        'poyui ouyip youpi uypoi uoiyp',
     ],
 ]
 const FINGER_MAPPING = [
@@ -32,6 +48,8 @@ const model = document.getElementById('user-model')!
 const input = document.getElementById('user-input')! as HTMLInputElement
 const levelElement = document.getElementById('level')!
 const handsPic = document.getElementById('hands')! as HTMLImageElement
+console.log(navigator.language)
+
 document.addEventListener('click', () => document.getElementById('user-input')!.focus())
 const setHtmlLevel = (level: number) => (levelElement.innerHTML = `${level + 1}`)
 

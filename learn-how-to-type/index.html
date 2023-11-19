@@ -3,7 +3,7 @@
         <title>Learn how to type</title>
         <meta property="og:title" content="Learn how to type the right way" />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://learn-how-to-type.com/" />
+        <meta property="og:url" content="https://tbo47.github.io/learn-how-to-type/" />
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css" />
@@ -11,16 +11,40 @@
     </head>
 
     <body>
-        <div class="container">
-            <div class="main-title">Learn how to type - level <span id="level"></span></div>
-            <div id="user-model"></div>
-            <div class="">
-                <input id="user-input" type="text" autofocus spellcheck="false" />
+        <nav class="navbar" role="navigation" aria-label="main navigation">
+            <div id="navbarBasicExample" class="navbar-menu" style="display: none;">
+                <div class="navbar-start"></div>
+                <div class="navbar-end">
+                    <div class="navbar-item has-dropdown is-hoverable lang-dropdown">
+                        <a class="navbar-link is-arrowless">
+                            <img src="flag-us.png" alt="" />
+                        </a>
+                        <div class="navbar-dropdown is-boxed is-right">
+                            <a class="navbar-item">
+                                <img src="flag-fr.png" />
+                                <span> French</span>
+                            </a>
+                            <a class="navbar-item">
+                                <img src="flag-us.png" />
+                                <span> English</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="hands">
-                <img id="hands" src="hands0.png" alt="left hand" class="left-hand" />
+        </nav>
+        <section class="is-fullheight-with-navbar">
+            <div class="container">
+                <div class="main-title">Learn how to type - level <span id="level"></span></div>
+                <div id="user-model"></div>
+                <div class="">
+                    <input id="user-input" type="text" autofocus spellcheck="false" />
+                </div>
+                <div class="hands">
+                    <img id="hands" src="hands0.png" alt="left hand" class="left-hand" />
+                </div>
             </div>
-        </div>
+        </section>
     </body>
     <script type="module" src="./index.js"></script>
 </html>

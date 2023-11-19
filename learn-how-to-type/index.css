@@ -43,3 +43,27 @@ body {
 .incorrect {
     color: red !important;
 }
+
+.lang-dropdown {
+    .navbar-dropdown {
+        width: 180px;
+
+        .navbar-item {
+            display: flex;
+            align-items: center;
+
+            img {
+                display: block;
+                height: 26px;
+                width: 26px;
+                min-width: 26px;
+                border-radius: 50%;
+            }
+
+            span {
+                display: block;
+                margin-left: 10px;
+            }
+        }
+    }
+}
