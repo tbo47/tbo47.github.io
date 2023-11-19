@@ -60,6 +60,7 @@ const main = () => {
     let progress = 0;
     model.innerHTML = CONTENT[levelProgress][progress];
     setHtmlLevel(levelProgress);
+    input.style.width = model.clientWidth + 'px';
     input.addEventListener('input', () => {
         if (input.value.length === model.innerHTML.length && input.value === model.innerHTML) {
             input.value = '';
