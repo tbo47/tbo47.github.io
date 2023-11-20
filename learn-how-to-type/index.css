@@ -66,3 +66,13 @@ body {
         }
     }
 }
+
+.blink {
+    animation: blinker 1.2s step-start infinite;
+}
+
+@keyframes blinker {
+    50% {
+        opacity: 0;
+    }
+}

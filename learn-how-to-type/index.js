@@ -44,48 +44,56 @@ const FINGER_MAPPING = [
     [8, ["'", '[', ']', '-']],
     [8, ['\\', ']', '=', '+']],
 ];
-const model = document.getElementById('user-model');
-const input = document.getElementById('user-input');
-const levelElement = document.getElementById('level');
-const handsPic = document.getElementById('hands');
-console.log(navigator.language);
-document.addEventListener('click', () => document.getElementById('user-input').focus());
-const changeLevelAction = (levelProgress, progress) => {
-    model.innerHTML = CONTENT[levelProgress][progress];
-    levelElement.innerHTML = `${levelProgress + 1}`;
+/**
+ * Change the page according to the progress object
+ */
+const reactToUserTyping = (progress, model, input, hands) => {
+    model.innerHTML = CONTENT[progress.level][progress.step];
+    document.getElementById('level').innerHTML = `${progress.level + 1}`;
     input.style.width = model.clientWidth + 'px';
     input.style.marginLeft = model.offsetLeft + 'px';
+    const isCorrect = input.value.split('').every((char, index) => char === model.innerHTML[index]);
+    const finger = findFinger(model.innerHTML[input.value.length]);
+    hands.src = `hands${finger}.png`;
+    input.classList.add(isCorrect ? 'correct' : 'incorrect');
+    input.classList.remove(isCorrect ? 'incorrect' : 'correct');
 };
-const findFinger = (l) => {
-    const f = FINGER_MAPPING.find(([finger, letters]) => letters.includes(l)) || [0, []];
+/**
+ *  Check if the user has completed the current level and move to the next one by incrementing the progress object
+ */
+const checkNextLevel = (progress, model, input) => {
+    if (input.value.length === model.innerHTML.length && input.value === model.innerHTML) {
+        input.value = '';
+        if (progress.step === CONTENT[progress.level].length - 1) {
+            progress.level++;
+            progress.step = 0;
+        }
+        else {
+            progress.step++;
+        }
+    }
+};
+/**
+ * find which finger should be used to type the letter
+ */
+const findFinger = (letter) => {
+    const f = FINGER_MAPPING.find(([finger, letters]) => letters.includes(letter)) || [0, []];
     return f[0];
 };
 const main = () => {
-    let levelProgress = 0;
-    let progress = 0;
-    changeLevelAction(levelProgress, progress);
+    const progress = { level: 0, step: 0 };
+    const model = document.getElementById('user-model');
+    const input = document.getElementById('user-input');
+    document.addEventListener('click', () => input.focus());
+    window.addEventListener('contextmenu', (e) => {
+        input.focus();
+        e.preventDefault();
+    });
+    const handsPic = document.getElementById('hands');
+    reactToUserTyping(progress, model, input, handsPic);
     input.addEventListener('input', () => {
-        if (input.value.length === model.innerHTML.length && input.value === model.innerHTML) {
-            input.value = '';
-            if (progress === CONTENT[levelProgress].length - 1) {
-                levelProgress++;
-                progress = 0;
-            }
-            changeLevelAction(levelProgress, ++progress);
-        }
-        const isCorrect = input.value.split('').every((char, index) => char === model.innerHTML[index]);
-        if (isCorrect) {
-            input.classList.add('correct');
-            input.classList.remove('incorrect');
-            const nextLetter = model.innerHTML[input.value.length];
-            const finger = findFinger(nextLetter);
-            handsPic.src = `hands${finger}.png`;
-        }
-        else {
-            input.classList.add('incorrect');
-            input.classList.remove('correct');
-            handsPic.src = 'hands0.png';
-        }
+        checkNextLevel(progress, model, input);
+        reactToUserTyping(progress, model, input, handsPic);
     });
 };
 main();
