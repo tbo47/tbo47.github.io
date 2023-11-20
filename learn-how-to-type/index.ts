@@ -57,7 +57,6 @@ const reactToUserTyping = (
     document.getElementById('level')!.innerHTML = `${progress.level + 1}`
     inputElement.parentElement!.style.width = model.clientWidth + 'px'
     inputElement.parentElement!.style.marginLeft = model.offsetLeft + 'px'
-    // const isCorrect = progress.input.split('').every((char, index) => char === model.innerHTML[index])
     const finger = findFinger(model.innerHTML[progress.input.length])
     hands.src = `hands${finger}.png`
     inputElement.innerHTML = ''
@@ -68,16 +67,21 @@ const reactToUserTyping = (
         const isCorrect = char === model.innerHTML[index]
         span.classList.add(isCorrect ? 'correct' : 'incorrect')
         span.classList.remove(isCorrect ? 'incorrect' : 'correct')
-        if(index === arr.length - 1) span.classList.add('blink')
+        if (index === arr.length - 1) span.classList.add('blink')
     })
 }
 
 /**
  *  Check if the user has completed the current level and move to the next one by incrementing the progress object
+ * @returns true if the user has completed the current level
  */
-const checkNextLevel = (progress: Progress, model: HTMLElement) => {
+const checkNextLevel = (progress: Progress, model: HTMLElement, start: Date) => {
     if (progress.input.length === model.innerHTML.length) {
-        //  TODO what to do here? progress.input === model.innerHTML
+        const correct = progress.input.split('').filter((char, index) => char === model.innerHTML[index])
+        const score = Math.round((correct.length / model.innerHTML.length) * 100)
+
+        const time = (new Date().getTime() - start.getTime()) / 1000
+        console.log(score, time)
         progress.input = ''
         if (progress.step === CONTENT[progress.level].length - 1) {
             progress.level++
@@ -85,7 +89,9 @@ const checkNextLevel = (progress: Progress, model: HTMLElement) => {
         } else {
             progress.step++
         }
+        return true
     }
+    return false
 }
 
 /**
@@ -108,15 +114,20 @@ const main = () => {
     const inputElement = document.getElementById('user-input')!
     window.addEventListener('contextmenu', (e) => e.preventDefault())
     const handsPic = document.getElementById('hands')! as HTMLImageElement
+    document.addEventListener('click', () => document.getElementById('hidden-input')!.focus())
+
     reactToUserTyping(progress, model, inputElement, handsPic)
-    document.addEventListener('keydown', ({key}) => {
-        if (['Alt', 'Control', 'Shift'].includes(key) || key.startsWith('F')) return
+    let startDate = new Date()
+    document.addEventListener('keydown', ({ key }) => {
         if (key === 'Backspace') {
             progress.input = progress.input.slice(0, -1)
+        } else if (key.length !== 1) {
+            // if Alt, Control, Shift, F19, etc. are pressed, do nothing
+            return
         } else {
             progress.input += key
+        if (checkNextLevel(progress, model, startDate)) startDate = new Date()
         }
-        checkNextLevel(progress, model)
         reactToUserTyping(progress, model, inputElement, handsPic)
     })
 }
