@@ -51,7 +51,13 @@ const handsPic = document.getElementById('hands')! as HTMLImageElement
 console.log(navigator.language)
 
 document.addEventListener('click', () => document.getElementById('user-input')!.focus())
-const setHtmlLevel = (level: number) => (levelElement.innerHTML = `${level + 1}`)
+
+const changeLevelAction = (levelProgress: number, progress: number) => {
+    model.innerHTML = CONTENT[levelProgress][progress]
+    levelElement.innerHTML = `${levelProgress + 1}`
+    input.style.width = model.clientWidth + 'px'
+    input.style.marginLeft = model.offsetLeft + 'px'
+}
 
 const findFinger = (l: string) => {
     const f = FINGER_MAPPING.find(([finger, letters]) => (letters as string[]).includes(l)) || [0, []]
@@ -61,18 +67,15 @@ const findFinger = (l: string) => {
 const main = () => {
     let levelProgress = 0
     let progress = 0
-    model.innerHTML = CONTENT[levelProgress][progress]
-    setHtmlLevel(levelProgress)
-    input.style.width = model.clientWidth + 'px'
+    changeLevelAction(levelProgress, progress)
     input.addEventListener('input', () => {
         if (input.value.length === model.innerHTML.length && input.value === model.innerHTML) {
             input.value = ''
             if (progress === CONTENT[levelProgress].length - 1) {
                 levelProgress++
                 progress = 0
-                setHtmlLevel(levelProgress)
             }
-            model.innerHTML = CONTENT[levelProgress][++progress]
+            changeLevelAction(levelProgress, ++progress)
         }
         const isCorrect = input.value.split('').every((char, index) => char === model.innerHTML[index])
         if (isCorrect) {
