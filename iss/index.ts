@@ -106,7 +106,7 @@ class IssComponent {
         issCollection.addTo(globus.planet)
         const issTrackEntity = new og.Entity({
             name: 'path',
-            polyline: { pathLonLat: [], thickness: 2, color: '#ff8282' },
+            polyline: { pathLonLat: [], thickness: 2, color: '#fff' },
         })
         const issTrackCollection = new og.EntityCollection({ entities: [issTrackEntity] })
         issTrackCollection.addTo(globus.planet)
@@ -133,25 +133,20 @@ class IssComponent {
     #initMap(target = '', mapProvider: string) {
         const url = IssComponent.MAPS_PROVIDER[mapProvider]
         const osm = new og.layer.XYZ('o', { url })
-        const globe = new og.Globe({ target, name: 'e', terrain: new og.terrain.EmptyTerrain(), layers: [osm] })
-        // globe.renderer.backgroundColor.set(0.09, 0.09, 0.09)
+        const globe = new og.Globe({
+            target,
+            name: 'e',
+            terrain: new og.terrain.EmptyTerrain(),
+            layers: [osm],
+            atmosphereEnabled: true,
+        })
         return globe
     }
 
-    // TODO replace by fetch
-    #get(url = '') {
-        return new Promise((resolve, reject) => {
-            const http = new XMLHttpRequest()
-            http.onreadystatechange = () => {
-                if (http.status === 200 && http.response) {
-                    resolve(JSON.parse(http.response))
-                } else if (http.statusText && http.statusText !== 'OK') {
-                    reject(http)
-                }
-            }
-            http.open('GET', url, true)
-            http.send(null)
-        })
+    async #get(url = '') {
+        const r = await fetch(url)
+        const d = await r.json()
+        return d
     }
 }
 
@@ -160,3 +155,7 @@ const issComp = new IssComponent('globusDivId', 1000, '  iss')
 function centerButtonOnClick() {
     issComp.focus()
 }
+
+setTimeout(() => {
+    document.getElementById('rotate-the-globe-info')!.classList.add('hidden')
+}, 1000)
