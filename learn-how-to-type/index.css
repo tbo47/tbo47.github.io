@@ -73,6 +73,6 @@ body {
 
 @keyframes blinker {
     50% {
-        opacity: 0;
+        border-right: 1px solid black;
     }
 }

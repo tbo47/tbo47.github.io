@@ -1,7 +1,7 @@
 "use strict";
 const CONTENT = [
     [
-        'aaaa ssss dddd ffff gggg aaaa ssss dddd ffff gggg aaaa ssss dddd ffff gggg',
+        'aaaa ssss dddd ffff gggg aaaa ssss dddd ffff gggg aaaa ssss',
         'aa ss dd ff gg aa ss dd ff gg aa ss dd ff gg',
         'asdfg asdfg asdfg asdfg asdfg asdfg asdfg asdfg',
         'fgads dagfs gsafd dsagf fasdg gadfs sgdaf afgds fdsag',
@@ -13,9 +13,9 @@ const CONTENT = [
         'klhj; ;hkjh ;hljk h;jkj',
     ],
     [
-        'fad fads lad lads lass halas salad salads dad gads ladh lads salads gala alas',
-        'ad add gads hadds has gask asks la lad lads lass da dad dada dada sa sad salad',
-        'all fall falls alf alfa alfas fad fads salsa ska skald skalds flak flask flasks',
+        'fad fads lad lads lass halas salad salads dad gads salads',
+        'ad add gads hadds has gask asks la lad lads lass da dad dada',
+        'all fall falls alf alfa alfas fad fads salsa ska skald flasks',
     ],
     [
         'qqqq wwww eeee rrrr tttt qqqq wwww eeee rrrr tttt',
@@ -47,23 +47,33 @@ const FINGER_MAPPING = [
 /**
  * Change the page according to the progress object
  */
-const reactToUserTyping = (progress, model, input, hands) => {
+const reactToUserTyping = (progress, model, inputElement, hands) => {
     model.innerHTML = CONTENT[progress.level][progress.step];
     document.getElementById('level').innerHTML = `${progress.level + 1}`;
-    input.style.width = model.clientWidth + 'px';
-    input.style.marginLeft = model.offsetLeft + 'px';
-    const isCorrect = input.value.split('').every((char, index) => char === model.innerHTML[index]);
-    const finger = findFinger(model.innerHTML[input.value.length]);
+    inputElement.parentElement.style.width = model.clientWidth + 'px';
+    inputElement.parentElement.style.marginLeft = model.offsetLeft + 'px';
+    // const isCorrect = progress.input.split('').every((char, index) => char === model.innerHTML[index])
+    const finger = findFinger(model.innerHTML[progress.input.length]);
     hands.src = `hands${finger}.png`;
-    input.classList.add(isCorrect ? 'correct' : 'incorrect');
-    input.classList.remove(isCorrect ? 'incorrect' : 'correct');
+    inputElement.innerHTML = '';
+    progress.input.split('').forEach((char, index, arr) => {
+        const span = document.createElement('span');
+        span.innerHTML = char === ' ' ? '&nbsp;' : char;
+        inputElement.appendChild(span);
+        const isCorrect = char === model.innerHTML[index];
+        span.classList.add(isCorrect ? 'correct' : 'incorrect');
+        span.classList.remove(isCorrect ? 'incorrect' : 'correct');
+        if (index === arr.length - 1)
+            span.classList.add('blink');
+    });
 };
 /**
  *  Check if the user has completed the current level and move to the next one by incrementing the progress object
  */
-const checkNextLevel = (progress, model, input) => {
-    if (input.value.length === model.innerHTML.length && input.value === model.innerHTML) {
-        input.value = '';
+const checkNextLevel = (progress, model) => {
+    if (progress.input.length === model.innerHTML.length) {
+        //  TODO what to do here? progress.input === model.innerHTML
+        progress.input = '';
         if (progress.step === CONTENT[progress.level].length - 1) {
             progress.level++;
             progress.step = 0;
@@ -81,19 +91,23 @@ const findFinger = (letter) => {
     return f[0];
 };
 const main = () => {
-    const progress = { level: 0, step: 0 };
+    const progress = { level: 0, step: 0, input: '' };
     const model = document.getElementById('user-model');
-    const input = document.getElementById('user-input');
-    document.addEventListener('click', () => input.focus());
-    window.addEventListener('contextmenu', (e) => {
-        input.focus();
-        e.preventDefault();
-    });
+    const inputElement = document.getElementById('user-input');
+    window.addEventListener('contextmenu', (e) => e.preventDefault());
     const handsPic = document.getElementById('hands');
-    reactToUserTyping(progress, model, input, handsPic);
-    input.addEventListener('input', () => {
-        checkNextLevel(progress, model, input);
-        reactToUserTyping(progress, model, input, handsPic);
+    reactToUserTyping(progress, model, inputElement, handsPic);
+    document.addEventListener('keydown', ({ key }) => {
+        if (['Alt', 'Control', 'Shift'].includes(key) || key.startsWith('F'))
+            return;
+        if (key === 'Backspace') {
+            progress.input = progress.input.slice(0, -1);
+        }
+        else {
+            progress.input += key;
+        }
+        checkNextLevel(progress, model);
+        reactToUserTyping(progress, model, inputElement, handsPic);
     });
 };
 main();
