@@ -140,6 +140,9 @@ function centerButtonOnClick() {
     issComp.focus()
 }
 
-setTimeout(() => {
-    document.getElementById('rotate-the-globe-info')!.classList.add('hidden')
-}, 1000)
+setInterval(() => {
+    document.getElementById('rotate-the-globe-info')!.classList.remove('hidden')
+    setTimeout(() => {
+        document.getElementById('rotate-the-globe-info')!.classList.add('hidden')
+    }, 1_000)
+}, 30_000)
