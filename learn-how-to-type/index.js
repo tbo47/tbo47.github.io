@@ -72,6 +72,7 @@ const reactToUserTyping = (progress, model, inputElement, hands) => {
         if (index === arr.length - 1)
             span.classList.add('blink');
     });
+    byId('blink-left').style.display = progress.input.length ? 'none' : 'inline';
 };
 const askUserForNextStep = async (score, time) => {
     ignoreUserInput = true;

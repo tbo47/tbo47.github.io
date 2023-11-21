@@ -76,6 +76,17 @@ body {
     }
 }
 
+.blink-left {
+    animation: blinker-left 1.2s step-start infinite;
+}
+
+@keyframes blinker-left {
+    50% {
+        border-left: 1px solid black;
+    }
+}
+
+
 #dialog {
     display: none;
     justify-content: center;

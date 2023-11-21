@@ -78,6 +78,7 @@ const reactToUserTyping = (
         span.classList.remove(isCorrect ? 'incorrect' : 'correct')
         if (index === arr.length - 1) span.classList.add('blink')
     })
+    byId('blink-left').style.display = progress.input.length ? 'none' : 'inline'
 }
 
 const askUserForNextStep = async (score: number, time: number) => {
