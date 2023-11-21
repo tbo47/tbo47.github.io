@@ -25,7 +25,25 @@ const CONTENT = [
     [
         'yyyy uuuu iiii oooo pppp yyyy uuuu iiii oooo pppp',
         'yy uu ii oo pp yy uu ii oo pp',
-        'poyui ouyip youpi uypoi uoiyp',
+        'yuiop yuiop yuiop yuiop yuiop yuiop',
+        'poyui ouyip youpi uypoi uoiyp ioypu',
+    ],
+    [
+        'zzzz xxxx cccc vvvv bbbb zzzz xxxx cccc vvvv bbbb',
+        'zz xx cc vv bb zz xx cc vv bb',
+        'zxcvb zxcvb zxcvb zxcvb zxcvb zxcvb zxcvb',
+        'vbzcx czbvx bxzvc cxzbv vzxcb bzcvx xbczv zvbcx vcxzb',
+    ],
+    [
+        'nnnn mmmm ,,,, .... nnnn mmmm ,,,, .... nnnn mmmm ,,,, ....',
+        'nn mm ,, .. nn mm ,, .. nn mm ,, ..',
+        'nm,. nm,. .,mn .,mn',
+        'n.m, ,n.m .m,n n,m. ,.nmm nnm,n. ,n.mn',
+    ],
+    [
+        'asdfghkl; qwertyuiop ;lkjhgfdsa poiuytrewq',
+        'asdfghjkl;lqwertyuiop ;lkjhgfdsa poiuytrewq',
+        'zxcvbnm,. mnbvcxz lkjhgfdsa poiuytrewq mnbvcxz lkjhgfdsa poiuytrewq',
     ],
 ]
 const FINGER_MAPPING = [
@@ -93,10 +111,10 @@ const askUserForNextStep = async (score: number, time: number) => {
     let comment = COMMENTS.not_enough
     byId('dialog-again').style.display = 'block'
     byId('dialog-next').style.display = 'block'
-    if (score < 50 || time > 30) {
+    if (score < 90 || time > 30) {
         comment = COMMENTS.not_enough
         byId('dialog-next').style.display = 'none'
-    } else if (score < 80 || time > 20) {
+    } else if (score < 95 || time > 15) {
         comment = COMMENTS.normal
     } else {
         comment = COMMENTS.good
