@@ -44,12 +44,19 @@ const FINGER_MAPPING = [
     [8, ["'", '[', ']', '-']],
     [8, ['\\', ']', '=', '+']],
 ];
+const COMMENTS = {
+    not_enough: "I'm sure you can do better",
+    normal: 'Not bad',
+    good: 'Good job!',
+};
+let ignoreUserInput = false;
+const byId = (id) => document.getElementById(id);
 /**
  * Change the page according to the progress object
  */
 const reactToUserTyping = (progress, model, inputElement, hands) => {
     model.innerHTML = CONTENT[progress.level][progress.step];
-    document.getElementById('level').innerHTML = `${progress.level + 1}`;
+    byId('level').innerHTML = `${progress.level + 1}`;
     inputElement.parentElement.style.width = model.clientWidth + 'px';
     inputElement.parentElement.style.marginLeft = model.offsetLeft + 'px';
     const finger = findFinger(model.innerHTML[progress.input.length]);
@@ -66,22 +73,56 @@ const reactToUserTyping = (progress, model, inputElement, hands) => {
             span.classList.add('blink');
     });
 };
+const askUserForNextStep = async (score, time) => {
+    ignoreUserInput = true;
+    const showDialog = (show) => {
+        byId('game').style.display = show ? 'none' : 'block';
+        byId('dialog').style.display = show ? 'flex' : 'none';
+    };
+    showDialog(true);
+    byId('score').innerHTML = score.toString();
+    byId('time').innerHTML = time.toString();
+    let comment = COMMENTS.not_enough;
+    byId('dialog-again').style.display = 'block';
+    byId('dialog-next').style.display = 'block';
+    if (score < 50 || time > 30) {
+        comment = COMMENTS.not_enough;
+        byId('dialog-next').style.display = 'none';
+    }
+    else if (score < 80 || time > 20) {
+        comment = COMMENTS.normal;
+    }
+    else {
+        comment = COMMENTS.good;
+    }
+    byId('dialog-comment').innerHTML = comment;
+    const userResponse = new Promise((resolve) => {
+        byId('dialog-again').addEventListener('click', () => resolve('again'));
+        byId('dialog-next').addEventListener('click', () => resolve('next'));
+    });
+    const response = await userResponse;
+    showDialog(false);
+    ignoreUserInput = false;
+    return response;
+};
 /**
- *  Check if the user has completed the current level and move to the next one by incrementing the progress object
+ * Check if the user has completed the current level and move to the next one by incrementing the progress object
  * @returns true if the user has completed the current level
  */
-const checkNextLevel = (progress, model, start) => {
+const checkNextLevel = async (progress, model, start) => {
     if (progress.input.length === model.innerHTML.length) {
         const correct = progress.input.split('').filter((char, index) => char === model.innerHTML[index]);
         const score = Math.round((correct.length / model.innerHTML.length) * 100);
-        const time = (new Date().getTime() - start.getTime()) / 1000;
-        console.log(score, time);
+        const time = Math.round((new Date().getTime() - start.getTime()) / 1000);
+        const userChoose = await askUserForNextStep(score, time);
         progress.input = '';
-        if (progress.step === CONTENT[progress.level].length - 1) {
+        const goNextLevel = userChoose === 'next' && progress.step === CONTENT[progress.level].length - 1;
+        const goNextStep = userChoose === 'next';
+        if (goNextLevel) {
             progress.level++;
             progress.step = 0;
         }
-        else {
+        else if (goNextStep) {
             progress.step++;
         }
         return true;
@@ -97,14 +138,16 @@ const findFinger = (letter) => {
 };
 const main = () => {
     const progress = { level: 0, step: 0, input: '' };
-    const model = document.getElementById('user-model');
-    const inputElement = document.getElementById('user-input');
+    const model = byId('user-model');
+    const inputElement = byId('user-input');
     window.addEventListener('contextmenu', (e) => e.preventDefault());
-    const handsPic = document.getElementById('hands');
-    document.addEventListener('click', () => document.getElementById('hidden-input').focus());
+    const handsPic = byId('hands');
+    document.addEventListener('click', () => byId('hidden-input').focus());
     reactToUserTyping(progress, model, inputElement, handsPic);
     let startDate = new Date();
-    document.addEventListener('keydown', ({ key }) => {
+    document.addEventListener('keydown', async ({ key }) => {
+        if (ignoreUserInput)
+            return;
         if (key === 'Backspace') {
             progress.input = progress.input.slice(0, -1);
         }
@@ -114,7 +157,7 @@ const main = () => {
         }
         else {
             progress.input += key;
-            if (checkNextLevel(progress, model, startDate))
+            if (await checkNextLevel(progress, model, startDate))
                 startDate = new Date();
         }
         reactToUserTyping(progress, model, inputElement, handsPic);

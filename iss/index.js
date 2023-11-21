@@ -7,13 +7,6 @@ class IssComponent {
     };
     #needToCenterTheMap = true;
     #footprintRadius = 0;
-    /**
-     *
-     * @param {string} [divId] the html div id where to render the globe
-     * @param {number} [refreshRate]  number of ms to refresh the position of iss
-     * @param {string} [satelliteLabel]
-     * @param {number} [footprintRadius]
-     */
     constructor(divId = 'globus', refreshRate = 1000, satelliteLabel = '', footprintRadius = 80000, mapProvider = 'osm') {
         this.#footprintRadius = footprintRadius;
         const globus = this.#initMap(divId, mapProvider);
@@ -114,8 +107,11 @@ class IssComponent {
         return globe;
     }
     async #get(url = '') {
-        const r = await fetch(url);
-        const d = await r.json();
+        const response = await fetch(url);
+        if (response.status === 429) {
+            return 429;
+        }
+        const d = await response.json();
         return d;
     }
 }

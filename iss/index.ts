@@ -10,13 +10,6 @@ class IssComponent {
     #needToCenterTheMap = true
     #footprintRadius = 0
 
-    /**
-     *
-     * @param {string} [divId] the html div id where to render the globe
-     * @param {number} [refreshRate]  number of ms to refresh the position of iss
-     * @param {string} [satelliteLabel]
-     * @param {number} [footprintRadius]
-     */
     constructor(
         divId = 'globus',
         refreshRate = 1000,
@@ -33,7 +26,7 @@ class IssComponent {
         this.#needToCenterTheMap = !this.#needToCenterTheMap
     }
 
-    #initIss(globus: any, refreshRate = 5000, satelliteLabel = '') {
+    #initIss(globus: any, refreshRate = 1000, satelliteLabel = '') {
         let iss: any
         let footprintEntityCollection: any
         setInterval(async () => {

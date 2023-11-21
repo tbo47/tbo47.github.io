@@ -4,10 +4,7 @@
         <title>Learn how to type</title>
         <meta property="og:title" content="Learn how to type" />
         <meta property="og:type" content="website" />
-        <meta
-            property="og:description"
-            content="Increase your agility and speed when using a keyboard in a easy and fun way"
-        />
+        <meta property="og:description" content="Increase your agility and speed when using a keyboard." />
         <meta property="og:url" content="https://tbo47.github.io/learn-how-to-type/" />
         <meta property="og:image" content="https://tbo47.github.io/learn-how-to-type/og_img_1.png" />
         <meta property="og:image:height" content="630" />
@@ -44,13 +41,23 @@
         </nav>
         <section class="is-fullheight-with-navbar">
             <div class="container">
-                <div class="main-title">Learn how to type on a keyboard - level <span id="level"></span></div>
-                <div style="text-align: center" class="is-family-monospace"><span id="user-model"></span></div>
-                <div class="is-family-monospace">
-                    <span id="user-input"></span>
+                <div id="game">
+                    <div class="main-title">Learn how to type on a keyboard - level <span id="level"></span></div>
+                    <div style="text-align: center" class="is-family-monospace"><span id="user-model"></span></div>
+                    <div class="is-family-monospace"><span id="user-input"></span>&nbsp;</div>
+                    <div class="hands">
+                        <img id="hands" src="hands0.png" alt="left hand" class="left-hand" />
+                    </div>
                 </div>
-                <div class="hands">
-                    <img id="hands" src="hands0.png" alt="left hand" class="left-hand" />
+                <div id="dialog">
+                    <div id="dialog-text">
+                        <div><span id="score"></span>% correct in <span id="time"></span> seconds</div>
+                        <div id="dialog-comment"></div>
+                    </div>
+                    <div style="display: flex; gap: 1rem;">
+                        <button id="dialog-again" class="button">Start over</button>
+                        <button id="dialog-next" class="button">Next</button>
+                    </div>
                 </div>
                 <input id="hidden-input" type="text" style="position: absolute; top: -10rem" />
             </div>
