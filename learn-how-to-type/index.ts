@@ -50,7 +50,7 @@ const COMMENTS = {
     good: 'Good job!',
 }
 
-let ignoreUserInput = false
+let inModal = false
 
 const byId = (id: string) => document.getElementById(id)!
 /**
@@ -60,14 +60,15 @@ const reactToUserTyping = (
     progress: Progress,
     model: HTMLElement,
     inputElement: HTMLElement,
-    hands: HTMLImageElement
+    hands: HTMLImageElement,
+    time: number
 ) => {
     model.innerHTML = CONTENT[progress.level][progress.step]
     byId('level').innerHTML = `${progress.level + 1}`
     inputElement.parentElement!.style.width = model.clientWidth + 'px'
     inputElement.parentElement!.style.marginLeft = model.offsetLeft + 'px'
     const finger = findFinger(model.innerHTML[progress.input.length])
-    hands.src = `hands${finger}.png`
+    hands.src = `../hands${finger}.png`
     inputElement.innerHTML = ''
     progress.input.split('').forEach((char, index, arr) => {
         const span = document.createElement('span')
@@ -82,14 +83,13 @@ const reactToUserTyping = (
 }
 
 const askUserForNextStep = async (score: number, time: number) => {
-    ignoreUserInput = true
+    inModal = true
     const showDialog = (show: boolean) => {
         byId('game').style.display = show ? 'none' : 'block'
         byId('dialog').style.display = show ? 'flex' : 'none'
     }
     showDialog(true)
     byId('score').innerHTML = score.toString()
-    byId('time').innerHTML = time.toString()
     let comment = COMMENTS.not_enough
     byId('dialog-again').style.display = 'block'
     byId('dialog-next').style.display = 'block'
@@ -109,7 +109,7 @@ const askUserForNextStep = async (score: number, time: number) => {
     })
     const response = await userResponse
     showDialog(false)
-    ignoreUserInput = false
+    inModal = false
     return response
 }
 
@@ -117,12 +117,11 @@ const askUserForNextStep = async (score: number, time: number) => {
  * Check if the user has completed the current level and move to the next one by incrementing the progress object
  * @returns true if the user has completed the current level
  */
-const checkNextLevel = async (progress: Progress, model: HTMLElement, start: Date) => {
+const checkNextLevel = async (progress: Progress, model: HTMLElement, time: number) => {
     if (progress.input.length === model.innerHTML.length) {
         const correct = progress.input.split('').filter((char, index) => char === model.innerHTML[index])
 
         const score = Math.round((correct.length / model.innerHTML.length) * 100)
-        const time = Math.round((new Date().getTime() - start.getTime()) / 1000)
         const userChoose = await askUserForNextStep(score, time)
 
         progress.input = ''
@@ -161,10 +160,16 @@ const main = () => {
     const handsPic = byId('hands')! as HTMLImageElement
     document.addEventListener('click', () => byId('hidden-input')!.focus())
 
-    reactToUserTyping(progress, model, inputElement, handsPic)
     let startDate = new Date()
+    const getTime = (start: Date) => {
+        if (progress.input.length === 0) startDate = new Date()
+        return Math.round((new Date().getTime() - startDate.getTime()) / 1000)
+    }
+
+    reactToUserTyping(progress, model, inputElement, handsPic, 0)
     document.addEventListener('keydown', async ({ key }) => {
-        if (ignoreUserInput) return
+        if (inModal) return
+        const time = getTime(startDate)
         if (key === 'Backspace') {
             progress.input = progress.input.slice(0, -1)
         } else if (key.length !== 1) {
@@ -172,10 +177,16 @@ const main = () => {
             return
         } else {
             progress.input += key
-            if (await checkNextLevel(progress, model, startDate)) startDate = new Date()
+            await checkNextLevel(progress, model, time)
         }
-        reactToUserTyping(progress, model, inputElement, handsPic)
+        reactToUserTyping(progress, model, inputElement, handsPic, time)
     })
+    setInterval(() => {
+        if (inModal) return
+        Array.from(document.getElementsByClassName('time')).forEach((el) => {
+            el.innerHTML = getTime(startDate).toString()
+        })
+    }, 400)
 }
 
 main()

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Learn how to type</title>
+        <meta property="og:title" content="Learn how to type" />
+        <meta property="og:type" content="website" />
+        <meta property="og:description" content="Increase your agility and speed when using a keyboard." />
+        <meta property="og:url" content="https://tbo47.github.io/learn-how-to-type/" />
+        <meta property="og:image" content="https://tbo47.github.io/learn-how-to-type/og_img_1.png" />
+        <meta property="og:image:height" content="630" />
+        <meta property="og:image:width" content="1200" />
+        <link rel="icon" type="image/png" href="favicon.png" />
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css" />
+        <link rel="stylesheet" href="../index.css" />
+    </head>
+
+    <body>
+        <nav class="navbar" role="navigation">
+            <div class="navbar-menu">
+                <div class="navbar-start"></div>
+                <div class="navbar-end">
+                    <div class="navbar-item has-dropdown is-hoverable lang-dropdown">
+                        <a class="navbar-link is-arrowless">
+                            <img src="../flag-us.png" alt="" />
+                        </a>
+                        <div class="navbar-dropdown is-boxed is-right">
+                            <a class="navbar-item" href="../fr/">
+                                <img src="../flag-fr.png" />
+                                <span>&nbsp;French keyboard</span>
+                            </a>
+                            <a class="navbar-item" href="../en/">
+                                <img src="../flag-us.png" />
+                                <span>&nbsp;US keyboard</span>
+                            </a>
+                            <hr class="navbar-divider" />
+                            <a class="navbar-item" href="https://tbo47.github.io/" target="tbo47">
+                                <small>About the author</small>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+        <section class="is-fullheight-with-navbar">
+            <div class="container">
+                <div id="game">
+                    <div class="main-title">Learn how to type on a keyboard - level <span id="level"></span></div>
+                    <div style="text-align: center" class="is-family-monospace"><span id="user-model"></span></div>
+                    <div class="is-family-monospace">
+                        <span id="blink-left" class="blink-left"></span><span id="user-input"></span>&nbsp;
+                    </div>
+                    <div class="hands">
+                        <img id="hands" src="../hands0.png" alt="left hand" class="left-hand" />
+                    </div>
+                    <div style="text-align: center; font-size: 1rem;">
+                        <span class="time">0</span>s&nbsp;
+                    </div>
+                </div>
+                <div id="dialog">
+                    <div id="dialog-text">
+                        <div><span id="score"></span>% correct in <span class="time"></span> seconds</div>
+                        <div id="dialog-comment"></div>
+                    </div>
+                    <div style="display: flex; gap: 1rem">
+                        <button id="dialog-again" class="button">Start over</button>
+                        <button id="dialog-next" class="button">Next</button>
+                    </div>
+                </div>
+                <input id="hidden-input" type="text" style="position: absolute; top: -10rem" />
+            </div>
+        </section>
+    </body>
+    <script type="module" src="../index.js"></script>
+</html>
