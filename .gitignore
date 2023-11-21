@@ -2,3 +2,4 @@ node_modules
 .venv
 package-lock.json
 **/*js.map
+!iss/og.umd.js.map

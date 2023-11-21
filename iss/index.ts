@@ -33,7 +33,7 @@ class IssComponent {
         this.#needToCenterTheMap = !this.#needToCenterTheMap
     }
 
-    #initIss(globus: any, refreshRate = 1000, satelliteLabel = '') {
+    #initIss(globus: any, refreshRate = 5000, satelliteLabel = '') {
         let iss: any
         let footprintEntityCollection: any
         setInterval(async () => {
@@ -132,8 +132,11 @@ class IssComponent {
     }
 
     async #get(url = '') {
-        const r = await fetch(url)
-        const d = await r.json()
+        const response = await fetch(url)
+        if (response.status === 429) {
+            return 429
+        }
+        const d = await response.json()
         return d
     }
 }
