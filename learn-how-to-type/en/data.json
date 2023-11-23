@@ -1,0 +1,70 @@
+{
+    "content": [
+        [
+            "aaaa ssss dddd ffff gggg aaaa ssss dddd ffff gggg aaaa ssss",
+            "aa ss dd ff gg aa ss dd ff gg aa ss dd ff gg",
+            "asdfg asdfg asdfg asdfg asdfg asdfg asdfg asdfg",
+            "fgads dagfs gsafd dsagf fasdg gadfs sgdaf afgds fdsag"
+        ],
+        [
+            "hhhh jjjj kkkk llll ;;;; hhhh jjjj kkkk llll ;;;; h j k l ;",
+            "hh jj kk lll ;; hhhh jjj kkk lll ;;; h j k l ;",
+            ";lkjh ;lkjh ;lkjh ;lkjh",
+            "klhj; ;hkjh ;hljk h;jkj"
+        ],
+        [
+            "fad fads lad lads lass halas salad salads dad gads salads",
+            "ad add gads hadds has gask asks la lad lads lass da dad dada",
+            "all fall falls alf alfa alfas fad fads salsa ska skald flasks"
+        ],
+        [
+            "qqqq wwww eeee rrrr tttt qqqq wwww eeee rrrr tttt",
+            "qq ww ee rr tt qq ww ee rr tt",
+            "qwert qwert qwert qwert",
+            "rqewt eqrwt wqrtw ewqrt tqerw weqtr rtewq"
+        ],
+        [
+            "yyyy uuuu iiii oooo pppp yyyy uuuu iiii oooo pppp",
+            "yy uu ii oo pp yy uu ii oo pp",
+            "yuiop yuiop yuiop yuiop yuiop yuiop",
+            "poyui ouyip youpi uypoi uoiyp ioypu"
+        ],
+        [
+            "zzzz xxxx cccc vvvv bbbb zzzz xxxx cccc vvvv bbbb",
+            "zz xx cc vv bb zz xx cc vv bb",
+            "zxcvb zxcvb zxcvb zxcvb zxcvb zxcvb zxcvb",
+            "vbzcx czbvx bxzvc cxzbv vzxcb bzcvx xbczv zvbcx vcxzb"
+        ],
+        [
+            "nnnn mmmm ,,,, .... nnnn mmmm ,,,, .... nnnn mmmm ,,,, ....",
+            "nn mm ,, .. nn mm ,, .. nn mm ,, ..",
+            "nm,. nm,. .,mn .,mn",
+            "n.m, ,n.m .m,n n,m. ,.nmm nnm,n. ,n.mn"
+        ],
+        [
+            "asdfghkl; qwertyuiop ;lkjhgfdsa poiuytrewq",
+            "asdfghjkl;lqwertyuiop ;lkjhgfdsa poiuytrewq",
+            "zxcvbnm,. mnbvcxz lkjhgfdsa poiuytrewq mnbvcxz lkjhgfdsa poiuytrewq"
+        ]
+    ],
+    "finger_mapping": [
+        [9, [" "]],
+        [1, ["a", "q", "z", "1"]],
+        [2, ["s", "w", "x", "2"]],
+        [3, ["d", "e", "c", "3"]],
+        [4, ["f", "r", "v", "4"]],
+        [4, ["g", "t", "b", "5"]],
+        [5, ["h", "y", "n", "6"]],
+        [5, ["j", "u", "m", "7"]],
+        [6, ["k", "i", ",", "8"]],
+        [7, ["l", "o", ".", "9"]],
+        [8, [";", "p", "/", "0"]],
+        [8, ["'", "[", "]", "-"]],
+        [8, ["\\", "]", "=", "+"]]
+    ],
+    "comments": {
+        "not_enough": "I'm sure you can do better",
+        "normal": "Not bad",
+        "good": "Good job!"
+    }
+}

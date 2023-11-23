@@ -1,79 +1,12 @@
 "use strict";
-const CONTENT = [
-    [
-        'aaaa ssss dddd ffff gggg aaaa ssss dddd ffff gggg aaaa ssss',
-        'aa ss dd ff gg aa ss dd ff gg aa ss dd ff gg',
-        'asdfg asdfg asdfg asdfg asdfg asdfg asdfg asdfg',
-        'fgads dagfs gsafd dsagf fasdg gadfs sgdaf afgds fdsag',
-    ],
-    [
-        'hhhh jjjj kkkk llll ;;;; hhhh jjjj kkkk llll ;;;; h j k l ;',
-        'hh jj kk lll ;; hhhh jjj kkk lll ;;; h j k l ;',
-        ';lkjh ;lkjh ;lkjh ;lkjh',
-        'klhj; ;hkjh ;hljk h;jkj',
-    ],
-    [
-        'fad fads lad lads lass halas salad salads dad gads salads',
-        'ad add gads hadds has gask asks la lad lads lass da dad dada',
-        'all fall falls alf alfa alfas fad fads salsa ska skald flasks',
-    ],
-    [
-        'qqqq wwww eeee rrrr tttt qqqq wwww eeee rrrr tttt',
-        'qq ww ee rr tt qq ww ee rr tt',
-        'qwert qwert qwert qwert',
-        'rqewt eqrwt wqrtw ewqrt tqerw weqtr rtewq',
-    ],
-    [
-        'yyyy uuuu iiii oooo pppp yyyy uuuu iiii oooo pppp',
-        'yy uu ii oo pp yy uu ii oo pp',
-        'yuiop yuiop yuiop yuiop yuiop yuiop',
-        'poyui ouyip youpi uypoi uoiyp ioypu',
-    ],
-    [
-        'zzzz xxxx cccc vvvv bbbb zzzz xxxx cccc vvvv bbbb',
-        'zz xx cc vv bb zz xx cc vv bb',
-        'zxcvb zxcvb zxcvb zxcvb zxcvb zxcvb zxcvb',
-        'vbzcx czbvx bxzvc cxzbv vzxcb bzcvx xbczv zvbcx vcxzb',
-    ],
-    [
-        'nnnn mmmm ,,,, .... nnnn mmmm ,,,, .... nnnn mmmm ,,,, ....',
-        'nn mm ,, .. nn mm ,, .. nn mm ,, ..',
-        'nm,. nm,. .,mn .,mn',
-        'n.m, ,n.m .m,n n,m. ,.nmm nnm,n. ,n.mn',
-    ],
-    [
-        'asdfghkl; qwertyuiop ;lkjhgfdsa poiuytrewq',
-        'asdfghjkl;lqwertyuiop ;lkjhgfdsa poiuytrewq',
-        'zxcvbnm,. mnbvcxz lkjhgfdsa poiuytrewq mnbvcxz lkjhgfdsa poiuytrewq',
-    ],
-];
-const FINGER_MAPPING = [
-    [9, [' ']],
-    [1, ['a', 'q', 'z', '1']],
-    [2, ['s', 'w', 'x', '2']],
-    [3, ['d', 'e', 'c', '3']],
-    [4, ['f', 'r', 'v', '4']],
-    [4, ['g', 't', 'b', '5']],
-    [5, ['h', 'y', 'n', '6']],
-    [5, ['j', 'u', 'm', '7']],
-    [6, ['k', 'i', ',', '8']],
-    [7, ['l', 'o', '.', '9']],
-    [8, [';', 'p', '/', '0']],
-    [8, ["'", '[', ']', '-']],
-    [8, ['\\', ']', '=', '+']],
-];
-const COMMENTS = {
-    not_enough: "I'm sure you can do better",
-    normal: 'Not bad',
-    good: 'Good job!',
-};
+let DATA = {};
 let inModal = false;
 const byId = (id) => document.getElementById(id);
 /**
  * Change the page according to the progress object
  */
 const reactToUserTyping = (progress, model, inputElement, hands, time) => {
-    model.innerHTML = CONTENT[progress.level][progress.step];
+    model.innerHTML = DATA.content[progress.level][progress.step];
     byId('level').innerHTML = `${progress.level + 1}`;
     inputElement.parentElement.style.width = model.clientWidth + 'px';
     inputElement.parentElement.style.marginLeft = model.offsetLeft + 'px';
@@ -100,18 +33,18 @@ const askUserForNextStep = async (score, time) => {
     };
     showDialog(true);
     byId('score').innerHTML = score.toString();
-    let comment = COMMENTS.not_enough;
+    let comment = DATA.comments.not_enough;
     byId('dialog-again').style.display = 'block';
     byId('dialog-next').style.display = 'block';
     if (score < 90 || time > 30) {
-        comment = COMMENTS.not_enough;
+        comment = DATA.comments.not_enough;
         byId('dialog-next').style.display = 'none';
     }
     else if (score < 95 || time > 15) {
-        comment = COMMENTS.normal;
+        comment = DATA.comments.normal;
     }
     else {
-        comment = COMMENTS.good;
+        comment = DATA.comments.good;
     }
     byId('dialog-comment').innerHTML = comment;
     const userResponse = new Promise((resolve) => {
@@ -133,7 +66,7 @@ const checkNextLevel = async (progress, model, time) => {
         const score = Math.round((correct.length / model.innerHTML.length) * 100);
         const userChoose = await askUserForNextStep(score, time);
         progress.input = '';
-        const goNextLevel = userChoose === 'next' && progress.step === CONTENT[progress.level].length - 1;
+        const goNextLevel = userChoose === 'next' && progress.step === DATA.content[progress.level].length - 1;
         const goNextStep = userChoose === 'next';
         if (goNextLevel) {
             progress.level++;
@@ -150,10 +83,12 @@ const checkNextLevel = async (progress, model, time) => {
  * find which finger should be used to type the letter
  */
 const findFinger = (letter) => {
-    const f = FINGER_MAPPING.find(([finger, letters]) => letters.includes(letter)) || [0, []];
+    const f = DATA.finger_mapping.find(([finger, letters]) => letters.includes(letter)) || [0, []];
     return f[0];
 };
-const main = () => {
+const main = async () => {
+    const data = await fetch('data.json');
+    DATA = await data.json();
     const progress = { level: 0, step: 0, input: '' };
     const model = byId('user-model');
     const inputElement = byId('user-input');
@@ -161,7 +96,7 @@ const main = () => {
     const handsPic = byId('hands');
     document.addEventListener('click', () => byId('hidden-input').focus());
     let startDate = new Date();
-    const getTime = (start) => {
+    const getTime = () => {
         if (progress.input.length === 0)
             startDate = new Date();
         return Math.round((new Date().getTime() - startDate.getTime()) / 1000);
@@ -170,7 +105,7 @@ const main = () => {
     document.addEventListener('keydown', async ({ key }) => {
         if (inModal)
             return;
-        const time = getTime(startDate);
+        const time = getTime();
         if (key === 'Backspace') {
             progress.input = progress.input.slice(0, -1);
         }
@@ -187,9 +122,9 @@ const main = () => {
     setInterval(() => {
         if (inModal)
             return;
-        Array.from(document.getElementsByClassName('time')).forEach((el) => {
-            el.innerHTML = getTime(startDate).toString();
-        });
+        for (const el of document.getElementsByClassName('time')) {
+            el.innerHTML = getTime().toString();
+        }
     }, 400);
 };
 main();
