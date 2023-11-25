@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>International Space Station</title>
+        <title>International Space Station ISS</title>
         <meta property="og:title" content="ISS on a 3d immersive globe." />
         <link rel="icon" href="sat.png" />
         <meta
             property="og:description"
-            content="Follow ISS on a 3d immersive globe. Using the openglobus opensource project."
+            content="Follow the International Space Station satellite (ISS) trajectory on a globe. Using the openglobus opensource project."
         />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://tbo47.github.io/iss/" />
@@ -14,9 +14,15 @@
         <meta property="og:image:height" content="630" />
         <meta property="og:image:width" content="1200" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css" />
+        <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css" />
         <link rel="stylesheet" href="og.css" type="text/css" />
         <style>
+            body {
+                margin: 0;
+                padding: 0;
+                width: 100vw;
+                height: 100vh;
+            }
             .og-coordinates {
                 visibility: hidden;
             }
@@ -28,11 +34,18 @@
         </style>
         <script src="og.umd.js"></script>
     </head>
-    <body style="margin: 0">
-        <div class="field is-grouped" style="position: absolute; padding: 1rem; z-index: 10">
-            <button class="button is-link is-light" onclick="centerButtonOnClick()">Center</button>
-            <button class="button is-light" style="margin-left: 1rem !important" id="rotate-the-globe-info">
-                Use the Alt key and your mouse to rotate the globe.
+    <body>
+        <div class="field" style="position: absolute; padding: 1rem; z-index: 10">
+            <a class="button is-link is-light" href="../" title="About the author">?</a>
+            <button
+                class="button is-link is-light"
+                onclick="centerButtonOnClick()"
+                title="Center the globe on the satellite"
+            >
+                Center
+            </button>
+            <button class="button is-light" id="rotate-the-globe-info">
+                Use the Alt key and the mouse to rotate the globe.
             </button>
             <!-- 
       <nav class="navbar" role="navigation" aria-label="dropdown navigation">
@@ -53,7 +66,7 @@
       </nav>
       -->
         </div>
-        <div id="globusDivId" style="width: 100vw; height: 100vh; overflow: hidden"></div>
+        <div id="globusDivId" style="height: 100%"></div>
     </body>
     <script src="index.js"></script>
 </html>

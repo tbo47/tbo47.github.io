@@ -115,14 +115,21 @@ class IssComponent {
         return d;
     }
 }
-const issComp = new IssComponent('globusDivId', 1000, '  iss');
-function centerButtonOnClick() {
-    issComp.focus();
-}
-setInterval(() => {
+let centerButtonOnClick = () => { };
+const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+if (!isMobile) {
+    const issComp = new IssComponent('globusDivId', 1000, '  iss');
+    centerButtonOnClick = () => issComp.focus();
     document.getElementById('rotate-the-globe-info').classList.remove('hidden');
     setTimeout(() => {
         document.getElementById('rotate-the-globe-info').classList.add('hidden');
+    }, 3_000);
+    let lastKeyDown = new Date().getTime();
+    document.addEventListener('keydown', () => (lastKeyDown = new Date().getTime()));
+    setInterval(() => {
+        if (new Date().getTime() - lastKeyDown > 10_000) {
+            issComp.focus();
+        }
     }, 1_000);
-}, 30_000);
+}
 //# sourceMappingURL=index.js.map
