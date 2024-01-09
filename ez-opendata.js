@@ -3,6 +3,8 @@
  * https://github.com/tbo47/ez-opendata
  */
 export const WIKI_COMMONS = 'https://commons.wikimedia.org/w/api.php';
+export const USER_AGENT = 'github.com/tbo47/ez-opendata';
+export const OPTIONS_WITH_USER_AGENT = { headers: { 'User-Agent': USER_AGENT } };
 export const OSM_CATEGORIES = {
     sustenance: [
         ['amenity', 'bar'],
@@ -128,7 +130,7 @@ export const openstreetmapExtractDiets = (pois) => {
 export const wikipediaQuery = async (lat = 37, lon = -122, language = 'en', radius = 10_000, limit = 100) => {
     const b = `https://${language}.wikipedia.org/w/api.php`;
     const u = `${b}?action=query&list=geosearch&gscoord=${lat}%7C${lon}&gsradius=${radius}&gslimit=${limit}&origin=*&format=json`;
-    const r = await fetch(u);
+    const r = await fetch(u, OPTIONS_WITH_USER_AGENT);
     const d = await r.json();
     if (d.error) {
         throw d.error;
@@ -156,26 +158,34 @@ export const wikidataQuery = async (northEast, southWest, limit = 3000) => {
             }
             LIMIT ${limit}`;
     // console.log('https://query.wikidata.org/#' + encodeURI(q))
-    const r = await fetch(b + encodeURI(q));
-    const d = await r.json();
-    const items = d.results.bindings || [];
-    items.forEach((i) => {
-        i.id = i.qLabel.value;
-        const [lng, lat] = i.location?.value
-            ?.slice(6, -1)
-            .split(' ')
-            .map((s) => parseFloat(s));
-        i.lat = lat;
-        i.lng = lng;
-    });
-    return items;
+    const u = b + encodeURI(q);
+    try {
+        const r = await fetch(u, OPTIONS_WITH_USER_AGENT);
+        const d = await r.json();
+        const items = d.results.bindings || [];
+        items.forEach((i) => {
+            i.id = i.qLabel.value;
+            const [lng, lat] = i.location?.value
+                ?.slice(6, -1)
+                .split(' ')
+                .map((s) => parseFloat(s));
+            i.lat = lat;
+            i.lng = lng;
+        });
+        return items;
+    }
+    catch (error) {
+        const r = await fetch(u, OPTIONS_WITH_USER_AGENT);
+        const err = await r.text();
+        throw new Error(err);
+    }
 };
 export const wikimediaQueryBound = async (bounds, limit = 5000) => {
     return await wikimediaQuery(bounds.getNorthEast(), bounds.getSouthWest(), limit);
 };
 export const wikimediaQuery = async (northEast, southWest, limit = 100) => {
     const q = `${WIKI_COMMONS}?action=query&list=geosearch&gsbbox=${northEast.lat}%7C${southWest.lng}%7C${southWest.lat}%7C${northEast.lng}&gsnamespace=6&gslimit=${limit}&format=json&origin=*`;
-    const res = await fetch(q);
+    const res = await fetch(q, OPTIONS_WITH_USER_AGENT);
     const d = await res.json();
     if (d.error) {
         throw d.error;
@@ -193,7 +203,7 @@ export const wikimediaGetThumbs = async (pageids, orientation, value = 600) => {
     value = Math.floor(value);
     const pageidsStr = pageids.join('|');
     const q = `${WIKI_COMMONS}?action=query&pageids=${pageidsStr}&prop=imageinfo&iiprop=extmetadata|url&iiurl${orientation}=${value}&format=json&origin=*`;
-    const res = await fetch(q);
+    const res = await fetch(q, OPTIONS_WITH_USER_AGENT);
     const d = await res.json();
     return d.query.pages;
 };
@@ -226,6 +236,8 @@ export const wikimediaGetThumb = async (pageid, height, width) => {
         result.artist = result.artist?.replace(/<a.*?>(.*?)<\/a>/, '$1'); // remove <a ... >Riamorei</a> -> Riamorei
         result.artistUrl = wikimediaGetAuthorLink(result.artist);
         result.atomicUrl = `https://commons.wikimedia.org/w/index.php?curid=${pageid}`;
+        result.gpslongitude = parseFloat(result.gpslongitude);
+        result.gpslatitude = parseFloat(result.gpslatitude);
         return result;
     };
     const thumbWidth = format(await wikimediaGetThumbs([pageid], 'width', width));
@@ -236,7 +248,8 @@ export const wikimediaGetThumb = async (pageid, height, width) => {
     return thumbWidth;
 };
 export const wikimediaGetAuthor = async (title, pageid) => {
-    const res = await fetch(`${WIKI_COMMONS}?action=query&titles=${title}&prop=imageinfo&format=json&origin=*`);
+    const u = `${WIKI_COMMONS}?action=query&titles=${title}&prop=imageinfo&format=json&origin=*`;
+    const res = await fetch(u, OPTIONS_WITH_USER_AGENT);
     const d = await res.json();
     return d.query.pages[pageid].imageinfo[0].user;
 };
@@ -276,8 +289,8 @@ export const wikimediaPicOfTheDay = async (lang = '') => {
     }
     const url = `${WIKI_COMMONS}?action=featuredfeed&feed=potd&feedformat=atom&language=${lang}&origin=*`;
     const match1 = 'href="https://commons.wikimedia.org/wiki/Special';
-    const match2 = 'typeof="mw:File"';
-    const raw = await fetch(url);
+    // const match2 = 'typeof="mw:File"'
+    const raw = await fetch(url, OPTIONS_WITH_USER_AGENT);
     const text = await raw.text();
     // const xml = new window.DOMParser().parseFromString(text, 'text/xml'); // doesn't work for nodejs
     const urls = text
