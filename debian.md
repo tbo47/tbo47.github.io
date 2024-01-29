@@ -1,5 +1,4 @@
-This is my Debian 12 configuration after installation.
-
+This is my [Debian](https://distrowatch.com/table.php?distribution=debian) 12 configuration after installation.
 
 `/etc/apt/sources.list`:
 
@@ -34,6 +33,7 @@ TODO find successor of exa and silversearcher-ag
 ```bash
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.5/install.sh | bash
 ```
+
 Then close and open a new console.
 
 ```bash
@@ -41,13 +41,40 @@ nvm install --lts
 npm i -g npm-check-updates
 ```
 
-
 ## Vim
 
-`~/.vimrc`: 
+`~/.vimrc`:
+
 ```
 :imap jk <Esc>
 :syntax on
 ```
 
 
+My vscode conf for the [vscodevim](https://marketplace.visualstudio.com/items?itemName=vscodevim.vim) extension:
+```bash
+grep -A9 vim ~/.config/Code/User/settings.json
+  "vim.insertModeKeyBindings": [
+    {
+      "before": [
+        "j",
+        "k"
+      ],
+      "after": [
+        "<Esc>"
+      ]
+    }
+--
+  "vim.normalModeKeyBindingsNonRecursive": [
+    {
+      "before": [
+        "<C-p>"
+      ],
+      "commands": [
+        "workbench.action.quickOpen"
+      ]
+    }
+  ],
+```
+
+Google Chrome extension [Vimium](https://chromewebstore.google.com/detail/vimium/dbepggeogbaibhgnhhndojpepiihcmeb)
