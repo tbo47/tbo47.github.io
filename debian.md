@@ -31,7 +31,7 @@ TODO find successor of exa and silversearcher-ag
 [Install nodejs with nvm](https://github.com/nvm-sh/nvm#install--update-script)
 
 ```bash
-curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.5/install.sh | bash
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
 ```
 
 Then close and open a new console.
