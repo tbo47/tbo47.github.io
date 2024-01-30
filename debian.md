@@ -15,7 +15,7 @@ Then
 ```
 su -
 apt update; apt dist-upgrade -y; apt autoremove -y
-apt install -y gnome-clocks vim thunderbird exa pavucontrol gimp silversearcher-ag rename pdfarranger vlc transmission snapd
+apt install -y gnome-clocks vim thunderbird exa pavucontrol gimp silversearcher-ag rename pdfarranger vlc transmission snapd chromium
 snap install core
 snap install plotjuggler
 ```
@@ -28,7 +28,8 @@ Install
 [globalprotect](https://github.com/yuezk/GlobalProtect-openconnect), 
 [vscode](https://code.visualstudio.com/), 
 [azure data studio](https://azure.microsoft.com/en-us/products/data-studio/). 
-For chrome: 
+
+For chromium: 
 [vimium](https://chromewebstore.google.com/detail/vimium/dbepggeogbaibhgnhhndojpepiihcmeb), 
 [adblocker](https://chromewebstore.google.com/detail/adblocker-ultimate/ohahllgiabjaoigichmmfljhkcfikeof), 
 [strongvpn](https://chromewebstore.google.com/detail/strongvpn-the-fastest-pro/ahcoedgggbhcdgmhhhhliafnbcifmdln), 
