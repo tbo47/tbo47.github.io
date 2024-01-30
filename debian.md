@@ -28,6 +28,7 @@ Install
 [globalprotect](https://github.com/yuezk/GlobalProtect-openconnect), 
 [vscode](https://code.visualstudio.com/), 
 [azure data studio](https://azure.microsoft.com/en-us/products/data-studio/). 
+[ohmyz](https://ohmyz.sh/)
 
 For chromium: 
 [vimium](https://chromewebstore.google.com/detail/vimium/dbepggeogbaibhgnhhndojpepiihcmeb), 
