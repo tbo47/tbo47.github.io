@@ -20,8 +20,16 @@ snap install core
 snap install plotjuggler
 ```
 
-Install [docker](https://docs.docker.com/engine/install/debian/), [discord](https://discord.com/download), [chrome](https://www.google.com/chrome/dr/download/), [syncthing](https://syncthing.net/), [globalprotect](https://github.com/yuezk/GlobalProtect-openconnect), [vscode](https://code.visualstudio.com/). 
-For chrome: [vimium](https://chromewebstore.google.com/detail/vimium/dbepggeogbaibhgnhhndojpepiihcmeb), 
+Install 
+[chrome](https://www.google.com/chrome/dr/download/), 
+[docker](https://docs.docker.com/engine/install/debian/), 
+[discord](https://discord.com/download), 
+[syncthing](https://syncthing.net/), 
+[globalprotect](https://github.com/yuezk/GlobalProtect-openconnect), 
+[vscode](https://code.visualstudio.com/), 
+[azure data studio](https://azure.microsoft.com/en-us/products/data-studio/). 
+For chrome: 
+[vimium](https://chromewebstore.google.com/detail/vimium/dbepggeogbaibhgnhhndojpepiihcmeb), 
 [adblocker](https://chromewebstore.google.com/detail/adblocker-ultimate/ohahllgiabjaoigichmmfljhkcfikeof), 
 [strongvpn](https://chromewebstore.google.com/detail/strongvpn-the-fastest-pro/ahcoedgggbhcdgmhhhhliafnbcifmdln), 
 [jsonformatter](https://chromewebstore.google.com/detail/json-formatter/bcjindcccaagfpapjjmafapmmgkkhgoa)
