@@ -15,7 +15,7 @@ Then
 ```
 su -
 apt update; apt dist-upgrade -y; apt autoremove -y
-apt install -y gnome-clocks vim thunderbird exa pavucontrol gimp silversearcher-ag rename pdfarranger vlc transmission snapd chromium
+apt install -y gnome-clocks vim thunderbird pavucontrol gimp silversearcher-ag rename pdfarranger vlc transmission snapd chromium curl
 snap install core
 snap install plotjuggler
 ```
@@ -27,7 +27,7 @@ Install
 [syncthing](https://syncthing.net/), 
 [globalprotect](https://github.com/yuezk/GlobalProtect-openconnect), 
 [vscode](https://code.visualstudio.com/), 
-[azure data studio](https://azure.microsoft.com/en-us/products/data-studio/). 
+[azure data studio](https://azure.microsoft.com/en-us/products/data-studio/), 
 [ohmyz](https://ohmyz.sh/)
 
 For chromium: 
@@ -38,7 +38,7 @@ For chromium:
 
 TODO add sudo
 
-TODO find successor of exa and silversearcher-ag
+TODO find successor of silversearcher-ag
 
 ## Nodejs
 
