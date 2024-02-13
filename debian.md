@@ -15,15 +15,15 @@ Then
 ```
 su -
 apt update; apt dist-upgrade -y; apt autoremove -y
-apt install -y gnome-clocks vim thunderbird pavucontrol gimp silversearcher-ag rename pdfarranger vlc transmission snapd chromium curl
-snap install core
-snap install plotjuggler
+apt install -y gnome-clocks vim thunderbird pavucontrol gimp rename pdfarranger vlc transmission chromium curl flatpak gnome-software-plugin-flatpak
+flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+flatpak install -y app/com.discordapp.Discord/x86_64/stable
+flatpak install -y org.mavlink.qgroundcontrol
 ```
 
 Install 
 [chrome](https://www.google.com/chrome/dr/download/), 
 [docker](https://docs.docker.com/engine/install/debian/), 
-[discord](https://discord.com/download), 
 [syncthing](https://syncthing.net/), 
 [globalprotect](https://github.com/yuezk/GlobalProtect-openconnect), 
 [vscode](https://code.visualstudio.com/), 
@@ -35,10 +35,6 @@ For chromium:
 [adblocker](https://chromewebstore.google.com/detail/adblocker-ultimate/ohahllgiabjaoigichmmfljhkcfikeof), 
 [strongvpn](https://chromewebstore.google.com/detail/strongvpn-the-fastest-pro/ahcoedgggbhcdgmhhhhliafnbcifmdln), 
 [jsonformatter](https://chromewebstore.google.com/detail/json-formatter/bcjindcccaagfpapjjmafapmmgkkhgoa)
-
-TODO add sudo
-
-TODO find successor of silversearcher-ag
 
 ## Nodejs
 
