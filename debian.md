@@ -37,7 +37,7 @@ For chromium:
 [strongvpn](https://chromewebstore.google.com/detail/strongvpn-the-fastest-pro/ahcoedgggbhcdgmhhhhliafnbcifmdln), 
 [jsonformatter](https://chromewebstore.google.com/detail/json-formatter/bcjindcccaagfpapjjmafapmmgkkhgoa)
 
-## Nodejs
+## nodejs
 
 [Install nodejs with nvm](https://github.com/nvm-sh/nvm#install--update-script)
 
@@ -49,7 +49,7 @@ Then close and open a new console.
 
 ```bash
 nvm install --lts
-npm i -g npm-check-updates
+npm install -g npm-check-updates ts-node
 ```
 
 ## neovim
