@@ -52,9 +52,9 @@ nvm install --lts
 npm i -g npm-check-updates
 ```
 
-## Vim
+## neovim
 
-`~/.vimrc`:
+`~/.config/nvim/init.vim`:
 
 ```
 :imap jk <Esc>
@@ -62,7 +62,7 @@ npm i -g npm-check-updates
 ```
 
 
-My vscode conf for the [vscodevim](https://marketplace.visualstudio.com/items?itemName=vscodevim.vim) extension:
+My vscode conf for the [vscode-neovim](https://marketplace.visualstudio.com/items?itemName=asvetliakov.vscode-neovim) extension:
 ```bash
 grep -A9 vim ~/.config/Code/User/settings.json
   "vim.insertModeKeyBindings": [
@@ -75,15 +75,4 @@ grep -A9 vim ~/.config/Code/User/settings.json
         "<Esc>"
       ]
     }
---
-  "vim.normalModeKeyBindingsNonRecursive": [
-    {
-      "before": [
-        "<C-p>"
-      ],
-      "commands": [
-        "workbench.action.quickOpen"
-      ]
-    }
-  ],
 ```
