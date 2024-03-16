@@ -54,11 +54,11 @@ npm install -g npm-check-updates ts-node
 
 ## neovim
 
-`~/.config/nvim/init.vim`:
+`~/.config/nvim/init.vim`. [more conf](https://builtin.com/software-engineering-perspectives/neovim-configuration)
 
 ```
-:imap jk <Esc>
-:syntax on
+syntax on
+imap jk <Esc>
 ```
 
 
