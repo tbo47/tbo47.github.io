@@ -15,7 +15,7 @@ Then
 ```
 su -
 apt update; apt dist-upgrade -y; apt autoremove -y
-apt install -y gnome-clocks neovim thunderbird pavucontrol gimp rename pdfarranger vlc transmission chromium curl flatpak gnome-software-plugin-flatpak
+apt install -y gnome-clocks neovim thunderbird pavucontrol gimp ripgrep pdfarranger vlc transmission chromium curl flatpak gnome-software-plugin-flatpak
 flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
 flatpak install -y app/com.discordapp.Discord
 flatpak install -y org.mavlink.qgroundcontrol
@@ -54,25 +54,11 @@ npm install -g npm-check-updates ts-node
 
 ## neovim
 
-`~/.config/nvim/init.vim`. [more conf](https://builtin.com/software-engineering-perspectives/neovim-configuration)
+`~/.config/nvim/init.vim`:
 
 ```
-syntax on
 imap jk <Esc>
 ```
 
+Use neovim in vscode: [vscode-neovim](https://marketplace.visualstudio.com/items?itemName=asvetliakov.vscode-neovim) 
 
-My vscode conf for the [vscode-neovim](https://marketplace.visualstudio.com/items?itemName=asvetliakov.vscode-neovim) extension:
-```bash
-grep -A9 vim ~/.config/Code/User/settings.json
-  "vim.insertModeKeyBindings": [
-    {
-      "before": [
-        "j",
-        "k"
-      ],
-      "after": [
-        "<Esc>"
-      ]
-    }
-```
