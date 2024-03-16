@@ -15,7 +15,7 @@ Then
 ```
 su -
 apt update; apt dist-upgrade -y; apt autoremove -y
-apt install -y gnome-clocks neovim thunderbird pavucontrol gimp ripgrep pdfarranger vlc transmission chromium curl flatpak gnome-software-plugin-flatpak
+apt install -y gnome-clocks neovim thunderbird pavucontrol gimp ripgrep fd-find pdfarranger vlc transmission chromium curl flatpak gnome-software-plugin-flatpak
 flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
 flatpak install -y app/com.discordapp.Discord
 flatpak install -y org.mavlink.qgroundcontrol
