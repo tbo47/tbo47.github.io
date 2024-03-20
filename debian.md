@@ -63,7 +63,7 @@ imap jk <Esc>
 Use neovim in vscode: [vscode-neovim](https://marketplace.visualstudio.com/items?itemName=asvetliakov.vscode-neovim) 
 
 `.config/Code/User/keybindings.json`:
-```
+```json
 [
   {
     "command": "vscode-neovim.compositeEscape1",
@@ -76,6 +76,11 @@ Use neovim in vscode: [vscode-neovim](https://marketplace.visualstudio.com/items
     "key": "k",
     "when": "neovim.mode == insert && editorTextFocus",
     "args": "k"
+  },
+  {
+    "key": "ctrl+p",
+    "command": "-workbench.action.quickOpenSelectPrevious",
+    "when": "inQuickOpen && neovim.wildMenuVisible || inQuickOpen && neovim.mode != 'cmdline'"
   }
 ]
 ```
