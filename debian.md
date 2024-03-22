@@ -18,10 +18,12 @@ apt update; apt dist-upgrade -y; apt autoremove -y
 apt install -y gnome-clocks transmission thunderbird pavucontrol gimp pdfarranger vlc chromium gnome-tweaks 
 apt install -y neovim ripgrep fd-find curl flatpak gnome-software-plugin-flatpak gnome-console
 flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
-# flatpak install -y com.spotify.Client
-flatpak install -y com.discordapp.Discord
-flatpak install -y org.mavlink.qgroundcontrol
-flatpak install -y org.kde.kdenlive
+apt remove -y firefox-esr
+flatpak install -y flathub org.mozilla.firefox
+flatpak install -y flathub com.discordapp.Discord
+flatpak install -y flathub org.mavlink.qgroundcontrol
+flatpak install -y flathub org.kde.kdenlive
+flatpak run org.mozilla.firefox https://flathub.org/apps/collection/popular
 ```
 
 Install 
