@@ -20,13 +20,13 @@ apt install -y ripgrep fd-find curl flatpak gnome-software-plugin-flatpak gnome-
 flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
 apt remove -y firefox-esr
 flatpak install -y flathub org.mozilla.firefox
-flatpak install -y flathub io.neovim.nvim
 flatpak install -y flathub com.discordapp.Discord
 flatpak install -y flathub org.kde.kdenlive
 flatpak run org.mozilla.firefox https://flathub.org/apps/collection/popular
 ```
 
 Install 
+[nvim](https://neovim.io/),
 [chrome](https://www.google.com/chrome/dr/download/), 
 [docker](https://docs.docker.com/engine/install/debian/), 
 [syncthing](https://syncthing.net/), 
