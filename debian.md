@@ -18,15 +18,13 @@ apt update; apt dist-upgrade -y; apt autoremove -y
 apt install -y gnome-clocks transmission thunderbird pavucontrol gimp pdfarranger vlc chromium gnome-tweaks 
 apt install -y ripgrep fd-find curl flatpak gnome-software-plugin-flatpak gnome-console
 flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
-apt remove -y firefox-esr
-flatpak install -y flathub org.mozilla.firefox
 flatpak install -y flathub com.discordapp.Discord
 flatpak install -y flathub org.kde.kdenlive
-flatpak run org.mozilla.firefox https://flathub.org/apps/collection/popular
+chromium https://flathub.org/apps/collection/popular
 ```
 
 Install 
-[nvim](https://neovim.io/),
+[neovim](https://neovim.io/),
 [chrome](https://www.google.com/chrome/dr/download/), 
 [docker](https://docs.docker.com/engine/install/debian/), 
 [syncthing](https://syncthing.net/), 
@@ -34,6 +32,8 @@ Install
 [vscode](https://code.visualstudio.com/), 
 [azure data studio](https://azure.microsoft.com/en-us/products/data-studio/), 
 [ohmyz](https://ohmyz.sh/)
+
+Note: I installed neovim manually because I want the latest version and flatpak doens't add it to the PATH.
 
 For chromium: 
 [vimium](https://chromewebstore.google.com/detail/vimium/dbepggeogbaibhgnhhndojpepiihcmeb), 
