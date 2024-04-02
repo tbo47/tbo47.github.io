@@ -35,7 +35,7 @@ Install
 
 Note: I installed neovim manually because I want the latest version and flatpak doens't add it to the PATH.
 
-For chromium: 
+For Chrome/Chromium: 
 [vimium](https://chromewebstore.google.com/detail/vimium/dbepggeogbaibhgnhhndojpepiihcmeb), 
 [adblocker](https://chromewebstore.google.com/detail/adblocker-ultimate/ohahllgiabjaoigichmmfljhkcfikeof), 
 [strongvpn](https://chromewebstore.google.com/detail/strongvpn-the-fastest-pro/ahcoedgggbhcdgmhhhhliafnbcifmdln), 
