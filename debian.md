@@ -1,6 +1,11 @@
 This is my [Debian](https://distrowatch.com/table.php?distribution=debian) 12 configuration after installation.
 
-`/etc/apt/sources.list`:
+Switch to root:
+```
+su -
+```
+
+The `/etc/apt/sources.list` file should look like this:
 
 ```
 deb http://deb.debian.org/debian/ bookworm contrib main non-free non-free-firmware
@@ -10,13 +15,12 @@ deb http://deb.debian.org/debian/ bookworm-backports contrib main non-free non-f
 deb http://deb.debian.org/debian-security/ bookworm-security contrib main non-free non-free-firmware
 ```
 
-Then
+Then, run the following commands:
 
 ```
-su -
 apt update; apt dist-upgrade -y; apt autoremove -y
 apt install -y gnome-clocks transmission thunderbird pavucontrol gimp pdfarranger vlc chromium gnome-tweaks 
-apt install -y ripgrep fd-find curl flatpak gnome-software-plugin-flatpak gnome-console
+apt install -y git ripgrep fd-find curl flatpak gnome-software-plugin-flatpak gnome-console
 flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
 flatpak install -y flathub com.discordapp.Discord
 flatpak install -y flathub org.kde.kdenlive
