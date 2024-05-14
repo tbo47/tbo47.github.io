@@ -9,16 +9,14 @@ The `/etc/apt/sources.list` file should look like this:
 
 ```
 deb http://deb.debian.org/debian/ bookworm contrib main non-free non-free-firmware
-deb http://deb.debian.org/debian/ bookworm-updates contrib main non-free non-free-firmware
-deb http://deb.debian.org/debian/ bookworm-proposed-updates contrib main non-free non-free-firmware
-deb http://deb.debian.org/debian/ bookworm-backports contrib main non-free non-free-firmware
 deb http://deb.debian.org/debian-security/ bookworm-security contrib main non-free non-free-firmware
+deb http://deb.debian.org/debian/ bookworm-backports contrib main non-free non-free-firmware
 ```
 
 Then, run the following commands:
 
 ```
-apt update; apt dist-upgrade -y; apt autoremove -y
+apt update ; apt -t bookworm-backports full-upgrade -y ; apt full-upgrade -y ; apt autoremove -y
 apt install -y gnome-clocks transmission thunderbird pavucontrol gimp pdfarranger vlc chromium gnome-tweaks 
 apt install -y git ripgrep fd-find curl flatpak gnome-software-plugin-flatpak gnome-console
 flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
@@ -62,29 +60,11 @@ npm install -g npm-check-updates ts-node
 
 ## neovim
 
-`~/.config/nvim/init.vim`:
-
-```
-imap jk <Esc>
-```
-
 Use neovim in vscode: [vscode-neovim](https://marketplace.visualstudio.com/items?itemName=asvetliakov.vscode-neovim) 
 
 `.config/Code/User/keybindings.json`:
 ```json
 [
-  {
-    "command": "vscode-neovim.compositeEscape1",
-    "key": "j",
-    "when": "neovim.mode == insert && editorTextFocus",
-    "args": "j"
-  },
-  {
-    "command": "vscode-neovim.compositeEscape2",
-    "key": "k",
-    "when": "neovim.mode == insert && editorTextFocus",
-    "args": "k"
-  },
   {
     "key": "ctrl+p",
     "command": "-workbench.action.quickOpenSelectPrevious",
