@@ -43,6 +43,9 @@ For Chrome/Chromium:
 [strongvpn](https://chromewebstore.google.com/detail/strongvpn-the-fastest-pro/ahcoedgggbhcdgmhhhhliafnbcifmdln), 
 [jsonformatter](https://chromewebstore.google.com/detail/json-formatter/bcjindcccaagfpapjjmafapmmgkkhgoa)
 
+Neovim in vscode:
+[vscode-neovim](https://marketplace.visualstudio.com/items?itemName=asvetliakov.vscode-neovim) 
+
 ## nodejs
 
 [Install nodejs with nvm](https://github.com/nvm-sh/nvm#install--update-script)
@@ -58,7 +61,4 @@ nvm install --lts
 npm install -g npm-check-updates ts-node @angular/cli
 ```
 
-## neovim
-
-Use neovim in vscode: [vscode-neovim](https://marketplace.visualstudio.com/items?itemName=asvetliakov.vscode-neovim) 
 
