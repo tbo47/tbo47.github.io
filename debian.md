@@ -16,7 +16,7 @@ deb http://deb.debian.org/debian/ bookworm-backports contrib main non-free non-f
 Then, run the following commands:
 
 ```
-apt update ; apt -t bookworm-backports full-upgrade -y ; apt full-upgrade -y ; apt autoremove -y
+apt update ; apt full-upgrade -y ; apt autoremove -y
 apt install -y gnome-clocks transmission thunderbird pavucontrol gimp pdfarranger vlc chromium gnome-tweaks 
 apt install -y git ripgrep fd-find curl flatpak gnome-software-plugin-flatpak gnome-console
 flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
@@ -55,21 +55,10 @@ Then close and open a new console.
 
 ```bash
 nvm install --lts
-npm install -g npm-check-updates ts-node
+npm install -g npm-check-updates ts-node @angular/cli
 ```
 
 ## neovim
 
 Use neovim in vscode: [vscode-neovim](https://marketplace.visualstudio.com/items?itemName=asvetliakov.vscode-neovim) 
-
-`.config/Code/User/keybindings.json`:
-```json
-[
-  {
-    "key": "ctrl+p",
-    "command": "-workbench.action.quickOpenSelectPrevious",
-    "when": "inQuickOpen && neovim.wildMenuVisible || inQuickOpen && neovim.mode != 'cmdline'"
-  }
-]
-```
 
