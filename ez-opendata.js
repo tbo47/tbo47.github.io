@@ -125,6 +125,16 @@ export const openstreetmapExtractDiets = (pois) => {
     return dietsSorted;
 };
 /**
+ * Geocode a location using openstreetmap.
+ * https://nominatim.org/release-docs/develop/api/Search/
+ */
+export const openstreetmapGeocoding = async (q, limit = 10) => {
+    const url = `https://nominatim.openstreetmap.org/search?addressdetails=1&q=${q}&format=jsonv2&limit=${limit}`;
+    const raw = await fetch(url, OPTIONS_WITH_USER_AGENT);
+    const json = await raw.json();
+    return json;
+};
+/**
  * Return the wikipedia articles around a given location.
  */
 export const wikipediaQuery = async (lat = 37, lon = -122, language = 'en', radius = 10_000, limit = 100) => {
@@ -212,11 +222,19 @@ export const wikimediaGetThumbs = async (pageids, orientation, value = 600) => {
  */
 export const wikimediaInfoMultiplePages = wikimediaGetThumbs;
 /**
- * Get a thumbnail from wikimedia commons which has a height and width less than the given values.
+ * Get a thumbnail from wikimedia commons which fits into the frame defines by the height and the width.
+ * The thumbnail is going to fit into the frame, so it might be smaller than the frame.
  *
+ * In this example, the thumbnail will fit into the div:
  * ```
  * const { height, width } = document.getElementById('my-div').getBoundingClientRect()
  * const { thumburl } = await wikimediaGetThumb(pic.pageid, height, width)
+ * ```
+ *
+ * In this example, the thumbnail will fit the cellphone width but never exeed 2/3 of the height:
+ * ```
+ * const { height, width } = document.body.getBoundingClientRect()
+ * const { thumburl } = await wikimediaGetThumb(pic.pageid, height * 0.66, width)
  * ```
  *
  * @param pageid wikimedia commons pageid
@@ -308,4 +326,3 @@ export const wikimediaPicOfTheDay = async (lang = '') => {
     return picName;
     */
 };
-//# sourceMappingURL=ez-opendata.js.map
