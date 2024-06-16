@@ -22,20 +22,18 @@ apt install -y git ripgrep fd-find curl flatpak gnome-software-plugin-flatpak gn
 flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
 flatpak install -y flathub com.discordapp.Discord
 flatpak install -y flathub org.kde.kdenlive
-flatpak install flathub io.dbeaver.DBeaverCommunity
+flatpak install -y flathub io.dbeaver.DBeaverCommunity
+flatpak install -y flathub io.neovim.nvim
 chromium https://flathub.org/apps/collection/popular
 ```
 
 Install 
 [ohmyz](https://ohmyz.sh/),
-[neovim](https://neovim.io/),
 [chrome](https://www.google.com/chrome/dr/download/), 
 [docker](https://docs.docker.com/engine/install/debian/), 
 [syncthing](https://syncthing.net/), 
 [globalprotect](https://github.com/yuezk/GlobalProtect-openconnect), 
 [vscode](https://code.visualstudio.com/)
-
-Note: I installed neovim manually because I want the latest version and flatpak doens't add it to the PATH.
 
 For Chrome/Chromium: 
 [vimium](https://chromewebstore.google.com/detail/vimium/dbepggeogbaibhgnhhndojpepiihcmeb), 
@@ -45,6 +43,11 @@ For Chrome/Chromium:
 
 Neovim in vscode:
 [vscode-neovim](https://marketplace.visualstudio.com/items?itemName=asvetliakov.vscode-neovim) 
+
+In .zshrc
+```
+alias vim=/var/lib/flatpak/app/io.neovim.nvim/x86_64/stable/active/export/bin/io.neovim.nvim
+```
 
 ## nodejs
 
