@@ -86,4 +86,4 @@ cd
 zip -r bk.zip .ssh/ .zshrc Documents/ .local/ .aMule .thunderbird/ p
 ```
 
-TODO sudo, python, thunderbird via flatpak
+TODO sudo, python, amule
