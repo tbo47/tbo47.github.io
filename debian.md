@@ -71,4 +71,19 @@ In `.zshrc` add the following line:
 export NODE_OPTIONS=--max_old_space_size=8192
 ```
 
+## backup
 
+```bash
+killall Discord
+killall thunderbird
+PROJECTS_DIR=~/p/
+for VARIABLE in $(ls $PROJECTS_DIR)
+do
+    rm -rf $PROJECTS_DIR$VARIABLE"/node_modules"
+done
+# ~/.local/share/flatpak contains flatpak apps conf
+cd
+zip -r bk.zip .ssh/ .zshrc Documents/ .local/ .aMule .thunderbird/ p
+```
+
+TODO sudo, python, thunderbird via flatpak
