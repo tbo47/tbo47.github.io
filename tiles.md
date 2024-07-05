@@ -21,7 +21,7 @@ def convert_pdf_to_png(pdf_path: str, img_name: str):
 convert_pdf_to_png("mypdf.pdf", 'mypdf.tiff')
 ```
 
-In qgis, Layer>Georefencer add tiff file and add 2 points(0.1 0 and 0 0), select "Create world file only"
+In [qgis](https://www.qgis.org/), Layer>Georefencer add tiff file and add 2 points(0.1 0 and 0 0), select "Create world file only"
 
 In qgis, left click on the new layer and "Zoom to layer"
 
