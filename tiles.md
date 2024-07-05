@@ -32,37 +32,37 @@ Serve the file with [martin](https://github.com/maplibre/martin): `./martin mypd
 With maplibre:
 
 ```javascript
-        const center: maplibregl.LngLatLike = [-0.01316, 0.0259]
-        const map = new maplibregl.Map({
-            container: 'jawg-map',
-            zoom: 12,
-            center,
-            attributionControl: false,
-            hash: true,
-            style: {
-                version: 8,
-                sources: {
-                    // using martin serving qgis made mbtiles
-                    martin: {
-                        type: 'raster',
-                        tiles: ['http://localhost:3000/procore_pdfjs/{z}/{x}/{y}'],
-                        tileSize: 256,
-                        maxzoom: 19,
-                    },
-                    osm: {
-                        type: 'raster',
-                        tiles: ['https://a.tile.openstreetmap.org/{z}/{x}/{y}.png'],
-                        tileSize: 256,
-                        maxzoom: 19,
-                    },
-                },
-                layers: [
-                    {
-                        id: 'martin',
-                        type: 'raster',
-                        source: 'martin',
-                    },
-                ],
+const center: maplibregl.LngLatLike = [-0.01316, 0.0259]
+const map = new maplibregl.Map({
+    container: 'jawg-map',
+    zoom: 12,
+    center,
+    attributionControl: false,
+    hash: true,
+    style: {
+        version: 8,
+        sources: {
+            // using martin serving qgis made mbtiles
+            martin: {
+                type: 'raster',
+                tiles: ['http://localhost:3000/mypdf/{z}/{x}/{y}'],
+                tileSize: 256,
+                maxzoom: 19,
             },
-        }).addControl(new maplibregl.NavigationControl(), 'bottom-right')
+            osm: {
+                type: 'raster',
+                tiles: ['https://a.tile.openstreetmap.org/{z}/{x}/{y}.png'],
+                tileSize: 256,
+                maxzoom: 19,
+            },
+        },
+        layers: [
+            {
+                id: 'martin',
+                type: 'raster',
+                source: 'martin',
+            },
+        ],
+    },
+}).addControl(new maplibregl.NavigationControl(), 'bottom-right')
 ```
