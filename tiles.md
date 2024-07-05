@@ -1,5 +1,7 @@
 ## Steps to tile a pdf
 
+### Tranform a pdf to image with python
+
 ```python
 from pdf2image import convert_from_path
 from pypdf import PdfReader, PdfWriter
@@ -21,6 +23,15 @@ def convert_pdf_to_png(pdf_path: str, img_name: str):
 convert_pdf_to_png("mypdf.pdf", 'mypdf.tiff')
 ```
 
+### To transform a pdf to image using node
+
+```
+npm i -g pdf-to-img@latest
+pdf2img inputFile.pdf
+```
+
+### Tile an image with qgis
+
 In [qgis](https://www.qgis.org/), Layer>Georefencer add tiff file and add 2 points(0.1 0 and 0 0), select "Create world file only"
 
 In qgis, left click on the new layer and "Zoom to layer"
@@ -29,7 +40,9 @@ In qgis, Processing>Toolbox "Raster tools"> "Generate XYZ tiles (MBtiles)". Min 
 
 Serve the file with [martin](https://github.com/maplibre/martin): `./martin mypdf.mbtiles`
 
-With maplibre:
+### Render the tiles 
+
+With [maplibre](https://maplibre.org/):
 
 ```javascript
 const center: maplibregl.LngLatLike = [-0.01316, 0.0259]
