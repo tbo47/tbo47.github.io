@@ -83,7 +83,7 @@ do
 done
 # ~/.local/share/flatpak contains flatpak apps conf
 cd
-zip -r bk.zip .ssh/ .zshrc Documents/ .local/ .aMule .thunderbird/ p
+zip -r ~/bk.zip .ssh/ .zshrc Documents/ .local/ .aMule .thunderbird/ p
 ```
 
 TODO sudo, python, amule
