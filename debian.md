@@ -79,7 +79,9 @@ killall thunderbird
 PROJECTS_DIR=~/p/
 for VARIABLE in $(ls $PROJECTS_DIR)
 do
+    rm -rf $PROJECTS_DIR$VARIABLE"/.angular"
     rm -rf $PROJECTS_DIR$VARIABLE"/node_modules"
+    rm -rf $PROJECTS_DIR$VARIABLE"/.venv"
 done
 # ~/.local/share/flatpak contains flatpak apps conf
 cd
