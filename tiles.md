@@ -33,7 +33,7 @@ pdf2img inputFile.pdf
 
 ### Tile an image with qgis
 
-In [qgis](https://www.qgis.org/), Layer>Georefencer add tiff file and add 2 points(0.1 0 and 0 0), select "Create world file only"
+In [qgis](https://www.qgis.org/), Layer>Georefencer add tiff file and add 2 points(0.1 0 and 0 0). And in "transformation Settings", select "Create world file only"
 
 In qgis, left click on the new layer and "Zoom to layer"
 
