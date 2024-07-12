@@ -1,12 +1,16 @@
 ## Steps to tile a pdf
 
-### Tranform a pdf to image with python
+### Tranform a pdf to image
+
+In python
 
 ```python
 from pdf2image import convert_from_path
 from pypdf import PdfReader, PdfWriter
 from pypdf.annotations import Link, Rectangle
 
+# apt-get install poppler-utils
+# brew install poppler
 
 def convert_pdf_to_png(pdf_path: str, img_name: str):
     reader = PdfReader(pdf_path)
@@ -23,7 +27,7 @@ def convert_pdf_to_png(pdf_path: str, img_name: str):
 convert_pdf_to_png("mypdf.pdf", 'mypdf.tiff')
 ```
 
-### To transform a pdf to image using node
+Or in javascript
 
 ```
 npm i -g pdf-to-img@latest
