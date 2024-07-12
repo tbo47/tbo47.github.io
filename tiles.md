@@ -2,15 +2,12 @@
 
 ### Tranform a pdf to image
 
-In python
+In python, you first need to install poopler: `apt-get install poppler-utils` for linux and `brew install poppler` for macos.
 
 ```python
 from pdf2image import convert_from_path
 from pypdf import PdfReader, PdfWriter
 from pypdf.annotations import Link, Rectangle
-
-# apt-get install poppler-utils
-# brew install poppler
 
 def convert_pdf_to_png(pdf_path: str, img_name: str):
     reader = PdfReader(pdf_path)
