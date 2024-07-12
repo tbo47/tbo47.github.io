@@ -33,7 +33,31 @@ pdf2img inputFile.pdf
 
 ### Tile an image with qgis
 
-In [qgis](https://www.qgis.org/), Layer>Georefencer add tiff file and add 2 points(0.1 0 and 0 0). And in "transformation Settings", select "Create world file only", click "Start Georeferencing"
+In [qgis](https://www.qgis.org/), Layer>Georefencer add tiff file and add 2 points: one with the coordonate(0.1 0 and 0 0). And in "transformation Settings", select "Create world file only", click "Start Georeferencing"
+
+```                                       
+ ┌──────────────────────────────────────────────────────────────┐ 
+ │                                                              │ 
+ │                                                              │ 
+ │                                                              │ 
+ │                                                              │ 
+ │                                                              │ 
+ │                                                              │ 
+ │                                                              │ 
+ │                                                              │ 
+ │   0.1 0                                                0 0   │ 
+ │                                                              │ 
+ │                                                              │ 
+ │                                                              │ 
+ │                                                              │ 
+ │                                                              │ 
+ │                                                              │ 
+ │                                                              │ 
+ │                                                              │ 
+ │                                                              │ 
+ └──────────────────────────────────────────────────────────────┘ 
+```
+
 
 In qgis, left click on the new layer and "Zoom to layer"
 
