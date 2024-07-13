@@ -74,6 +74,7 @@ const fetchInfo = async () => {
     })
     await Promise.all(promises)
     fs.writeFileSync(FILE_JSON, JSON.stringify(output))
+    console.log('done: ', output.length)
 }
 
 fetchInfo()
