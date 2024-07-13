@@ -1,5 +1,7 @@
 import { openstreetmapGetPOIs } from 'https://tbo47.github.io/ez-opendata.js'
 
+// https://jsfiddle.net/tbo47/c9sn3mav/
+
 const myDiv = document.getElementById('my-div')
 const range = 0.0005
 
