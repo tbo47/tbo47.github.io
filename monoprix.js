@@ -44,11 +44,14 @@ const openstreetmapGetPOIs = async (
 
 const fetchInfo = async () => {
     const output = []
-    for (let i = 1; i < 3_000; i++) {
+    for (let i = 1; i < 3; i++) {
         const url = `https://api.woosmap.com/stores/${i}?key=woos-ef21433b-45e1-3752-851f-6653279c035a`
+        console.log(url)
         try {
             const response = await fetch(url, { headers: { Referer: 'https://www.monoprix.fr/' } })
-            output.push(await response.json())
+            const j = await response.json()
+            console.log(j)
+            output.push(j)
         } catch (e) {
             console.log(e)
         }
