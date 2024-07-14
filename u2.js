@@ -1,35 +1,36 @@
-// https://jsfiddle.net/tbo47/dt4hLy3s/
-
-const myDiv = document.getElementById('my-div')
+const fs = require('fs')
 
 const fetchData = async () => {
     const res = await fetch('https://tbo47.github.io/u.json')
     const shops = await res.json()
+    const output = []
     console.log(shops)
-    myDiv.innerHTML += `<h2>Missing OSM website</h2>`
+    output.push(`<h2>Missing OSM website</h2>`)
     shops.map((shop) => {
         const { website, lon, lat, osm, osm_area } = shop
         if (osm && !osm.website) {
-            myDiv.innerHTML += `<a href="${osm.osm_url_edit}" target="_blank">shop</a> | `
-            myDiv.innerHTML += `${website} <br>`
+            output.push(`<a href="${osm.osm_url_edit}" target="osmedit">${osm.osm_url_edit}</a><br>${website} <br><br>`)
         }
     })
-    myDiv.innerHTML += `<h2>Missing OSM poi</h2>`
+    output.push(`<h2>Missing OSM poi</h2>`)
     shops.map((shop) => {
         const { website, lon, lat, osm, osm_area } = shop
         if (!osm) {
-            myDiv.innerHTML += `<a href="${osm_area}" target="_blank">area</a> | `
-            myDiv.innerHTML += `${website} <br>`
+            output.push(`<a href="${osm_area}" target="osmarea">${osm_area}</a><br>${website}<br><br>`)
         }
     })
-    myDiv.innerHTML += `<h2>Questionning the website</h2>`
+    output.push(`<h2>Questionning the website</h2>`)
     shops.map((shop) => {
         const { website, lon, lat, osm, osm_area } = shop
-        if (osm && !osm.website.startsWith(website)) {
-            myDiv.innerHTML += `<a href="${osm.osm_url_edit}" target="_blank">shop</a> | `
-            myDiv.innerHTML += `${website} <br>`
+        if (osm?.website && !osm.website.startsWith(website)) {
+            output.push(
+                `<a href="${osm.osm_url_edit}" target="osmedit">${osm.osm_url_edit}</a><br>${osm.website}<br>${website}<br><br>`
+            )
         }
     })
+
+    fs.writeFileSync(`u.html`, `<html><body>` + output.join('') + `</body></html>`)
+    return output
 }
 
 fetchData()
