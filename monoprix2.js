@@ -7,7 +7,7 @@ const myDiv = document.getElementById('my-div')
 const fetchData = async () => {
     const res = await fetch('https://tbo47.github.io/monoprix.json')
     const shops = await res.json()
-    shops.map(async (shop) => {
+    shops.map((shop) => {
         const [lon, lat] = shop.geometry.coordinates
         const { phone, website } = shop.properties.contact
         const { osm } = shop
