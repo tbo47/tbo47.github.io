@@ -1,0 +1,4755 @@
+[
+    {
+        "f": {
+            "type": "Feature",
+            "properties": {
+                "store_id": "7641",
+                "name": "Market Ballancourt-Sur-Essonne",
+                "contact": {
+                    "email": "",
+                    "phone": "0033160795650",
+                    "website": "https://www.carrefour.fr/magasin/market-ballancourt-sur-essonne"
+                },
+                "address": {
+                    "lines": [
+                        "zone d'activité commerciale De L'Aunaie"
+                    ],
+                    "country_code": "FR",
+                    "city": "Ballancourt-Sur-Essonne",
+                    "zipcode": "91610"
+                },
+                "user_properties": {
+                    "banner": "CARREFOUR MARKET",
+                    "region": "DTF IDF",
+                    "services": null,
+                    "has_drive": "yes",
+                    "drive_list": "[{\"serviceInstanceKey\": \"7641-310-278\", \"openingWeekPattern\": []}]",
+                    "store_name": "Market Ballancourt-Sur-Essonne",
+                    "carrefour_pro": "no",
+                    "city_insee_code": "91045",
+                    "region_insee_code": "11",
+                    "department_insee_code": "91"
+                },
+                "tags": [
+                    "Supermarché",
+                    "Marché de produits frais",
+                    "Magasin d'alimentation bio",
+                    "Magasin de cosmétiques",
+                    "Boulangerie",
+                    "Poissonnerie",
+                    "Boucherie-charcuterie",
+                    "Produits laitiers",
+                    "Primeur",
+                    "Magasin d'électroménager",
+                    "Restauration rapide"
+                ],
+                "types": [
+                    "CARREFOUR MARKET"
+                ],
+                "last_updated": "2024-07-14T01:13:12.611717+00:00",
+                "distance": 25013.63069151,
+                "open": {
+                    "open_now": false,
+                    "open_hours": [
+                        {
+                            "end": "13:00",
+                            "start": "09:00"
+                        }
+                    ],
+                    "week_day": 7,
+                    "next_opening": {
+                        "day": "2024-07-15",
+                        "start": "08:30",
+                        "end": "20:00"
+                    }
+                },
+                "weekly_opening": {
+                    "1": {
+                        "hours": [
+                            {
+                                "end": "20:00",
+                                "start": "08:30"
+                            }
+                        ],
+                        "isSpecial": false
+                    },
+                    "2": {
+                        "hours": [
+                            {
+                                "end": "20:00",
+                                "start": "08:30"
+                            }
+                        ],
+                        "isSpecial": false
+                    },
+                    "3": {
+                        "hours": [
+                            {
+                                "end": "20:00",
+                                "start": "08:30"
+                            }
+                        ],
+                        "isSpecial": false
+                    },
+                    "4": {
+                        "hours": [
+                            {
+                                "end": "20:00",
+                                "start": "08:30"
+                            }
+                        ],
+                        "isSpecial": false
+                    },
+                    "5": {
+                        "hours": [
+                            {
+                                "end": "20:00",
+                                "start": "08:30"
+                            }
+                        ],
+                        "isSpecial": false
+                    },
+                    "6": {
+                        "hours": [
+                            {
+                                "end": "20:00",
+                                "start": "08:30"
+                            }
+                        ],
+                        "isSpecial": false
+                    },
+                    "7": {
+                        "hours": [
+                            {
+                                "end": "13:00",
+                                "start": "09:00"
+                            }
+                        ],
+                        "isSpecial": true
+                    },
+                    "timezone": "Europe/Paris"
+                },
+                "opening_hours": {
+                    "usual": {
+                        "1": [
+                            {
+                                "end": "20:00",
+                                "start": "08:30"
+                            }
+                        ],
+                        "2": [
+                            {
+                                "end": "20:00",
+                                "start": "08:30"
+                            }
+                        ],
+                        "3": [
+                            {
+                                "end": "20:00",
+                                "start": "08:30"
+                            }
+                        ],
+                        "4": [
+                            {
+                                "end": "20:00",
+                                "start": "08:30"
+                            }
+                        ],
+                        "5": [
+                            {
+                                "end": "20:00",
+                                "start": "08:30"
+                            }
+                        ],
+                        "6": [
+                            {
+                                "end": "20:00",
+                                "start": "08:30"
+                            }
+                        ],
+                        "7": [
+                            {
+                                "end": "12:30",
+                                "start": "09:00"
+                            }
+                        ]
+                    },
+                    "special": {
+                        "2024-07-14": [
+                            {
+                                "end": "13:00",
+                                "start": "09:00"
+                            }
+                        ],
+                        "2024-08-15": [
+                            {
+                                "end": "13:00",
+                                "start": "09:00"
+                            }
+                        ],
+                        "2024-11-01": [
+                            {
+                                "end": "19:00",
+                                "start": "09:00"
+                            }
+                        ],
+                        "2024-11-11": [
+                            {
+                                "end": "13:00",
+                                "start": "09:00"
+                            }
+                        ],
+                        "2024-12-25": []
+                    },
+                    "timezone": "Europe/Paris"
+                }
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    2.388358,
+                    48.529808
+                ]
+            }
+        },
+        "lon": 48.529808,
+        "lat": 2.388358,
+        "osm": {
+            "type": "way",
+            "id": 203077964,
+            "nodes": [
+                2130469070,
+                2130469071,
+                2130469072,
+                2130469075,
+                2130469073,
+                2130469074,
+                8745108034,
+                2130469068,
+                1241371647,
+                783175007,
+                783160772,
+                783306609,
+                2130469067,
+                2130469066,
+                2130469065,
+                2130469069,
+                2130469070
+            ],
+            "brand": "Carrefour Market",
+            "brand:wikidata": "Q2689639",
+            "brand:wikipedia": "fr:Carrefour Market",
+            "building": "retail",
+            "name": "Carrefour Market",
+            "operator": "Carrefour",
+            "shop": "supermarket",
+            "source": "cadastre-dgi-fr source : Direction Générale des Impôts - Cadastre. Mise à jour : 2014",
+            "osm_url": "https://www.openstreetmap.org/way/203077964",
+            "osm_url_edit": "https://www.openstreetmap.org/edit?way=203077964"
+        },
+        "osm_area": "https://www.openstreetmap.org/?mlat=48.529808&mlon=2.388358#map=19/48.529808/2.388358"
+    },
+    {
+        "f": {
+            "type": "Feature",
+            "properties": {
+                "store_id": "1697",
+                "name": "Express Chevreuse",
+                "contact": {
+                    "email": "",
+                    "phone": "0033130051982",
+                    "website": "https://www.carrefour.fr/magasin/express-chevreuse"
+                },
+                "address": {
+                    "lines": [
+                        "76 Avenue De La Division Leclerc"
+                    ],
+                    "country_code": "FR",
+                    "city": "Chevreuse",
+                    "zipcode": "78460"
+                },
+                "user_properties": {
+                    "banner": "CARREFOUR EXPRESS",
+                    "region": "MARTIN ALEXANDRE",
+                    "services": null,
+                    "has_drive": "no",
+                    "drive_list": "[]",
+                    "store_name": "Express Chevreuse",
+                    "carrefour_pro": "no",
+                    "city_insee_code": "78160",
+                    "region_insee_code": "11",
+                    "department_insee_code": "78"
+                },
+                "tags": [
+                    "Supermarché",
+                    "Marché de produits frais",
+                    "Magasin d'alimentation bio",
+                    "Magasin de cosmétiques",
+                    "Épicerie",
+                    "Distributeur de boissons",
+                    "Fournisseur d'équipements de nettoyage et d'entretien",
+                    "Boulangerie",
+                    "Produits laitiers",
+                    "Restauration rapide"
+                ],
+                "types": [
+                    "CARREFOUR EXPRESS"
+                ],
+                "last_updated": "2024-07-14T01:13:13.705637+00:00",
+                "distance": 18648.20536988,
+                "open": {
+                    "open_now": false,
+                    "open_hours": [
+                        {
+                            "end": "13:00",
+                            "start": "09:00"
+                        }
+                    ],
+                    "week_day": 7,
+                    "next_opening": {
+                        "day": "2024-07-15",
+                        "start": "08:00",
+                        "end": "21:00"
+                    }
+                },
+                "weekly_opening": {
+                    "1": {
+                        "hours": [
+                            {
+                                "end": "21:00",
+                                "start": "08:00"
+                            }
+                        ],
+                        "isSpecial": false
+                    },
+                    "2": {
+                        "hours": [
+                            {
+                                "end": "21:00",
+                                "start": "08:00"
+                            }
+                        ],
+                        "isSpecial": false
+                    },
+                    "3": {
+                        "hours": [
+                            {
+                                "end": "21:00",
+                                "start": "08:00"
+                            }
+                        ],
+                        "isSpecial": false
+                    },
+                    "4": {
+                        "hours": [
+                            {
+                                "end": "21:00",
+                                "start": "08:00"
+                            }
+                        ],
+                        "isSpecial": false
+                    },
+                    "5": {
+                        "hours": [
+                            {
+                                "end": "21:00",
+                                "start": "08:00"
+                            }
+                        ],
+                        "isSpecial": false
+                    },
+                    "6": {
+                        "hours": [
+                            {
+                                "end": "21:00",
+                                "start": "08:00"
+                            }
+                        ],
+                        "isSpecial": false
+                    },
+                    "7": {
+                        "hours": [
+                            {
+                                "end": "13:00",
+                                "start": "09:00"
+                            }
+                        ],
+                        "isSpecial": true
+                    },
+                    "timezone": "Europe/Paris"
+                },
+                "opening_hours": {
+                    "usual": {
+                        "1": [
+                            {
+                                "end": "21:00",
+                                "start": "08:00"
+                            }
+                        ],
+                        "2": [
+                            {
+                                "end": "21:00",
+                                "start": "08:00"
+                            }
+                        ],
+                        "3": [
+                            {
+                                "end": "21:00",
+                                "start": "08:00"
+                            }
+                        ],
+                        "4": [
+                            {
+                                "end": "21:00",
+                                "start": "08:00"
+                            }
+                        ],
+                        "5": [
+                            {
+                                "end": "21:00",
+                                "start": "08:00"
+                            }
+                        ],
+                        "6": [
+                            {
+                                "end": "21:00",
+                                "start": "08:00"
+                            }
+                        ],
+                        "7": [
+                            {
+                                "end": "13:00",
+                                "start": "09:00"
+                            }
+                        ]
+                    },
+                    "special": {
+                        "2024-07-14": [
+                            {
+                                "end": "13:00",
+                                "start": "09:00"
+                            }
+                        ],
+                        "2024-08-15": [
+                            {
+                                "end": "13:00",
+                                "start": "09:00"
+                            }
+                        ],
+                        "2024-11-01": [
+                            {
+                                "end": "13:00",
+                                "start": "09:00"
+                            }
+                        ],
+                        "2024-11-11": [
+                            {
+                                "end": "13:00",
+                                "start": "09:00"
+                            }
+                        ],
+                        "2024-12-25": []
+                    },
+                    "timezone": "Europe/Paris"
+                }
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    2.03937471,
+                    48.707548
+                ]
+            }
+        },
+        "lon": 48.707548,
+        "lat": 2.03937471,
+        "osm": {
+            "type": "node",
+            "id": 3832735643,
+            "lat": 48.7075136,
+            "lon": 2.039364,
+            "brand": "Carrefour Express",
+            "brand:wikidata": "Q2940190",
+            "brand:wikipedia": "fr:Carrefour Express",
+            "description:covid19": "Ferme à 19h",
+            "name": "Carrefour Express",
+            "shop": "convenience",
+            "website": "https://www.carrefour.fr/magasin/express-chevreuse",
+            "osm_url": "https://www.openstreetmap.org/node/3832735643",
+            "osm_url_edit": "https://www.openstreetmap.org/edit?node=3832735643"
+        },
+        "osm_area": "https://www.openstreetmap.org/?mlat=48.707548&mlon=2.03937471#map=19/48.707548/2.03937471"
+    },
+    {
+        "f": {
+            "type": "Feature",
+            "properties": {
+                "store_id": "7328",
+                "name": "Carrefour La Ville Du Bois",
+                "contact": {
+                    "email": "",
+                    "phone": "0033169803879",
+                    "website": "https://www.carrefour.fr/magasin/la-ville-du-bois"
+                },
+                "address": {
+                    "lines": [
+                        "5 Rue De La Croix St Jacques"
+                    ],
+                    "country_code": "FR",
+                    "city": "La Ville-Du-Bois",
+                    "zipcode": "91620"
+                },
+                "user_properties": {
+                    "banner": "CARREFOUR",
+                    "region": "DTI IDF OUEST",
+                    "services": [
+                        "Spectacles",
+                        "Wi-Fi gratuit et illimité",
+                        "Location de véhicules",
+                        "Traiteur en ligne",
+                        "Station Service",
+                        "Retrait 2 heures",
+                        "Scan Lib",
+                        "Parapharmacie",
+                        "Voyages",
+                        "Banque & Assurance"
+                    ],
+                    "has_drive": "yes",
+                    "drive_list": "[{\"serviceInstanceKey\": \"7328-310-51\", \"openingWeekPattern\": []}]",
+                    "store_name": "La Ville Du Bois",
+                    "carrefour_pro": "yes",
+                    "city_insee_code": "91665",
+                    "region_insee_code": "11",
+                    "department_insee_code": "91"
+                },
+                "tags": [
+                    "Hypermarché",
+                    "Marché de produits frais",
+                    "Magasin d'alimentation bio",
+                    "Magasin de cosmétiques",
+                    "Boulangerie",
+                    "Poissonnerie",
+                    "Boucherie-charcuterie",
+                    "Produits laitiers",
+                    "Primeur",
+                    "Magasin d'électroménager",
+                    "Restauration rapide",
+                    "Spectacles",
+                    "Wi-Fi gratuit et illimité",
+                    "Location de véhicules",
+                    "Traiteur en ligne",
+                    "Station Service",
+                    "Retrait 2 heures",
+                    "Scan Lib",
+                    "Parapharmacie",
+                    "Voyages",
+                    "Banque & Assurance"
+                ],
+                "types": [
+                    "CARREFOUR"
+                ],
+                "last_updated": "2024-07-14T01:13:12.568164+00:00",
+                "distance": 21863.36343388,
+                "open": {
+                    "open_now": false,
+                    "open_hours": [],
+                    "week_day": 7,
+                    "next_opening": {
+                        "day": "2024-07-15",
+                        "start": "08:30",
+                        "end": "21:30"
+                    }
+                },
+                "weekly_opening": {
+                    "1": {
+                        "hours": [
+                            {
+                                "end": "21:30",
+                                "start": "08:30"
+                            }
+                        ],
+                        "isSpecial": false
+                    },
+                    "2": {
+                        "hours": [
+                            {
+                                "end": "21:30",
+                                "start": "08:30"
+                            }
+                        ],
+                        "isSpecial": false
+                    },
+                    "3": {
+                        "hours": [
+                            {
+                                "end": "21:30",
+                                "start": "08:30"
+                            }
+                        ],
+                        "isSpecial": false
+                    },
+                    "4": {
+                        "hours": [
+                            {
+                                "end": "21:30",
+                                "start": "08:30"
+                            }
+                        ],
+                        "isSpecial": false
+                    },
+                    "5": {
+                        "hours": [
+                            {
+                                "end": "21:30",
+                                "start": "08:30"
+                            }
+                        ],
+                        "isSpecial": false
+                    },
+                    "6": {
+                        "hours": [
+                            {
+                                "end": "21:30",
+                                "start": "08:30"
+                            }
+                        ],
+                        "isSpecial": false
+                    },
+                    "7": {
+                        "hours": [],
+                        "isSpecial": true
+                    },
+                    "timezone": "Europe/Paris"
+                },
+                "opening_hours": {
+                    "usual": {
+                        "1": [
+                            {
+                                "end": "21:30",
+                                "start": "08:30"
+                            }
+                        ],
+                        "2": [
+                            {
+                                "end": "21:30",
+                                "start": "08:30"
+                            }
+                        ],
+                        "3": [
+                            {
+                                "end": "21:30",
+                                "start": "08:30"
+                            }
+                        ],
+                        "4": [
+                            {
+                                "end": "21:30",
+                                "start": "08:30"
+                            }
+                        ],
+                        "5": [
+                            {
+                                "end": "21:30",
+                                "start": "08:30"
+                            }
+                        ],
+                        "6": [
+                            {
+                                "end": "21:30",
+                                "start": "08:30"
+                            }
+                        ],
+                        "7": []
+                    },
+                    "special": {
+                        "2024-07-14": [],
+                        "2024-08-15": [
+                            {
+                                "end": "20:00",
+                                "start": "09:00"
+                            }
+                        ],
+                        "2024-11-01": [
+                            {
+                                "end": "20:00",
+                                "start": "09:00"
+                            }
+                        ],
+                        "2024-11-11": [
+                            {
+                                "end": "19:00",
+                                "start": "09:00"
+                            }
+                        ],
+                        "2024-12-15": [
+                            {
+                                "end": "19:00",
+                                "start": "09:00"
+                            }
+                        ],
+                        "2024-12-22": [
+                            {
+                                "end": "19:00",
+                                "start": "09:00"
+                            }
+                        ],
+                        "2024-12-25": [],
+                        "2024-12-29": [
+                            {
+                                "end": "19:00",
+                                "start": "09:00"
+                            }
+                        ]
+                    },
+                    "timezone": "Europe/Paris"
+                }
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    2.27359056,
+                    48.6690996
+                ]
+            }
+        },
+        "lon": 48.6690996,
+        "lat": 2.27359056,
+        "osm": {
+            "type": "node",
+            "id": 4828653906,
+            "lat": 48.6691116,
+            "lon": 2.2733612,
+            "brand": "Carrefour",
+            "brand:wikidata": "Q217599",
+            "name": "Carrefour",
+            "shop": "supermarket",
+            "wheelchair": "yes",
+            "osm_url": "https://www.openstreetmap.org/node/4828653906",
+            "osm_url_edit": "https://www.openstreetmap.org/edit?node=4828653906"
+        },
+        "osm_area": "https://www.openstreetmap.org/?mlat=48.6690996&mlon=2.27359056#map=19/48.6690996/2.27359056"
+    },
+    {
+        "f": {
+            "type": "Feature",
+            "properties": {
+                "store_id": "7777",
+                "name": "Market Epinay-Sur-Orge",
+                "contact": {
+                    "email": "",
+                    "phone": "0033169090066",
+                    "website": "https://www.carrefour.fr/magasin/market-epinay-sur-orge"
+                },
+                "address": {
+                    "lines": [
+                        "Rd 257"
+                    ],
+                    "country_code": "FR",
+                    "city": "Epinay-Sur-Orge",
+                    "zipcode": "91360"
+                },
+                "user_properties": {
+                    "banner": "MARKET",
+                    "region": "DTI IDF OUEST",
+                    "services": [
+                        "Spectacles",
+                        "Wi-Fi gratuit et illimité",
+                        "Lavage auto",
+                        "Location de véhicules",
+                        "Traiteur en ligne",
+                        "Station Service"
+                    ],
+                    "has_drive": "yes",
+                    "drive_list": "[{\"serviceInstanceKey\": \"7777-310-264\", \"openingWeekPattern\": []}]",
+                    "store_name": "Market Epinay-Sur-Orge",
+                    "carrefour_pro": "yes",
+                    "city_insee_code": "91216",
+                    "region_insee_code": "11",
+                    "department_insee_code": "91"
+                },
+                "tags": [
+                    "Supermarché",
+                    "Marché de produits frais",
+                    "Magasin d'alimentation bio",
+                    "Magasin de cosmétiques",
+                    "Boulangerie",
+                    "Poissonnerie",
+                    "Boucherie-charcuterie",
+                    "Produits laitiers",
+                    "Primeur",
+                    "Magasin d'électroménager",
+                    "Restauration rapide",
+                    "Spectacles",
+                    "Wi-Fi gratuit et illimité",
+                    "Lavage auto",
+                    "Location de véhicules",
+                    "Traiteur en ligne",
+                    "Station Service"
+                ],
+                "types": [
+                    "MARKET"
+                ],
+                "last_updated": "2024-07-14T01:13:12.638270+00:00",
+                "distance": 25439.00110582,
+                "open": {
+                    "open_now": false,
+                    "open_hours": [
+                        {
+                            "end": "15:00",
+                            "start": "09:00"
+                        }
+                    ],
+                    "week_day": 7,
+                    "next_opening": {
+                        "day": "2024-07-15",
+                        "start": "08:30",
+                        "end": "21:00"
+                    }
+                },
+                "weekly_opening": {
+                    "1": {
+                        "hours": [
+                            {
+                                "end": "21:00",
+                                "start": "08:30"
+                            }
+                        ],
+                        "isSpecial": false
+                    },
+                    "2": {
+                        "hours": [
+                            {
+                                "end": "21:00",
+                                "start": "08:30"
+                            }
+                        ],
+                        "isSpecial": false
+                    },
+                    "3": {
+                        "hours": [
+                            {
+                                "end": "21:00",
+                                "start": "08:30"
+                            }
+                        ],
+                        "isSpecial": false
+                    },
+                    "4": {
+                        "hours": [
+                            {
+                                "end": "21:00",
+                                "start": "08:30"
+                            }
+                        ],
+                        "isSpecial": false
+                    },
+                    "5": {
+                        "hours": [
+                            {
+                                "end": "21:00",
+                                "start": "08:30"
+                            }
+                        ],
+                        "isSpecial": false
+                    },
+                    "6": {
+                        "hours": [
+                            {
+                                "end": "21:00",
+                                "start": "08:30"
+                            }
+                        ],
+                        "isSpecial": false
+                    },
+                    "7": {
+                        "hours": [
+                            {
+                                "end": "15:00",
+                                "start": "09:00"
+                            }
+                        ],
+                        "isSpecial": true
+                    },
+                    "timezone": "Europe/Paris"
+                },
+                "opening_hours": {
+                    "usual": {
+                        "1": [
+                            {
+                                "end": "21:00",
+                                "start": "08:30"
+                            }
+                        ],
+                        "2": [
+                            {
+                                "end": "21:00",
+                                "start": "08:30"
+                            }
+                        ],
+                        "3": [
+                            {
+                                "end": "21:00",
+                                "start": "08:30"
+                            }
+                        ],
+                        "4": [
+                            {
+                                "end": "21:00",
+                                "start": "08:30"
+                            }
+                        ],
+                        "5": [
+                            {
+                                "end": "21:00",
+                                "start": "08:30"
+                            }
+                        ],
+                        "6": [
+                            {
+                                "end": "21:00",
+                                "start": "08:30"
+                            }
+                        ],
+                        "7": [
+                            {
+                                "end": "12:30",
+                                "start": "08:30"
+                            }
+                        ]
+                    },
+                    "special": {
+                        "2024-07-14": [
+                            {
+                                "end": "15:00",
+                                "start": "09:00"
+                            }
+                        ],
+                        "2024-08-15": [
+                            {
+                                "end": "15:00",
+                                "start": "09:00"
+                            }
+                        ],
+                        "2024-11-01": [
+                            {
+                                "end": "20:00",
+                                "start": "09:00"
+                            }
+                        ],
+                        "2024-11-11": [
+                            {
+                                "end": "20:00",
+                                "start": "09:00"
+                            }
+                        ],
+                        "2024-12-22": [
+                            {
+                                "end": "20:00",
+                                "start": "09:00"
+                            }
+                        ],
+                        "2024-12-25": [],
+                        "2024-12-29": [
+                            {
+                                "end": "20:00",
+                                "start": "09:00"
+                            }
+                        ]
+                    },
+                    "timezone": "Europe/Paris"
+                }
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    2.335828391540513,
+                    48.66805703945595
+                ]
+            }
+        },
+        "lon": 48.66805703945595,
+        "lat": 2.335828391540513,
+        "osm": {
+            "type": "way",
+            "id": 155517683,
+            "nodes": [
+                1679040071,
+                1679040127,
+                1679040141,
+                4151010562,
+                1679041043,
+                1679040983,
+                1679041200,
+                4153412410,
+                4153412413,
+                4153412419,
+                4153424849,
+                4153412422,
+                4153412426,
+                1679042118,
+                4153412428,
+                4153412430,
+                1679042436,
+                1679042544,
+                1679042546,
+                4151010566,
+                1679042647,
+                1679042643,
+                1679042829,
+                4153412452,
+                4153412451,
+                4153412450,
+                7411866757,
+                7411866758,
+                7411866760,
+                7411866759,
+                7411866762,
+                7411866761,
+                7411866763,
+                7411866764,
+                7411866767,
+                7411866766,
+                7411866765,
+                1679039714,
+                1679039764,
+                1679039883,
+                4153412391,
+                4153424845,
+                4153412392,
+                1679039943,
+                1679039893,
+                4153412389,
+                4153412390,
+                2272608906,
+                1679040071
+            ],
+            "brand": "Carrefour Market",
+            "brand:wikidata": "Q2689639",
+            "brand:wikipedia": "fr:Carrefour Market",
+            "building": "retail",
+            "name": "Carrefour Market",
+            "operator": "Carrefour",
+            "shop": "supermarket",
+            "source": "cadastre-dgi-fr source : Direction Générale des Impôts - Cadastre. Mise à jour : 2012",
+            "source:brand": "User:\"Olyon\"; changeset: \"58864859\"",
+            "osm_url": "https://www.openstreetmap.org/way/155517683",
+            "osm_url_edit": "https://www.openstreetmap.org/edit?way=155517683"
+        },
+        "osm_area": "https://www.openstreetmap.org/?mlat=48.66805703945595&mlon=2.335828391540513#map=19/48.66805703945595/2.335828391540513"
+    },
+    {
+        "f": {
+            "type": "Feature",
+            "properties": {
+                "store_id": "0033",
+                "name": "Carrefour Etampes",
+                "contact": {
+                    "email": "",
+                    "phone": "0033160808179",
+                    "website": "https://www.carrefour.fr/magasin/etampes"
+                },
+                "address": {
+                    "lines": [
+                        "Avenue Bonneveaux"
+                    ],
+                    "country_code": "FR",
+                    "city": "Etampes",
+                    "zipcode": "91150"
+                },
+                "user_properties": {
+                    "banner": "CARREFOUR",
+                    "region": "DTI IDF OUEST",
+                    "services": [
+                        "Spectacles",
+                        "Wi-Fi gratuit et illimité",
+                        "Location de véhicules",
+                        "Traiteur en ligne",
+                        "Station Service",
+                        "Retrait 2 heures",
+                        "Scan Lib",
+                        "Banque & Assurance",
+                        "Voyages"
+                    ],
+                    "has_drive": "yes",
+                    "drive_list": "[{\"serviceInstanceKey\": \"0033-310-49\", \"openingWeekPattern\": []}]",
+                    "store_name": "Etampes",
+                    "carrefour_pro": "yes",
+                    "city_insee_code": "91223",
+                    "region_insee_code": "11",
+                    "department_insee_code": "91"
+                },
+                "tags": [
+                    "Hypermarché",
+                    "Marché de produits frais",
+                    "Magasin d'alimentation bio",
+                    "Magasin de cosmétiques",
+                    "Boulangerie",
+                    "Poissonnerie",
+                    "Boucherie-charcuterie",
+                    "Produits laitiers",
+                    "Primeur",
+                    "Magasin d'électroménager",
+                    "Restauration rapide",
+                    "Spectacles",
+                    "Wi-Fi gratuit et illimité",
+                    "Location de véhicules",
+                    "Traiteur en ligne",
+                    "Station Service",
+                    "Retrait 2 heures",
+                    "Scan Lib",
+                    "Banque & Assurance",
+                    "Voyages"
+                ],
+                "types": [
+                    "CARREFOUR"
+                ],
+                "last_updated": "2024-07-14T01:13:12.571154+00:00",
+                "distance": 14690.53311676,
+                "open": {
+                    "open_now": false,
+                    "open_hours": [],
+                    "week_day": 7,
+                    "next_opening": {
+                        "day": "2024-07-15",
+                        "start": "08:30",
+                        "end": "20:30"
+                    }
+                },
+                "weekly_opening": {
+                    "1": {
+                        "hours": [
+                            {
+                                "end": "20:30",
+                                "start": "08:30"
+                            }
+                        ],
+                        "isSpecial": false
+                    },
+                    "2": {
+                        "hours": [
+                            {
+                                "end": "20:30",
+                                "start": "08:30"
+                            }
+                        ],
+                        "isSpecial": false
+                    },
+                    "3": {
+                        "hours": [
+                            {
+                                "end": "20:30",
+                                "start": "08:30"
+                            }
+                        ],
+                        "isSpecial": false
+                    },
+                    "4": {
+                        "hours": [
+                            {
+                                "end": "20:30",
+                                "start": "08:30"
+                            }
+                        ],
+                        "isSpecial": false
+                    },
+                    "5": {
+                        "hours": [
+                            {
+                                "end": "21:30",
+                                "start": "08:30"
+                            }
+                        ],
+                        "isSpecial": false
+                    },
+                    "6": {
+                        "hours": [
+                            {
+                                "end": "20:30",
+                                "start": "08:30"
+                            }
+                        ],
+                        "isSpecial": false
+                    },
+                    "7": {
+                        "hours": [],
+                        "isSpecial": true
+                    },
+                    "timezone": "Europe/Paris"
+                },
+                "opening_hours": {
+                    "usual": {
+                        "1": [
+                            {
+                                "end": "20:30",
+                                "start": "08:30"
+                            }
+                        ],
+                        "2": [
+                            {
+                                "end": "20:30",
+                                "start": "08:30"
+                            }
+                        ],
+                        "3": [
+                            {
+                                "end": "20:30",
+                                "start": "08:30"
+                            }
+                        ],
+                        "4": [
+                            {
+                                "end": "20:30",
+                                "start": "08:30"
+                            }
+                        ],
+                        "5": [
+                            {
+                                "end": "21:30",
+                                "start": "08:30"
+                            }
+                        ],
+                        "6": [
+                            {
+                                "end": "20:30",
+                                "start": "08:30"
+                            }
+                        ],
+                        "7": []
+                    },
+                    "special": {
+                        "2024-07-14": [],
+                        "2024-08-15": [
+                            {
+                                "end": "20:00",
+                                "start": "09:00"
+                            }
+                        ],
+                        "2024-11-01": [
+                            {
+                                "end": "20:00",
+                                "start": "09:00"
+                            }
+                        ],
+                        "2024-11-11": [
+                            {
+                                "end": "20:00",
+                                "start": "09:00"
+                            }
+                        ],
+                        "2024-12-15": [
+                            {
+                                "end": "19:00",
+                                "start": "09:00"
+                            }
+                        ],
+                        "2024-12-22": [
+                            {
+                                "end": "19:00",
+                                "start": "09:00"
+                            }
+                        ],
+                        "2024-12-25": [],
+                        "2024-12-29": [
+                            {
+                                "end": "19:00",
+                                "start": "09:00"
+                            }
+                        ]
+                    },
+                    "timezone": "Europe/Paris"
+                }
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    2.159903,
+                    48.429932
+                ]
+            }
+        },
+        "lon": 48.429932,
+        "lat": 2.159903,
+        "osm": {
+            "type": "way",
+            "id": 80468982,
+            "nodes": [
+                938824499,
+                938781640,
+                938758503,
+                938852016,
+                938754542,
+                938833457,
+                938767213,
+                938834762,
+                938788401,
+                938791547,
+                938769728,
+                938757542,
+                938757897,
+                938838798,
+                938757855,
+                938811604,
+                938788235,
+                938813948,
+                938820044,
+                938853771,
+                938807180,
+                938760273,
+                938790577,
+                938830653,
+                938766598,
+                938801907,
+                938854001,
+                938758384,
+                938785585,
+                938763746,
+                938781465,
+                938831361,
+                938806087,
+                938838107,
+                938788952,
+                938802849,
+                938768183,
+                938757244,
+                938767877,
+                938794315,
+                938794258,
+                938759502,
+                938824499
+            ],
+            "brand": "Carrefour",
+            "brand:wikidata": "Q217599",
+            "building": "retail",
+            "building:levels": "1",
+            "name": "Carrefour",
+            "opening_hours": "Mo-Sa 08:00-19:00",
+            "operator": "Carrefour",
+            "shop": "supermarket",
+            "source": "cadastre-dgi-fr source : Direction Générale des Impôts - Cadastre. Mise à jour : 2010",
+            "website": "https://www.carrefour.fr/magasin/etampes",
+            "osm_url": "https://www.openstreetmap.org/way/80468982",
+            "osm_url_edit": "https://www.openstreetmap.org/edit?way=80468982"
+        },
+        "osm_area": "https://www.openstreetmap.org/?mlat=48.429932&mlon=2.159903#map=19/48.429932/2.159903"
+    },
+    {
+        "f": {
+            "type": "Feature",
+            "properties": {
+                "store_id": "1827",
+                "name": "Market Saulx-Les-Chartreux",
+                "contact": {
+                    "email": "",
+                    "phone": "0033169091134",
+                    "website": "https://www.carrefour.fr/magasin/market-saulx-les-chartreux"
+                },
+                "address": {
+                    "lines": [
+                        "1 Rue Du Pont Neuf"
+                    ],
+                    "country_code": "FR",
+                    "city": "Saulx-Les-Chartreux",
+                    "zipcode": "91160"
+                },
+                "user_properties": {
+                    "banner": "MARKET",
+                    "region": "DTF IDF",
+                    "services": [
+                        "Location de véhicules",
+                        "Station Service"
+                    ],
+                    "has_drive": "yes",
+                    "drive_list": "[{\"serviceInstanceKey\": \"1827-308-1342\", \"openingWeekPattern\": []}]",
+                    "store_name": "Market Saulx-Les-Chartreux",
+                    "carrefour_pro": "no",
+                    "city_insee_code": "91587",
+                    "region_insee_code": "11",
+                    "department_insee_code": "91"
+                },
+                "tags": [
+                    "Supermarché",
+                    "Marché de produits frais",
+                    "Magasin d'alimentation bio",
+                    "Magasin de cosmétiques",
+                    "Boulangerie",
+                    "Poissonnerie",
+                    "Boucherie-charcuterie",
+                    "Produits laitiers",
+                    "Primeur",
+                    "Magasin d'électroménager",
+                    "Restauration rapide",
+                    "Location de véhicules",
+                    "Station Service"
+                ],
+                "types": [
+                    "MARKET"
+                ],
+                "last_updated": "2024-07-14T01:13:13.734608+00:00",
+                "distance": 24206.35116794,
+                "open": {
+                    "open_now": true,
+                    "open_hours": [
+                        {
+                            "end": "19:00",
+                            "start": "09:00"
+                        }
+                    ],
+                    "week_day": 7,
+                    "current_slice": {
+                        "end": "19:00",
+                        "start": "09:00"
+                    }
+                },
+                "weekly_opening": {
+                    "1": {
+                        "hours": [
+                            {
+                                "end": "20:00",
+                                "start": "08:30"
+                            }
+                        ],
+                        "isSpecial": false
+                    },
+                    "2": {
+                        "hours": [
+                            {
+                                "end": "20:00",
+                                "start": "08:30"
+                            }
+                        ],
+                        "isSpecial": false
+                    },
+                    "3": {
+                        "hours": [
+                            {
+                                "end": "20:00",
+                                "start": "08:30"
+                            }
+                        ],
+                        "isSpecial": false
+                    },
+                    "4": {
+                        "hours": [
+                            {
+                                "end": "20:00",
+                                "start": "08:30"
+                            }
+                        ],
+                        "isSpecial": false
+                    },
+                    "5": {
+                        "hours": [
+                            {
+                                "end": "20:00",
+                                "start": "08:30"
+                            }
+                        ],
+                        "isSpecial": false
+                    },
+                    "6": {
+                        "hours": [
+                            {
+                                "end": "20:00",
+                                "start": "08:30"
+                            }
+                        ],
+                        "isSpecial": false
+                    },
+                    "7": {
+                        "hours": [
+                            {
+                                "end": "19:00",
+                                "start": "09:00"
+                            }
+                        ],
+                        "isSpecial": true
+                    },
+                    "timezone": "Europe/Paris"
+                },
+                "opening_hours": {
+                    "usual": {
+                        "1": [
+                            {
+                                "end": "20:00",
+                                "start": "08:30"
+                            }
+                        ],
+                        "2": [
+                            {
+                                "end": "20:00",
+                                "start": "08:30"
+                            }
+                        ],
+                        "3": [
+                            {
+                                "end": "20:00",
+                                "start": "08:30"
+                            }
+                        ],
+                        "4": [
+                            {
+                                "end": "20:00",
+                                "start": "08:30"
+                            }
+                        ],
+                        "5": [
+                            {
+                                "end": "20:00",
+                                "start": "08:30"
+                            }
+                        ],
+                        "6": [
+                            {
+                                "end": "20:00",
+                                "start": "08:30"
+                            }
+                        ],
+                        "7": [
+                            {
+                                "end": "13:00",
+                                "start": "09:00"
+                            }
+                        ]
+                    },
+                    "special": {
+                        "2024-07-14": [
+                            {
+                                "end": "19:00",
+                                "start": "09:00"
+                            }
+                        ],
+                        "2024-08-15": [
+                            {
+                                "end": "14:00",
+                                "start": "09:00"
+                            }
+                        ],
+                        "2024-11-01": [
+                            {
+                                "end": "19:00",
+                                "start": "09:00"
+                            }
+                        ],
+                        "2024-11-11": [
+                            {
+                                "end": "19:00",
+                                "start": "09:00"
+                            }
+                        ],
+                        "2024-12-25": [],
+                        "2025-01-01": [],
+                        "2025-04-21": [],
+                        "2025-05-01": [],
+                        "2025-05-08": [],
+                        "2025-05-29": [],
+                        "2025-06-09": [],
+                        "2025-07-14": [],
+                        "2025-08-15": [],
+                        "2025-11-01": [],
+                        "2025-11-11": [],
+                        "2025-12-25": []
+                    },
+                    "timezone": "Europe/Paris"
+                }
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    2.28233866,
+                    48.69379474
+                ]
+            }
+        },
+        "lon": 48.69379474,
+        "lat": 2.28233866,
+        "osm": {
+            "type": "way",
+            "id": 146300345,
+            "nodes": [
+                1595671145,
+                1595670783,
+                1595670874,
+                1595671220,
+                1595671145
+            ],
+            "brand": "Carrefour Market",
+            "brand:wikidata": "Q2689639",
+            "brand:wikipedia": "fr:Carrefour Market",
+            "building": "retail",
+            "description:covid19": "De 8h30 à 9h30 : réservé aux personnes de plus de 70 ans, femmes enceintes, personnes handicapées, personnel soignant – sur présentation d’une carte d’identité ou d’une carte professionnelle.",
+            "name": "Carrefour Market",
+            "opening_hours": "Mo-Sa 08:30-09:30 \"prioritaires\"; Mo-Sa 09:30-19:00",
+            "shop": "supermarket",
+            "source": "cadastre-dgi-fr source : Direction Générale des Impôts - Cadastre. Mise à jour : 2012",
+            "supermarket": "yes",
+            "supermarket:FR": "supermarché",
+            "website": "https://www.carrefour.fr/magasin/market-saulx-les-chartreux",
+            "osm_url": "https://www.openstreetmap.org/way/146300345",
+            "osm_url_edit": "https://www.openstreetmap.org/edit?way=146300345"
+        },
+        "osm_area": "https://www.openstreetmap.org/?mlat=48.69379474&mlon=2.28233866#map=19/48.69379474/2.28233866"
+    },
+    {
+        "f": {
+            "type": "Feature",
+            "properties": {
+                "store_id": "7151",
+                "name": "Contact Bonnelles",
+                "contact": {
+                    "email": "",
+                    "phone": "0033177370602",
+                    "website": "https://www.carrefour.fr/magasin/contact-bonnelles"
+                },
+                "address": {
+                    "lines": [
+                        "47 Avenue De La Division Leclerc"
+                    ],
+                    "country_code": "FR",
+                    "city": "Bonnelles",
+                    "zipcode": "78830"
+                },
+                "user_properties": {
+                    "banner": "CARREFOUR CONTACT",
+                    "region": "MARTIN ALEXANDRE",
+                    "services": null,
+                    "has_drive": "no",
+                    "drive_list": "[]",
+                    "store_name": "Contact Bonnelles",
+                    "carrefour_pro": "no",
+                    "city_insee_code": "78087",
+                    "region_insee_code": "11",
+                    "department_insee_code": "78"
+                },
+                "tags": [
+                    "Supermarché",
+                    "Marché de produits frais",
+                    "Magasin d'alimentation bio",
+                    "Magasin de cosmétiques",
+                    "Épicerie",
+                    "Distributeur de boissons",
+                    "Fournisseur d'équipements de nettoyage et d'entretien",
+                    "Boulangerie",
+                    "Produits laitiers",
+                    "Restauration rapide"
+                ],
+                "types": [
+                    "CARREFOUR CONTACT"
+                ],
+                "last_updated": "2024-07-14T01:13:13.670502+00:00",
+                "distance": 8503.4298655,
+                "open": {
+                    "open_now": false,
+                    "open_hours": [
+                        {
+                            "end": "13:00",
+                            "start": "09:00"
+                        }
+                    ],
+                    "week_day": 7,
+                    "next_opening": {
+                        "day": "2024-07-15",
+                        "start": "08:00",
+                        "end": "20:00"
+                    }
+                },
+                "weekly_opening": {
+                    "1": {
+                        "hours": [
+                            {
+                                "end": "20:00",
+                                "start": "08:00"
+                            }
+                        ],
+                        "isSpecial": false
+                    },
+                    "2": {
+                        "hours": [
+                            {
+                                "end": "20:00",
+                                "start": "08:00"
+                            }
+                        ],
+                        "isSpecial": false
+                    },
+                    "3": {
+                        "hours": [
+                            {
+                                "end": "20:00",
+                                "start": "08:00"
+                            }
+                        ],
+                        "isSpecial": false
+                    },
+                    "4": {
+                        "hours": [
+                            {
+                                "end": "20:00",
+                                "start": "08:00"
+                            }
+                        ],
+                        "isSpecial": false
+                    },
+                    "5": {
+                        "hours": [
+                            {
+                                "end": "20:00",
+                                "start": "08:00"
+                            }
+                        ],
+                        "isSpecial": false
+                    },
+                    "6": {
+                        "hours": [
+                            {
+                                "end": "20:00",
+                                "start": "08:00"
+                            }
+                        ],
+                        "isSpecial": false
+                    },
+                    "7": {
+                        "hours": [
+                            {
+                                "end": "13:00",
+                                "start": "09:00"
+                            }
+                        ],
+                        "isSpecial": true
+                    },
+                    "timezone": "Europe/Paris"
+                },
+                "opening_hours": {
+                    "usual": {
+                        "1": [
+                            {
+                                "end": "20:00",
+                                "start": "08:00"
+                            }
+                        ],
+                        "2": [
+                            {
+                                "end": "20:00",
+                                "start": "08:00"
+                            }
+                        ],
+                        "3": [
+                            {
+                                "end": "20:00",
+                                "start": "08:00"
+                            }
+                        ],
+                        "4": [
+                            {
+                                "end": "20:00",
+                                "start": "08:00"
+                            }
+                        ],
+                        "5": [
+                            {
+                                "end": "20:00",
+                                "start": "08:00"
+                            }
+                        ],
+                        "6": [
+                            {
+                                "end": "20:00",
+                                "start": "08:00"
+                            }
+                        ],
+                        "7": [
+                            {
+                                "end": "13:00",
+                                "start": "09:00"
+                            }
+                        ]
+                    },
+                    "special": {
+                        "2024-07-14": [
+                            {
+                                "end": "13:00",
+                                "start": "09:00"
+                            }
+                        ],
+                        "2024-08-15": [
+                            {
+                                "end": "13:00",
+                                "start": "09:00"
+                            }
+                        ],
+                        "2024-11-01": [
+                            {
+                                "end": "13:00",
+                                "start": "09:00"
+                            }
+                        ],
+                        "2024-11-11": [
+                            {
+                                "end": "13:00",
+                                "start": "09:00"
+                            }
+                        ],
+                        "2024-12-25": []
+                    },
+                    "timezone": "Europe/Paris"
+                }
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    2.02699865,
+                    48.61492997
+                ]
+            }
+        },
+        "lon": 48.61492997,
+        "lat": 2.02699865,
+        "osm": {
+            "type": "way",
+            "id": 185617032,
+            "nodes": [
+                1962645359,
+                1962645365,
+                1962645366,
+                1962645367,
+                1962645364,
+                1962645362,
+                1962645360,
+                1962645359
+            ],
+            "brand": "Carrefour Contact",
+            "brand:wikidata": "Q2940188",
+            "brand:wikipedia": "fr:Carrefour Contact",
+            "name": "Carrefour Contact",
+            "operator": "Carrefour",
+            "shop": "supermarket",
+            "supermarket": "yes",
+            "supermarket:FR": "supermarché",
+            "website": "https://www.carrefour.fr/magasin/contact-bonnelles",
+            "osm_url": "https://www.openstreetmap.org/way/185617032",
+            "osm_url_edit": "https://www.openstreetmap.org/edit?way=185617032"
+        },
+        "osm_area": "https://www.openstreetmap.org/?mlat=48.61492997&mlon=2.02699865#map=19/48.61492997/2.02699865"
+    },
+    {
+        "f": {
+            "type": "Feature",
+            "properties": {
+                "store_id": "5247",
+                "name": "City Le Mesnil Saint Denis Husson",
+                "contact": {
+                    "email": "",
+                    "phone": "0033134618641",
+                    "website": "https://www.carrefour.fr/magasin/city-le-mesnil-saint-denis-husson"
+                },
+                "address": {
+                    "lines": [
+                        "38-40 Rue Henri Husson"
+                    ],
+                    "country_code": "FR",
+                    "city": "Le Mesnil-Saint-Denis",
+                    "zipcode": "78320"
+                },
+                "user_properties": {
+                    "banner": "CARREFOUR CITY",
+                    "region": "MARTIN ALEXANDRE",
+                    "services": null,
+                    "has_drive": "no",
+                    "drive_list": "[]",
+                    "store_name": "City Le Mesnil Saint Denis Husson",
+                    "carrefour_pro": "no",
+                    "city_insee_code": "78397",
+                    "region_insee_code": "11",
+                    "department_insee_code": "78"
+                },
+                "tags": [
+                    "Supermarché",
+                    "Marché de produits frais",
+                    "Magasin d'alimentation bio",
+                    "Magasin de cosmétiques",
+                    "Épicerie",
+                    "Distributeur de boissons",
+                    "Fournisseur d'équipements de nettoyage et d'entretien",
+                    "Boulangerie",
+                    "Produits laitiers",
+                    "Restauration rapide"
+                ],
+                "types": [
+                    "CARREFOUR CITY"
+                ],
+                "last_updated": "2024-07-14T01:13:13.139744+00:00",
+                "distance": 23334.09178078,
+                "open": {
+                    "open_now": false,
+                    "open_hours": [
+                        {
+                            "end": "13:00",
+                            "start": "09:00"
+                        }
+                    ],
+                    "week_day": 7,
+                    "next_opening": {
+                        "day": "2024-07-15",
+                        "start": "07:00",
+                        "end": "21:00"
+                    }
+                },
+                "weekly_opening": {
+                    "1": {
+                        "hours": [
+                            {
+                                "end": "21:00",
+                                "start": "07:00"
+                            }
+                        ],
+                        "isSpecial": false
+                    },
+                    "2": {
+                        "hours": [
+                            {
+                                "end": "21:00",
+                                "start": "07:00"
+                            }
+                        ],
+                        "isSpecial": false
+                    },
+                    "3": {
+                        "hours": [
+                            {
+                                "end": "21:00",
+                                "start": "07:00"
+                            }
+                        ],
+                        "isSpecial": false
+                    },
+                    "4": {
+                        "hours": [
+                            {
+                                "end": "21:00",
+                                "start": "07:00"
+                            }
+                        ],
+                        "isSpecial": false
+                    },
+                    "5": {
+                        "hours": [
+                            {
+                                "end": "21:00",
+                                "start": "07:00"
+                            }
+                        ],
+                        "isSpecial": false
+                    },
+                    "6": {
+                        "hours": [
+                            {
+                                "end": "21:00",
+                                "start": "07:00"
+                            }
+                        ],
+                        "isSpecial": false
+                    },
+                    "7": {
+                        "hours": [
+                            {
+                                "end": "13:00",
+                                "start": "09:00"
+                            }
+                        ],
+                        "isSpecial": true
+                    },
+                    "timezone": "Europe/Paris"
+                },
+                "opening_hours": {
+                    "usual": {
+                        "1": [
+                            {
+                                "end": "21:00",
+                                "start": "07:00"
+                            }
+                        ],
+                        "2": [
+                            {
+                                "end": "21:00",
+                                "start": "07:00"
+                            }
+                        ],
+                        "3": [
+                            {
+                                "end": "21:00",
+                                "start": "07:00"
+                            }
+                        ],
+                        "4": [
+                            {
+                                "end": "21:00",
+                                "start": "07:00"
+                            }
+                        ],
+                        "5": [
+                            {
+                                "end": "21:00",
+                                "start": "07:00"
+                            }
+                        ],
+                        "6": [
+                            {
+                                "end": "21:00",
+                                "start": "07:00"
+                            }
+                        ],
+                        "7": [
+                            {
+                                "end": "13:00",
+                                "start": "08:30"
+                            }
+                        ]
+                    },
+                    "special": {
+                        "2024-07-14": [
+                            {
+                                "end": "13:00",
+                                "start": "09:00"
+                            }
+                        ],
+                        "2024-08-15": [
+                            {
+                                "end": "13:00",
+                                "start": "09:00"
+                            }
+                        ],
+                        "2024-11-01": [
+                            {
+                                "end": "13:00",
+                                "start": "09:00"
+                            }
+                        ],
+                        "2024-11-11": [
+                            {
+                                "end": "13:00",
+                                "start": "09:00"
+                            }
+                        ],
+                        "2024-12-25": []
+                    },
+                    "timezone": "Europe/Paris"
+                }
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    1.96430287,
+                    48.74200184
+                ]
+            }
+        },
+        "lon": 48.74200184,
+        "lat": 1.96430287,
+        "osm": {
+            "type": "node",
+            "id": 1668344968,
+            "lat": 48.7420858,
+            "lon": 1.9643308,
+            "brand": "Carrefour City",
+            "brand:wikidata": "Q2940187",
+            "brand:wikipedia": "fr:Carrefour City",
+            "name": "Carrefour City",
+            "operator": "Carrefour",
+            "shop": "supermarket",
+            "osm_url": "https://www.openstreetmap.org/node/1668344968",
+            "osm_url_edit": "https://www.openstreetmap.org/edit?node=1668344968"
+        },
+        "osm_area": "https://www.openstreetmap.org/?mlat=48.74200184&mlon=1.96430287#map=19/48.74200184/1.96430287"
+    },
+    {
+        "f": {
+            "type": "Feature",
+            "properties": {
+                "store_id": "5726",
+                "name": "Express Igny",
+                "contact": {
+                    "email": "",
+                    "phone": "0033169411750",
+                    "website": "https://www.carrefour.fr/magasin/express-igny"
+                },
+                "address": {
+                    "lines": [
+                        "20 R. Pierre Lescaut"
+                    ],
+                    "country_code": "FR",
+                    "city": "Igny",
+                    "zipcode": "91430"
+                },
+                "user_properties": {
+                    "banner": "CARREFOUR EXPRESS",
+                    "region": "ALIX ARNAUD",
+                    "services": null,
+                    "has_drive": "no",
+                    "drive_list": "[]",
+                    "store_name": "Express Igny",
+                    "carrefour_pro": "no",
+                    "city_insee_code": "91312",
+                    "region_insee_code": "11",
+                    "department_insee_code": "91"
+                },
+                "tags": [
+                    "Supermarché",
+                    "Marché de produits frais",
+                    "Magasin d'alimentation bio",
+                    "Magasin de cosmétiques",
+                    "Épicerie",
+                    "Distributeur de boissons",
+                    "Fournisseur d'équipements de nettoyage et d'entretien",
+                    "Boulangerie",
+                    "Produits laitiers",
+                    "Restauration rapide"
+                ],
+                "types": [
+                    "CARREFOUR EXPRESS"
+                ],
+                "last_updated": "2024-07-14T01:13:13.669132+00:00",
+                "distance": 24949.80486757,
+                "open": {
+                    "open_now": false,
+                    "open_hours": [
+                        {
+                            "end": "13:00",
+                            "start": "09:00"
+                        }
+                    ],
+                    "week_day": 7,
+                    "next_opening": {
+                        "day": "2024-07-15",
+                        "start": "08:00",
+                        "end": "20:00"
+                    }
+                },
+                "weekly_opening": {
+                    "1": {
+                        "hours": [
+                            {
+                                "end": "20:00",
+                                "start": "08:00"
+                            }
+                        ],
+                        "isSpecial": false
+                    },
+                    "2": {
+                        "hours": [
+                            {
+                                "end": "20:00",
+                                "start": "08:00"
+                            }
+                        ],
+                        "isSpecial": false
+                    },
+                    "3": {
+                        "hours": [
+                            {
+                                "end": "20:00",
+                                "start": "08:00"
+                            }
+                        ],
+                        "isSpecial": false
+                    },
+                    "4": {
+                        "hours": [
+                            {
+                                "end": "20:00",
+                                "start": "08:00"
+                            }
+                        ],
+                        "isSpecial": false
+                    },
+                    "5": {
+                        "hours": [
+                            {
+                                "end": "20:00",
+                                "start": "08:00"
+                            }
+                        ],
+                        "isSpecial": false
+                    },
+                    "6": {
+                        "hours": [
+                            {
+                                "end": "20:00",
+                                "start": "08:00"
+                            }
+                        ],
+                        "isSpecial": false
+                    },
+                    "7": {
+                        "hours": [
+                            {
+                                "end": "13:00",
+                                "start": "09:00"
+                            }
+                        ],
+                        "isSpecial": true
+                    },
+                    "timezone": "Europe/Paris"
+                },
+                "opening_hours": {
+                    "usual": {
+                        "1": [
+                            {
+                                "end": "20:00",
+                                "start": "08:00"
+                            }
+                        ],
+                        "2": [
+                            {
+                                "end": "20:00",
+                                "start": "08:00"
+                            }
+                        ],
+                        "3": [
+                            {
+                                "end": "20:00",
+                                "start": "08:00"
+                            }
+                        ],
+                        "4": [
+                            {
+                                "end": "20:00",
+                                "start": "08:00"
+                            }
+                        ],
+                        "5": [
+                            {
+                                "end": "20:00",
+                                "start": "08:00"
+                            }
+                        ],
+                        "6": [
+                            {
+                                "end": "20:00",
+                                "start": "08:00"
+                            }
+                        ],
+                        "7": [
+                            {
+                                "end": "12:30",
+                                "start": "08:30"
+                            }
+                        ]
+                    },
+                    "special": {
+                        "2024-07-14": [
+                            {
+                                "end": "13:00",
+                                "start": "09:00"
+                            }
+                        ],
+                        "2024-08-15": [
+                            {
+                                "end": "20:00",
+                                "start": "09:00"
+                            }
+                        ],
+                        "2024-11-01": [
+                            {
+                                "end": "20:00",
+                                "start": "09:00"
+                            }
+                        ],
+                        "2024-11-11": [
+                            {
+                                "end": "20:00",
+                                "start": "09:00"
+                            }
+                        ],
+                        "2024-12-25": []
+                    },
+                    "timezone": "Europe/Paris"
+                }
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    2.22205381,
+                    48.73322359
+                ]
+            }
+        },
+        "lon": 48.73322359,
+        "lat": 2.22205381,
+        "osm": {
+            "type": "node",
+            "id": 2311546301,
+            "lat": 48.7332216,
+            "lon": 2.2220885,
+            "addr:city": "Igny",
+            "addr:housenumber": "20",
+            "addr:postcode": "91430",
+            "addr:street": "Rue Pierre Lescot",
+            "brand": "Carrefour Express",
+            "brand:wikidata": "Q2940190",
+            "brand:wikipedia": "fr:Carrefour Express",
+            "name": "Carrefour Express",
+            "opening_hours": "Mo-Sa 08:00-20:00; Su 08:30-12:30;",
+            "post_office:parcel_pickup": "yes",
+            "shop": "convenience",
+            "website": "https://www.carrefour.fr/magasin/express-igny",
+            "osm_url": "https://www.openstreetmap.org/node/2311546301",
+            "osm_url_edit": "https://www.openstreetmap.org/edit?node=2311546301"
+        },
+        "osm_area": "https://www.openstreetmap.org/?mlat=48.73322359&mlon=2.22205381#map=19/48.73322359/2.22205381"
+    },
+    {
+        "f": {
+            "type": "Feature",
+            "properties": {
+                "store_id": "3297",
+                "name": "City Sainte Genevieve Des Bois Longpont",
+                "contact": {
+                    "email": "",
+                    "phone": "0033165159132",
+                    "website": "https://www.carrefour.fr/magasin/city-sainte-genevieve-des-bois-longpont"
+                },
+                "address": {
+                    "lines": [
+                        "140 Route De Longpont"
+                    ],
+                    "country_code": "FR",
+                    "city": "Sainte Genevieve Des Bois",
+                    "zipcode": "91700"
+                },
+                "user_properties": {
+                    "banner": "CARREFOUR CITY",
+                    "region": "ALIX ARNAUD",
+                    "services": null,
+                    "has_drive": "no",
+                    "drive_list": "[]",
+                    "store_name": "City Sainte Genevieve Des Bois Longpont",
+                    "carrefour_pro": "no",
+                    "city_insee_code": "None",
+                    "region_insee_code": "None",
+                    "department_insee_code": "None"
+                },
+                "tags": [
+                    "Supermarché",
+                    "Marché de produits frais",
+                    "Magasin d'alimentation bio",
+                    "Magasin de cosmétiques",
+                    "Épicerie",
+                    "Distributeur de boissons",
+                    "Fournisseur d'équipements de nettoyage et d'entretien",
+                    "Boulangerie",
+                    "Produits laitiers",
+                    "Restauration rapide"
+                ],
+                "types": [
+                    "CARREFOUR CITY"
+                ],
+                "last_updated": "2024-07-14T01:13:13.761278+00:00",
+                "distance": 22215.65173322,
+                "open": {
+                    "open_now": false,
+                    "open_hours": [
+                        {
+                            "end": "13:00",
+                            "start": "09:00"
+                        }
+                    ],
+                    "week_day": 7,
+                    "next_opening": {
+                        "day": "2024-07-15",
+                        "start": "07:00",
+                        "end": "21:00"
+                    }
+                },
+                "weekly_opening": {
+                    "1": {
+                        "hours": [
+                            {
+                                "end": "21:00",
+                                "start": "07:00"
+                            }
+                        ],
+                        "isSpecial": false
+                    },
+                    "2": {
+                        "hours": [
+                            {
+                                "end": "21:00",
+                                "start": "07:00"
+                            }
+                        ],
+                        "isSpecial": false
+                    },
+                    "3": {
+                        "hours": [
+                            {
+                                "end": "21:00",
+                                "start": "07:00"
+                            }
+                        ],
+                        "isSpecial": false
+                    },
+                    "4": {
+                        "hours": [
+                            {
+                                "end": "21:00",
+                                "start": "07:00"
+                            }
+                        ],
+                        "isSpecial": false
+                    },
+                    "5": {
+                        "hours": [
+                            {
+                                "end": "21:00",
+                                "start": "07:00"
+                            }
+                        ],
+                        "isSpecial": false
+                    },
+                    "6": {
+                        "hours": [
+                            {
+                                "end": "21:00",
+                                "start": "07:00"
+                            }
+                        ],
+                        "isSpecial": false
+                    },
+                    "7": {
+                        "hours": [
+                            {
+                                "end": "13:00",
+                                "start": "09:00"
+                            }
+                        ],
+                        "isSpecial": true
+                    },
+                    "timezone": "Europe/Paris"
+                },
+                "opening_hours": {
+                    "usual": {
+                        "1": [
+                            {
+                                "end": "21:00",
+                                "start": "07:00"
+                            }
+                        ],
+                        "2": [
+                            {
+                                "end": "21:00",
+                                "start": "07:00"
+                            }
+                        ],
+                        "3": [
+                            {
+                                "end": "21:00",
+                                "start": "07:00"
+                            }
+                        ],
+                        "4": [
+                            {
+                                "end": "21:00",
+                                "start": "07:00"
+                            }
+                        ],
+                        "5": [
+                            {
+                                "end": "21:00",
+                                "start": "07:00"
+                            }
+                        ],
+                        "6": [
+                            {
+                                "end": "21:00",
+                                "start": "07:00"
+                            }
+                        ],
+                        "7": [
+                            {
+                                "end": "13:00",
+                                "start": "09:00"
+                            }
+                        ]
+                    },
+                    "special": {
+                        "2024-07-14": [
+                            {
+                                "end": "13:00",
+                                "start": "09:00"
+                            }
+                        ],
+                        "2024-08-15": [
+                            {
+                                "end": "20:00",
+                                "start": "09:00"
+                            }
+                        ],
+                        "2024-11-01": [
+                            {
+                                "end": "20:00",
+                                "start": "09:00"
+                            }
+                        ],
+                        "2024-11-11": [
+                            {
+                                "end": "20:00",
+                                "start": "09:00"
+                            }
+                        ],
+                        "2024-12-25": [
+                            {
+                                "end": "20:00",
+                                "start": "09:00"
+                            }
+                        ]
+                    },
+                    "timezone": "Europe/Paris"
+                }
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    2.30287465,
+                    48.6485086
+                ]
+            }
+        },
+        "lon": 48.6485086,
+        "lat": 2.30287465,
+        "osm": {
+            "type": "way",
+            "id": 549024940,
+            "nodes": [
+                1489100484,
+                1489100309,
+                1489098497,
+                1489097589,
+                1489098454,
+                1489100189,
+                1489100929,
+                1489100484
+            ],
+            "LIB_DEPART_GEO": "Essonne",
+            "addr:city": "Sainte-Geneviève-des-Bois",
+            "addr:housenumber": "140",
+            "addr:postcode": "91700",
+            "addr:street": "Route de Longpont",
+            "brand": "Carrefour City",
+            "brand:wikidata": "Q2940187",
+            "building": "retail",
+            "name": "Carrefour City",
+            "shop": "supermarket",
+            "source": "cadastre-dgi-fr source : Direction Générale des Impôts - Cadastre. Mise à jour : 2011",
+            "supermarket": "yes",
+            "supermarket:FR": "supermarché",
+            "website": "https://www.carrefour.fr/magasin/city-sainte-genevieve-des-bois-longpont",
+            "osm_url": "https://www.openstreetmap.org/way/549024940",
+            "osm_url_edit": "https://www.openstreetmap.org/edit?way=549024940"
+        },
+        "osm_area": "https://www.openstreetmap.org/?mlat=48.6485086&mlon=2.30287465#map=19/48.6485086/2.30287465"
+    },
+    {
+        "f": {
+            "type": "Feature",
+            "properties": {
+                "store_id": "2704",
+                "name": "Contact Epinay Sur Orge",
+                "contact": {
+                    "email": "",
+                    "phone": "0033169109286",
+                    "website": "https://www.carrefour.fr/magasin/contact-epinay-sur-orge"
+                },
+                "address": {
+                    "lines": [
+                        "142 Grande Rue"
+                    ],
+                    "country_code": "FR",
+                    "city": "Epinay Sur Orge",
+                    "zipcode": "91360"
+                },
+                "user_properties": {
+                    "banner": "CARREFOUR CONTACT",
+                    "region": "ALIX ARNAUD",
+                    "services": null,
+                    "has_drive": "yes",
+                    "drive_list": "[{\"serviceInstanceKey\": \"2704-294-801171\", \"openingWeekPattern\": []}]",
+                    "store_name": "Contact Epinay Sur Orge",
+                    "carrefour_pro": "no",
+                    "city_insee_code": "91216",
+                    "region_insee_code": "11",
+                    "department_insee_code": "91"
+                },
+                "tags": [
+                    "Supermarché",
+                    "Marché de produits frais",
+                    "Magasin d'alimentation bio",
+                    "Magasin de cosmétiques",
+                    "Épicerie",
+                    "Distributeur de boissons",
+                    "Fournisseur d'équipements de nettoyage et d'entretien",
+                    "Boulangerie",
+                    "Produits laitiers",
+                    "Restauration rapide"
+                ],
+                "types": [
+                    "CARREFOUR CONTACT"
+                ],
+                "last_updated": "2024-07-14T01:13:13.724499+00:00",
+                "distance": 25203.84930747,
+                "open": {
+                    "open_now": false,
+                    "open_hours": [
+                        {
+                            "end": "13:00",
+                            "start": "08:00"
+                        }
+                    ],
+                    "week_day": 7,
+                    "next_opening": {
+                        "day": "2024-07-15",
+                        "start": "08:00",
+                        "end": "20:00"
+                    }
+                },
+                "weekly_opening": {
+                    "1": {
+                        "hours": [
+                            {
+                                "end": "20:00",
+                                "start": "08:00"
+                            }
+                        ],
+                        "isSpecial": false
+                    },
+                    "2": {
+                        "hours": [
+                            {
+                                "end": "20:00",
+                                "start": "08:00"
+                            }
+                        ],
+                        "isSpecial": false
+                    },
+                    "3": {
+                        "hours": [
+                            {
+                                "end": "20:00",
+                                "start": "08:00"
+                            }
+                        ],
+                        "isSpecial": false
+                    },
+                    "4": {
+                        "hours": [
+                            {
+                                "end": "20:00",
+                                "start": "08:00"
+                            }
+                        ],
+                        "isSpecial": false
+                    },
+                    "5": {
+                        "hours": [
+                            {
+                                "end": "20:00",
+                                "start": "08:00"
+                            }
+                        ],
+                        "isSpecial": false
+                    },
+                    "6": {
+                        "hours": [
+                            {
+                                "end": "20:00",
+                                "start": "08:00"
+                            }
+                        ],
+                        "isSpecial": false
+                    },
+                    "7": {
+                        "hours": [
+                            {
+                                "end": "13:00",
+                                "start": "08:00"
+                            }
+                        ],
+                        "isSpecial": true
+                    },
+                    "timezone": "Europe/Paris"
+                },
+                "opening_hours": {
+                    "usual": {
+                        "1": [
+                            {
+                                "end": "20:00",
+                                "start": "08:00"
+                            }
+                        ],
+                        "2": [
+                            {
+                                "end": "20:00",
+                                "start": "08:00"
+                            }
+                        ],
+                        "3": [
+                            {
+                                "end": "20:00",
+                                "start": "08:00"
+                            }
+                        ],
+                        "4": [
+                            {
+                                "end": "20:00",
+                                "start": "08:00"
+                            }
+                        ],
+                        "5": [
+                            {
+                                "end": "20:00",
+                                "start": "08:00"
+                            }
+                        ],
+                        "6": [
+                            {
+                                "end": "20:00",
+                                "start": "08:00"
+                            }
+                        ],
+                        "7": [
+                            {
+                                "end": "13:00",
+                                "start": "09:00"
+                            }
+                        ]
+                    },
+                    "special": {
+                        "2024-07-14": [
+                            {
+                                "end": "13:00",
+                                "start": "08:00"
+                            }
+                        ],
+                        "2024-08-15": [
+                            {
+                                "end": "20:00",
+                                "start": "08:00"
+                            }
+                        ],
+                        "2024-11-01": [
+                            {
+                                "end": "20:00",
+                                "start": "08:00"
+                            }
+                        ],
+                        "2024-11-11": [
+                            {
+                                "end": "20:00",
+                                "start": "08:00"
+                            }
+                        ],
+                        "2024-12-25": []
+                    },
+                    "timezone": "Europe/Paris"
+                }
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    2.318933,
+                    48.679877
+                ]
+            }
+        },
+        "lon": 48.679877,
+        "lat": 2.318933,
+        "osm": {
+            "type": "node",
+            "id": 2647325834,
+            "lat": 48.6790811,
+            "lon": 2.3187534,
+            "brand": "Carrefour Contact",
+            "brand:wikidata": "Q2940188",
+            "brand:wikipedia": "fr:Carrefour Contact",
+            "name": "Carrefour Contact",
+            "shop": "supermarket",
+            "website": "https://www.carrefour.fr/magasin/contact-epinay-sur-orge",
+            "osm_url": "https://www.openstreetmap.org/node/2647325834",
+            "osm_url_edit": "https://www.openstreetmap.org/edit?node=2647325834"
+        },
+        "osm_area": "https://www.openstreetmap.org/?mlat=48.679877&mlon=2.318933#map=19/48.679877/2.318933"
+    },
+    {
+        "f": {
+            "type": "Feature",
+            "properties": {
+                "store_id": "6378",
+                "name": "City Palaiseau",
+                "contact": {
+                    "email": "",
+                    "phone": "",
+                    "website": "https://www.carrefour.fr/magasin/city-palaiseau"
+                },
+                "address": {
+                    "lines": [
+                        "Route De Saclay"
+                    ],
+                    "country_code": "FR",
+                    "city": "Palaiseau",
+                    "zipcode": "91120"
+                },
+                "user_properties": {
+                    "banner": "CARREFOUR CITY",
+                    "region": "ALIX ARNAUD",
+                    "services": null,
+                    "has_drive": "no",
+                    "drive_list": "[]",
+                    "store_name": "City Palaiseau",
+                    "carrefour_pro": "no",
+                    "city_insee_code": "91477",
+                    "region_insee_code": "11",
+                    "department_insee_code": "91"
+                },
+                "tags": [
+                    "Supermarché",
+                    "Marché de produits frais",
+                    "Magasin d'alimentation bio",
+                    "Magasin de cosmétiques",
+                    "Épicerie",
+                    "Distributeur de boissons",
+                    "Fournisseur d'équipements de nettoyage et d'entretien",
+                    "Boulangerie",
+                    "Produits laitiers",
+                    "Restauration rapide"
+                ],
+                "types": [
+                    "CARREFOUR CITY"
+                ],
+                "last_updated": "2024-07-14T01:13:13.737307+00:00",
+                "distance": 23904.39331473,
+                "open": {
+                    "open_now": false,
+                    "open_hours": [
+                        {
+                            "end": "13:00",
+                            "start": "09:00"
+                        }
+                    ],
+                    "week_day": 7,
+                    "next_opening": {
+                        "day": "2024-07-15",
+                        "start": "07:00",
+                        "end": "22:00"
+                    }
+                },
+                "weekly_opening": {
+                    "1": {
+                        "hours": [
+                            {
+                                "end": "22:00",
+                                "start": "07:00"
+                            }
+                        ],
+                        "isSpecial": false
+                    },
+                    "2": {
+                        "hours": [
+                            {
+                                "end": "22:00",
+                                "start": "07:00"
+                            }
+                        ],
+                        "isSpecial": false
+                    },
+                    "3": {
+                        "hours": [
+                            {
+                                "end": "22:00",
+                                "start": "07:00"
+                            }
+                        ],
+                        "isSpecial": false
+                    },
+                    "4": {
+                        "hours": [
+                            {
+                                "end": "22:00",
+                                "start": "07:00"
+                            }
+                        ],
+                        "isSpecial": false
+                    },
+                    "5": {
+                        "hours": [
+                            {
+                                "end": "22:00",
+                                "start": "07:00"
+                            }
+                        ],
+                        "isSpecial": false
+                    },
+                    "6": {
+                        "hours": [
+                            {
+                                "end": "22:00",
+                                "start": "07:00"
+                            }
+                        ],
+                        "isSpecial": false
+                    },
+                    "7": {
+                        "hours": [
+                            {
+                                "end": "13:00",
+                                "start": "09:00"
+                            }
+                        ],
+                        "isSpecial": true
+                    },
+                    "timezone": "Europe/Paris"
+                },
+                "opening_hours": {
+                    "usual": {
+                        "1": [
+                            {
+                                "end": "22:00",
+                                "start": "07:00"
+                            }
+                        ],
+                        "2": [
+                            {
+                                "end": "22:00",
+                                "start": "07:00"
+                            }
+                        ],
+                        "3": [
+                            {
+                                "end": "22:00",
+                                "start": "07:00"
+                            }
+                        ],
+                        "4": [
+                            {
+                                "end": "22:00",
+                                "start": "07:00"
+                            }
+                        ],
+                        "5": [
+                            {
+                                "end": "22:00",
+                                "start": "07:00"
+                            }
+                        ],
+                        "6": [
+                            {
+                                "end": "22:00",
+                                "start": "07:00"
+                            }
+                        ],
+                        "7": [
+                            {
+                                "end": "13:00",
+                                "start": "09:00"
+                            }
+                        ]
+                    },
+                    "special": {
+                        "2024-07-14": [
+                            {
+                                "end": "13:00",
+                                "start": "09:00"
+                            }
+                        ],
+                        "2024-08-15": [
+                            {
+                                "end": "21:00",
+                                "start": "09:00"
+                            }
+                        ],
+                        "2024-11-01": [
+                            {
+                                "end": "21:00",
+                                "start": "09:00"
+                            }
+                        ],
+                        "2024-11-11": [
+                            {
+                                "end": "21:00",
+                                "start": "09:00"
+                            }
+                        ],
+                        "2024-12-25": [
+                            {
+                                "end": "21:00",
+                                "start": "09:00"
+                            }
+                        ]
+                    },
+                    "timezone": "Europe/Paris"
+                }
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    2.23366561,
+                    48.71716156
+                ]
+            }
+        },
+        "lon": 48.71716156,
+        "lat": 2.23366561,
+        "osm": {
+            "type": "node",
+            "id": 4056193698,
+            "lat": 48.7169612,
+            "lon": 2.2335408,
+            "brand": "Carrefour City",
+            "brand:wikidata": "Q2940187",
+            "brand:wikipedia": "fr:Carrefour City",
+            "name": "Carrefour City",
+            "opening_hours": "Mo-Sa 07:00-22:00; Su 09:00-22:00",
+            "operator": "Carrefour",
+            "shop": "supermarket",
+            "website": "https://www.carrefour.fr/magasin/city-palaiseau",
+            "wheelchair": "yes",
+            "osm_url": "https://www.openstreetmap.org/node/4056193698",
+            "osm_url_edit": "https://www.openstreetmap.org/edit?node=4056193698"
+        },
+        "osm_area": "https://www.openstreetmap.org/?mlat=48.71716156&mlon=2.23366561#map=19/48.71716156/2.23366561"
+    },
+    {
+        "f": {
+            "type": "Feature",
+            "properties": {
+                "store_id": "7869",
+                "name": "Market Limours",
+                "contact": {
+                    "email": "",
+                    "phone": "0033164914080",
+                    "website": "https://www.carrefour.fr/magasin/market-limours"
+                },
+                "address": {
+                    "lines": [
+                        "Rn 152 Route D'arpajon"
+                    ],
+                    "country_code": "FR",
+                    "city": "Limours",
+                    "zipcode": "91470"
+                },
+                "user_properties": {
+                    "banner": "MARKET",
+                    "region": "DTI IDF OUEST",
+                    "services": [
+                        "Spectacles",
+                        "Wi-Fi gratuit et illimité",
+                        "Location de véhicules",
+                        "Traiteur en ligne"
+                    ],
+                    "has_drive": "yes",
+                    "drive_list": "[{\"serviceInstanceKey\": \"7869-310-452\", \"openingWeekPattern\": []}]",
+                    "store_name": "Market Limours",
+                    "carrefour_pro": "yes",
+                    "city_insee_code": "91338",
+                    "region_insee_code": "11",
+                    "department_insee_code": "91"
+                },
+                "tags": [
+                    "Supermarché",
+                    "Marché de produits frais",
+                    "Magasin d'alimentation bio",
+                    "Magasin de cosmétiques",
+                    "Boulangerie",
+                    "Poissonnerie",
+                    "Boucherie-charcuterie",
+                    "Produits laitiers",
+                    "Primeur",
+                    "Magasin d'électroménager",
+                    "Restauration rapide",
+                    "Spectacles",
+                    "Wi-Fi gratuit et illimité",
+                    "Location de véhicules",
+                    "Traiteur en ligne"
+                ],
+                "types": [
+                    "MARKET"
+                ],
+                "last_updated": "2024-07-14T01:13:12.622271+00:00",
+                "distance": 11783.6289088,
+                "open": {
+                    "open_now": false,
+                    "open_hours": [
+                        {
+                            "end": "12:30",
+                            "start": "09:00"
+                        }
+                    ],
+                    "week_day": 7,
+                    "next_opening": {
+                        "day": "2024-07-15",
+                        "start": "08:30",
+                        "end": "20:00"
+                    }
+                },
+                "weekly_opening": {
+                    "1": {
+                        "hours": [
+                            {
+                                "end": "20:00",
+                                "start": "08:30"
+                            }
+                        ],
+                        "isSpecial": false
+                    },
+                    "2": {
+                        "hours": [
+                            {
+                                "end": "20:00",
+                                "start": "08:30"
+                            }
+                        ],
+                        "isSpecial": false
+                    },
+                    "3": {
+                        "hours": [
+                            {
+                                "end": "20:00",
+                                "start": "08:30"
+                            }
+                        ],
+                        "isSpecial": false
+                    },
+                    "4": {
+                        "hours": [
+                            {
+                                "end": "20:00",
+                                "start": "08:30"
+                            }
+                        ],
+                        "isSpecial": false
+                    },
+                    "5": {
+                        "hours": [
+                            {
+                                "end": "20:00",
+                                "start": "08:30"
+                            }
+                        ],
+                        "isSpecial": false
+                    },
+                    "6": {
+                        "hours": [
+                            {
+                                "end": "20:00",
+                                "start": "08:30"
+                            }
+                        ],
+                        "isSpecial": false
+                    },
+                    "7": {
+                        "hours": [
+                            {
+                                "end": "12:30",
+                                "start": "09:00"
+                            }
+                        ],
+                        "isSpecial": true
+                    },
+                    "timezone": "Europe/Paris"
+                },
+                "opening_hours": {
+                    "usual": {
+                        "1": [
+                            {
+                                "end": "20:00",
+                                "start": "08:30"
+                            }
+                        ],
+                        "2": [
+                            {
+                                "end": "20:00",
+                                "start": "08:30"
+                            }
+                        ],
+                        "3": [
+                            {
+                                "end": "20:00",
+                                "start": "08:30"
+                            }
+                        ],
+                        "4": [
+                            {
+                                "end": "20:00",
+                                "start": "08:30"
+                            }
+                        ],
+                        "5": [
+                            {
+                                "end": "20:00",
+                                "start": "08:30"
+                            }
+                        ],
+                        "6": [
+                            {
+                                "end": "20:00",
+                                "start": "08:30"
+                            }
+                        ],
+                        "7": [
+                            {
+                                "end": "12:30",
+                                "start": "08:30"
+                            }
+                        ]
+                    },
+                    "special": {
+                        "2024-07-14": [
+                            {
+                                "end": "12:30",
+                                "start": "09:00"
+                            }
+                        ],
+                        "2024-08-15": [
+                            {
+                                "end": "19:00",
+                                "start": "09:00"
+                            }
+                        ],
+                        "2024-11-01": [
+                            {
+                                "end": "20:00",
+                                "start": "09:00"
+                            }
+                        ],
+                        "2024-11-11": [
+                            {
+                                "end": "12:30",
+                                "start": "09:00"
+                            }
+                        ],
+                        "2024-12-25": []
+                    },
+                    "timezone": "Europe/Paris"
+                }
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    2.089942,
+                    48.6426
+                ]
+            }
+        },
+        "lon": 48.6426,
+        "lat": 2.089942,
+        "osm": {
+            "type": "way",
+            "id": 134957699,
+            "nodes": [
+                1482773883,
+                1482773766,
+                1482773775,
+                1482772701,
+                1482772671,
+                1482772501,
+                1482772496,
+                1482772268,
+                1482772159,
+                1482772123,
+                1482772108,
+                8091545797,
+                8091545796,
+                1482772269,
+                1482772355,
+                1482772354,
+                1482773203,
+                1482773231,
+                1482773427,
+                1482773449,
+                1482773710,
+                1482773883
+            ],
+            "addr:city": "Limours",
+            "addr:postcode": "91470",
+            "addr:street": "Rue d'Arpajon",
+            "brand": "Carrefour Market",
+            "brand:wikidata": "Q2689639",
+            "brand:wikipedia": "fr:Carrefour Market",
+            "building": "retail",
+            "building:levels": "2",
+            "check_date": "2023-05-10",
+            "drive_through": "yes",
+            "name": "Carrefour Market",
+            "nohousenumber": "yes",
+            "opening_hours": "Mo-Tu 08:30-20:00; We 08:30-20:30; Th-Sa 08:30-20:00",
+            "operator": "Carrefour",
+            "roof:colour": "grey",
+            "shop": "supermarket",
+            "website": "https://www.carrefour.fr/magasin/market-limours",
+            "osm_url": "https://www.openstreetmap.org/way/134957699",
+            "osm_url_edit": "https://www.openstreetmap.org/edit?way=134957699"
+        },
+        "osm_area": "https://www.openstreetmap.org/?mlat=48.6426&mlon=2.089942#map=19/48.6426/2.089942"
+    },
+    {
+        "f": {
+            "type": "Feature",
+            "properties": {
+                "store_id": "7795",
+                "name": "Market Marolles-En-Hurepoix",
+                "contact": {
+                    "email": "",
+                    "phone": "0033164568282",
+                    "website": "https://www.carrefour.fr/magasin/market-marolles-en-hurepoix"
+                },
+                "address": {
+                    "lines": [
+                        "rue De La Gare"
+                    ],
+                    "country_code": "FR",
+                    "city": "Marolles En Hurepoix",
+                    "zipcode": "91630"
+                },
+                "user_properties": {
+                    "banner": "CARREFOUR MARKET",
+                    "region": "DTF IDF",
+                    "services": null,
+                    "has_drive": "yes",
+                    "drive_list": "[{\"serviceInstanceKey\": \"7795-310-586\", \"openingWeekPattern\": []}]",
+                    "store_name": "Market Marolles-En-Hurepoix",
+                    "carrefour_pro": "no",
+                    "city_insee_code": "91376",
+                    "region_insee_code": "11",
+                    "department_insee_code": "91"
+                },
+                "tags": [
+                    "Supermarché",
+                    "Marché de produits frais",
+                    "Magasin d'alimentation bio",
+                    "Magasin de cosmétiques",
+                    "Boulangerie",
+                    "Poissonnerie",
+                    "Boucherie-charcuterie",
+                    "Produits laitiers",
+                    "Primeur",
+                    "Magasin d'électroménager",
+                    "Restauration rapide"
+                ],
+                "types": [
+                    "CARREFOUR MARKET"
+                ],
+                "last_updated": "2024-07-14T01:13:12.609863+00:00",
+                "distance": 18101.12291002,
+                "open": {
+                    "open_now": true,
+                    "open_hours": [
+                        {
+                            "end": "19:00",
+                            "start": "09:00"
+                        }
+                    ],
+                    "week_day": 7,
+                    "current_slice": {
+                        "end": "19:00",
+                        "start": "09:00"
+                    }
+                },
+                "weekly_opening": {
+                    "1": {
+                        "hours": [
+                            {
+                                "end": "20:00",
+                                "start": "08:30"
+                            }
+                        ],
+                        "isSpecial": false
+                    },
+                    "2": {
+                        "hours": [
+                            {
+                                "end": "20:00",
+                                "start": "08:30"
+                            }
+                        ],
+                        "isSpecial": false
+                    },
+                    "3": {
+                        "hours": [
+                            {
+                                "end": "20:00",
+                                "start": "08:30"
+                            }
+                        ],
+                        "isSpecial": false
+                    },
+                    "4": {
+                        "hours": [
+                            {
+                                "end": "20:00",
+                                "start": "08:30"
+                            }
+                        ],
+                        "isSpecial": false
+                    },
+                    "5": {
+                        "hours": [
+                            {
+                                "end": "20:00",
+                                "start": "08:30"
+                            }
+                        ],
+                        "isSpecial": false
+                    },
+                    "6": {
+                        "hours": [
+                            {
+                                "end": "20:00",
+                                "start": "08:30"
+                            }
+                        ],
+                        "isSpecial": false
+                    },
+                    "7": {
+                        "hours": [
+                            {
+                                "end": "19:00",
+                                "start": "09:00"
+                            }
+                        ],
+                        "isSpecial": true
+                    },
+                    "timezone": "Europe/Paris"
+                },
+                "opening_hours": {
+                    "usual": {
+                        "1": [
+                            {
+                                "end": "20:00",
+                                "start": "08:30"
+                            }
+                        ],
+                        "2": [
+                            {
+                                "end": "20:00",
+                                "start": "08:30"
+                            }
+                        ],
+                        "3": [
+                            {
+                                "end": "20:00",
+                                "start": "08:30"
+                            }
+                        ],
+                        "4": [
+                            {
+                                "end": "20:00",
+                                "start": "08:30"
+                            }
+                        ],
+                        "5": [
+                            {
+                                "end": "20:00",
+                                "start": "08:30"
+                            }
+                        ],
+                        "6": [
+                            {
+                                "end": "20:00",
+                                "start": "08:30"
+                            }
+                        ],
+                        "7": [
+                            {
+                                "end": "12:30",
+                                "start": "09:00"
+                            }
+                        ]
+                    },
+                    "special": {
+                        "2024-07-14": [
+                            {
+                                "end": "19:00",
+                                "start": "09:00"
+                            }
+                        ],
+                        "2024-08-15": [
+                            {
+                                "end": "13:00",
+                                "start": "09:00"
+                            }
+                        ],
+                        "2024-11-01": [
+                            {
+                                "end": "13:00",
+                                "start": "09:00"
+                            }
+                        ],
+                        "2024-11-11": [
+                            {
+                                "end": "19:00",
+                                "start": "09:00"
+                            }
+                        ],
+                        "2024-12-25": []
+                    },
+                    "timezone": "Europe/Paris"
+                }
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    2.292251,
+                    48.565127
+                ]
+            }
+        },
+        "lon": 48.565127,
+        "lat": 2.292251,
+        "osm": {
+            "type": "way",
+            "id": 107375120,
+            "nodes": [
+                1234160188,
+                1234156038,
+                1234151201,
+                1234144522,
+                1234138944,
+                1234136267,
+                1234159794,
+                1234155485,
+                1234136752,
+                1234140304,
+                1234132622,
+                1234143661,
+                1234160188
+            ],
+            "addr:city": "Marolles-en-Hurepoix",
+            "addr:full": "Rue de la Gare 91630 Marolles-en-Hurepoix",
+            "addr:postcode": "91630",
+            "brand": "Carrefour Market",
+            "brand:wikidata": "Q2689639",
+            "brand:wikipedia": "fr:Carrefour Market",
+            "building": "retail",
+            "comment": "correction osmose",
+            "name": "Carrefour Market",
+            "operator": "Carrefour",
+            "shop": "supermarket",
+            "source": "cadastre 2013",
+            "website": "https://www.carrefour.fr/magasin/market-marolles-en-hurepoix",
+            "osm_url": "https://www.openstreetmap.org/way/107375120",
+            "osm_url_edit": "https://www.openstreetmap.org/edit?way=107375120"
+        },
+        "osm_area": "https://www.openstreetmap.org/?mlat=48.565127&mlon=2.292251#map=19/48.565127/2.292251"
+    },
+    {
+        "f": {
+            "type": "Feature",
+            "properties": {
+                "store_id": "7784",
+                "name": "Market Guyancourt",
+                "contact": {
+                    "email": "",
+                    "phone": "0033130485151",
+                    "website": "https://www.carrefour.fr/magasin/market-guyancourt"
+                },
+                "address": {
+                    "lines": [
+                        "47 rue G. Haussmann"
+                    ],
+                    "country_code": "FR",
+                    "city": "Guyancourt",
+                    "zipcode": "78280"
+                },
+                "user_properties": {
+                    "banner": "CARREFOUR MARKET",
+                    "region": "DTF IDF",
+                    "services": null,
+                    "has_drive": "yes",
+                    "drive_list": "[{\"serviceInstanceKey\": \"7784-310-410\", \"openingWeekPattern\": []}]",
+                    "store_name": "Market Guyancourt",
+                    "carrefour_pro": "no",
+                    "city_insee_code": "78297",
+                    "region_insee_code": "11",
+                    "department_insee_code": "78"
+                },
+                "tags": [
+                    "Supermarché",
+                    "Marché de produits frais",
+                    "Magasin d'alimentation bio",
+                    "Magasin de cosmétiques",
+                    "Boulangerie",
+                    "Poissonnerie",
+                    "Boucherie-charcuterie",
+                    "Produits laitiers",
+                    "Primeur",
+                    "Magasin d'électroménager",
+                    "Restauration rapide"
+                ],
+                "types": [
+                    "CARREFOUR MARKET"
+                ],
+                "last_updated": "2024-07-14T01:13:12.616561+00:00",
+                "distance": 25336.9387739,
+                "open": {
+                    "open_now": true,
+                    "open_hours": [
+                        {
+                            "end": "20:00",
+                            "start": "09:00"
+                        }
+                    ],
+                    "week_day": 7,
+                    "current_slice": {
+                        "end": "20:00",
+                        "start": "09:00"
+                    }
+                },
+                "weekly_opening": {
+                    "1": {
+                        "hours": [
+                            {
+                                "end": "20:30",
+                                "start": "08:30"
+                            }
+                        ],
+                        "isSpecial": false
+                    },
+                    "2": {
+                        "hours": [
+                            {
+                                "end": "20:30",
+                                "start": "08:30"
+                            }
+                        ],
+                        "isSpecial": false
+                    },
+                    "3": {
+                        "hours": [
+                            {
+                                "end": "20:30",
+                                "start": "08:30"
+                            }
+                        ],
+                        "isSpecial": false
+                    },
+                    "4": {
+                        "hours": [
+                            {
+                                "end": "20:30",
+                                "start": "08:30"
+                            }
+                        ],
+                        "isSpecial": false
+                    },
+                    "5": {
+                        "hours": [
+                            {
+                                "end": "20:30",
+                                "start": "08:30"
+                            }
+                        ],
+                        "isSpecial": false
+                    },
+                    "6": {
+                        "hours": [
+                            {
+                                "end": "20:30",
+                                "start": "08:30"
+                            }
+                        ],
+                        "isSpecial": false
+                    },
+                    "7": {
+                        "hours": [
+                            {
+                                "end": "20:00",
+                                "start": "09:00"
+                            }
+                        ],
+                        "isSpecial": true
+                    },
+                    "timezone": "Europe/Paris"
+                },
+                "opening_hours": {
+                    "usual": {
+                        "1": [
+                            {
+                                "end": "20:30",
+                                "start": "08:30"
+                            }
+                        ],
+                        "2": [
+                            {
+                                "end": "20:30",
+                                "start": "08:30"
+                            }
+                        ],
+                        "3": [
+                            {
+                                "end": "20:30",
+                                "start": "08:30"
+                            }
+                        ],
+                        "4": [
+                            {
+                                "end": "20:30",
+                                "start": "08:30"
+                            }
+                        ],
+                        "5": [
+                            {
+                                "end": "20:30",
+                                "start": "08:30"
+                            }
+                        ],
+                        "6": [
+                            {
+                                "end": "20:30",
+                                "start": "08:30"
+                            }
+                        ],
+                        "7": [
+                            {
+                                "end": "20:00",
+                                "start": "08:30"
+                            }
+                        ]
+                    },
+                    "special": {
+                        "2024-07-14": [
+                            {
+                                "end": "20:00",
+                                "start": "09:00"
+                            }
+                        ],
+                        "2024-08-15": [
+                            {
+                                "end": "20:00",
+                                "start": "09:00"
+                            }
+                        ],
+                        "2024-11-01": [
+                            {
+                                "end": "20:00",
+                                "start": "09:00"
+                            }
+                        ],
+                        "2024-11-11": [
+                            {
+                                "end": "20:00",
+                                "start": "09:00"
+                            }
+                        ],
+                        "2024-12-24": [
+                            {
+                                "end": "20:00",
+                                "start": "09:00"
+                            }
+                        ],
+                        "2024-12-25": [
+                            {
+                                "end": "20:00",
+                                "start": "09:00"
+                            }
+                        ],
+                        "2024-12-31": [
+                            {
+                                "end": "20:00",
+                                "start": "09:00"
+                            }
+                        ]
+                    },
+                    "timezone": "Europe/Paris"
+                }
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    2.07894111,
+                    48.76703568
+                ]
+            }
+        },
+        "lon": 48.76703568,
+        "lat": 2.07894111,
+        "osm": {
+            "type": "node",
+            "id": 901719210,
+            "lat": 48.7669239,
+            "lon": 2.0790972,
+            "brand": "Carrefour Market",
+            "brand:wikidata": "Q2689639",
+            "brand:wikipedia": "fr:Carrefour Market",
+            "delivery:covid19": "no",
+            "name": "Carrefour Market",
+            "operator": "Carrefour",
+            "shop": "supermarket",
+            "survey:date": "2017-07-17",
+            "osm_url": "https://www.openstreetmap.org/node/901719210",
+            "osm_url_edit": "https://www.openstreetmap.org/edit?node=901719210"
+        },
+        "osm_area": "https://www.openstreetmap.org/?mlat=48.76703568&mlon=2.07894111#map=19/48.76703568/2.07894111"
+    },
+    {
+        "f": {
+            "type": "Feature",
+            "properties": {
+                "store_id": "6096",
+                "name": "Express Saint-Rémy-Lès-Chevreuse",
+                "contact": {
+                    "email": "",
+                    "phone": "0033130452401",
+                    "website": "https://www.carrefour.fr/magasin/express-saint-remy-les-chevreuse"
+                },
+                "address": {
+                    "lines": [
+                        "1 Rue De La Republique"
+                    ],
+                    "country_code": "FR",
+                    "city": "Saint-Rémy-Lès-Chevreuse",
+                    "zipcode": "78470"
+                },
+                "user_properties": {
+                    "banner": "CARREFOUR EXPRESS",
+                    "region": "MARTIN ALEXANDRE",
+                    "services": null,
+                    "has_drive": "no",
+                    "drive_list": "[]",
+                    "store_name": "Express Saint-Rémy-Lès-Chevreuse",
+                    "carrefour_pro": "no",
+                    "city_insee_code": "78575",
+                    "region_insee_code": "11",
+                    "department_insee_code": "78"
+                },
+                "tags": [
+                    "Supermarché",
+                    "Marché de produits frais",
+                    "Magasin d'alimentation bio",
+                    "Magasin de cosmétiques",
+                    "Épicerie",
+                    "Distributeur de boissons",
+                    "Fournisseur d'équipements de nettoyage et d'entretien",
+                    "Boulangerie",
+                    "Produits laitiers",
+                    "Restauration rapide"
+                ],
+                "types": [
+                    "CARREFOUR EXPRESS"
+                ],
+                "last_updated": "2024-07-14T01:13:13.240286+00:00",
+                "distance": 18494.51288713,
+                "open": {
+                    "open_now": true,
+                    "open_hours": [
+                        {
+                            "end": "20:00",
+                            "start": "09:00"
+                        }
+                    ],
+                    "week_day": 7,
+                    "current_slice": {
+                        "end": "20:00",
+                        "start": "09:00"
+                    }
+                },
+                "weekly_opening": {
+                    "1": {
+                        "hours": [
+                            {
+                                "end": "22:00",
+                                "start": "08:00"
+                            }
+                        ],
+                        "isSpecial": false
+                    },
+                    "2": {
+                        "hours": [
+                            {
+                                "end": "22:00",
+                                "start": "08:00"
+                            }
+                        ],
+                        "isSpecial": false
+                    },
+                    "3": {
+                        "hours": [
+                            {
+                                "end": "22:00",
+                                "start": "08:00"
+                            }
+                        ],
+                        "isSpecial": false
+                    },
+                    "4": {
+                        "hours": [
+                            {
+                                "end": "22:00",
+                                "start": "08:00"
+                            }
+                        ],
+                        "isSpecial": false
+                    },
+                    "5": {
+                        "hours": [
+                            {
+                                "end": "22:00",
+                                "start": "08:00"
+                            }
+                        ],
+                        "isSpecial": false
+                    },
+                    "6": {
+                        "hours": [
+                            {
+                                "end": "22:00",
+                                "start": "08:00"
+                            }
+                        ],
+                        "isSpecial": false
+                    },
+                    "7": {
+                        "hours": [
+                            {
+                                "end": "20:00",
+                                "start": "09:00"
+                            }
+                        ],
+                        "isSpecial": true
+                    },
+                    "timezone": "Europe/Paris"
+                },
+                "opening_hours": {
+                    "usual": {
+                        "1": [
+                            {
+                                "end": "22:00",
+                                "start": "08:00"
+                            }
+                        ],
+                        "2": [
+                            {
+                                "end": "22:00",
+                                "start": "08:00"
+                            }
+                        ],
+                        "3": [
+                            {
+                                "end": "22:00",
+                                "start": "08:00"
+                            }
+                        ],
+                        "4": [
+                            {
+                                "end": "22:00",
+                                "start": "08:00"
+                            }
+                        ],
+                        "5": [
+                            {
+                                "end": "22:00",
+                                "start": "08:00"
+                            }
+                        ],
+                        "6": [
+                            {
+                                "end": "22:00",
+                                "start": "08:00"
+                            }
+                        ],
+                        "7": [
+                            {
+                                "end": "20:00",
+                                "start": "09:00"
+                            }
+                        ]
+                    },
+                    "special": {
+                        "2024-07-14": [
+                            {
+                                "end": "20:00",
+                                "start": "09:00"
+                            }
+                        ],
+                        "2024-08-15": [
+                            {
+                                "end": "20:00",
+                                "start": "09:00"
+                            }
+                        ],
+                        "2024-11-01": [
+                            {
+                                "end": "20:00",
+                                "start": "09:00"
+                            }
+                        ],
+                        "2024-11-11": [
+                            {
+                                "end": "20:00",
+                                "start": "09:00"
+                            }
+                        ],
+                        "2024-12-25": [
+                            {
+                                "end": "20:00",
+                                "start": "09:00"
+                            }
+                        ]
+                    },
+                    "timezone": "Europe/Paris"
+                }
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    2.07196355,
+                    48.7056753
+                ]
+            }
+        },
+        "lon": 48.7056753,
+        "lat": 2.07196355,
+        "osm": {
+            "type": "node",
+            "id": 3837716772,
+            "lat": 48.7057481,
+            "lon": 2.0719811,
+            "addr:housenumber": "1",
+            "addr:street": "Rue de la République",
+            "brand": "Carrefour Express",
+            "brand:wikidata": "Q2940190",
+            "brand:wikipedia": "fr:Carrefour Express",
+            "name": "Carrefour Express",
+            "opening_hours": "Mo-Sa 08:00-21:00; Su 09:00-21:00",
+            "ref:FR:SIRET": "48769338400025",
+            "shop": "convenience",
+            "source": "INSEE - 06/2019",
+            "website": "https://www.carrefour.fr/magasin/express-saint-remy-les-chevreuse",
+            "osm_url": "https://www.openstreetmap.org/node/3837716772",
+            "osm_url_edit": "https://www.openstreetmap.org/edit?node=3837716772"
+        },
+        "osm_area": "https://www.openstreetmap.org/?mlat=48.7056753&mlon=2.07196355#map=19/48.7056753/2.07196355"
+    },
+    {
+        "f": {
+            "type": "Feature",
+            "properties": {
+                "store_id": "7772",
+                "name": "Market Breuillet Le Buisson Rondeau",
+                "contact": {
+                    "email": "",
+                    "phone": "0033169940101",
+                    "website": "https://www.carrefour.fr/magasin/market-breuillet-le-buisson-rondeau"
+                },
+                "address": {
+                    "lines": [
+                        "Route de Saint-Chéron"
+                    ],
+                    "country_code": "FR",
+                    "city": "Breuillet",
+                    "zipcode": "91650"
+                },
+                "user_properties": {
+                    "banner": "MARKET",
+                    "region": "DTI IDF OUEST",
+                    "services": [
+                        "Spectacles",
+                        "Location de véhicules",
+                        "Traiteur en ligne",
+                        "Station Service"
+                    ],
+                    "has_drive": "yes",
+                    "drive_list": "[{\"serviceInstanceKey\": \"7772-310-300\", \"openingWeekPattern\": []}]",
+                    "store_name": "Market Breuillet Le Buisson Rondeau",
+                    "carrefour_pro": "yes",
+                    "city_insee_code": "91105",
+                    "region_insee_code": "11",
+                    "department_insee_code": "91"
+                },
+                "tags": [
+                    "Supermarché",
+                    "Marché de produits frais",
+                    "Magasin d'alimentation bio",
+                    "Magasin de cosmétiques",
+                    "Boulangerie",
+                    "Poissonnerie",
+                    "Boucherie-charcuterie",
+                    "Produits laitiers",
+                    "Primeur",
+                    "Magasin d'électroménager",
+                    "Restauration rapide",
+                    "Spectacles",
+                    "Location de véhicules",
+                    "Traiteur en ligne",
+                    "Station Service"
+                ],
+                "types": [
+                    "MARKET"
+                ],
+                "last_updated": "2024-07-14T01:13:12.695039+00:00",
+                "distance": 8909.44091495,
+                "open": {
+                    "open_now": false,
+                    "open_hours": [
+                        {
+                            "end": "12:30",
+                            "start": "09:00"
+                        }
+                    ],
+                    "week_day": 7,
+                    "next_opening": {
+                        "day": "2024-07-15",
+                        "start": "08:30",
+                        "end": "20:30"
+                    }
+                },
+                "weekly_opening": {
+                    "1": {
+                        "hours": [
+                            {
+                                "end": "20:30",
+                                "start": "08:30"
+                            }
+                        ],
+                        "isSpecial": false
+                    },
+                    "2": {
+                        "hours": [
+                            {
+                                "end": "20:30",
+                                "start": "08:30"
+                            }
+                        ],
+                        "isSpecial": false
+                    },
+                    "3": {
+                        "hours": [
+                            {
+                                "end": "20:30",
+                                "start": "08:30"
+                            }
+                        ],
+                        "isSpecial": false
+                    },
+                    "4": {
+                        "hours": [
+                            {
+                                "end": "20:30",
+                                "start": "08:30"
+                            }
+                        ],
+                        "isSpecial": false
+                    },
+                    "5": {
+                        "hours": [
+                            {
+                                "end": "20:30",
+                                "start": "08:30"
+                            }
+                        ],
+                        "isSpecial": false
+                    },
+                    "6": {
+                        "hours": [
+                            {
+                                "end": "20:30",
+                                "start": "08:30"
+                            }
+                        ],
+                        "isSpecial": false
+                    },
+                    "7": {
+                        "hours": [
+                            {
+                                "end": "12:30",
+                                "start": "09:00"
+                            }
+                        ],
+                        "isSpecial": true
+                    },
+                    "timezone": "Europe/Paris"
+                },
+                "opening_hours": {
+                    "usual": {
+                        "1": [
+                            {
+                                "end": "20:30",
+                                "start": "08:30"
+                            }
+                        ],
+                        "2": [
+                            {
+                                "end": "20:30",
+                                "start": "08:30"
+                            }
+                        ],
+                        "3": [
+                            {
+                                "end": "20:30",
+                                "start": "08:30"
+                            }
+                        ],
+                        "4": [
+                            {
+                                "end": "20:30",
+                                "start": "08:30"
+                            }
+                        ],
+                        "5": [
+                            {
+                                "end": "20:30",
+                                "start": "08:30"
+                            }
+                        ],
+                        "6": [
+                            {
+                                "end": "20:30",
+                                "start": "08:30"
+                            }
+                        ],
+                        "7": [
+                            {
+                                "end": "12:30",
+                                "start": "08:30"
+                            }
+                        ]
+                    },
+                    "special": {
+                        "2024-07-14": [
+                            {
+                                "end": "12:30",
+                                "start": "09:00"
+                            }
+                        ],
+                        "2024-08-15": [
+                            {
+                                "end": "12:30",
+                                "start": "09:00"
+                            }
+                        ],
+                        "2024-11-01": [
+                            {
+                                "end": "20:00",
+                                "start": "09:00"
+                            }
+                        ],
+                        "2024-11-11": [
+                            {
+                                "end": "12:30",
+                                "start": "09:00"
+                            }
+                        ],
+                        "2024-12-22": [
+                            {
+                                "end": "18:00",
+                                "start": "09:00"
+                            }
+                        ],
+                        "2024-12-25": [],
+                        "2024-12-29": [
+                            {
+                                "end": "18:00",
+                                "start": "09:00"
+                            }
+                        ]
+                    },
+                    "timezone": "Europe/Paris"
+                }
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    2.162614,
+                    48.568812
+                ]
+            }
+        },
+        "lon": 48.568812,
+        "lat": 2.162614,
+        "osm": {
+            "type": "way",
+            "id": 131138572,
+            "nodes": [
+                1443680436,
+                1443679815,
+                1443679452,
+                1443679805,
+                1443679801,
+                1443680065,
+                1443680110,
+                1443680166,
+                1443680183,
+                1443680427,
+                1443680436
+            ],
+            "brand": "Carrefour Market",
+            "brand:wikidata": "Q2689639",
+            "brand:wikipedia": "fr:Carrefour Market",
+            "building": "retail",
+            "name": "Carrefour Market",
+            "shop": "supermarket",
+            "source": "cadastre-dgi-fr source : Direction Générale des Impôts - Cadastre. Mise à jour : 2011",
+            "website": "https://www.carrefour.fr/magasin/market-breuillet-le-buisson-rondeau",
+            "osm_url": "https://www.openstreetmap.org/way/131138572",
+            "osm_url_edit": "https://www.openstreetmap.org/edit?way=131138572"
+        },
+        "osm_area": "https://www.openstreetmap.org/?mlat=48.568812&mlon=2.162614#map=19/48.568812/2.162614"
+    },
+    {
+        "f": {
+            "type": "Feature",
+            "properties": {
+                "store_id": "7155",
+                "name": "Express Le Mesnil Saint Denis",
+                "contact": {
+                    "email": "",
+                    "phone": "0033134620099",
+                    "website": "https://www.carrefour.fr/magasin/express-le-mesnil-saint-denis"
+                },
+                "address": {
+                    "lines": [
+                        "92 Avenue Habert De Montmort"
+                    ],
+                    "country_code": "FR",
+                    "city": "Le Mesnil-Saint-Denis",
+                    "zipcode": "78320"
+                },
+                "user_properties": {
+                    "banner": "CARREFOUR EXPRESS",
+                    "region": "MARTIN ALEXANDRE",
+                    "services": null,
+                    "has_drive": "no",
+                    "drive_list": "[]",
+                    "store_name": "Express Le Mesnil Saint Denis",
+                    "carrefour_pro": "no",
+                    "city_insee_code": "78397",
+                    "region_insee_code": "11",
+                    "department_insee_code": "78"
+                },
+                "tags": [
+                    "Supermarché",
+                    "Marché de produits frais",
+                    "Magasin d'alimentation bio",
+                    "Magasin de cosmétiques",
+                    "Épicerie",
+                    "Distributeur de boissons",
+                    "Fournisseur d'équipements de nettoyage et d'entretien",
+                    "Boulangerie",
+                    "Produits laitiers",
+                    "Restauration rapide"
+                ],
+                "types": [
+                    "CARREFOUR EXPRESS"
+                ],
+                "last_updated": "2024-07-14T01:13:13.237139+00:00",
+                "distance": 23379.83904543,
+                "open": {
+                    "open_now": false,
+                    "open_hours": [
+                        {
+                            "end": "13:00",
+                            "start": "09:00"
+                        }
+                    ],
+                    "week_day": 7,
+                    "next_opening": {
+                        "day": "2024-07-15",
+                        "start": "08:00",
+                        "end": "20:00"
+                    }
+                },
+                "weekly_opening": {
+                    "1": {
+                        "hours": [
+                            {
+                                "end": "20:00",
+                                "start": "08:00"
+                            }
+                        ],
+                        "isSpecial": false
+                    },
+                    "2": {
+                        "hours": [
+                            {
+                                "end": "20:00",
+                                "start": "08:00"
+                            }
+                        ],
+                        "isSpecial": false
+                    },
+                    "3": {
+                        "hours": [
+                            {
+                                "end": "20:00",
+                                "start": "08:00"
+                            }
+                        ],
+                        "isSpecial": false
+                    },
+                    "4": {
+                        "hours": [
+                            {
+                                "end": "20:00",
+                                "start": "08:00"
+                            }
+                        ],
+                        "isSpecial": false
+                    },
+                    "5": {
+                        "hours": [
+                            {
+                                "end": "20:00",
+                                "start": "08:00"
+                            }
+                        ],
+                        "isSpecial": false
+                    },
+                    "6": {
+                        "hours": [
+                            {
+                                "end": "20:00",
+                                "start": "08:00"
+                            }
+                        ],
+                        "isSpecial": false
+                    },
+                    "7": {
+                        "hours": [
+                            {
+                                "end": "13:00",
+                                "start": "09:00"
+                            }
+                        ],
+                        "isSpecial": true
+                    },
+                    "timezone": "Europe/Paris"
+                },
+                "opening_hours": {
+                    "usual": {
+                        "1": [
+                            {
+                                "end": "20:00",
+                                "start": "08:00"
+                            }
+                        ],
+                        "2": [
+                            {
+                                "end": "20:00",
+                                "start": "08:00"
+                            }
+                        ],
+                        "3": [
+                            {
+                                "end": "20:00",
+                                "start": "08:00"
+                            }
+                        ],
+                        "4": [
+                            {
+                                "end": "20:00",
+                                "start": "08:00"
+                            }
+                        ],
+                        "5": [
+                            {
+                                "end": "20:00",
+                                "start": "08:00"
+                            }
+                        ],
+                        "6": [
+                            {
+                                "end": "20:00",
+                                "start": "08:00"
+                            }
+                        ],
+                        "7": [
+                            {
+                                "end": "13:00",
+                                "start": "09:00"
+                            }
+                        ]
+                    },
+                    "special": {
+                        "2024-07-14": [
+                            {
+                                "end": "13:00",
+                                "start": "09:00"
+                            }
+                        ],
+                        "2024-08-15": [
+                            {
+                                "end": "13:00",
+                                "start": "09:00"
+                            }
+                        ],
+                        "2024-11-01": [
+                            {
+                                "end": "13:00",
+                                "start": "09:00"
+                            }
+                        ],
+                        "2024-11-11": [
+                            {
+                                "end": "13:00",
+                                "start": "09:00"
+                            }
+                        ],
+                        "2024-12-25": []
+                    },
+                    "timezone": "Europe/Paris"
+                }
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    1.95019713,
+                    48.73956994
+                ]
+            }
+        },
+        "lon": 48.73956994,
+        "lat": 1.95019713,
+        "osm": {
+            "type": "node",
+            "id": 1679673572,
+            "lat": 48.7395039,
+            "lon": 1.9503335,
+            "brand": "Carrefour City",
+            "brand:wikidata": "Q2940187",
+            "brand:wikipedia": "fr:Carrefour City",
+            "name": "Carrefour City",
+            "opening_hours": "Mo-Sa 08:00-20:00; Su 09:00-13:00",
+            "operator": "Carrefour",
+            "shop": "convenience",
+            "wheelchair": "yes",
+            "osm_url": "https://www.openstreetmap.org/node/1679673572",
+            "osm_url_edit": "https://www.openstreetmap.org/edit?node=1679673572"
+        },
+        "osm_area": "https://www.openstreetmap.org/?mlat=48.73956994&mlon=1.95019713#map=19/48.73956994/1.95019713"
+    },
+    {
+        "f": {
+            "type": "Feature",
+            "properties": {
+                "store_id": "2915",
+                "name": "City Palaiseau Morere",
+                "contact": {
+                    "email": "",
+                    "phone": "0033160122839",
+                    "website": "https://www.carrefour.fr/magasin/city-palaiseau-morere"
+                },
+                "address": {
+                    "lines": [
+                        "4 Rue Du Dr Morere"
+                    ],
+                    "country_code": "FR",
+                    "city": "Palaiseau",
+                    "zipcode": "91120"
+                },
+                "user_properties": {
+                    "banner": "CARREFOUR CITY",
+                    "region": "ALIX ARNAUD",
+                    "services": null,
+                    "has_drive": "yes",
+                    "drive_list": "[{\"serviceInstanceKey\": \"2915-294-801177\", \"openingWeekPattern\": []}]",
+                    "store_name": "City Palaiseau Morere",
+                    "carrefour_pro": "no",
+                    "city_insee_code": "91477",
+                    "region_insee_code": "11",
+                    "department_insee_code": "91"
+                },
+                "tags": [
+                    "Supermarché",
+                    "Marché de produits frais",
+                    "Magasin d'alimentation bio",
+                    "Magasin de cosmétiques",
+                    "Épicerie",
+                    "Distributeur de boissons",
+                    "Fournisseur d'équipements de nettoyage et d'entretien",
+                    "Boulangerie",
+                    "Produits laitiers",
+                    "Restauration rapide"
+                ],
+                "types": [
+                    "CARREFOUR CITY"
+                ],
+                "last_updated": "2024-07-14T01:13:13.756664+00:00",
+                "distance": 23839.4960018,
+                "open": {
+                    "open_now": false,
+                    "open_hours": [
+                        {
+                            "end": "13:00",
+                            "start": "08:00"
+                        }
+                    ],
+                    "week_day": 7,
+                    "next_opening": {
+                        "day": "2024-07-15",
+                        "start": "07:00",
+                        "end": "21:00"
+                    }
+                },
+                "weekly_opening": {
+                    "1": {
+                        "hours": [
+                            {
+                                "end": "21:00",
+                                "start": "07:00"
+                            }
+                        ],
+                        "isSpecial": false
+                    },
+                    "2": {
+                        "hours": [
+                            {
+                                "end": "21:00",
+                                "start": "07:00"
+                            }
+                        ],
+                        "isSpecial": false
+                    },
+                    "3": {
+                        "hours": [
+                            {
+                                "end": "21:00",
+                                "start": "07:00"
+                            }
+                        ],
+                        "isSpecial": false
+                    },
+                    "4": {
+                        "hours": [
+                            {
+                                "end": "21:00",
+                                "start": "07:00"
+                            }
+                        ],
+                        "isSpecial": false
+                    },
+                    "5": {
+                        "hours": [
+                            {
+                                "end": "21:00",
+                                "start": "07:00"
+                            }
+                        ],
+                        "isSpecial": false
+                    },
+                    "6": {
+                        "hours": [
+                            {
+                                "end": "21:00",
+                                "start": "07:00"
+                            }
+                        ],
+                        "isSpecial": false
+                    },
+                    "7": {
+                        "hours": [
+                            {
+                                "end": "13:00",
+                                "start": "08:00"
+                            }
+                        ],
+                        "isSpecial": true
+                    },
+                    "timezone": "Europe/Paris"
+                },
+                "opening_hours": {
+                    "usual": {
+                        "1": [
+                            {
+                                "end": "21:00",
+                                "start": "07:00"
+                            }
+                        ],
+                        "2": [
+                            {
+                                "end": "21:00",
+                                "start": "07:00"
+                            }
+                        ],
+                        "3": [
+                            {
+                                "end": "21:00",
+                                "start": "07:00"
+                            }
+                        ],
+                        "4": [
+                            {
+                                "end": "21:00",
+                                "start": "07:00"
+                            }
+                        ],
+                        "5": [
+                            {
+                                "end": "21:00",
+                                "start": "07:00"
+                            }
+                        ],
+                        "6": [
+                            {
+                                "end": "21:00",
+                                "start": "07:00"
+                            }
+                        ],
+                        "7": [
+                            {
+                                "end": "13:00",
+                                "start": "08:00"
+                            }
+                        ]
+                    },
+                    "special": {
+                        "2024-07-14": [
+                            {
+                                "end": "13:00",
+                                "start": "08:00"
+                            }
+                        ],
+                        "2024-08-15": [
+                            {
+                                "end": "20:00",
+                                "start": "08:00"
+                            }
+                        ],
+                        "2024-11-01": [
+                            {
+                                "end": "20:00",
+                                "start": "08:00"
+                            }
+                        ],
+                        "2024-11-11": [
+                            {
+                                "end": "20:00",
+                                "start": "08:00"
+                            }
+                        ],
+                        "2024-12-25": []
+                    },
+                    "timezone": "Europe/Paris"
+                }
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    2.24405944,
+                    48.71148962
+                ]
+            }
+        },
+        "lon": 48.71148962,
+        "lat": 2.24405944,
+        "osm": {
+            "type": "node",
+            "id": 1826852510,
+            "lat": 48.7115154,
+            "lon": 2.2440718,
+            "brand": "Carrefour City",
+            "brand:wikidata": "Q2940187",
+            "brand:wikipedia": "fr:Carrefour City",
+            "name": "Carrefour City",
+            "shop": "supermarket",
+            "osm_url": "https://www.openstreetmap.org/node/1826852510",
+            "osm_url_edit": "https://www.openstreetmap.org/edit?node=1826852510"
+        },
+        "osm_area": "https://www.openstreetmap.org/?mlat=48.71148962&mlon=2.24405944#map=19/48.71148962/2.24405944"
+    }
+]

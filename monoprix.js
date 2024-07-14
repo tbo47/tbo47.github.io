@@ -66,7 +66,10 @@ const parseInfo = async (shops) => {
         const { phone, website } = shop.properties.contact
         try {
             const bbox = [lat - range, lon - range, lat + range, lon + range].join(',')
-            const osmShops = await openstreetmapGetPOIs(bbox, [['shop', 'supermarket']])
+            const osmShops = await openstreetmapGetPOIs(bbox, [
+                ['shop', 'supermarket'],
+                ['shop', 'convenience'],
+            ])
             shop.osm = osmShops.find((poi) => poi.brand.toLowerCase().includes('monop'))
         } catch (e) {
             console.log(e)

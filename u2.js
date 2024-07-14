@@ -1,8 +1,7 @@
 const fs = require('fs')
 
 const fetchData = async () => {
-    const res = await fetch('https://tbo47.github.io/u.json')
-    const shops = await res.json()
+    const shops = JSON.parse(fs.readFileSync('u.json'))
     const output = []
     console.log(shops)
     output.push(`<h2>Missing OSM website</h2>`)
