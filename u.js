@@ -66,14 +66,15 @@ const fetchInfo = async () => {
             const bbox = [lon - range, lat - range, lon + range, lat + range].join(',')
             const osmShops = await openstreetmapGetPOIs(bbox, [['shop', 'supermarket']])
             const osm = osmShops.find((poi) => poi.brand.toLowerCase().includes('u'))
-            const osm_area =  `https://www.openstreetmap.org/?mlat=${lon}&mlon=${lat}#map=19/${lon}/${lat}`
+            const osm_area = `https://www.openstreetmap.org/?mlat=${lon}&mlon=${lat}#map=19/${lon}/${lat}`
             const shop = { website, lon, lat, osm, osm_area }
-            console.log(shop)
             output.push(shop)
-        } catch (e) {}
+        } catch (e) {
+            console.log(e)
+        }
     })
     await Promise.all(promises)
-    fs.writeFileSync(FILE_JSON, JSON.stringify(output))
+    fs.writeFileSync(FILE_JSON, JSON.stringify(output, null, 4))
     console.log('done: ', output.length)
 }
 

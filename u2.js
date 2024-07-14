@@ -9,6 +9,7 @@ const fetchData = async () => {
     shops.map(async (shop) => {
         const { website, lon, lat, osm, osm_area } = shop
         // if (osmShop && !osmShop.website.startsWith(shopLink)) {
+        // if (!osm) {
         if (osm && !osm.website) {
             myDiv.innerHTML += `<a href="${website}" target="_blank">${website}</a> | `
             myDiv.innerHTML += `<a href="${osm.osm_url}" target="_blank">${osm.brand}</a><br>`
