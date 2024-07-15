@@ -32,7 +32,7 @@ const fetchInfo = async () => {
                 .map((co) => parseFloat(co))
             const bbox = [lon - range, lat - range, lon + range, lat + range].join(',')
             const osmShops = await openstreetmapGetPOIs(bbox)
-            const osm = osmShops.find((poi) => poi.brand.toLowerCase().includes('u'))
+            const osm = osmShops.find((poi) => poi?.brand?.toLowerCase().includes('u'))
             const osm_area = `https://www.openstreetmap.org/?mlat=${lon}&mlon=${lat}#map=19/${lon}/${lat}`
             const shop = { website, lon, lat, osm, osm_area }
             output.push(shop)
