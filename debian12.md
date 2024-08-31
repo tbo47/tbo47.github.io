@@ -1,5 +1,7 @@
 This is my [Debian](https://distrowatch.com/table.php?distribution=debian) 12 configuration after installation.
 
+Leave admin password blank to have sudo during installation.
+
 Switch to root:
 ```
 su -
@@ -18,20 +20,21 @@ Then, run the following commands:
 ```
 apt update ; apt full-upgrade -y ; apt autoremove -y
 apt install -y gnome-clocks transmission thunderbird pavucontrol gimp pdfarranger vlc chromium gnome-tweaks 
-apt install -y git ripgrep fd-find curl flatpak gnome-software-plugin-flatpak gnome-console podman
+apt install -y git ripgrep fd-find curl flatpak gnome-software-plugin-flatpak gnome-console podman amule amule-daemon
+apt remove -y firefox-esr
 flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
 flatpak install -y flathub com.discordapp.Discord
+flatpak install -y flathub org.mozilla.firefox
 flatpak install -y flathub io.neovim.nvim
-chromium https://flathub.org/apps/collection/popular
 ```
 
 Install 
 [ohmyz](https://ohmyz.sh/),
 [chrome](https://www.google.com/chrome/dr/download/), 
+[vscode](https://code.visualstudio.com/),
+[pgadmin](https://www.pgadmin.org/)
 [syncthing](https://syncthing.net/), 
 [globalprotect](https://github.com/yuezk/GlobalProtect-openconnect), 
-[vscode](https://code.visualstudio.com/),
-[pgAdmin](https://www.pgadmin.org/)
 
 For Chrome/Chromium: 
 [vimium](https://chromewebstore.google.com/detail/vimium/dbepggeogbaibhgnhhndojpepiihcmeb), 
@@ -62,22 +65,3 @@ In `.zshrc` or `.bashrc` add the following line:
 ```bash
 export NODE_OPTIONS=--max_old_space_size=8192
 ```
-
-## backup
-
-```bash
-killall Discord
-killall thunderbird
-PROJECTS_DIR=~/p/
-for VARIABLE in $(ls $PROJECTS_DIR)
-do
-    rm -rf $PROJECTS_DIR$VARIABLE"/.angular"
-    rm -rf $PROJECTS_DIR$VARIABLE"/node_modules"
-    rm -rf $PROJECTS_DIR$VARIABLE"/.venv"
-done
-# ~/.local/share/flatpak contains flatpak apps conf
-cd
-zip -r ~/bk.zip .ssh/ .zshrc Documents/ .local/ .aMule .thunderbird/ p
-```
-
-TODO sudo, amule
