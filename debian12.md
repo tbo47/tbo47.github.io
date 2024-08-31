@@ -1,6 +1,6 @@
 This is my [Debian](https://distrowatch.com/table.php?distribution=debian) 12 configuration after installation.
 
-Leave admin password blank to have sudo during installation.
+Leave admin password blank during installation to have sudo.
 
 Switch to root:
 ```
