@@ -30,7 +30,7 @@ Install
 [chrome](https://www.google.com/chrome/dr/download/), 
 [syncthing](https://syncthing.net/), 
 [globalprotect](https://github.com/yuezk/GlobalProtect-openconnect), 
-[vscode](https://code.visualstudio.com/)
+[vscode](https://code.visualstudio.com/),
 [pgAdmin](https://www.pgadmin.org/)
 
 For Chrome/Chromium: 
