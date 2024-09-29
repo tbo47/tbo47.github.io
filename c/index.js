@@ -1,14 +1,10 @@
-// Create a new stage
 const stage = new Konva.Stage({
     container: 'container',
     width: window.innerWidth,
     height: window.innerHeight,
 })
-// Create a new layer
 const layer = new Konva.Layer()
 stage.add(layer)
-// Draw the base of the card
-const WIDTH = 830
 layer.draw()
 
 const webpFiles = [
@@ -27,7 +23,7 @@ const webpFiles = [
     'PXL_20240914_164644577.jpg',
     'PXL_20240915_080829680.jpg',
 ]
-// Function to load and display images
+
 async function loadImages(imageFiles) {
     const imgs = await Promise.all(
         imageFiles.map((file, index) => {
@@ -59,5 +55,4 @@ async function loadImages(imageFiles) {
     return imgs
 }
 
-// Load and display images from webpFiles array
 loadImages(webpFiles)
