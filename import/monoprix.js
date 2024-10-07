@@ -1,5 +1,5 @@
 const fs = require('fs')
-const osmutils = require('./utils.js')
+const osmutils = require('../utils.js')
 const openstreetmapGetPOIs = osmutils.openstreetmapGetPOIs
 
 const FILE_JSON = 'monoprix.json'
