@@ -13658,7 +13658,7 @@ var Konva3 = Konva2.Util._assign(Konva2, {
 // konva/src/index.ts
 var src_default = Konva3;
 export {
-  src_default as default
+  src_default as Konva
 };
 /*
  * Konva JavaScript Framework v@@version

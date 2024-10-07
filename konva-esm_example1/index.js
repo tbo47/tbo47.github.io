@@ -1,19 +1,18 @@
-// import * as Konva from 'https://tbo47.github.io/konva-es.9.3.15.min.js'
-import * as Konva from 'https://tbo47.github.io/konva-es.9.3.15_2.js'
+import { Konva } from 'https://tbo47.github.io/konva-es.9.3.15.js'
 
 function go() {
-    const stage = new Konva.lib.Stage({
+    const stage = new Konva.Stage({
         container: 'container', // id of container <div>
         width: 500,
         height: 500,
     })
 
-    const layer = new Konva.default.Layer()
+    const layer = new Konva.Layer()
 
     stage.add(layer)
 
     // Create a rectangle shape
-    const rectangle = new Konva.default.Rect({
+    const rectangle = new Konva.Rect({
         x: 20,
         y: 20,
         width: 100,
