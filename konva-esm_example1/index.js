@@ -16,8 +16,8 @@ function go() {
             x: Math.random() * stage.width(),
             y: Math.random() * stage.height(),
             numPoints: 5,
-            innerRadius: 5,
-            outerRadius: 10,
+            innerRadius: 4,
+            outerRadius: 8,
             fill: '#FFD700',
             stroke: 'black',
             strokeWidth: 1,
@@ -26,7 +26,7 @@ function go() {
 
     // Create and add multiple stars to the layer
     const stars = []
-    for (let i = 0; i < 50; i++) {
+    for (let i = 0; i < 500; i++) {
         const star = createStar()
         stars.push(star)
         layer.add(star)
@@ -35,8 +35,10 @@ function go() {
     // Animation to move stars randomly
     const anim = new Konva.Animation((frame) => {
         stars.forEach((star) => {
-            star.x(star.x() + Math.random() * 2 - 1)
-            star.y(star.y() + Math.random() * 2 - 1)
+            star.x(star.x() + Math.random() - 0.6)
+            if (star.x() < 0) star.x(star.x() + stage.width())
+            star.y(star.y() + (Math.random() + 1) * 0.6)
+            if (star.y() > stage.height()) star.y(0)
         })
     }, layer)
 
