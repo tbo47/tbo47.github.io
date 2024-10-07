@@ -13656,10 +13656,10 @@ var Konva3 = Konva2.Util._assign(Konva2, {
 });
 
 // konva/src/index.ts
+/** @type Object */
 var lib = Konva3;
-export {
-  lib
-};
+export Konva3;
+
 /*
  * Konva JavaScript Framework v@@version
  * http://konvajs.org/
