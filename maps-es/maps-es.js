@@ -67,7 +67,7 @@ export class Map {
         this.#token = opts.token;
         this.#style = opts.style || `osm`;
         this.#db = await initDb();
-        this.#draw(opts);
+        await this.#draw(opts);
         this.#addScrollHandler();
         return this;
     }
@@ -94,7 +94,7 @@ export class Map {
         if (!theBlob) {
             const response = await fetch(url);
             theBlob = await response.blob();
-            setDataToLocalCache(url, theBlob, this.#db);
+            await setDataToLocalCache(url, theBlob, this.#db);
         }
         const img = new Image();
         img.src = URL.createObjectURL(new Blob([theBlob], { type: 'image/png' }));
@@ -107,7 +107,7 @@ export class Map {
         else
             return `https://tile.openstreetmap.org/${this.#zoom}/${x}/${y}.png`;
     }
-    #draw({ zoom, center }) {
+    async #draw({ zoom, center }) {
         const [lat, lon] = center;
         const { x, y } = this.#latLonToTile(lat, lon, zoom);
         const canvasWidth = this.#canvas.width;
@@ -116,12 +116,14 @@ export class Map {
         const centerY = Math.floor(canvasHeight / 2) - tileSize / 2;
         const tilesHorizontally = Math.ceil(canvasWidth / tileSize);
         const tilesVertically = Math.ceil(canvasHeight / tileSize);
+        const promises = [];
         for (let dx = -Math.floor(tilesHorizontally / 2); dx <= Math.floor(tilesHorizontally / 2); dx++) {
             for (let dy = -Math.floor(tilesVertically / 2); dy <= Math.floor(tilesVertically / 2); dy++) {
                 const u = this.#getUrl(x + dx, y + dy);
-                this.#drawTile(u, centerX + dx * tileSize, centerY + dy * tileSize);
+                promises.push(this.#drawTile(u, centerX + dx * tileSize, centerY + dy * tileSize));
             }
         }
+        await Promise.all(promises);
     }
     #addScrollHandler() {
         let isDragging = false;

@@ -78,7 +78,7 @@ export class Map {
         this.#token = opts.token
         this.#style = opts.style || `osm`
         this.#db = await initDb()
-        this.#draw(opts)
+        await this.#draw(opts)
         this.#addScrollHandler()
         return this
     }
@@ -105,7 +105,7 @@ export class Map {
         if (!theBlob) {
             const response = await fetch(url)
             theBlob = await response.blob()
-            setDataToLocalCache(url, theBlob, this.#db)
+            await setDataToLocalCache(url, theBlob, this.#db)
         }
 
         const img = new Image()
@@ -118,7 +118,7 @@ export class Map {
             return `https://tile.jawg.io/jawg-streets/${this.#zoom}/${x}/${y}.png?access-token=${this.#token}`
         else return `https://tile.openstreetmap.org/${this.#zoom}/${x}/${y}.png`
     }
-    #draw({ zoom, center }: { zoom: number; center: [number, number] }) {
+    async #draw({ zoom, center }: { zoom: number; center: [number, number] }) {
         const [lat, lon] = center
         const { x, y } = this.#latLonToTile(lat, lon, zoom)
         const canvasWidth = this.#canvas!.width
@@ -129,12 +129,14 @@ export class Map {
         const tilesHorizontally = Math.ceil(canvasWidth / tileSize)
         const tilesVertically = Math.ceil(canvasHeight / tileSize)
 
+        const promises = []
         for (let dx = -Math.floor(tilesHorizontally / 2); dx <= Math.floor(tilesHorizontally / 2); dx++) {
             for (let dy = -Math.floor(tilesVertically / 2); dy <= Math.floor(tilesVertically / 2); dy++) {
                 const u = this.#getUrl(x + dx, y + dy)
-                this.#drawTile(u, centerX + dx * tileSize, centerY + dy * tileSize)
+                promises.push(this.#drawTile(u, centerX + dx * tileSize, centerY + dy * tileSize))
             }
         }
+        await Promise.all(promises)
     }
 
     #addScrollHandler() {
