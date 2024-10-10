@@ -1,5 +1,5 @@
-import { Map } from './maps-es.js';
-new Map().init({
+import { MapsEs } from './maps-es.js';
+new MapsEs().init({
     container: '#map',
     style: 'osm',
     zoom: 16,
