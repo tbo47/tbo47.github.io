@@ -1,5 +1,6 @@
 import * as d3 from 'https://cdn.jsdelivr.net/npm/d3@7.9.0/+esm'
-import * as dagreD3 from 'https://tbo47.github.io/dagre-d3-es.7.0.11.js'
+// import * as dagreD3 from 'https://tbo47.github.io/dagre-d3-es.7.0.11.js'
+import * as dagreD3 from '../dagre-d3-es.7.0.11.js'
 
 function componentDidMount() {
     const g = new dagreD3.graphlib.Graph({ directed: true })
