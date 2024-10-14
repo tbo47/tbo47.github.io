@@ -1,6 +1,6 @@
-This is my [Debian](https://distrowatch.com/table.php?distribution=debian) 12 configuration after installation.
+IMPORTANT: if you give root an empty password during installation, sudo will be installed and the first user will be able to use it to gain root access
 
-Leave admin password blank during installation to have sudo.
+This is my [Debian](https://distrowatch.com/table.php?distribution=debian) 12 configuration after installation.
 
 Switch to root:
 ```
@@ -19,8 +19,8 @@ Then, run the following commands:
 
 ```
 apt update ; apt full-upgrade -y ; apt autoremove -y
-apt install -y gnome-clocks transmission thunderbird pavucontrol gimp pdfarranger vlc chromium gnome-tweaks 
-apt install -y git ripgrep fd-find curl flatpak gnome-software-plugin-flatpak gnome-console podman amule amule-daemon
+apt install -y gnome-clocks transmission pavucontrol gimp pdfarranger vlc gnome-tweaks 
+apt install -y git ripgrep fd-find curl flatpak gnome-software-plugin-flatpak gnome-console podman
 apt remove -y firefox-esr
 flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
 flatpak install -y flathub com.discordapp.Discord
@@ -32,13 +32,14 @@ Install
 [ohmyz](https://ohmyz.sh/),
 [chrome](https://www.google.com/chrome/dr/download/), 
 [vscode](https://code.visualstudio.com/),
-[pgadmin](https://www.pgadmin.org/)
+[pgadmin](https://www.pgadmin.org/),
 [syncthing](https://syncthing.net/), 
 [globalprotect](https://github.com/yuezk/GlobalProtect-openconnect), 
 
 For Chrome/Chromium: 
 [vimium](https://chromewebstore.google.com/detail/vimium/dbepggeogbaibhgnhhndojpepiihcmeb), 
-[jsonformatter](https://chromewebstore.google.com/detail/json-formatter/bcjindcccaagfpapjjmafapmmgkkhgoa)
+[jsonformatter](https://chromewebstore.google.com/detail/json-formatter/bcjindcccaagfpapjjmafapmmgkkhgoa),
+[ublock origin lite](https://chromewebstore.google.com/detail/ublock-origin-lite/ddkjiahejlhfcafbddmgiahcphecmpfh),
 
 Neovim in vscode:
 [vscode-neovim](https://marketplace.visualstudio.com/items?itemName=asvetliakov.vscode-neovim) 
@@ -57,7 +58,7 @@ Then close and open a new console.
 
 ```bash
 nvm install --lts
-npm install -g npm-check-updates ts-node @angular/cli npm
+npm install -g npm-check-updates npm
 ```
 
 
