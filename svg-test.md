@@ -1,6 +1,6 @@
 L'exercice consiste a transformer une image au format webp en une image au format svg.
 
-![valve](./3-way-control-valve.webp =250x)
+<img src="./3-way-control-valve.webp" width="200" />
 
 Le resultat attendu sera un [simple chemin SVG](https://docs.aspose.com/svg/fr/net/drawing-basics/svg-path-data/)
 
