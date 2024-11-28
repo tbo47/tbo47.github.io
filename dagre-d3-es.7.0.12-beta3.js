@@ -1048,6 +1048,7 @@ function longestPath(g) {
     rank2 === null) {
       rank2 = 0;
     }
+    if (!label) label = {};
     label.rank = rank2;
     return rank2;
   }
