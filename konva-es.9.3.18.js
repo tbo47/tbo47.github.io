@@ -9953,7 +9953,7 @@ var Konva3 = Konva2.Util._assign(Konva2, {
 // ../konva/src/index.ts
 var index_default = Konva3;
 export {
-  index_default as default
+  index_default as Konva
 };
 /*
  * Konva JavaScript Framework v@@version
