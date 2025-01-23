@@ -12,6 +12,7 @@ sudo flatpak install -y flathub com.discordapp.Discord
 sudo flatpak install -y flathub org.mozilla.firefox
 sudo flatpak install -y flathub org.pgadmin.pgadmin4
 sudo flatpak install -y flathub io.neovim.nvim
+gnome-software --mode=installed
 ```
 
 Note: trixie install [neovim 0.9](https://packages.debian.org/en/trixie/neovim) by default, we want [neovim 0.10](https://flathub.org/apps/io.neovim.nvim) from flatpak
