@@ -17,12 +17,12 @@ gnome-software --mode=installed
 
 Note: trixie install [neovim 0.9](https://packages.debian.org/en/trixie/neovim) by default, we want [neovim 0.10](https://flathub.org/apps/io.neovim.nvim) from flatpak
 
-Install 
+If needed, install 
 [ohmyz](https://ohmyz.sh/),
 [chrome](https://www.google.com/chrome/dr/download/), 
-[vscode](https://code.visualstudio.com/),
+[vscode](https://code.visualstudio.com/)
 
-For Chrome/Chromium: 
+For Chrome: 
 [vimium](https://chromewebstore.google.com/detail/vimium/dbepggeogbaibhgnhhndojpepiihcmeb), 
 [ublock origin lite](https://chromewebstore.google.com/detail/ublock-origin-lite/ddkjiahejlhfcafbddmgiahcphecmpfh),
 
