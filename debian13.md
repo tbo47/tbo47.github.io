@@ -5,13 +5,15 @@ This is my [Debian](https://distrowatch.com/table.php?distribution=debian) 13 (a
 Then, run the following commands:
 
 ```
-sudo apt install -y transmission gnome-software-plugin-flatpak gnome-console
-apt remove -y firefox-esr
-flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
-flatpak install -y flathub com.discordapp.Discord
-flatpak install -y flathub org.mozilla.firefox
-flatpak install -y flathub io.neovim.nvim
+sudo apt install -y transmission gnome-software-plugin-flatpak gnome-console curl git
+sudo apt remove -y firefox-esr
+sudo flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+sudo flatpak install -y flathub com.discordapp.Discord
+sudo flatpak install -y flathub org.mozilla.firefox
+sudo flatpak install -y flathub io.neovim.nvim
 ```
+
+Note: trixie install neovim 0.9 by default, we want neovim 0.10 from flatpak
 
 Install 
 [ohmyz](https://ohmyz.sh/),
@@ -43,7 +45,7 @@ Then close and open a new console.
 
 ```bash
 nvm install --lts
-npm install -g npm-check-updates npm
+npm install -g npm-check-updates npm tsx
 ```
 
 
