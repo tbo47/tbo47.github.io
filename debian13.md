@@ -51,7 +51,7 @@ npm install -g npm-check-updates npm tsx
 ```
 
 
-In `.zshrc` add the following line:
+In `.zshrc` add memory to nodejs with:
 ```bash
 export NODE_OPTIONS=--max_old_space_size=8192
 ```
