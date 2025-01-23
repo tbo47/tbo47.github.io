@@ -13,6 +13,7 @@ sudo flatpak install -y flathub org.mozilla.firefox
 sudo flatpak install -y flathub org.pgadmin.pgadmin4
 sudo flatpak install -y flathub io.neovim.nvim
 gnome-software --mode=installed
+flatpak run org.mozilla.firefox https://flathub.org/?category=popular
 ```
 
 Note: trixie install [neovim 0.9](https://packages.debian.org/en/trixie/neovim) by default, we want [neovim 0.10](https://flathub.org/apps/io.neovim.nvim) from flatpak
@@ -24,7 +25,7 @@ If needed, install
 
 For Chrome: 
 [vimium](https://chromewebstore.google.com/detail/vimium/dbepggeogbaibhgnhhndojpepiihcmeb), 
-[ublock origin lite](https://chromewebstore.google.com/detail/ublock-origin-lite/ddkjiahejlhfcafbddmgiahcphecmpfh),
+[ublock origin lite](https://chromewebstore.google.com/detail/ublock-origin-lite/ddkjiahejlhfcafbddmgiahcphecmpfh)
 
 Neovim in vscode:
 [vscode-neovim](https://marketplace.visualstudio.com/items?itemName=asvetliakov.vscode-neovim) 
@@ -35,7 +36,7 @@ alias vim=/var/lib/flatpak/app/io.neovim.nvim/x86_64/stable/active/export/bin/io
 alias nvim=/var/lib/flatpak/app/io.neovim.nvim/x86_64/stable/active/export/bin/io.neovim.nvim
 ```
 
-[Explore more apps on flatpak hub](https://flathub.org/?category=popular)
+[Explore more apps from flatpak hub](https://flathub.org/?category=popular) and install them with the software app.
 
 ## nodejs
 
