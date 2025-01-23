@@ -5,7 +5,7 @@ This is my [Debian](https://www.debian.org/devel/debian-installer/) 13 (alias tr
 Run the following commands:
 
 ```
-sudo apt install -y transmission gnome-software-plugin-flatpak gnome-console curl git
+sudo apt install -y transmission gnome-software-plugin-flatpak gnome-console curl git zsh
 sudo apt remove -y firefox-esr
 sudo flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
 sudo flatpak install -y flathub com.discordapp.Discord
