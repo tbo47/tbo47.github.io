@@ -29,7 +29,7 @@ For Chrome:
 Neovim in vscode:
 [vscode-neovim](https://marketplace.visualstudio.com/items?itemName=asvetliakov.vscode-neovim) 
 
-In `.zshrc` or `.bashrc`
+In `.zshrc`:
 ```
 alias vim=/var/lib/flatpak/app/io.neovim.nvim/x86_64/stable/active/export/bin/io.neovim.nvim
 alias nvim=/var/lib/flatpak/app/io.neovim.nvim/x86_64/stable/active/export/bin/io.neovim.nvim
