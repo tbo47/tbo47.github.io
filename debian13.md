@@ -5,7 +5,7 @@ This is my [Debian](https://www.debian.org/devel/debian-installer/) 13 (alias tr
 Run the following commands:
 
 ```
-sudo apt install -y transmission gnome-software-plugin-flatpak gnome-console curl git zsh
+sudo apt install -y transmission gnome-software-plugin-flatpak gnome-console curl git zsh vlc
 sudo apt remove -y firefox-esr
 sudo flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
 sudo flatpak install -y flathub com.discordapp.Discord
@@ -17,11 +17,6 @@ flatpak run org.mozilla.firefox https://flathub.org/?category=popular
 ```
 
 Note: trixie install [neovim 0.9](https://packages.debian.org/en/trixie/neovim) by default, we want [neovim 0.10](https://flathub.org/apps/io.neovim.nvim) from flatpak
-
-If needed, install 
-[ohmyz](https://ohmyz.sh/),
-[chrome](https://www.google.com/chrome/dr/download/), 
-[vscode](https://code.visualstudio.com/)
 
 For Chrome: 
 [vimium](https://chromewebstore.google.com/detail/vimium/dbepggeogbaibhgnhhndojpepiihcmeb), 
@@ -38,7 +33,13 @@ alias nvim=/var/lib/flatpak/app/io.neovim.nvim/x86_64/stable/active/export/bin/i
 
 [Explore more apps from flatpak hub](https://flathub.org/?category=popular) and install them with the software app.
 
-## nodejs
+## dev environment
+
+Install [ohmyz](https://ohmyz.sh/).
+
+Download the `deb` files from [chrome](https://www.google.com/chrome/dr/download/), [vscode](https://code.visualstudio.com/)
+
+And install the deb file with `sudo apt install ./chrome***.deb`
 
 [Install nodejs with nvm](https://github.com/nvm-sh/nvm#install--update-script)
 
