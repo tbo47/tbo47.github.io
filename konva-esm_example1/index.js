@@ -1,4 +1,4 @@
-import { Konva } from '../konva-es.9.3.18.js'
+import { Konva } from '../konva-es.9.3.19.js'
 
 function go() {
     const stage = new Konva.Stage({
