@@ -3,7 +3,7 @@ body {
     margin: 0;
     width: 100vw;
     height: 100vh;
-    background-color: lightgrey;
+    background-color: white;
 }
 
 .container {
@@ -11,4 +11,12 @@ body {
     width: 100vw;
     height: 100vh;
     display: block;
+}
+
+#github-icon {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 50px;
+    height: 50px;
 }
