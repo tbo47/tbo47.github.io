@@ -3,19 +3,42 @@ import { Konva } from '../konva-es.9.3.19.js'
 const PID_DATASET_URL = 'https://raw.githubusercontent.com/tbo47/open-pid-icons/refs/heads/main/open-pid-icons.json'
 
 const createPicIcon = ({ name, path }, stage) => {
-    const icon = new Konva.Path({
+    const group = new Konva.Group({
         x: Math.random() * stage.width() * 0.9,
         y: Math.random() * stage.height() * 0.9,
+        draggable: true,
+    })
+    // add name text to the group
+    const text = new Konva.Text({
+        text: name,
+        fontSize: 12,
+        fontFamily: 'Calibri',
+        fill: 'black',
+        x: 0,
+        y: -18,
+    })
+    group.add(text)
+    const icon = new Konva.Path({
         data: path,
         // fill: 'green',
-        draggable: true,
         stroke: 'black',
         strokeWidth: 1,
         name,
         width: 50,
         height: 50,
     })
-    return icon
+    group.add(icon)
+
+    const boundingBox = icon.getClientRect({ relativeTo: group })
+
+    const box = new Konva.Rect({
+        x: boundingBox.x,
+        y: boundingBox.y,
+        width: boundingBox.width,
+        height: boundingBox.height,
+    })
+    group.add(box)
+    return group
 }
 
 const go = async () => {
