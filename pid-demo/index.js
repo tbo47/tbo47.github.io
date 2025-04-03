@@ -8,36 +8,18 @@ const createPicIcon = ({ name, path }, stage) => {
         y: Math.random() * stage.height() * 0.9,
         draggable: true,
     })
-    // add name text to the group
-    const text = new Konva.Text({
-        text: name,
-        fontSize: 12,
-        fontFamily: 'Calibri',
-        fill: 'black',
-        x: 0,
-        y: -18,
-    })
-    group.add(text)
-    const icon = new Konva.Path({
-        data: path,
-        // fill: 'green',
-        stroke: 'black',
-        strokeWidth: 1,
-        name,
-        width: 50,
-        height: 50,
-    })
+    const icon = new Konva.Path({ data: path, stroke: 'black', strokeWidth: 1, name, width: 50, height: 50 })
     group.add(icon)
-
-    const boundingBox = icon.getClientRect({ relativeTo: group })
-
-    const box = new Konva.Rect({
-        x: boundingBox.x,
-        y: boundingBox.y,
-        width: boundingBox.width,
-        height: boundingBox.height,
-    })
-    group.add(box)
+    const text = new Konva.Text({ text: name, fontSize: 12, fill: 'black', x: 0, y: -18 })
+    group.add(text)
+    {
+        const { x, y, width, height } = icon.getClientRect({ relativeTo: group })
+        text.x(width / 2 - text.width() / 2)
+        const box = new Konva.Rect({ x, y, width, height })
+        box.on('mouseover', (e) => (e.target.getStage().container().style.cursor = 'move'))
+        box.on('mouseout', (e) => (e.target.getStage().container().style.cursor = 'default'))
+        group.add(box)
+    }
     return group
 }
 
