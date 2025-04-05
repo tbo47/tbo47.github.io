@@ -1,4 +1,4 @@
-import { Konva } from '../konva-es.9.3.19.js'
+import { Konva } from 'https://tbo47.github.io//konva-es.9.3.19.js'
 
 const PID_DATASET_URL = 'https://raw.githubusercontent.com/tbo47/open-pid-icons/refs/heads/main/open-pid-icons.json'
 
