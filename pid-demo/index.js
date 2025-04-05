@@ -33,7 +33,8 @@ const go = async () => {
     stage.add(layer)
     const response = await fetch(PID_DATASET_URL)
     const data = await response.json()
-    data.valve.forEach((item) => layer.add(createPicIcon(item, stage)))
+    console.log(data)
+    data.data.forEach((item) => layer.add(createPicIcon(item, stage)))
     layer.draw()
 }
 
