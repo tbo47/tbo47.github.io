@@ -2,15 +2,21 @@ import { Konva } from 'https://tbo47.github.io//konva-es.9.3.19.js'
 
 const PID_DATASET_URL = 'https://raw.githubusercontent.com/tbo47/open-pid-icons/refs/heads/main/open-pid-icons.json'
 
+const offset = {
+    x: 60,
+    y: 60,
+}
+
 const createPicIcon = ({ name, path }, stage) => {
     const group = new Konva.Group({
-        x: Math.random() * stage.width() * 0.9,
-        y: Math.random() * stage.height() * 0.9,
+        x: offset.x,
+        y: offset.y,
         draggable: true,
     })
     const icon = new Konva.Path({ data: path, stroke: 'black', strokeWidth: 1, name, width: 50, height: 50 })
+    console.log(name, icon.getClientRect())
     group.add(icon)
-    const text = new Konva.Text({ text: name, fontSize: 12, fill: 'black', x: 0, y: -18 })
+    const text = new Konva.Text({ text: name, fontSize: 12, fill: 'black', x: 0, y: -22 })
     group.add(text)
     {
         const { x, y, width, height } = icon.getClientRect({ relativeTo: group })
@@ -19,6 +25,14 @@ const createPicIcon = ({ name, path }, stage) => {
         box.on('mouseover', (e) => (e.target.getStage().container().style.cursor = 'move'))
         box.on('mouseout', (e) => (e.target.getStage().container().style.cursor = 'default'))
         group.add(box)
+    }
+    {
+        const rect = group.getClientRect()
+        offset.y += rect.height + 10
+        if (offset.y > stage.height()) {
+            offset.y = 60
+            offset.x += rect.width + 10
+        }
     }
     return group
 }
