@@ -7630,6 +7630,31 @@ Factory.addGetterSetter(Star, "numPoints", 5, getNumberValidator());
 Factory.addGetterSetter(Star, "innerRadius", 0, getNumberValidator());
 Factory.addGetterSetter(Star, "outerRadius", 0, getNumberValidator());
 
+// ../konva/src/shapes/Cloud.ts
+var CLOUD = {
+  topPath: "a 8 8 0 0 1 14 5",
+  topOffset: "m -2 -5",
+  topWidth: 12,
+  rightPath: "a 8 8 0 0 1 -5 14",
+  rightOffset: "m 5 -2",
+  bottomPath: "a 8 8 0 0 1 -14 -5",
+  bottomOffset: "m 2 5",
+  leftPath: "a 8 8 0 0 1 5 -14",
+  leftOffset: "m -5 2",
+  leftHeight: 12
+}, Cloud = class extends Path {
+  constructor(config) {
+    super(config), this.adjustPath(config.width || 0, config.height || 0), this.on("transformend", (e) => {
+      let { width, height } = this.getClientRect(), a = Math.abs(e.target.rotation()), sinA = Math.sin(a * Math.PI / 180), cosA = Math.cos(a * Math.PI / 180), h = (width * sinA - height * cosA) / (sinA ** 2 - cosA ** 2), w = (width * cosA - height * sinA) / (cosA ** 2 - sinA ** 2);
+      this.adjustPath(w, h), this.width(width), this.height(height), this.scaleX(1), this.scaleY(1);
+    });
+  }
+  adjustPath(width, height) {
+    let topPathCounter = Math.floor(Math.abs(width) / CLOUD.topWidth), leftPathCounter = Math.floor(Math.abs(height) / CLOUD.leftHeight), path = `${CLOUD.topPath} ${CLOUD.topOffset} `.repeat(topPathCounter) + `${CLOUD.rightPath} ${CLOUD.rightOffset} `.repeat(leftPathCounter) + `${CLOUD.bottomPath} ${CLOUD.bottomOffset} `.repeat(topPathCounter) + `${CLOUD.leftPath} ${CLOUD.leftOffset} `.repeat(leftPathCounter);
+    this.setAttr("data", path);
+  }
+};
+
 // ../konva/src/shapes/Text.ts
 function stringToArray(string) {
   return [...string].reduce((acc, char, index, array) => {
@@ -9990,6 +10015,7 @@ var Konva3 = Konva2.Util._assign(Konva2, {
   Ring,
   Sprite,
   Star,
+  Cloud,
   Text,
   TextPath,
   Transformer,
