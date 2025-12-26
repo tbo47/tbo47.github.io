@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Angular Monaco Editor</title>
+        <meta property="og:title" content="Angular Monaco Editor" />
+        <meta property="og:description" content="Angular integration with Monaco Editor" />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://tbo47.github.io/angular-monaco-editor.html" />
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css" />
+    </head>
+
+    <body>
+        <section class="section">
+            <div class="container">
+                <h1 class="title">Angular integration with Monaco Editor</h1>
+                <p>
+                    This is a simple example of how to integrate the
+                    <a href="https://microsoft.github.io/monaco-editor/" target="monaco">Monaco Editor</a>
+                    into an <a href="https://angular.dev/" target="angular">Angular 21 application</a>.
+                </p>
+                <p>
+                    I tested various approaches, including using
+                    <a href="https://github.com/miki995/ngx-monaco-editor-v2" target="ngx">ngx-monaco-editor-v2</a>
+                    , but finally settled on a simple manual integration without any additional libraries.
+                </p>
+                <p>The steps to set up the project are as follows:</p>
+                <pre>
+# install angular cli
+npm install -g @angular/cli
+# create a new angular project
+ng new angular-monaco-editor
+cd angular-monaco-editor</pre
+                >
+                <p>Install monaco editor:</p>
+                <pre>npm install monaco-editor</pre>
+                <p>
+                    In angular.json, add the following lines to the "build" -> "options" -> "assets" array to copy the
+                    monaco editor assets to the output folder:
+                </p>
+                <pre>
+{
+    "glob": "**/*",
+    "input": "node_modules/monaco-editor",
+    "output": "/assets/monaco/"
+},</pre
+                >
+                <p>
+                    In angular.json, add the following lines to the "build" -> "options" -> "styles" array to load the
+                    monaco editor styles:
+                </p>
+                <pre>
+"styles": [
+    src/styles.css",
+    "node_modules/monaco-editor/min/vs/editor/editor.main.css"
+]</pre
+                >
+                <p>In src/main.ts add (add whatever language you want to support):</p>
+                <pre>
+;(window as any).MonacoEnvironment = {
+    getWorkerUrl: (moduleId: string, label: string) => {
+        if (label === 'json') {
+            return './assets/monaco/esm/vs/language/json/json.worker.js'
+        }
+        if (label === 'css' || label === 'scss' || label === 'less') {
+            return './assets/monaco/esm/vs/language/css/css.worker.js'
+        }
+        if (label === 'html' || label === 'handlebars' || label === 'razor') {
+            return './assets/monaco/esm/vs/language/html/html.worker.js'
+        }
+        if (label === 'typescript' || label === 'javascript') {
+            return './assets/monaco/esm/vs/language/typescript/ts.worker.js'
+        }
+        return './assets/monaco/esm/vs/editor/editor.worker.js'
+    },
+}</pre
+                >
+                <p>In src/app/app.ts, add the following code to initialize the monaco editor:</p>
+                <pre>
+...
+import * as monaco from 'monaco-editor'
+...
+    private readonly editor = viewChild&lt;ElementRef&lt;HTMLDivElement&gt;&gt;('editor')
+...
+    ngOnInit() {
+        monaco.editor.create(this.editor()!.nativeElement, {
+            language: 'javascript',
+            value: `console.log('test')`,
+        })
+    }
+...
+    </pre
+                >
+                <p>In src/app/app.html</p>
+                <pre>&lt;div #editor style="width: 800px; height: 200px;"&gt;&lt;/div&gt;</pre>
+                <p>Restart the Angular development server to see the Monaco Editor in action.</p>
+
+                <hr class="navbar-divider" />
+                <div class="navbar-item">
+                    <a target="linkedin" href="https://tbo47.github.io/">Home</a>
+                </div>
+            </div>
+        </section>
+    </body>
+</html>
