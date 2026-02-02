@@ -81,17 +81,22 @@ cd angular-monaco-editor</pre
 ...
 import * as monaco from 'monaco-editor'
 ...
-    private readonly editor = viewChild&lt;ElementRef&lt;HTMLDivElement&gt;&gt;('editor')
+    private readonly editorDiv = viewChild&lt;ElementRef&lt;HTMLDivElement&gt;&gt;('editor')
+    private monacoEditor!: monaco.editor.IStandaloneCodeEditor
 ...
     ngOnInit() {
-        monaco.editor.create(this.editor()!.nativeElement, {
+        this.monacoEditor = monaco.editor.create(this.editor()!.nativeElement, {
             language: 'javascript',
             value: `console.log('test')`,
         })
     }
 ...
-    </pre
-                >
+    onSave() {
+        const code = this.monacoEditor.getValue()
+        console.log(code)
+    }
+...
+    </pre>
                 <p>In src/app/app.html</p>
                 <pre>&lt;div #editor style="width: 800px; height: 200px;"&gt;&lt;/div&gt;</pre>
                 <p>Restart the Angular development server to see the Monaco Editor in action.</p>
