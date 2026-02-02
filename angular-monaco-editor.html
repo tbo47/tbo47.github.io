@@ -58,6 +58,8 @@ cd angular-monaco-editor</pre
                 >
                 <p>In src/main.ts add (add whatever language you want to support):</p>
                 <pre>
+export const GLOBAL_MONACO_OPTIONS = { theme: 'vs-light', language: 'javascript' }
+
 ;(window as any).MonacoEnvironment = {
     getWorkerUrl: (moduleId: string, label: string) => {
         if (label === 'json') {
@@ -86,7 +88,7 @@ import * as monaco from 'monaco-editor'
 ...
     ngOnInit() {
         this.monacoEditor = monaco.editor.create(this.editor()!.nativeElement, {
-            language: 'javascript',
+            ...GLOBAL_MONACO_OPTIONS,
             value: `console.log('test')`,
         })
     }
