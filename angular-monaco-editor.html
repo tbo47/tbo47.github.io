@@ -89,7 +89,7 @@ import * as monaco from 'monaco-editor'
     private readonly editorDiv = viewChild&lt;ElementRef&lt;HTMLDivElement&gt;&gt;('editor')
     private monacoEditor!: monaco.editor.IStandaloneCodeEditor
 ...
-    ngOnInit() {
+    ngAfterViewInit() {
         this.monacoEditor = monaco.editor.create(this.editor()!.nativeElement, {
             ...GLOBAL_MONACO_OPTIONS,
             value: `console.log('test')`,
