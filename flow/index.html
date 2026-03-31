@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Flow — drag nodes</title>
+        <style>
+            * {
+                box-sizing: border-box;
+            }
+            body {
+                margin: 0;
+                min-height: 100vh;
+                font-family: system-ui, sans-serif;
+                background: #0f1419;
+                color: #e6edf3;
+            }
+            h1 {
+                margin: 0;
+                padding: 1rem 1.25rem;
+                font-size: 1rem;
+                font-weight: 600;
+                color: #8b949e;
+                border-bottom: 1px solid #21262d;
+            }
+            .canvas {
+                position: relative;
+                width: min(900px, 100vw - 32px);
+                height: min(520px, calc(100vh - 80px));
+                margin: 1rem auto;
+                background: #161b22;
+                border: 1px solid #30363d;
+                border-radius: 8px;
+                overflow: hidden;
+                touch-action: none;
+            }
+            .connections {
+                position: absolute;
+                inset: 0;
+                width: 100%;
+                height: 100%;
+                pointer-events: none;
+                z-index: 0;
+            }
+            .connections path {
+                fill: none;
+                stroke: #58a6ff;
+                stroke-width: 2;
+                stroke-linecap: round;
+            }
+            .node {
+                position: absolute;
+                z-index: 1;
+                min-width: 100px;
+                padding: 12px 16px;
+                background: #21262d;
+                border: 1px solid #30363d;
+                border-radius: 6px;
+                cursor: grab;
+                user-select: none;
+                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+            }
+            .node:active {
+                cursor: grabbing;
+            }
+            .node--target {
+                border-color: #388bfd;
+                background: #1c2333;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>Drag the boxes — Bézier links follow</h1>
+        <div class="canvas" id="canvas" aria-label="Flow diagram canvas">
+            <svg class="connections" id="svg" xmlns="http://www.w3.org/2000/svg">
+                <path id="path1" />
+                <path id="path2" />
+                <path id="path3" />
+            </svg>
+            <div class="node" id="node1" data-node="1">Node 1</div>
+            <div class="node" id="node2" data-node="2">Node 2</div>
+            <div class="node" id="node3" data-node="3">Node 3</div>
+            <div class="node node--target" id="node4" data-node="4">Target</div>
+        </div>
+        <script>
+            (function () {
+                const canvas = document.getElementById('canvas');
+                const svg = document.getElementById('svg');
+                const paths = [
+                    document.getElementById('path1'),
+                    document.getElementById('path2'),
+                    document.getElementById('path3'),
+                ];
+                const sources = [
+                    document.getElementById('node1'),
+                    document.getElementById('node2'),
+                    document.getElementById('node3'),
+                ];
+                const target = document.getElementById('node4');
+                /** Vertical anchor on target (0–1) for each source */
+                const targetT = [0.25, 0.5, 0.75];
+
+                function setSvgSize() {
+                    const w = canvas.clientWidth;
+                    const h = canvas.clientHeight;
+                    svg.setAttribute('width', String(w));
+                    svg.setAttribute('height', String(h));
+                    svg.setAttribute('viewBox', `0 0 ${w} ${h}`);
+                }
+
+                function updatePaths() {
+                    setSvgSize();
+                    const c = canvas.getBoundingClientRect();
+                    const tr = target.getBoundingClientRect();
+
+                    for (let i = 0; i < 3; i++) {
+                        const sr = sources[i].getBoundingClientRect();
+                        const sx = sr.right - c.left;
+                        const sy = sr.top + sr.height / 2 - c.top;
+                        const ex = tr.left - c.left;
+                        const ey = tr.top + tr.height * targetT[i] - c.top;
+                        const mid = (sx + ex) / 2;
+                        const c1x = mid;
+                        const c1y = sy;
+                        const c2x = mid;
+                        const c2y = ey;
+                        const d = `M ${sx} ${sy} C ${c1x} ${c1y} ${c2x} ${c2y} ${ex} ${ey}`;
+                        paths[i].setAttribute('d', d);
+                    }
+                }
+
+                let drag = null;
+
+                function onPointerDown(e) {
+                    const el = e.target.closest('.node');
+                    if (!el || !canvas.contains(el)) return;
+                    el.setPointerCapture(e.pointerId);
+                    const rect = el.getBoundingClientRect();
+                    const c = canvas.getBoundingClientRect();
+                    drag = {
+                        el,
+                        offsetX: e.clientX - rect.left,
+                        offsetY: e.clientY - rect.top,
+                    };
+                    e.preventDefault();
+                }
+
+                function onPointerMove(e) {
+                    if (!drag) return;
+                    const c = canvas.getBoundingClientRect();
+                    const el = drag.el;
+                    const w = el.offsetWidth;
+                    const h = el.offsetHeight;
+                    let left = e.clientX - c.left - drag.offsetX;
+                    let top = e.clientY - c.top - drag.offsetY;
+                    left = Math.max(0, Math.min(left, c.width - w));
+                    top = Math.max(0, Math.min(top, c.height - h));
+                    el.style.left = `${left}px`;
+                    el.style.top = `${top}px`;
+                    updatePaths();
+                }
+
+                function onPointerUp(e) {
+                    if (drag && drag.el.hasPointerCapture(e.pointerId)) {
+                        drag.el.releasePointerCapture(e.pointerId);
+                    }
+                    drag = null;
+                }
+
+                function layoutInitial() {
+                    const w = canvas.clientWidth;
+                    const h = canvas.clientHeight;
+                    const nodeW = 120;
+                    const nodeH = 52;
+                    const gap = 24;
+                    const leftX = 40;
+                    const startY = (h - (3 * nodeH + 2 * gap)) / 2;
+                    const positions = [
+                        { left: leftX, top: startY },
+                        { left: leftX, top: startY + nodeH + gap },
+                        { left: leftX, top: startY + 2 * (nodeH + gap) },
+                        { left: w - nodeW - 48, top: (h - nodeH) / 2 },
+                    ];
+                    const nodes = [...sources, target];
+                    nodes.forEach((el, i) => {
+                        el.style.left = `${positions[i].left}px`;
+                        el.style.top = `${positions[i].top}px`;
+                    });
+                }
+
+                canvas.addEventListener('pointerdown', onPointerDown);
+                canvas.addEventListener('pointermove', onPointerMove);
+                canvas.addEventListener('pointerup', onPointerUp);
+                canvas.addEventListener('pointercancel', onPointerUp);
+                window.addEventListener('resize', updatePaths);
+
+                layoutInitial();
+                updatePaths();
+            })();
+        </script>
+    </body>
+</html>
