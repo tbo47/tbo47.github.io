@@ -31,10 +31,11 @@ class IssComponent {
     #initIss(globus, refreshRate = 1000, satelliteLabel = '') {
         let iss;
         let footprintEntityCollection;
-        setInterval(async () => {
+        let timeoutId;
+        let running = false;
+        const minDelay = Math.max(refreshRate, 2000);
+        const tick = async () => {
             if (document.visibilityState === 'hidden') {
-                iss?.issTrackEntity?.polyline?.clear();
-                this.#needToCenterTheMap = true;
                 return;
             }
             try {
@@ -54,7 +55,34 @@ class IssComponent {
             catch (error) {
                 console.error(error);
             }
-        }, refreshRate);
+            finally {
+                if (running && document.visibilityState !== 'hidden') {
+                    timeoutId = setTimeout(tick, minDelay);
+                }
+            }
+        };
+        const start = () => {
+            if (running) {
+                return;
+            }
+            running = true;
+            tick();
+        };
+        const stop = () => {
+            running = false;
+            clearTimeout(timeoutId);
+        };
+        document.addEventListener('visibilitychange', () => {
+            if (document.visibilityState === 'hidden') {
+                stop();
+                iss?.issTrackEntity?.polyline?.clear();
+                this.#needToCenterTheMap = true;
+            }
+            else {
+                start();
+            }
+        });
+        start();
     }
     #changeFootprint(globus, newPoint, footprintEntityCollection) {
         const circle = this.#createCircle(globus.planet.ellipsoid, newPoint);
@@ -149,6 +177,14 @@ class IssComponent {
     }
 }
 let centerButtonOnClick = () => { };
+function toggleFullscreen() {
+    if (!document.fullscreenElement) {
+        document.documentElement.requestFullscreen().catch((error) => console.error(error));
+    }
+    else {
+        document.exitFullscreen();
+    }
+}
 const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 if (!isMobile) {
     const issComp = new IssComponent('globusDivId', 1000, '  iss');
