@@ -43,14 +43,17 @@ class IssComponent {
                 if (!iss) {
                     iss = this.#initIssCollections(globus, satelliteLabel);
                 }
-                if (this.#needToCenterTheMap) {
-                    await this.#goTo(globus, latitude, longitude, latitude - 16, longitude, altitude * 2000);
-                    this.#needToCenterTheMap = false;
-                }
                 const newPoint = new og.LonLat(longitude, latitude, altitude * 1000);
                 iss.issEntity.setLonLat(newPoint);
                 iss.issTrackEntity.polyline.addPointLonLat(newPoint);
                 footprintEntityCollection = this.#changeFootprint(globus, newPoint, footprintEntityCollection);
+                if (this.#needToCenterTheMap) {
+                    this.#needToCenterTheMap = false;
+                    // Fire-and-forget: a camera flight can be interrupted by mouse/keyboard
+                    // map interaction, in which case its completion callback never fires.
+                    // Awaiting it would hang this loop and freeze position updates.
+                    this.#goTo(globus, latitude, longitude, latitude - 16, longitude, altitude * 2000);
+                }
             }
             catch (error) {
                 console.error(error);
