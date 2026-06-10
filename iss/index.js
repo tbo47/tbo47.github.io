@@ -42,6 +42,7 @@ class IssComponent {
                 const { longitude, latitude, altitude, timestamp } = (await this.#get('https://api.wheretheiss.at/v1/satellites/25544'));
                 if (!iss) {
                     iss = this.#initIssCollections(globus, satelliteLabel);
+                    document.getElementById('loading-bar')?.classList.add('hidden');
                 }
                 const newPoint = new og.LonLat(longitude, latitude, altitude * 1000);
                 iss.issEntity.setLonLat(newPoint);
