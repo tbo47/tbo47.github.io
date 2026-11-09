@@ -12,11 +12,9 @@ sudo flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flat
 sudo flatpak install -y flathub com.google.Chrome
 sudo flatpak install -y flathub org.mozilla.firefox
 gnome-software --mode=installed
-gsettings set org.gnome.shell favorite-apps "$(gsettings get org.gnome.shell favorite-apps | sed "s/]$/, 'com.google.Chrome.desktop']/")"
-sudo reboot
+gsettings set org.gnome.shell favorite-apps "['com.google.Chrome.desktop', 'org.mozilla.firefox.desktop', 'org.gnome.Nautilus.desktop', 'org.gnome.Software.desktop', 'org.gnome.TextEditor.desktop']"
+flatpak run org.mozilla.firefox https://github.com/tbo47/tbo47.github.io/blob/main/debian13.md
 ```
-
-Restart
 
 For Chrome:
 [vimium](https://chromewebstore.google.com/detail/vimium/dbepggeogbaibhgnhhndojpepiihcmeb),
