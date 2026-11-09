@@ -12,7 +12,11 @@ sudo flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flat
 sudo flatpak install -y flathub com.google.Chrome
 sudo flatpak install -y flathub org.mozilla.firefox
 gnome-software --mode=installed
+gsettings set org.gnome.shell favorite-apps "$(gsettings get org.gnome.shell favorite-apps | sed "s/]$/, 'com.google.Chrome.desktop']/")"
+sudo reboot
 ```
+
+Restart
 
 For Chrome:
 [vimium](https://chromewebstore.google.com/detail/vimium/dbepggeogbaibhgnhhndojpepiihcmeb),
