@@ -11,8 +11,10 @@ sudo apt autoremove -y
 sudo flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
 sudo flatpak install -y flathub com.google.Chrome
 sudo flatpak install -y flathub org.mozilla.firefox
+sudo flatpak install -y com.spotify.Client
+sudo flatpak install -y org.signal.Signal
 gnome-software --mode=installed
-gsettings set org.gnome.shell favorite-apps "['com.google.Chrome.desktop', 'org.mozilla.firefox.desktop', 'org.gnome.Nautilus.desktop', 'org.gnome.Software.desktop', 'org.gnome.TextEditor.desktop']"
+gsettings set org.gnome.shell favorite-apps "['com.google.Chrome.desktop', 'org.mozilla.firefox.desktop', 'org.signal.Signal.desktop', 'org.gnome.Nautilus.desktop']"
 flatpak run org.mozilla.firefox https://github.com/tbo47/tbo47.github.io/blob/main/debian13.md
 ```
 
