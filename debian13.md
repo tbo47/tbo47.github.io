@@ -6,18 +6,24 @@ Run the following commands:
 
 ```
 sudo apt install -y transmission gnome-software-plugin-flatpak gnome-console curl git zsh vlc
-sudo apt remove -y firefox-esr
+sudo apt remove -y firefox-esr evolution evolution-common
+sudo apt autoremove -y
 sudo flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
 sudo flatpak install -y flathub com.google.Chrome
 sudo flatpak install -y flathub org.mozilla.firefox
-sudo flatpak install -y flathub org.pgadmin.pgadmin4
-sudo flatpak install -y flathub com.visualstudio.code
 gnome-software --mode=installed
 flatpak run com.visualstudio.code https://chromewebstore.google.com/detail/ublock-origin-lite/ddkjiahejlhfcafbddmgiahcphecmpfh
 gsettings set org.gnome.shell favorite-apps "$(gsettings get org.gnome.shell favorite-apps | sed "s/]$/, 'com.google.Chrome.desktop']/")"
 ```
 
 ## dev environment
+
+Install vscode and pgAdmin:
+
+```bash
+sudo flatpak install -y flathub org.pgadmin.pgadmin4
+sudo flatpak install -y flathub com.visualstudio.code
+```
 
 Install [ohmyz](https://ohmyz.sh/) for a better terminal.
 
