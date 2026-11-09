@@ -12,9 +12,13 @@ sudo flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flat
 sudo flatpak install -y flathub com.google.Chrome
 sudo flatpak install -y flathub org.mozilla.firefox
 gnome-software --mode=installed
-flatpak run flathub com.google.Chrome https://chromewebstore.google.com/detail/ublock-origin-lite/ddkjiahejlhfcafbddmgiahcphecmpfh
-gsettings set org.gnome.shell favorite-apps "$(gsettings get org.gnome.shell favorite-apps | sed "s/]$/, 'com.google.Chrome.desktop']/")"
 ```
+
+For Chrome:
+[vimium](https://chromewebstore.google.com/detail/vimium/dbepggeogbaibhgnhhndojpepiihcmeb),
+[ublock origin lite](https://chromewebstore.google.com/detail/ublock-origin-lite/ddkjiahejlhfcafbddmgiahcphecmpfh)
+
+[Explore more apps from flatpak hub](https://flathub.org/?category=popular) and install them with the software app.
 
 ## dev environment
 
