@@ -33,9 +33,7 @@ Install [ohmyz](https://ohmyz.sh/) for a better terminal.
 
 [Install nodejs with nvm](https://github.com/nvm-sh/nvm#install--update-script)
 
-Install vscode manually.
-
-Then re-open the console
+Then re-open the terminal
 
 ```bash
 nvm install --lts
@@ -49,6 +47,7 @@ export NODE_OPTIONS=--max_old_space_size=8192
 ```
 
 Install postgres 18 and redis:
+
 ```
 sudo apt update
 sudo apt install -y postgresql-common
@@ -62,3 +61,4 @@ ALTER DATABASE postgres OWNER TO "user";
 SQL
 ```
 
+Install vscode manually and something like `alias code=/home/user1/VSCode-linux-x64/bin/code` in .zshrc
