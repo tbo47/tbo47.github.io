@@ -1,4 +1,4 @@
-IMPORTANT: leave the root password blank, it will configure `sudo` automatically and it's what you want.
+IMPORTANT: during install, leave the root password blank, it will configure `sudo` automatically and it's what you want.
 
 This is my [Debian](https://www.debian.org/devel/debian-installer/) 13 (alias trixie) configuration after installation.
 
