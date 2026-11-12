@@ -64,4 +64,5 @@ ALTER DATABASE postgres OWNER TO "user";
 SQL
 ```
 
-Install vscode manually and something like `alias code=/home/user1/VSCode-linux-x64/bin/code` in .zshrc
+Install [vscode from the .deb file](https://code.visualstudio.com/docs/setup/linux)
+
