@@ -12,8 +12,8 @@ curl -fsSLo /tmp/chrome.deb https://dl.google.com/linux/direct/google-chrome-sta
 sudo apt install -y /tmp/chrome.deb
 sudo flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
 flatpak install -y flathub io.github.cosmic_utils.camera
-gsettings set org.gnome.shell favorite-apps "['google-chrome.desktop', 'firefox-esr.desktop', 'signal-desktop.desktop', 'org.gnome.Nautilus.desktop', 'io.github.cosmic_utils.camera.desktop']"
-sudo shutdown -r now
+gsettings set org.gnome.shell favorite-apps "['google-chrome.desktop', 'org.gnome.Terminal.desktop', 'org.gnome.Nautilus.desktop', 'signal-desktop.desktop', 'firefox-esr.desktop']"
+gsettings set org.gnome.shell favorite-apps "['google-chrome.desktop', 'org.gnome.Terminal.desktop', 'org.gnome.Nautilus.desktop', 'signal-desktop.desktop', 'firefox-esr.desktop', 'io.github.cosmic_utils.camera.desktop']"
 ```
 
 Chrome extensions:
@@ -28,7 +28,7 @@ Chrome extensions:
 sudo apt install -y vim tilix gimp
 ```
 
-Install [vscode](https://code.visualstudio.com/docs/setup/linux) and its extensions:
+Install vscode and its extensions:
 
 ```bash
 echo "code code/add-microsoft-repo boolean true" | sudo debconf-set-selections
@@ -37,6 +37,7 @@ sudo apt install -y /tmp/code.deb
 code --install-extension anthropic.claude-code \
      --install-extension ms-ossdata.vscode-pgsql \
      --install-extension vscodevim.vim
+gsettings set org.gnome.shell favorite-apps "['google-chrome.desktop', 'org.gnome.Terminal.desktop', 'com.microsoft.VSCode.desktop', 'org.gnome.Nautilus.desktop', 'signal-desktop.desktop', 'firefox-esr.desktop', 'io.github.cosmic_utils.camera.desktop']"
 ```
 
 Install [ohmyz](https://ohmyz.sh/) for a better terminal.
