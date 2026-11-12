@@ -39,7 +39,6 @@ sudo apt install -y /tmp/code.deb
 code --install-extension anthropic.claude-code \
      --install-extension ms-ossdata.vscode-pgsql \
      --install-extension vscodevim.vim
-gsettings set org.gnome.shell favorite-apps "['google-chrome.desktop', 'org.gnome.Terminal.desktop', 'com.microsoft.VSCode.desktop', 'org.gnome.Nautilus.desktop', 'signal-desktop.desktop', 'firefox-esr.desktop', 'io.github.cosmic_utils.camera.desktop']"
 ```
 
 Install [ohmyz](https://ohmyz.sh/) for a better terminal.
