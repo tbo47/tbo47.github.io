@@ -7,13 +7,10 @@ This is my [Debian](https://www.debian.org/devel/debian-installer/) 13 (alias tr
 Run the following commands:
 
 ```bash
-sudo apt install -y transmission gnome-software-plugin-flatpak curl git zsh vlc ffmpeg
+sudo apt install -y transmission curl git zsh vlc ffmpeg
 curl -fsSLo /tmp/chrome.deb https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
 sudo apt install -y /tmp/chrome.deb
-sudo flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
-flatpak install -y flathub io.github.cosmic_utils.camera
 gsettings set org.gnome.shell favorite-apps "['google-chrome.desktop', 'org.gnome.Terminal.desktop', 'org.gnome.Nautilus.desktop', 'signal-desktop.desktop', 'firefox-esr.desktop']"
-gsettings set org.gnome.shell favorite-apps "['google-chrome.desktop', 'org.gnome.Terminal.desktop', 'org.gnome.Nautilus.desktop', 'signal-desktop.desktop', 'firefox-esr.desktop', 'io.github.cosmic_utils.camera.desktop']"
 mkdir -p ~/.config/autostart
 cat > ~/.config/autostart/gnome-software-updates.desktop <<'EOF'
 [Desktop Entry]
@@ -26,8 +23,6 @@ EOF
 Chrome extensions:
 [vimium](https://chromewebstore.google.com/detail/vimium/dbepggeogbaibhgnhhndojpepiihcmeb),
 [ublock origin lite](https://chromewebstore.google.com/detail/ublock-origin-lite/ddkjiahejlhfcafbddmgiahcphecmpfh)
-
-[Explore more apps from flatpak hub](https://flathub.org/en/apps/collection/popular/1) and install them with the software app.
 
 ## dev environment
 
