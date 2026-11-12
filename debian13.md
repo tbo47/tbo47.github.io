@@ -14,6 +14,13 @@ sudo flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flat
 flatpak install -y flathub io.github.cosmic_utils.camera
 gsettings set org.gnome.shell favorite-apps "['google-chrome.desktop', 'org.gnome.Terminal.desktop', 'org.gnome.Nautilus.desktop', 'signal-desktop.desktop', 'firefox-esr.desktop']"
 gsettings set org.gnome.shell favorite-apps "['google-chrome.desktop', 'org.gnome.Terminal.desktop', 'org.gnome.Nautilus.desktop', 'signal-desktop.desktop', 'firefox-esr.desktop', 'io.github.cosmic_utils.camera.desktop']"
+mkdir -p ~/.config/autostart
+cat > ~/.config/autostart/gnome-software-updates.desktop <<'EOF'
+[Desktop Entry]
+Type=Application
+Name=Software updates
+Exec=gnome-software --mode=updates
+EOF
 ```
 
 Chrome extensions:
