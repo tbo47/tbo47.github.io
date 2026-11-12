@@ -2,15 +2,13 @@ IMPORTANT: during install, leave the root password blank, it will configure `sud
 
 This is my [Debian](https://www.debian.org/devel/debian-installer/) 13 (alias trixie) configuration after installation.
 
-[Install Signal](https://signal.org/download/)
-
 Run the following commands:
 
 ```bash
 sudo apt install -y transmission curl git zsh vlc ffmpeg
 curl -fsSLo /tmp/chrome.deb https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
 sudo apt install -y /tmp/chrome.deb
-gsettings set org.gnome.shell favorite-apps "['google-chrome.desktop', 'org.gnome.Terminal.desktop', 'org.gnome.Nautilus.desktop', 'signal-desktop.desktop', 'firefox-esr.desktop']"
+gsettings set org.gnome.shell favorite-apps "['google-chrome.desktop', 'org.gnome.Terminal.desktop', 'org.gnome.Nautilus.desktop', 'firefox-esr.desktop']"
 mkdir -p ~/.config/autostart
 cat > ~/.config/autostart/gnome-software-updates.desktop <<'EOF'
 [Desktop Entry]
@@ -23,6 +21,8 @@ EOF
 Chrome extensions:
 [vimium](https://chromewebstore.google.com/detail/vimium/dbepggeogbaibhgnhhndojpepiihcmeb),
 [ublock origin lite](https://chromewebstore.google.com/detail/ublock-origin-lite/ddkjiahejlhfcafbddmgiahcphecmpfh)
+
+[Install Signal](https://signal.org/download/)
 
 ## dev environment
 
