@@ -2,34 +2,34 @@ IMPORT: during install, leave the root password blank, it will configure `sudo` 
 
 This is my [Debian](https://www.debian.org/devel/debian-installer/) 13 (alias trixie) configuration after installation.
 
+[Install Chrome](https://www.google.com/chrome/) and extensions
+[vimium](https://chromewebstore.google.com/detail/vimium/dbepggeogbaibhgnhhndojpepiihcmeb),
+[ublock origin lite](https://chromewebstore.google.com/detail/ublock-origin-lite/ddkjiahejlhfcafbddmgiahcphecmpfh)
+
+[Install Signal](https://signal.org/download/)
+
 Run the following commands:
 
 ```bash
 sudo apt install -y transmission gnome-software-plugin-flatpak curl git zsh vlc ffmpeg
-sudo apt remove -y firefox-esr evolution evolution-common
 sudo flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
-sudo flatpak install -y flathub com.google.Chrome
-sudo flatpak install -y flathub org.mozilla.firefox
-sudo flatpak install -y com.spotify.Client
-sudo flatpak install -y org.signal.Signal
-gsettings set org.gnome.shell favorite-apps "['com.google.Chrome.desktop', 'org.mozilla.firefox.desktop', 'org.signal.Signal.desktop', 'com.spotify.Client.desktop', 'org.gnome.Nautilus.desktop']"
-gnome-software --mode=installed
-flatpak run org.mozilla.firefox https://github.com/tbo47/tbo47.github.io/blob/main/debian13.md &
-sleep 6
+flatpak install flathub io.github.cosmic_utils.camera
+gsettings set org.gnome.shell favorite-apps "['google-chrome.desktop', 'firefox-esr.desktop', 'signal-desktop.desktop', 'com.spotify.Client.desktop', 'org.gnome.Nautilus.desktop', 'io.github.cosmic_utils.camera.desktop']"
 sudo shutdown -r now
 ```
-
-For Chrome:
-[vimium](https://chromewebstore.google.com/detail/vimium/dbepggeogbaibhgnhhndojpepiihcmeb),
-[ublock origin lite](https://chromewebstore.google.com/detail/ublock-origin-lite/ddkjiahejlhfcafbddmgiahcphecmpfh)
 
 [Explore more apps from flatpak hub](https://flathub.org/en/apps/collection/popular/1) and install them with the software app.
 
 ## dev environment
 
 ```bash
-sudo flatpak install -y flathub org.pgadmin.pgadmin4
 sudo apt install vim tilix gimp
+```
+
+Install [vscode from the .deb file](https://code.visualstudio.com/docs/setup/linux)
+
+```bash
+code --install-extension anthropic.claude-code ms-ossdata.vscode-pgsql vscodevim.vim
 ```
 
 Install [ohmyz](https://ohmyz.sh/) for a better terminal.
@@ -63,6 +63,3 @@ CREATE USER "user" WITH PASSWORD 'password' SUPERUSER;
 ALTER DATABASE postgres OWNER TO "user";
 SQL
 ```
-
-Install [vscode from the .deb file](https://code.visualstudio.com/docs/setup/linux)
-
