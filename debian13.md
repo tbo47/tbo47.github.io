@@ -5,7 +5,7 @@ This is my [Debian](https://www.debian.org/devel/debian-installer/) 13 (alias tr
 Run the following commands:
 
 ```bash
-sudo apt install -y transmission curl git zsh vlc ffmpeg
+sudo apt install -y transmission curl git vlc ffmpeg
 curl -fsSLo /tmp/chrome.deb https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
 sudo apt install -y /tmp/chrome.deb
 gsettings set org.gnome.shell favorite-apps "['google-chrome.desktop', 'org.gnome.Terminal.desktop', 'org.gnome.Nautilus.desktop', 'firefox-esr.desktop']"
