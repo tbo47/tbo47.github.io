@@ -22,6 +22,10 @@ Chrome extensions:
 [vimium](https://chromewebstore.google.com/detail/vimium/dbepggeogbaibhgnhhndojpepiihcmeb),
 [ublock origin lite](https://chromewebstore.google.com/detail/ublock-origin-lite/ddkjiahejlhfcafbddmgiahcphecmpfh)
 
+Firefox extensions:
+[vimium](https://addons.mozilla.org/en-US/firefox/addon/vimium-ff/), 
+[ublock origin](https://addons.mozilla.org/en-US/firefox/addon/ublock-origin/)
+
 [Install Signal](https://signal.org/download/)
 
 ## dev environment
